@@ -78,7 +78,6 @@
         "cache:clear": "rm -fr ./.cache",
         "check": [
             "@composer validate",
-            "@cs",
             "@test"
         ],
         "cs": [
