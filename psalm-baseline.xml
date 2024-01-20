@@ -9,16 +9,11 @@
     <MixedArgument>
       <code>$file</code>
       <code><![CDATA[$info->getFilename()]]></code>
-      <code>$source</code>
-      <code><![CDATA[InstalledVersions::getPrettyVersion('ghostwriter/testify')]]></code>
-      <code><![CDATA[InstalledVersions::getPrettyVersion('ghostwriter/testify')]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$dryRun</code>
       <code>$file</code>
       <code>$files[]</code>
       <code>$info</code>
-      <code>$source</code>
     </MixedAssignment>
     <MixedMethodCall>
       <code>getExtension</code>
