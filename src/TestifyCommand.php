@@ -132,7 +132,7 @@ final class TestifyCommand extends SingleCommandApplication
         {
             public function testExample(): void
             {
-                self::markTestSkipped('TODO: Implement test.');
+                self::assertTrue(true);
             }
         }
         CODE;
