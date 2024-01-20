@@ -214,7 +214,7 @@ final class TestifyCommand extends SingleCommandApplication
                 $testFileContent = str_replace(
                     ['{test_namespace}', '{class_namespace}', '{class}', '{test_class}'],
                     [$testNamespace, $classNamespace, $class, $test],
-                    $classContent
+                    $classContent . PHP_EOL
                 );
 
                 //                    $output->writeln($testFileContent . PHP_EOL);
