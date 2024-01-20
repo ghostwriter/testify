@@ -2,10 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify;
+namespace Ghostwriter\Testify\Command;
 
 use Composer\InstalledVersions;
 use Faker\Factory;
+use Faker\Generator;
+use Ghostwriter\Testify\Directory;
+use Ghostwriter\Testify\FileContentGenerator;
+use Ghostwriter\Testify\Filesystem;
+use Ghostwriter\Testify\NamespaceDetector;
+use Ghostwriter\Testify\PhpFileFinder;
 use Override;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -24,10 +30,11 @@ use function str_replace;
 final class TestifyCommand extends SingleCommandApplication
 {
     public function __construct(
-        private Filesystem $filesystem,
-        private NamespaceDetector $namespaceDetector,
-        private FileContentGenerator $fileContentGenerator,
-        private PhpFileFinder $phpFileFinder,
+        private readonly Filesystem $filesystem,
+        private readonly NamespaceDetector $namespaceDetector,
+        private readonly FileContentGenerator $fileContentGenerator,
+        private readonly PhpFileFinder $phpFileFinder,
+        private readonly Generator $fakerGenerator,
     ) {
         parent::__construct('Testify');
 
@@ -54,9 +61,12 @@ final class TestifyCommand extends SingleCommandApplication
 
         $progressBar = new ProgressBar($output);
 
-        $faker = Factory::create();
-
-        $output->writeln(sprintf('%s by %s <%s>' . PHP_EOL, $faker->word(), $faker->name(), $faker->email()));
+        $output->writeln(sprintf(
+            '%s by %s <%s>' . PHP_EOL,
+            $this->fakerGenerator->word(),
+            $this->fakerGenerator->name(),
+            $this->fakerGenerator->email()
+        ));
 
         $count = 0;
 
@@ -66,27 +76,25 @@ final class TestifyCommand extends SingleCommandApplication
             $testFile = str_replace(['/src/', '.php'], ['/tests/Unit/', 'Test.php'], $file);
 
             if ($dryRun || $this->filesystem->missing($testFile)) {
-                ++$count;
-
-                [$classNamespace, $testNamespace] = ($this->namespaceDetector)($file);
-
-                $test = $this->filesystem->basename($testFile, '.php');
-                $class = $this->filesystem->basename($file, '.php');
-
                 $output->writeln('Generating ' . $testFile);
 
-                $testFileContent = $this->fileContentGenerator->render(
-                    $classContent,
-                    [
-                        'class' => $class,
-                        'classNamespace' => $classNamespace,
-                        'testClass' => $test,
-                        'testNamespace' => $testNamespace,
-                    ]
-                );
+                $class = $this->filesystem->basename($file, '.php');
+                $test = $this->filesystem->basename($testFile, '.php');
+                [$classNamespace, $testNamespace] = ($this->namespaceDetector)($file);
+
+                /** @var array<string,string> $variables */
+                $variables = [
+                    'class' => $class,
+                    'classNamespace' => $classNamespace,
+                    'testClass' => $test,
+                    'testNamespace' => $testNamespace,
+                ];
+
+                $testFileContent = $this->fileContentGenerator->render($classContent, $variables);
 
                 $output->writeln(PHP_EOL . $testFileContent . PHP_EOL);
 
+                ++$count;
                 if ($dryRun) {
                     continue;
                 }
@@ -107,6 +115,7 @@ final class TestifyCommand extends SingleCommandApplication
             new NamespaceDetector(),
             new FileContentGenerator($filesystem),
             new PhpFileFinder(),
+            Factory::create(),
         );
     }
 }
