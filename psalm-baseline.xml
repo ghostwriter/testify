@@ -1,2 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.16.0@2897ba636551a8cb61601cc26f6ccfbba6c36591"/>
+<files psalm-version="5.20.0@3f284e96c9d9be6fe6b15c79416e1d1903dcfef4">
+  <file src="src/Command/AbstractCommand.php">
+    <UnusedClass>
+      <code>AbstractCommand</code>
+    </UnusedClass>
+  </file>
+  <file src="src/TestifyCommand.php">
+    <MixedArgument>
+      <code>$file</code>
+      <code><![CDATA[$info->getFilename()]]></code>
+      <code>$source</code>
+      <code><![CDATA[InstalledVersions::getPrettyVersion('ghostwriter/testify')]]></code>
+      <code><![CDATA[InstalledVersions::getPrettyVersion('ghostwriter/testify')]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$dryRun</code>
+      <code>$file</code>
+      <code>$files[]</code>
+      <code>$info</code>
+      <code>$source</code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code>getExtension</code>
+      <code>getFilename</code>
+      <code>getPathname</code>
+    </MixedMethodCall>
+    <PossiblyUndefinedArrayOffset>
+      <code><![CDATA[$_SERVER['argv']]]></code>
+    </PossiblyUndefinedArrayOffset>
+    <PossiblyUnusedMethod>
+      <code>new</code>
+    </PossiblyUnusedMethod>
+    <TooManyArguments>
+      <code><![CDATA[new self($_SERVER['argv'])]]></code>
+    </TooManyArguments>
+  </file>
+</files>
