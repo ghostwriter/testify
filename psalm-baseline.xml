@@ -5,29 +5,29 @@
       <code>AbstractCommand</code>
     </UnusedClass>
   </file>
+  <file src="src/FileContentGenerator.php">
+    <DocblockTypeContradiction>
+      <code>is_string($key)</code>
+      <code>is_string($value)</code>
+    </DocblockTypeContradiction>
+  </file>
+  <file src="src/Filesystem.php">
+    <PossiblyUnusedMethod>
+      <code>exists</code>
+      <code>parentDirectory</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/TestifyCommand.php">
-    <MixedArgument>
-      <code>$file</code>
-      <code><![CDATA[$info->getFilename()]]></code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code>$file</code>
-      <code>$files[]</code>
-      <code>$info</code>
-    </MixedAssignment>
-    <MixedMethodCall>
-      <code>getExtension</code>
-      <code>getFilename</code>
-      <code>getPathname</code>
-    </MixedMethodCall>
-    <PossiblyUndefinedArrayOffset>
-      <code><![CDATA[$_SERVER['argv']]]></code>
-    </PossiblyUndefinedArrayOffset>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[[
+                        'class' => $class,
+                        'classNamespace' => $classNamespace,
+                        'testClass' => $test,
+                        'testNamespace' => $testNamespace,
+                    ]]]></code>
+    </MixedArgumentTypeCoercion>
     <PossiblyUnusedMethod>
       <code>new</code>
     </PossiblyUnusedMethod>
-    <TooManyArguments>
-      <code><![CDATA[new self($_SERVER['argv'])]]></code>
-    </TooManyArguments>
   </file>
 </files>
