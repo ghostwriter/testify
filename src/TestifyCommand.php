@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify;
 
 use Composer\InstalledVersions;
+use Faker\Factory;
 use Ghostwriter\Testify\Exception\FailedToCreateDirectoryException;
 use Override;
 use PhpToken;
@@ -55,6 +56,12 @@ final class TestifyCommand extends SingleCommandApplication
     #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $faker = Factory::create();
+
+        $output->writeln(sprintf('%s by %s <%s>', $faker->company(), $faker->name(), $faker->email()));
+
+        $output->writeln(sprintf('Version: %s' . PHP_EOL, InstalledVersions::getPrettyVersion('ghostwriter/testify')));
+
         $dryRun = $input->getOption('dry-run');
 
         $source = $input->getArgument('source');
