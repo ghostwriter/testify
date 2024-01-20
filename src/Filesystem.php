@@ -15,6 +15,8 @@ use function file_exists;
 use function file_get_contents;
 use function file_put_contents;
 use function is_dir;
+use function is_file;
+use function is_readable;
 use function mkdir;
 
 final readonly class Filesystem
@@ -35,6 +37,16 @@ final readonly class Filesystem
     public function exists(string $path): bool
     {
         return file_exists($path);
+    }
+
+    public function isFile(string $path): bool
+    {
+        return is_file($path);
+    }
+
+    public function isReadable(string $path): bool
+    {
+        return is_readable($path);
     }
 
     public function missing(string $path): bool
