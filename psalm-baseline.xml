@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.20.0@3f284e96c9d9be6fe6b15c79416e1d1903dcfef4">
-  <file src="src/Command/AbstractCommand.php">
-    <UnusedClass>
-      <code>AbstractCommand</code>
-    </UnusedClass>
-  </file>
   <file src="src/FileContentGenerator.php">
     <DocblockTypeContradiction>
       <code>is_string($key)</code>
@@ -15,19 +10,6 @@
     <PossiblyUnusedMethod>
       <code>exists</code>
       <code>parentDirectory</code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/TestifyCommand.php">
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[[
-                        'class' => $class,
-                        'classNamespace' => $classNamespace,
-                        'testClass' => $test,
-                        'testNamespace' => $testNamespace,
-                    ]]]></code>
-    </MixedArgumentTypeCoercion>
-    <PossiblyUnusedMethod>
-      <code>new</code>
     </PossiblyUnusedMethod>
   </file>
 </files>
