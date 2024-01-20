@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify;
 
+use Ghostwriter\Testify\Exception\StubNotAFileException;
+use Ghostwriter\Testify\Exception\StubNotFoundException;
+use Ghostwriter\Testify\Exception\StubNotReadableException;
 use const DIRECTORY_SEPARATOR;
 
 use function is_string;
