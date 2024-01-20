@@ -9,7 +9,7 @@
 [![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/testify)](https://packagist.org/packages/ghostwriter/testify)
 [![Downloads](https://badgen.net/packagist/dt/ghostwriter/testify?color=blue)](https://packagist.org/packages/ghostwriter/testify)
 
-work in progress
+Automated test Generation for PHP code.
 
 > [!WARNING]
 >
@@ -20,7 +20,7 @@ work in progress
 You can install the package via composer:
 
 ``` bash
-composer require ghostwriter/testify
+composer require ghostwriter/testify --dev
 ```
 
 ### Star ⭐️ this repo if you find it useful
