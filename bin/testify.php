@@ -1,11 +1,15 @@
-#!/usr/bin/env php
 <?php
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Wip\Console;
+namespace Ghostwriter\Testify\Console;
 
-use Ghostwriter\Wip\Foo;
+use Ghostwriter\Testify\TestifyCommand;
+
+use const STDERR;
+
+use function dirname;
+use function fwrite;
 use function sprintf;
 
 /** @var ?string $_composer_autoload_path */
@@ -19,5 +23,5 @@ use function sprintf;
     /**
      * #BlackLivesMatter.
      */
-    echo (new Foo())->test();
-})($_composer_autoload_path ?? null);
+    TestifyCommand::new()->run();
+})($_composer_autoload_path ?? dirname(__DIR__) . '/vendor/autoload.php');
