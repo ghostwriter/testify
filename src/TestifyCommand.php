@@ -6,44 +6,29 @@ namespace Ghostwriter\Testify;
 
 use Composer\InstalledVersions;
 use Faker\Factory;
-use Ghostwriter\Testify\Exception\FailedToCreateDirectoryException;
 use Override;
-use PhpToken;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\SingleCommandApplication;
+use Throwable;
 
 use const PHP_EOL;
-use const T_NAME_QUALIFIED;
-use const T_NAMESPACE;
-use const T_NS_SEPARATOR;
 
-use function basename;
-use function count;
-use function dirname;
-use function explode;
-use function file_exists;
-use function file_get_contents;
-use function file_put_contents;
-use function implode;
-use function is_dir;
-use function mkdir;
-use function realpath;
 use function sprintf;
-use function str_ends_with;
 use function str_replace;
-use function str_starts_with;
 
 /** @see TestifyTest */
 final class TestifyCommand extends SingleCommandApplication
 {
-    public function __construct()
-    {
+    public function __construct(
+        private Filesystem $filesystem,
+        private NamespaceDetector $namespaceDetector,
+        private FileContentGenerator $fileContentGenerator,
+        private PhpFileFinder $phpFileFinder,
+    ) {
         parent::__construct('Testify');
 
         $this->setName('testify');
@@ -56,187 +41,57 @@ final class TestifyCommand extends SingleCommandApplication
     #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $faker = Factory::create();
+        /** @var bool $dryRun */
+        $dryRun = $input->getOption('dry-run');
 
-        $output->writeln(sprintf('%s by %s <%s>' . PHP_EOL, $faker->company(), $faker->name(), $faker->email()));
+        try {
+            $sourceDirectory = Directory::new($input);
+        } catch (Throwable $exception) {
+            $output->writeln($exception->getMessage());
 
-        $dryRun = (bool) $input->getOption('dry-run');
-
-        $source = (string) $input->getArgument('source');
-
-        $sourcePath = realpath($source);
-
-        if ($sourcePath === false) {
-            $output->writeln('The path "' . $source . '" does not exist.');
-            return self::INVALID;
-        }
-
-        if (! is_dir($sourcePath)) {
-            $output->writeln('The path "' . $source . '" is not a directory.');
             return self::INVALID;
         }
 
         $progressBar = new ProgressBar($output);
-        //        foreach ($progressBar->iterate($sources) as $src) {
 
-        $findAllPhpFilesInPath = static function (string $path): array {
-            $files = [];
-            $directory = new RecursiveDirectoryIterator($path);
-            $iterator = new RecursiveIteratorIterator($directory);
+        $faker = Factory::create();
 
-            $skip = static fn (string $filename): bool => match (true) {
-                str_starts_with($filename, 'Abstract'),
-                str_ends_with($filename, 'Trait.php'),
-                str_ends_with($filename, 'Interface.php'),
-                str_ends_with($filename, 'Test.php') => true,
-                default => false,
-            };
-
-            foreach ($iterator as $info) {
-                if ($info->getExtension() !== 'php') {
-                    continue;
-                }
-
-                if ($skip($info->getFilename())) {
-                    continue;
-                }
-
-                $files[] = $info->getPathname();
-            }
-            return $files;
-        };
-
-        $files = $findAllPhpFilesInPath($sourcePath);
-
-        $determineTestPath = static fn (string $file): string => str_replace(
-            ['src/', '.php'],
-            ['tests/Unit/', 'Test.php'],
-            $file
-        );
-
-        $classContent = <<<CODE
-        <?php
-
-        declare(strict_types=1);
-
-        namespace {test_namespace};
-
-        use {class_namespace}\{class};
-        use PHPUnit\Framework\Attributes\CoversClass;
-        use PHPUnit\Framework\TestCase;
-
-        #[CoversClass({class}::class)]
-        final class {test_class} extends TestCase
-        {
-            public function testExample(): void
-            {
-                self::assertTrue(true);
-            }
-        }
-        CODE;
-
-        $detectNamespace = static function (string $file): string {
-            if (! file_exists($file)) {
-                return '';
-            }
-
-            $fileContent = file_get_contents($file);
-
-            if ($fileContent === false) {
-                return '';
-            }
-
-            $tokens = PhpToken::tokenize($fileContent);
-
-            $supported = [T_NAMESPACE, T_NAME_QUALIFIED, T_NS_SEPARATOR, ';'];
-
-            $namespace = '';
-            $inNamespace = false;
-            foreach ($tokens as $token) {
-                if (! $token->is($supported)) {
-                    continue;
-                }
-
-                if ($token->is(T_NAMESPACE)) {
-                    $inNamespace = true;
-                    continue;
-                }
-
-                if (! $inNamespace) {
-                    continue;
-                }
-
-                if ($token->is(';')) {
-                    break;
-                }
-
-                if ($token->is(T_NAME_QUALIFIED)) {
-                    $namespace .= $token->text;
-                    continue;
-                }
-
-                if (! $token->is(T_NS_SEPARATOR)) {
-                    continue;
-                }
-
-                $namespace .= '\\';
-            }
-
-            return $namespace;
-        };
-
-        $determineTestNamespace = static function (string $classNamespace): string {
-            $namespaces = explode('\\', $classNamespace);
-
-            $namespaces[1] .= 'Tests\\Unit';
-
-            return implode('\\', $namespaces);
-        };
-
-        //        $progressBar = new ProgressBar($output, count($files));
+        $output->writeln(sprintf('%s by %s <%s>' . PHP_EOL, $faker->word(), $faker->name(), $faker->email()));
 
         $count = 0;
-        foreach ($progressBar->iterate($files) as $file) {
-            $testFile = $determineTestPath($file);
-            if ($dryRun || ! file_exists($testFile)) {
-                //                    $output->writeln(PHP_EOL);
+
+        $classContent = $this->filesystem->read($this->fileContentGenerator->stub('test'));
+
+        foreach ($progressBar->iterate($this->phpFileFinder->find($sourceDirectory->path())) as $file) {
+            $testFile = str_replace(['/src/', '.php'], ['/tests/Unit/', 'Test.php'], $file);
+
+            if ($dryRun || $this->filesystem->missing($testFile)) {
                 ++$count;
 
-                $classNamespace = $detectNamespace($file);
-                $testNamespace = $determineTestNamespace($classNamespace);
-                $test = basename($testFile, '.php');
-                $class = basename($file, '.php');
+                [$classNamespace, $testNamespace] = ($this->namespaceDetector)($file);
 
-                //                    $output->writeln('########################################################################');
-                //                    $output->writeln('File: ' . $file);
-                //                    $output->writeln('Test File: ' . $testFile);
-                //                    $output->writeln('Class Namespace: ' . $classNamespace);
-                //                    $output->writeln('Test Namespace: ' . $testNamespace);
-                //                    $output->writeln('Class: ' . $class);
-                //                    $output->writeln('Test: ' . $test);
+                $test = $this->filesystem->basename($testFile, '.php');
+                $class = $this->filesystem->basename($file, '.php');
+
                 $output->writeln('Generating ' . $testFile);
 
-                $testFileContent = str_replace(
-                    ['{test_namespace}', '{class_namespace}', '{class}', '{test_class}'],
-                    [$testNamespace, $classNamespace, $class, $test],
-                    $classContent . PHP_EOL
+                $testFileContent = $this->fileContentGenerator->render(
+                    $classContent,
+                    [
+                        'class' => $class,
+                        'classNamespace' => $classNamespace,
+                        'testClass' => $test,
+                        'testNamespace' => $testNamespace,
+                    ]
                 );
 
-                //                    $output->writeln($testFileContent . PHP_EOL);
+                $output->writeln(PHP_EOL . $testFileContent . PHP_EOL);
 
                 if ($dryRun) {
                     continue;
                 }
 
-                $parentDirectory = dirname($testFile);
-                if (! file_exists($parentDirectory)) {
-                    $makeDir = mkdir($parentDirectory, 0777, true);
-                    if (! $makeDir || ! is_dir($parentDirectory)) {
-                        throw new FailedToCreateDirectoryException($parentDirectory);
-                    }
-                }
-
-                file_put_contents($testFile, $testFileContent);
+                $this->filesystem->save($testFile, $testFileContent);
             }
         }
         $output->writeln(sprintf('%sGenerated %d missing tests.', PHP_EOL . PHP_EOL, $count));
@@ -246,6 +101,12 @@ final class TestifyCommand extends SingleCommandApplication
 
     public static function new(): self
     {
-        return new self($_SERVER['argv']);
+        $filesystem = new Filesystem();
+        return new self(
+            $filesystem,
+            new NamespaceDetector(),
+            new FileContentGenerator($filesystem),
+            new PhpFileFinder(),
+        );
     }
 }
