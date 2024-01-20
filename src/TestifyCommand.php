@@ -48,7 +48,7 @@ final class TestifyCommand extends SingleCommandApplication
 
         $this->setName('testify');
         $this->setDescription('Generate missing Tests.');
-        $this->setVersion(InstalledVersions::getPrettyVersion('ghostwriter/testify'));
+        $this->setVersion(InstalledVersions::getPrettyVersion('ghostwriter/testify') ?? 'UNKNOWN');
         $this->addArgument('source', InputArgument::OPTIONAL, 'The path to search for missing tests.', 'src');
         $this->addOption('dry-run', 'd', InputOption::VALUE_NONE, 'Do not write any files.');
     }
@@ -58,13 +58,11 @@ final class TestifyCommand extends SingleCommandApplication
     {
         $faker = Factory::create();
 
-        $output->writeln(sprintf('%s by %s <%s>', $faker->company(), $faker->name(), $faker->email()));
+        $output->writeln(sprintf('%s by %s <%s>' . PHP_EOL, $faker->company(), $faker->name(), $faker->email()));
 
-        $output->writeln(sprintf('Version: %s' . PHP_EOL, InstalledVersions::getPrettyVersion('ghostwriter/testify')));
+        $dryRun = (bool) $input->getOption('dry-run');
 
-        $dryRun = $input->getOption('dry-run');
-
-        $source = $input->getArgument('source');
+        $source = (string) $input->getArgument('source');
 
         $sourcePath = realpath($source);
 
