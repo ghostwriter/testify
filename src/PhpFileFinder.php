@@ -30,6 +30,7 @@ final readonly class PhpFileFinder
         $skip ??= static function (SplFileInfo $file): bool {
             $filename = $file->getFilename();
             return match (true) {
+                mb_strtolower($filename[0]) === $filename[0],
                 str_starts_with($filename, 'Abstract'),
                 str_ends_with($filename, 'Trait.php'),
                 str_ends_with($filename, 'Interface.php'),
