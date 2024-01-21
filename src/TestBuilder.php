@@ -120,7 +120,7 @@ final readonly class TestBuilder
                 return $a->uses[0]->name->toString() <=> $b->uses[0]->name->toString();
             });
 
-            return $this->printer->prettyPrintFile([$declareStrictTypes, $nop, $node]);
+            return $this->printer->prettyPrintFile([$declareStrictTypes, $nop, $node, $nop]);
         }
 
         return '';
