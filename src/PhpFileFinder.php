@@ -10,6 +10,7 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
 
+use function mb_strtolower;
 use function str_ends_with;
 use function str_starts_with;
 
