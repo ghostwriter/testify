@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify;
 
 use Ghostwriter\Testify\Exception\FailedToCreateDirectoryException;
+use Ghostwriter\Testify\Exception\FailedToDetermineCurrentWorkingDirectoryException;
 use Ghostwriter\Testify\Exception\FailedToReadFileException;
 use Ghostwriter\Testify\Exception\FailedToWriteFileException;
 use Ghostwriter\Testify\Exception\FileNotFoundException;
@@ -14,6 +15,7 @@ use function dirname;
 use function file_exists;
 use function file_get_contents;
 use function file_put_contents;
+use function getcwd;
 use function is_dir;
 use function is_file;
 use function is_readable;
@@ -32,6 +34,17 @@ final readonly class Filesystem
         if (! $makeDirectory || ! is_dir($path)) {
             throw new FailedToCreateDirectoryException($path);
         }
+    }
+
+    public function currentWorkingDirectory(): string
+    {
+        $currentWorkingDirectory = getcwd();
+
+        if ($currentWorkingDirectory === false) {
+            throw new FailedToDetermineCurrentWorkingDirectoryException();
+        }
+
+        return $currentWorkingDirectory;
     }
 
     public function exists(string $path): bool
