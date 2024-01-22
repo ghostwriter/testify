@@ -8,11 +8,18 @@ use Composer\InstalledVersions;
 use Faker\Factory;
 use Faker\Generator;
 use Ghostwriter\Testify\Directory;
-use Ghostwriter\Testify\FileContentGenerator;
 use Ghostwriter\Testify\Filesystem;
-use Ghostwriter\Testify\NamespaceDetector;
 use Ghostwriter\Testify\PhpFileFinder;
+use Ghostwriter\Testify\TestBuilder;
 use Override;
+use Psalm\Config;
+use Psalm\Internal\Analyzer\ProjectAnalyzer;
+use Psalm\Internal\IncludeCollector;
+use Psalm\Internal\Provider\FileProvider;
+use Psalm\Internal\Provider\Providers;
+use Psalm\Progress\VoidProgress;
+use Psalm\Report;
+use Psalm\Report\ReportOptions;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,12 +38,15 @@ final class TestifyCommand extends SingleCommandApplication
 {
     public function __construct(
         private readonly Filesystem $filesystem,
-        private readonly NamespaceDetector $namespaceDetector,
-        private readonly FileContentGenerator $fileContentGenerator,
+        private readonly TestBuilder $testBuilder,
         private readonly PhpFileFinder $phpFileFinder,
         private readonly Generator $fakerGenerator,
     ) {
         parent::__construct('Testify');
+
+        $this->setAutoExit(false);
+        //        $this->getApplication()
+        //            ->setCatchExceptions(false);
 
         $this->setName('testify');
         $this->setDescription('Generate missing Tests.');
@@ -48,19 +58,6 @@ final class TestifyCommand extends SingleCommandApplication
     #[Override]
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        /** @var bool $dryRun */
-        $dryRun = $input->getOption('dry-run');
-
-        try {
-            $sourceDirectory = Directory::new($input);
-        } catch (Throwable $exception) {
-            $output->writeln($exception->getMessage());
-
-            return self::INVALID;
-        }
-
-        $progressBar = new ProgressBar($output);
-
         $output->writeln(sprintf(
             '%s by %s <%s>' . PHP_EOL,
             $this->fakerGenerator->word(),
@@ -68,33 +65,31 @@ final class TestifyCommand extends SingleCommandApplication
             $this->fakerGenerator->email()
         ));
 
+        /** @var bool $dryRun */
+        $dryRun = $input->getOption('dry-run');
+
+        try {
+            $sourceDirectory = Directory::new($input);
+        } catch (Throwable $exception) {
+            $output->writeln([$exception::class, $exception->getMessage(), $exception->getTraceAsString()]);
+
+            return self::INVALID;
+        }
+
         $count = 0;
-
-        $classContent = $this->filesystem->read($this->fileContentGenerator->stub('test'));
-
+        $progressBar = new ProgressBar($output);
         foreach ($progressBar->iterate($this->phpFileFinder->find($sourceDirectory->path())) as $file) {
             $testFile = str_replace(['/src/', '.php'], ['/tests/Unit/', 'Test.php'], $file);
 
             if ($dryRun || $this->filesystem->missing($testFile)) {
+                ++$count;
+
                 $output->writeln('Generating ' . $testFile);
 
-                $class = $this->filesystem->basename($file, '.php');
-                $test = $this->filesystem->basename($testFile, '.php');
-                [$classNamespace, $testNamespace] = ($this->namespaceDetector)($file);
-
-                /** @var array<string,string> $variables */
-                $variables = [
-                    'class' => $class,
-                    'classNamespace' => $classNamespace,
-                    'testClass' => $test,
-                    'testNamespace' => $testNamespace,
-                ];
-
-                $testFileContent = $this->fileContentGenerator->render($classContent, $variables);
+                $testFileContent = $this->testBuilder->build($file);
 
                 $output->writeln(PHP_EOL . $testFileContent . PHP_EOL);
 
-                ++$count;
                 if ($dryRun) {
                     continue;
                 }
@@ -110,10 +105,29 @@ final class TestifyCommand extends SingleCommandApplication
     public static function new(): self
     {
         $filesystem = new Filesystem();
+
+        $currentWorkingDirectory = $filesystem->currentWorkingDirectory();
+
+        $config = Config::loadFromXML($currentWorkingDirectory, '<psalm/>');
+        $config->cache_directory = null;
+        $config->setIncludeCollector(new IncludeCollector());
+        //        $config->addPluginClass('Ghostwriter\Testify\PsalmPlugin');
+        //        $config->addPluginPath($currentWorkingDirectory . '/vendor/ghostwriter/psalm-plugin/src/Plugin.php');
+
+        $stdout_report_options = new ReportOptions();
+        $stdout_report_options->show_suggestions = false;
+        $stdout_report_options->format = Report::TYPE_JSON;
+
         return new self(
             $filesystem,
-            new NamespaceDetector(),
-            new FileContentGenerator($filesystem),
+            new TestBuilder(new ProjectAnalyzer(
+                $config,
+                new Providers(new FileProvider()),
+                $stdout_report_options,
+                [],
+                1,
+                new VoidProgress(),
+            )),
             new PhpFileFinder(),
             Factory::create(),
         );
