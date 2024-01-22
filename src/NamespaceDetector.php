@@ -17,7 +17,7 @@ use function file_exists;
 use function file_get_contents;
 use function implode;
 
-final class NamespaceDetector
+final readonly class NamespaceDetector
 {
     public function __invoke(string $file): array
     {
