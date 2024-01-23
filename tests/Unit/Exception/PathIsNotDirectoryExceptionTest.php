@@ -11,6 +11,11 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(PathIsNotDirectoryException::class)]
 final class PathIsNotDirectoryExceptionTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        self::markTestSkipped('Not implemented yet.');
+    }
+
     public function testExample(): void
     {
         self::assertTrue(true);
