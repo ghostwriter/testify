@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\NodeVisitor;
 
+use Ghostwriter\Testify\Exception\UseStatementNotFoundException;
 use function array_key_exists;
 
 final class UseStatements
