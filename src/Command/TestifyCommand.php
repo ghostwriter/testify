@@ -49,6 +49,7 @@ final class TestifyCommand extends SingleCommandApplication
         $this->setDescription('Generate missing Tests.');
         $this->setVersion(InstalledVersions::getPrettyVersion('ghostwriter/testify') ?? 'UNKNOWN');
         $this->addArgument('source', InputArgument::OPTIONAL, 'The path to search for missing tests.', 'src');
+        $this->addArgument('tests', InputArgument::OPTIONAL, 'The path used to create tests.', 'tests/Unit');
         $this->addOption('dry-run', 'd', InputOption::VALUE_NONE, 'Do not write any files.');
     }
 
@@ -56,10 +57,11 @@ final class TestifyCommand extends SingleCommandApplication
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln(sprintf(
-            '%s by %s and Contributors. <%s>' . PHP_EOL,
+            '<info>%s</info> by <info>%s</info> (<comment>%s</comment>) and contributors. %s' . PHP_EOL,
             'Testify',
             'Nathanael Esayeas',
-            '#BlackLivesMatter'
+            'https://ghostwriter.github.io',
+            '<error>#BlackLivesMatter</error>'
         ));
 
         /** @var bool $dryRun */
@@ -81,11 +83,18 @@ final class TestifyCommand extends SingleCommandApplication
             if ($dryRun || $this->filesystem->missing($testFile)) {
                 ++$count;
 
+                $memoryUsage = memory_get_usage(true);
                 $output->writeln([
                     PHP_EOL ,
                     'Generating ' . $testFile,
                     'from ' . $file,
-                    (memory_get_usage(true) / 10000) . ' bytes used',
+                    match(true){
+                        $memoryUsage < 1024 => sprintf('%s bytes used', $memoryUsage),
+                        $memoryUsage < 1048576 => sprintf('%s KiB used', round($memoryUsage / 1024, 2)),
+                        $memoryUsage < 1073741824 => sprintf('%s MiB used', round($memoryUsage / 1048576, 2)),
+                        $memoryUsage < 1099511627776 => sprintf('%s GiB used', round($memoryUsage / 1073741824, 2)),
+                        $memoryUsage < 1125899906842624 => sprintf('%s TiB used', round($memoryUsage / 1099511627776, 2)),
+                    },
                     gc_collect_cycles() . ' garbage collections',
                     PHP_EOL,
                 ]);
