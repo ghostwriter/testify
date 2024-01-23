@@ -32,14 +32,14 @@ You can also star (🌟) this repo to find it easier later.
 Call the `testify` command with the path to the directory you want to generate tests for.
 
 ```sh
+vendor/bin/testify --dry-run
+```
+
+```sh
 vendor/bin/testify app --dry-run
-```
 
-```sh
-vendor/bin/testify app
-```
+vendor/bin/testify app/Middleware --dry-run
 
-```sh
 vendor/bin/testify # default path is `src`
 ```
 
