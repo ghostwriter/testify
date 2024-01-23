@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Command;
 
 use Composer\InstalledVersions;
-use Faker\Factory;
-use Faker\Generator;
 use Ghostwriter\Testify\Directory;
 use Ghostwriter\Testify\Filesystem;
 use Ghostwriter\Testify\PhpFileFinder;
@@ -40,7 +38,6 @@ final class TestifyCommand extends SingleCommandApplication
         private readonly Filesystem $filesystem,
         private readonly TestBuilder $testBuilder,
         private readonly PhpFileFinder $phpFileFinder,
-        private readonly Generator $fakerGenerator,
     ) {
         parent::__construct('Testify');
 
@@ -59,10 +56,10 @@ final class TestifyCommand extends SingleCommandApplication
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln(sprintf(
-            '%s by %s <%s>' . PHP_EOL,
-            $this->fakerGenerator->word(),
-            $this->fakerGenerator->name(),
-            $this->fakerGenerator->email()
+            '%s by %s and Contributors. <%s>' . PHP_EOL,
+            'Testify',
+            'Nathanael Esayeas',
+            '#BlackLivesMatter'
         ));
 
         /** @var bool $dryRun */
@@ -84,7 +81,14 @@ final class TestifyCommand extends SingleCommandApplication
             if ($dryRun || $this->filesystem->missing($testFile)) {
                 ++$count;
 
-                $output->writeln('Generating ' . $testFile);
+                $output->writeln([
+                    PHP_EOL ,
+                    'Generating ' . $testFile,
+                    'from ' . $file,
+                    (memory_get_usage(true) / 10000) . ' bytes used',
+                    gc_collect_cycles() . ' garbage collections',
+                    PHP_EOL,
+                ]);
 
                 $testFileContent = $this->testBuilder->build($file);
 
@@ -129,7 +133,6 @@ final class TestifyCommand extends SingleCommandApplication
                 new VoidProgress(),
             )),
             new PhpFileFinder(),
-            Factory::create(),
         );
     }
 }
