@@ -34,6 +34,7 @@ use function array_key_exists;
 use function array_key_first;
 use function array_key_last;
 use function array_unique;
+use function basename;
 use function count;
 use function explode;
 use function implode;
@@ -83,13 +84,13 @@ final readonly class TestBuilder
         $this->traverser->addVisitor(new SortUseStatementsAlphabeticallyNodeVisitor());
     }
 
-    public function build(string $file): string
+    public function build(string $file, string $testsDirectory): string
     {
         $imports = [];
 
         foreach ($this->check($file) as $namespace => $classes) {
             $namespaces = explode('\\', $namespace);
-            $namespaces[1] .= 'Tests\\Unit';
+            $namespaces[1] .= 'Tests\\' . basename($testsDirectory, '.php');
 
             $testNamespace = implode('\\', $namespaces);
 
@@ -208,7 +209,6 @@ final readonly class TestBuilder
     {
         $this->projectAnalyzer->checkFile($file);
 
-
         $namespace = null;
         $codebase = $this->projectAnalyzer->getCodebase();
         foreach ($codebase->file_storage_provider->get($file)->namespace_aliases as $aliases) {
@@ -300,15 +300,6 @@ final readonly class TestBuilder
             $classes[$namespace][$className]['Imports'] = array_unique($imports);
             $classes[$namespace][$className]['Methods'] = $methods;
         }
-
-//        try {
-//            $codebase->invalidateInformationForFile($file);
-//        } catch (Throwable) {}
-
-//        dump(gc_collect_cycles());
-
-//        FileAnalyzer::clearCache();
-//        ClassLikeStorageProvider::deleteAll();
 
         return $classes;
     }
