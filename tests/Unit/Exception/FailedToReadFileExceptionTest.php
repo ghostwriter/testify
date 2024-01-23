@@ -11,6 +11,11 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(FailedToReadFileException::class)]
 final class FailedToReadFileExceptionTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        self::markTestSkipped('Not implemented yet.');
+    }
+
     public function testExample(): void
     {
         self::assertTrue(true);
