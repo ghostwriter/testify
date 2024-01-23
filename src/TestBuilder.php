@@ -101,7 +101,32 @@ final readonly class TestBuilder
                         ])
                     );
 
-                foreach ($classInfo['Methods'] ?? [] as $method => $methodInfo) {
+                $classBuilder->addStmt(
+                    $this->builderFactory->method('setUp')
+                        ->makeProtected()
+                        ->setReturnType('void')
+                        ->addStmt(
+                            $this->builderFactory->staticCall(
+                                'self',
+                                'markTestSkipped',
+                                [$this->builderFactory->val('Not implemented yet.')]
+                            )
+                        )
+                );
+
+                $methods = $classInfo['Methods'];
+
+                if ($methods === []) {
+                    $classBuilder->addStmt(
+                        $this->builderFactory
+                            ->method('testExample')
+                            ->makePublic()
+                            ->setReturnType('void')
+                            ->addStmt($this->assertTrueStmt)
+                    );
+                }
+
+                foreach ($methods as $method => $methodInfo) {
                     $methodBuilder = $this->builderFactory->method($method)
                         ->makePublic()
                         ->setReturnType($methodInfo['return'])
