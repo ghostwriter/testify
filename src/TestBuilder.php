@@ -24,11 +24,8 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psalm\Aliases;
-use Psalm\Internal\Analyzer\FileAnalyzer;
 use Psalm\Internal\Analyzer\ProjectAnalyzer;
-use Psalm\Internal\Provider\ClassLikeStorageProvider;
 use RuntimeException;
-use Throwable;
 
 use function array_key_exists;
 use function array_key_first;
