@@ -24,9 +24,12 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psalm\Aliases;
+use Psalm\Internal\Analyzer\FileAnalyzer;
 use Psalm\Internal\Analyzer\ProjectAnalyzer;
+use Psalm\Internal\Provider\ClassLikeStorageProvider;
 use RuntimeException;
 
+use Throwable;
 use function array_key_exists;
 use function array_key_first;
 use function array_key_last;
@@ -202,15 +205,11 @@ final readonly class TestBuilder
 
     private function check(string $file): array
     {
-        $codebase = $this->projectAnalyzer->getCodebase();
-
         $this->projectAnalyzer->checkFile($file);
 
-        $codebase->addFilesToAnalyze([
-            $file => $file,
-        ]);
 
         $namespace = null;
+        $codebase = $this->projectAnalyzer->getCodebase();
         foreach ($codebase->file_storage_provider->get($file)->namespace_aliases as $aliases) {
             if (! $aliases instanceof Aliases) {
                 continue;
@@ -299,11 +298,16 @@ final readonly class TestBuilder
             }
             $classes[$namespace][$className]['Imports'] = array_unique($imports);
             $classes[$namespace][$className]['Methods'] = $methods;
-
-            unset($imports, $methods, $className, $fullyQualifiedClassName, $lastSlash, $location, $params);
         }
 
-        $codebase->invalidateInformationForFile($file);
+//        try {
+//            $codebase->invalidateInformationForFile($file);
+//        } catch (Throwable) {}
+
+//        dump(gc_collect_cycles());
+
+//        FileAnalyzer::clearCache();
+//        ClassLikeStorageProvider::deleteAll();
 
         return $classes;
     }
