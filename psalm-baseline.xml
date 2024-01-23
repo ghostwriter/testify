@@ -154,18 +154,11 @@
   </file>
   <file src="tests/Unit/Command/TestifyCommandTest.php">
     <UnusedParam>
-      <code>$fakerGenerator</code>
       <code>$filesystem</code>
       <code>$input</code>
       <code>$output</code>
       <code>$phpFileFinder</code>
       <code>$testBuilder</code>
-    </UnusedParam>
-  </file>
-  <file src="tests/Unit/DirectoryTest.php">
-    <UnusedParam>
-      <code>$input</code>
-      <code>$path</code>
     </UnusedParam>
   </file>
   <file src="tests/Unit/FilesystemTest.php">
@@ -234,6 +227,14 @@
       <code>$skip</code>
     </UnusedParam>
   </file>
+  <file src="tests/Unit/ProjectTest.php">
+    <UnusedParam>
+      <code>$dryRun</code>
+      <code>$input</code>
+      <code>$source</code>
+      <code>$tests</code>
+    </UnusedParam>
+  </file>
   <file src="tests/Unit/TestBuilderTest.php">
     <UnusedParam>
       <code>$builderFactory</code>
@@ -241,6 +242,7 @@
       <code>$file</code>
       <code>$printer</code>
       <code>$projectAnalyzer</code>
+      <code>$testsDirectory</code>
       <code>$traverser</code>
     </UnusedParam>
   </file>
