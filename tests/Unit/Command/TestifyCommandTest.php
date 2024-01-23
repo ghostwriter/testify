@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\TestifyTests\Unit\Command;
 
-use Faker\Generator as FakerGenerator;
 use Generator;
 use Ghostwriter\Testify\Command\TestifyCommand;
 use Ghostwriter\Testify\Filesystem;
@@ -25,17 +24,18 @@ final class TestifyCommandTest extends TestCase
     }
 
     #[DataProvider('dataProviderConstruct')]
-    public function testConstruct(
-        Filesystem $filesystem,
-        TestBuilder $testBuilder,
-        PhpFileFinder $phpFileFinder,
-        FakerGenerator $fakerGenerator
-    ): void {
+    public function testConstruct(Filesystem $filesystem, TestBuilder $testBuilder, PhpFileFinder $phpFileFinder): void
+    {
         self::assertTrue(true);
     }
 
     #[DataProvider('dataProviderExecute')]
     public function testExecute(InputInterface $input, OutputInterface $output): void
+    {
+        self::assertTrue(true);
+    }
+
+    public function testMemoryUsage(): void
     {
         self::assertTrue(true);
     }
