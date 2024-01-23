@@ -1,15 +1,247 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.20.0@3f284e96c9d9be6fe6b15c79416e1d1903dcfef4">
-  <file src="src/FileContentGenerator.php">
-    <DocblockTypeContradiction>
-      <code>is_string($key)</code>
-      <code>is_string($value)</code>
-    </DocblockTypeContradiction>
+  <file src="src/Command/TestifyCommand.php">
+    <InternalClass>
+      <code>new FileProvider()</code>
+      <code>new IncludeCollector()</code>
+      <code>new ProjectAnalyzer(
+                $config,
+                new Providers(new FileProvider()),
+                $stdout_report_options,
+                [],
+                1,
+                new VoidProgress(),
+            )</code>
+      <code>new Providers(new FileProvider())</code>
+    </InternalClass>
+    <InternalMethod>
+      <code>new ProjectAnalyzer(
+                $config,
+                new Providers(new FileProvider()),
+                $stdout_report_options,
+                [],
+                1,
+                new VoidProgress(),
+            )</code>
+      <code>new Providers(new FileProvider())</code>
+    </InternalMethod>
+    <InternalProperty>
+      <code><![CDATA[$config->cache_directory]]></code>
+    </InternalProperty>
   </file>
   <file src="src/Filesystem.php">
     <PossiblyUnusedMethod>
+      <code>basename</code>
       <code>exists</code>
+      <code>isFile</code>
+      <code>isReadable</code>
       <code>parentDirectory</code>
+      <code>read</code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="src/NodeVisitor/ImportFullyQualifiedNamesNodeVisitor.php">
+    <MixedArgument>
+      <code><![CDATA[$this->aliases[$type]]]></code>
+    </MixedArgument>
+  </file>
+  <file src="src/NodeVisitor/UseStatement.php">
+    <PossiblyUnusedMethod>
+      <code>full</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/NodeVisitor/UseStatements.php">
+    <MixedInferredReturnType>
+      <code>UseStatement</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->uses[$name] ?? throw new UseStatementNotFoundException($name)]]></code>
+    </MixedReturnStatement>
+    <PossiblyUnusedMethod>
+      <code>uses</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Resource/test.view.php">
+    <MixedArgument>
+      <code>$class</code>
+      <code><![CDATA[$method['dataProviderName']]]></code>
+      <code><![CDATA[$method['dataProviderName']]]></code>
+      <code><![CDATA[$method['testMethodName']]]></code>
+      <code><![CDATA[$method['testMethodName']]]></code>
+      <code><![CDATA[$method['testMethodParamsString']]]></code>
+      <code><![CDATA[$method['testMethodParamsString']]]></code>
+      <code><![CDATA[$params['fakerMethod']]]></code>
+      <code>$testClass</code>
+      <code>$testNamespace</code>
+    </MixedArgument>
+    <MixedArrayAccess>
+      <code><![CDATA[$method['dataProviderName']]]></code>
+      <code><![CDATA[$method['dataProviderName']]]></code>
+      <code><![CDATA[$method['testMethodName']]]></code>
+      <code><![CDATA[$method['testMethodName']]]></code>
+      <code><![CDATA[$method['testMethodParams']]]></code>
+      <code><![CDATA[$method['testMethodParamsString']]]></code>
+      <code><![CDATA[$method['testMethodParamsString']]]></code>
+      <code><![CDATA[$params['fakerMethod']]]></code>
+    </MixedArrayAccess>
+    <MixedAssignment>
+      <code>$method</code>
+      <code>$params</code>
+    </MixedAssignment>
+    <MixedOperand>
+      <code>$class</code>
+      <code>$classNamespace</code>
+    </MixedOperand>
+    <UndefinedGlobalVariable>
+      <code>$class</code>
+      <code>$class</code>
+      <code>$classNamespace</code>
+      <code>$methods</code>
+      <code>$testClass</code>
+      <code>$testNamespace</code>
+    </UndefinedGlobalVariable>
+  </file>
+  <file src="src/TestBuilder.php">
+    <InternalMethod>
+      <code>checkFile</code>
+      <code>get</code>
+      <code>getAll</code>
+      <code>getCodebase</code>
+    </InternalMethod>
+    <InvalidOperand>
+      <code>$namespace</code>
+    </InvalidOperand>
+    <MixedArgument>
+      <code>$class</code>
+      <code><![CDATA[$classInfo['Imports'] ?? []]]></code>
+      <code>$dataProviderName</code>
+      <code>$method</code>
+      <code>$methodInfo</code>
+      <code><![CDATA[$methodInfo['return']]]></code>
+      <code>$param</code>
+      <code>$type</code>
+      <code>$use</code>
+      <code>$use</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code>$namespace</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAccess>
+      <code><![CDATA[$classInfo['Imports']]]></code>
+      <code><![CDATA[$classInfo['Methods']]]></code>
+      <code><![CDATA[$methodInfo['Params']]]></code>
+      <code><![CDATA[$methodInfo['return']]]></code>
+    </MixedArrayAccess>
+    <MixedArrayOffset>
+      <code>$imports[$use]</code>
+    </MixedArrayOffset>
+    <MixedAssignment>
+      <code>$class</code>
+      <code>$classInfo</code>
+      <code>$classes</code>
+      <code>$dataProviderName</code>
+      <code>$imports[$use]</code>
+      <code>$method</code>
+      <code>$methodInfo</code>
+      <code>$methods</code>
+      <code>$param</code>
+      <code>$type</code>
+      <code>$use</code>
+    </MixedAssignment>
+    <MixedOperand>
+      <code>$class</code>
+      <code>$class</code>
+    </MixedOperand>
+  </file>
+  <file src="tests/Unit/Command/TestifyCommandTest.php">
+    <UnusedParam>
+      <code>$fakerGenerator</code>
+      <code>$filesystem</code>
+      <code>$input</code>
+      <code>$output</code>
+      <code>$phpFileFinder</code>
+      <code>$testBuilder</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/DirectoryTest.php">
+    <UnusedParam>
+      <code>$input</code>
+      <code>$path</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/FilesystemTest.php">
+    <UnusedParam>
+      <code>$content</code>
+      <code>$levels</code>
+      <code>$mode</code>
+      <code>$path</code>
+      <code>$path</code>
+      <code>$path</code>
+      <code>$path</code>
+      <code>$path</code>
+      <code>$path</code>
+      <code>$path</code>
+      <code>$path</code>
+      <code>$path</code>
+      <code>$recursive</code>
+      <code>$suffix</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/NodeVisitor/ChangeToShortArrayNodeVisitorTest.php">
+    <UnusedParam>
+      <code>$node</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/NodeVisitor/HashNodeVisitorTest.php">
+    <UnusedParam>
+      <code>$node</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/NodeVisitor/ImportFullyQualifiedNamesNodeVisitorTest.php">
+    <UnusedParam>
+      <code>$node</code>
+      <code>$node</code>
+      <code>$node</code>
+      <code>$node</code>
+      <code>$node</code>
+      <code>$uses</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/NodeVisitor/SortUseStatementsAlphabeticallyNodeVisitorTest.php">
+    <UnusedParam>
+      <code>$node</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/NodeVisitor/UseStatementTest.php">
+    <UnusedParam>
+      <code>$full</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/NodeVisitor/UseStatementsTest.php">
+    <UnusedParam>
+      <code>$name</code>
+      <code>$name</code>
+      <code>$name</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/PhpFileFinderTest.php">
+    <UndefinedClass>
+      <code>Closure</code>
+      <code>Closure</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$match</code>
+      <code>$path</code>
+      <code>$skip</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/TestBuilderTest.php">
+    <UnusedParam>
+      <code>$builderFactory</code>
+      <code>$file</code>
+      <code>$file</code>
+      <code>$printer</code>
+      <code>$projectAnalyzer</code>
+      <code>$traverser</code>
+    </UnusedParam>
   </file>
 </files>
