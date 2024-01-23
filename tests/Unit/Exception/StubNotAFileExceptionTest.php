@@ -11,6 +11,11 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(StubNotAFileException::class)]
 final class StubNotAFileExceptionTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        self::markTestSkipped('Not implemented yet.');
+    }
+
     public function testExample(): void
     {
         self::assertTrue(true);
