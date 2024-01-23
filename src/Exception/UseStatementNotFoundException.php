@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\NodeVisitor;
+namespace Ghostwriter\Testify\Exception;
 
 use RuntimeException;
 
