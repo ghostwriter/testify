@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Command;
 
 use Composer\InstalledVersions;
-use Ghostwriter\Testify\Directory;
 use Ghostwriter\Testify\Filesystem;
 use Ghostwriter\Testify\PhpFileFinder;
+use Ghostwriter\Testify\Project;
 use Ghostwriter\Testify\TestBuilder;
 use Override;
 use Psalm\Config;
@@ -28,8 +28,12 @@ use Throwable;
 
 use const PHP_EOL;
 
+use function gc_collect_cycles;
+use function memory_get_usage;
+use function round;
 use function sprintf;
 use function str_replace;
+use function vsprintf;
 
 /** @see TestifyTest */
 final class TestifyCommand extends SingleCommandApplication
@@ -42,14 +46,12 @@ final class TestifyCommand extends SingleCommandApplication
         parent::__construct('Testify');
 
         $this->setAutoExit(false);
-        //        $this->getApplication()
-        //            ->setCatchExceptions(false);
 
         $this->setName('testify');
         $this->setDescription('Generate missing Tests.');
         $this->setVersion(InstalledVersions::getPrettyVersion('ghostwriter/testify') ?? 'UNKNOWN');
         $this->addArgument('source', InputArgument::OPTIONAL, 'The path to search for missing tests.', 'src');
-        $this->addArgument('tests', InputArgument::OPTIONAL, 'The path used to create tests.', 'tests/Unit');
+        $this->addArgument('tests', InputArgument::OPTIONAL, 'The path used to create tests.', 'tests');
         $this->addOption('dry-run', 'd', InputOption::VALUE_NONE, 'Do not write any files.');
     }
 
@@ -64,11 +66,8 @@ final class TestifyCommand extends SingleCommandApplication
             '<error>#BlackLivesMatter</error>'
         ));
 
-        /** @var bool $dryRun */
-        $dryRun = $input->getOption('dry-run');
-
         try {
-            $sourceDirectory = Directory::new($input);
+            $project = Project::new($input);
         } catch (Throwable $exception) {
             $output->writeln([$exception::class, $exception->getMessage(), $exception->getTraceAsString()]);
 
@@ -76,43 +75,58 @@ final class TestifyCommand extends SingleCommandApplication
         }
 
         $count = 0;
+        $dryRun = $project->dryRun;
+        $sourceDirectory = $project->source;
+        $testsDirectory = $project->tests;
+
         $progressBar = new ProgressBar($output);
-        foreach ($progressBar->iterate($this->phpFileFinder->find($sourceDirectory->path())) as $file) {
-            $testFile = str_replace(['/src/', '.php'], ['/tests/Unit/', 'Test.php'], $file);
+        foreach ($progressBar->iterate($this->phpFileFinder->find($sourceDirectory)) as $file) {
+            gc_collect_cycles();
+
+            $testFile = str_replace([$sourceDirectory, '.php'], [$testsDirectory, 'Test.php'], $file);
 
             if ($dryRun || $this->filesystem->missing($testFile)) {
                 ++$count;
 
-                $memoryUsage = memory_get_usage(true);
                 $output->writeln([
-                    PHP_EOL ,
-                    'Generating ' . $testFile,
-                    'from ' . $file,
-                    match(true){
-                        $memoryUsage < 1024 => sprintf('%s bytes used', $memoryUsage),
-                        $memoryUsage < 1048576 => sprintf('%s KiB used', round($memoryUsage / 1024, 2)),
-                        $memoryUsage < 1073741824 => sprintf('%s MiB used', round($memoryUsage / 1048576, 2)),
-                        $memoryUsage < 1099511627776 => sprintf('%s GiB used', round($memoryUsage / 1073741824, 2)),
-                        $memoryUsage < 1125899906842624 => sprintf('%s TiB used', round($memoryUsage / 1099511627776, 2)),
-                    },
-                    gc_collect_cycles() . ' garbage collections',
+                    PHP_EOL,
+                    'Class <comment>' . $file . '</comment> is missing a test.',
+                    'Generating <info>' . $testFile . '</info>.',
+                    self::memoryUsage(),
                     PHP_EOL,
                 ]);
 
-                $testFileContent = $this->testBuilder->build($file);
+                $testFileContent = $this->testBuilder->build($file, $testsDirectory);
 
                 $output->writeln(PHP_EOL . $testFileContent . PHP_EOL);
 
                 if ($dryRun) {
+                    $output->writeln('<info>Dry run, not writing file.</info>');
                     continue;
                 }
 
                 $this->filesystem->save($testFile, $testFileContent);
             }
         }
-        $output->writeln(sprintf('%sGenerated %d missing tests.', PHP_EOL . PHP_EOL, $count));
+
+        $output->writeln(
+            sprintf('%s<comment>Found <info>%d</info> missing tests.</comment>', PHP_EOL . PHP_EOL, $count)
+        );
 
         return self::SUCCESS;
+    }
+
+    public static function memoryUsage(): string
+    {
+        $memoryUsage = memory_get_usage(true);
+
+        return vsprintf('<info>%s</info> %s used', match (true) {
+            $memoryUsage < 1024 => [$memoryUsage, 'bytes'],
+            $memoryUsage < 1048576 => [round($memoryUsage / 1024, 2), 'KiB'],
+            $memoryUsage < 1073741824 => [round($memoryUsage / 1048576, 2), 'MiB'],
+            $memoryUsage < 1099511627776 => [round($memoryUsage / 1073741824, 2), 'GiB'],
+            $memoryUsage < 1125899906842624 => [round($memoryUsage / 1099511627776, 2), 'TiB'],
+        });
     }
 
     public static function new(): self
