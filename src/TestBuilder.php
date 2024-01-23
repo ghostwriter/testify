@@ -28,8 +28,8 @@ use Psalm\Internal\Analyzer\FileAnalyzer;
 use Psalm\Internal\Analyzer\ProjectAnalyzer;
 use Psalm\Internal\Provider\ClassLikeStorageProvider;
 use RuntimeException;
-
 use Throwable;
+
 use function array_key_exists;
 use function array_key_first;
 use function array_key_last;
@@ -86,6 +86,7 @@ final readonly class TestBuilder
     public function build(string $file): string
     {
         $imports = [];
+
         foreach ($this->check($file) as $namespace => $classes) {
             $namespaces = explode('\\', $namespace);
             $namespaces[1] .= 'Tests\\Unit';
