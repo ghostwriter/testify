@@ -23,7 +23,7 @@ final class TestBuilderTest extends TestCase
     }
 
     #[DataProvider('dataProviderBuild')]
-    public function testBuild(string $file): void
+    public function testBuild(string $file, string $testsDirectory): void
     {
         self::assertTrue(true);
     }
