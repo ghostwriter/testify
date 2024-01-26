@@ -13,7 +13,6 @@ use const STDERR;
 
 use function define;
 use function defined;
-use function dirname;
 use function error_reporting;
 use function file_exists;
 use function fwrite;
@@ -59,11 +58,11 @@ use function sprintf;
          * #BlackLivesMatter.
          */
         $exitCode = TestifyCommand::new()->run();
-        //    } catch (Throwable $exception) {
-        //        fwrite(STDERR, sprintf('[ERROR] %s: %s', $exception::class, $exception->getMessage()));
+    } catch (Throwable $exception) {
+        fwrite(STDERR, sprintf('[ERROR] %s: %s', $exception::class, $exception->getMessage()));
     } finally {
         restore_error_handler();
 
         exit($exitCode);
     }
-})($_composer_autoload_path ?? dirname(__DIR__) . '/vendor/autoload.php');
+})($_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php');
