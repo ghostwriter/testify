@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify;
 
+use Generator;
 use Ghostwriter\Testify\Exception\FailedToCreateDirectoryException;
 use Ghostwriter\Testify\Exception\FailedToDetermineCurrentWorkingDirectoryException;
 use Ghostwriter\Testify\Exception\FailedToReadFileException;
 use Ghostwriter\Testify\Exception\FailedToWriteFileException;
 use Ghostwriter\Testify\Exception\FileNotFoundException;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
+use SplFileInfo;
 use function basename;
 use function dirname;
 use function file_exists;
@@ -88,6 +92,11 @@ final readonly class Filesystem
         }
 
         return $content;
+    }
+
+    public function recursiveDirectoryIterator(string $directory): Generator
+    {
+        yield from new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory));
     }
 
     public function save(string $path, string $content): void
