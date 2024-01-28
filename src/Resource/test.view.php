@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace <?= $testNamespace ?>;
 
+<?php foreach ($useStatements as $useStatement) : ?>
+use <?= $useStatement ?>;
+<?php endforeach; ?>
 use <?= $classNamespace . '\\' . $class ?>;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -38,5 +41,5 @@ final class <?= $testClass ?> extends TestCase
         }
     <?php endif; ?>
 <?php endforeach; ?>
-
+<?php PHP_EOL; ?>
 }
