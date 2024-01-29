@@ -9,6 +9,8 @@ use Ghostwriter\Testify\Exception\NoNamespaceFoundException;
 use Ghostwriter\Testify\NodeVisitor\ChangeToShortArrayNodeVisitor;
 use Ghostwriter\Testify\NodeVisitor\HashNodeVisitor;
 use Ghostwriter\Testify\NodeVisitor\ImportFullyQualifiedNamesNodeVisitor;
+use Ghostwriter\Testify\NodeVisitor\SortClassLikeStatementsAlphabeticallyNodeVisitor;
+use Ghostwriter\Testify\NodeVisitor\SortMatchExpressionsAlphabeticallyNodeVisitor;
 use Ghostwriter\Testify\NodeVisitor\SortUseStatementsAlphabeticallyNodeVisitor;
 use PhpParser\BuilderFactory;
 use PhpParser\Node\Expr\StaticCall;
@@ -79,6 +81,8 @@ final readonly class TestBuilder
         $this->traverser->addVisitor(new ImportFullyQualifiedNamesNodeVisitor());
         $this->traverser->addVisitor(new ChangeToShortArrayNodeVisitor());
         $this->traverser->addVisitor(new SortUseStatementsAlphabeticallyNodeVisitor());
+        $this->traverser->addVisitor(new SortClassLikeStatementsAlphabeticallyNodeVisitor());
+        $this->traverser->addVisitor(new SortMatchExpressionsAlphabeticallyNodeVisitor());
     }
 
     public function build(string $file, string $testsDirectory): string
