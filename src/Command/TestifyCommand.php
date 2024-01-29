@@ -155,7 +155,7 @@ final class TestifyCommand extends SingleCommandApplication
                 1,
                 new VoidProgress(),
             )),
-            new PhpFileFinder(),
+            new PhpFileFinder($filesystem),
         );
     }
 }
