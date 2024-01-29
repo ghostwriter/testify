@@ -6,8 +6,6 @@ namespace Ghostwriter\Testify;
 
 use Closure;
 use Generator;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 use SplFileInfo;
 
 use function mb_strtolower;
@@ -16,21 +14,17 @@ use function str_starts_with;
 
 final readonly class PhpFileFinder
 {
-    /**
-     * @param null|Closure(SplFileInfo):bool $match
-     * @param null|Closure(SplFileInfo):bool $skip
-     *
-     * @return Generator<string>
-     */
-    public function find(string $path, ?Closure $match = null, ?Closure $skip = null): Generator
-    {
-        $directory = new RecursiveDirectoryIterator($path);
-        $iterator = new RecursiveIteratorIterator($directory);
+    private Closure $isPhpFile;
+    private Closure $isNotSupported;
+    public function __construct(
+        private Filesystem $filesystem,
+    ) {
+        $this->isPhpFile = static fn (SplFileInfo $file): bool => $file->getExtension() === 'php';
 
-        $match ??= static fn (SplFileInfo $file): bool => $file->getExtension() === 'php';
-        $skip ??= static function (SplFileInfo $file): bool {
+        $this->isNotSupported = static function (SplFileInfo $file): bool {
             $filename = $file->getFilename();
             return match (true) {
+                // if the first letter is lowercase, it's not a class
                 mb_strtolower($filename[0]) === $filename[0],
                 str_starts_with($filename, 'Abstract'),
                 str_ends_with($filename, 'Trait.php'),
@@ -39,21 +33,33 @@ final readonly class PhpFileFinder
                 default => false,
             };
         };
+    }
 
-        foreach ($iterator as $info) {
-            if (! $info instanceof SplFileInfo) {
+    /**
+     * @param null|Closure(SplFileInfo):bool $match
+     * @param null|Closure(SplFileInfo):bool $skip
+     *
+     * @return Generator<string>
+     */
+    public function find(string $path, ?Closure $match = null, ?Closure $skip = null): Generator
+    {
+        $match ??= $this->isPhpFile;
+        $skip ??= $this->isNotSupported;
+
+        foreach ($this->filesystem->recursiveDirectoryIterator($path) as $file) {
+            if (! $file instanceof SplFileInfo) {
                 continue;
             }
 
-            if (! $match($info)) {
+            if (false === ($this->isPhpFile)($file) || true === ($this->isNotSupported)($file)) {
                 continue;
             }
 
-            if ($skip($info)) {
+            if (false === $match($file) || true === $skip($file)) {
                 continue;
             }
 
-            yield $info->getPathname();
+            yield $file->getPathname();
         }
     }
 }
