@@ -6,6 +6,10 @@ namespace Ghostwriter\Testify\NodeVisitor;
 
 use Override;
 use PhpParser\Node;
+use PhpParser\Node\Expr\Match_;
+use PhpParser\Node\Identifier;
+use PhpParser\Node\MatchArm;
+use PhpParser\Node\Stmt\ClassLike;
 use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Use_;
 use PhpParser\NodeVisitor;
