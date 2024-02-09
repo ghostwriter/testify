@@ -6,9 +6,12 @@ namespace Ghostwriter\Testify\Console;
 
 use Composer\InstalledVersions;
 use ErrorException;
+use Ghostwriter\Container\Container;
 use Ghostwriter\Testify\Command\TestifyCommand;
+use Ghostwriter\Testify\ServiceProvider;
 use Throwable;
 
+use const PHP_EOL;
 use const STDERR;
 
 use function define;
@@ -52,17 +55,27 @@ use function sprintf;
         throw new ErrorException($message, 0, $severity, $filename, $line);
     });
 
-    $exitCode = 0;
     try {
         /**
          * #BlackLivesMatter.
          */
-        $exitCode = TestifyCommand::new()->run();
-    } catch (Throwable $exception) {
-        fwrite(STDERR, sprintf('[ERROR] %s: %s', $exception::class, $exception->getMessage()));
-    } finally {
-        restore_error_handler();
+        $container = Container::getInstance();
+
+        if (! $container->has(ServiceProvider::class)) {
+            $container->provide(ServiceProvider::class);
+        }
+
+        $exitCode = $container->get(TestifyCommand::class)->run();
 
         exit($exitCode);
+    } catch (Throwable $exception) {
+        fwrite(STDERR, sprintf(
+            '[%s] %s: ' . PHP_EOL . '%s',
+            $exception::class,
+            $exception->getMessage(),
+            $exception->getTraceAsString()
+        ));
+    } finally {
+        restore_error_handler();
     }
 })($_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php');
