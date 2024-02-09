@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -14,44 +14,49 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(UseClassGenerator::class)]
 final class UseClassGeneratorTest extends TestCase
 {
-    public function testGenerate(): void
-    {
-        self::markTestSkipped('Not implemented yet.');
-    }
-
-    public static function testConstructDataProvider(): Generator
-    {
-        yield from [
-            'testConstruct' => ['parameter-0', 'parameter-1'],
-        ];
-    }
-
-    #[DataProvider('testConstructDataProvider')]
-    public function testConstruct(string $name, string $alias): void
+    protected function setUp(): void
     {
         self::markTestSkipped('Not implemented yet.');
     }
 
     final public function testAlias(): void
     {
-        self::markTestSkipped('Not implemented yet.');
+        self::assertTrue(true);
     }
 
-    public static function testCompareDataProvider(): Generator
+    #[DataProvider('dataProvidertestCompare')]
+    final public function testCompare(UseGeneratorInterface $generator): void
+    {
+        self::assertTrue(true);
+    }
+
+    #[DataProvider('dataProvidertestConstruct')]
+    public function testConstruct(string $name, string $alias): void
+    {
+        self::assertTrue(true);
+    }
+
+    public function testGenerate(): void
+    {
+        self::assertTrue(true);
+    }
+
+    final public function testName(): void
+    {
+        self::assertTrue(true);
+    }
+
+    public static function dataProvidertestCompare(): Generator
     {
         yield from [
             'testCompare' => ['parameter-0'],
         ];
     }
 
-    #[DataProvider('testCompareDataProvider')]
-    final public function testCompare(UseGeneratorInterface $generator): void
+    public static function dataProvidertestConstruct(): Generator
     {
-        self::markTestSkipped('Not implemented yet.');
-    }
-
-    final public function testName(): void
-    {
-        self::markTestSkipped('Not implemented yet.');
+        yield from [
+            'testConstruct' => ['parameter-0', 'parameter-1'],
+        ];
     }
 }
