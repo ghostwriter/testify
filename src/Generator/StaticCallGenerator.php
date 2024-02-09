@@ -20,12 +20,16 @@ final class StaticCallGenerator implements GeneratorInterface
 
     public function generate(): string
     {
-        $code = sprintf("%s::%s('", $this->class, $this->method);
+        $code = sprintf('%s::%s(', $this->class, $this->method);
 
         foreach ($this->args as $arg) {
+            if (str_contains($arg, ' ')) {
+                $arg = sprintf("'%s'", $arg);
+            }
+
             $code .= $arg . ', ';
         }
 
-        return sprintf("%s');%s", rtrim($code, ', '), self::NEWLINE);
+        return sprintf('%s);%s', rtrim($code, ', '), self::NEWLINE);
     }
 }
