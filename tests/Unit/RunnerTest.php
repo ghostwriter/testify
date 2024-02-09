@@ -21,26 +21,26 @@ final class RunnerTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProvidertestConstruct')]
+    #[DataProvider('dataProviderTestConstruct')]
     public function testConstruct(ProgressBar $progressBar, PhpFileFinder $phpFileFinder): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestRun')]
+    #[DataProvider('dataProviderTestRun')]
     public function testRun(ProjectInterface $project): void
     {
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestConstruct(): Generator
+    public static function dataProviderTestConstruct(): Generator
     {
         yield from [
             'testConstruct' => ['parameter-0', 'parameter-1'],
         ];
     }
 
-    public static function dataProvidertestRun(): Generator
+    public static function dataProviderTestRun(): Generator
     {
         yield from [
             'testRun' => ['parameter-0'],
