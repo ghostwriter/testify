@@ -24,13 +24,13 @@ final class UseFunctionGeneratorTest extends TestCase
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestCompare')]
+    #[DataProvider('dataProviderTestCompare')]
     final public function testCompare(UseGeneratorInterface $generator): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestConstruct')]
+    #[DataProvider('dataProviderTestConstruct')]
     public function testConstruct(string $name, string $alias): void
     {
         self::assertTrue(true);
@@ -46,14 +46,14 @@ final class UseFunctionGeneratorTest extends TestCase
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestCompare(): Generator
+    public static function dataProviderTestCompare(): Generator
     {
         yield from [
             'testCompare' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestConstruct(): Generator
+    public static function dataProviderTestConstruct(): Generator
     {
         yield from [
             'testConstruct' => ['parameter-0', 'parameter-1'],
