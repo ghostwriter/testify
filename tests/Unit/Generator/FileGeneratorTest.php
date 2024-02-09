@@ -18,7 +18,7 @@ final class FileGeneratorTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProvidertestConstruct')]
+    #[DataProvider('dataProviderTestConstruct')]
     public function testConstruct(array $namespaces): void
     {
         self::assertTrue(true);
@@ -34,21 +34,21 @@ final class FileGeneratorTest extends TestCase
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestConstruct(): Generator
+    public static function dataProviderTestConstruct(): Generator
     {
         yield from [
             'testConstruct' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestNew(): Generator
+    public static function dataProviderTestNew(): Generator
     {
         yield from [
             'testNew' => ['parameter-0'],
         ];
     }
 
-    #[DataProvider('dataProvidertestNew')]
+    #[DataProvider('dataProviderTestNew')]
     public static function testNew(array $namespaces): void
     {
         self::assertTrue(true);
