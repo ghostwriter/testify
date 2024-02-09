@@ -19,26 +19,26 @@ final class PhpFileFinderTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProvidertestConstruct')]
+    #[DataProvider('dataProviderTestConstruct')]
     public function testConstruct(Filesystem $filesystem): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestFind')]
+    #[DataProvider('dataProviderTestFind')]
     public function testFind(string $directory): void
     {
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestConstruct(): Generator
+    public static function dataProviderTestConstruct(): Generator
     {
         yield from [
             'testConstruct' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestFind(): Generator
+    public static function dataProviderTestFind(): Generator
     {
         yield from [
             'testFind' => ['parameter-0'],
