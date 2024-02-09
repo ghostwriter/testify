@@ -273,9 +273,6 @@
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
-    <TooFewArguments>
-      <code>new TestMethodNameNormalizer()</code>
-    </TooFewArguments>
     <UnusedParam>
       <code>$className</code>
     </UnusedParam>
@@ -308,6 +305,16 @@
   <file src="src/Interface/Generator/UseGeneratorInterface.php">
     <PossiblyUnusedMethod>
       <code>alias</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Normalizer/TestDataProviderMethodNameNormalizer.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Normalizer/TestMethodNameNormalizer.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/PhpFileFinder.php">
@@ -368,11 +375,6 @@
     <MixedOperand>
       <code>$testNamespace</code>
     </MixedOperand>
-    <PossiblyUnusedMethod>
-      <code>__construct</code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/TestDataProviderMethodNameNormalizer.php">
     <PossiblyUnusedMethod>
       <code>__construct</code>
     </PossiblyUnusedMethod>
@@ -594,6 +596,16 @@
       <code>$path</code>
       <code>$recursive</code>
       <code>$suffix</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Formatter/TestDataProviderMethodNameFormatterTest.php">
+    <UnusedParam>
+      <code>$name</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Formatter/TestMethodNameFormatterTest.php">
+    <UnusedParam>
+      <code>$name</code>
     </UnusedParam>
   </file>
   <file src="tests/Unit/Generator/AttributeGeneratorTest.php">
@@ -821,6 +833,35 @@
       <code>$name</code>
     </UnusedParam>
   </file>
+  <file src="tests/Unit/Normalizer/ClassConstantNameNormalizerTest.php">
+    <UnusedParam>
+      <code>$name</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Normalizer/ClassMethodNameNormalizerTest.php">
+    <UnusedParam>
+      <code>$name</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Normalizer/ClassNameNormalizerTest.php">
+    <UnusedParam>
+      <code>$name</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Normalizer/TestDataProviderMethodNameNormalizerTest.php">
+    <UnusedParam>
+      <code>$classMethodNormalizer</code>
+      <code>$name</code>
+      <code>$testDataProviderMethodNameFormatter</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Normalizer/TestMethodNameNormalizerTest.php">
+    <UnusedParam>
+      <code>$classMethodNormalizer</code>
+      <code>$name</code>
+      <code>$testMethodNameFormatter</code>
+    </UnusedParam>
+  </file>
   <file src="tests/Unit/PhpFileFinderTest.php">
     <UnusedParam>
       <code>$directory</code>
@@ -851,6 +892,7 @@
   </file>
   <file src="tests/Unit/TestBuilderTest.php">
     <UnusedParam>
+      <code>$classNameNormalizer</code>
       <code>$file</code>
       <code>$fileResolver</code>
       <code>$testFile</code>
@@ -858,22 +900,36 @@
     </UnusedParam>
   </file>
   <file src="tests/Unit/TestDataProviderMethodNameFormatterTest.php">
+    <UndefinedClass>
+      <code>TestDataProviderMethodNameFormatter</code>
+    </UndefinedClass>
     <UnusedParam>
       <code>$name</code>
     </UnusedParam>
   </file>
   <file src="tests/Unit/TestDataProviderMethodNameNormalizerTest.php">
+    <UndefinedClass>
+      <code>TestDataProviderMethodNameFormatter</code>
+      <code>TestDataProviderMethodNameNormalizer</code>
+    </UndefinedClass>
     <UnusedParam>
       <code>$name</code>
       <code>$testDataProviderMethodNameFormatter</code>
     </UnusedParam>
   </file>
   <file src="tests/Unit/TestMethodNameFormatterTest.php">
+    <UndefinedClass>
+      <code>TestMethodNameFormatter</code>
+    </UndefinedClass>
     <UnusedParam>
       <code>$name</code>
     </UnusedParam>
   </file>
   <file src="tests/Unit/TestMethodNameNormalizerTest.php">
+    <UndefinedClass>
+      <code>TestMethodNameFormatter</code>
+      <code>TestMethodNameNormalizer</code>
+    </UndefinedClass>
     <UnusedParam>
       <code>$name</code>
       <code>$testMethodNameFormatter</code>
