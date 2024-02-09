@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -13,39 +13,44 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(FileGenerator::class)]
 final class FileGeneratorTest extends TestCase
 {
-    public static function testConstructDataProvider(): Generator
+    protected function setUp(): void
+    {
+        self::markTestSkipped('Not implemented yet.');
+    }
+
+    #[DataProvider('dataProvidertestConstruct')]
+    public function testConstruct(array $namespaces): void
+    {
+        self::assertTrue(true);
+    }
+
+    public function testDeclareStrictTypes(): void
+    {
+        self::assertTrue(true);
+    }
+
+    public function testGenerate(): void
+    {
+        self::assertTrue(true);
+    }
+
+    public static function dataProvidertestConstruct(): Generator
     {
         yield from [
             'testConstruct' => ['parameter-0'],
         ];
     }
 
-    #[DataProvider('testConstructDataProvider')]
-    public function testConstruct(array $namespaces): void
-    {
-        self::markTestSkipped('Not implemented yet.');
-    }
-
-    public function testDeclareStrictTypes(): void
-    {
-        self::markTestSkipped('Not implemented yet.');
-    }
-
-    public function testGenerate(): void
-    {
-        self::markTestSkipped('Not implemented yet.');
-    }
-
-    public static function testNewDataProvider(): Generator
+    public static function dataProvidertestNew(): Generator
     {
         yield from [
             'testNew' => ['parameter-0'],
         ];
     }
 
-    #[DataProvider('testNewDataProvider')]
+    #[DataProvider('dataProvidertestNew')]
     public static function testNew(array $namespaces): void
     {
-        self::markTestSkipped('Not implemented yet.');
+        self::assertTrue(true);
     }
 }
