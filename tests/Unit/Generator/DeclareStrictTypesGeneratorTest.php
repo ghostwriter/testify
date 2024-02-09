@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -11,8 +11,13 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(DeclareStrictTypesGenerator::class)]
 final class DeclareStrictTypesGeneratorTest extends TestCase
 {
-    public function testGenerate(): void
+    protected function setUp(): void
     {
         self::markTestSkipped('Not implemented yet.');
+    }
+
+    public function testGenerate(): void
+    {
+        self::assertTrue(true);
     }
 }
