@@ -6,7 +6,6 @@ namespace Ghostwriter\Testify;
 
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\ServiceProviderInterface;
-use Ghostwriter\Testify\Interface\NormalizerInterface;
 use Ghostwriter\Testify\Interface\PrinterInterface;
 use Ghostwriter\Testify\Interface\RunnerInterface;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -23,6 +22,5 @@ final readonly class ServiceProvider implements ServiceProviderInterface
         $container->alias(OutputInterface::class, ConsoleOutput::class);
         $container->alias(RunnerInterface::class, Runner::class);
         $container->alias(PrinterInterface::class, Printer::class);
-        $container->alias(NormalizerInterface::class, TestMethodNameNormalizer::class);
     }
 }
