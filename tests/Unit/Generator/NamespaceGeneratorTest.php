@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -13,96 +13,101 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(NamespaceGenerator::class)]
 final class NamespaceGeneratorTest extends TestCase
 {
-    public static function testConstructDataProvider(): Generator
-    {
-        yield from [
-            'testConstruct' => ['parameter-0', 'parameter-1', 'parameter-2'],
-        ];
-    }
-
-    #[DataProvider('testConstructDataProvider')]
-    public function testConstruct(string $name, array $uses, array $classLikes): void
+    protected function setUp(): void
     {
         self::markTestSkipped('Not implemented yet.');
     }
 
-    public static function testClassDataProvider(): Generator
+    #[DataProvider('dataProvidertestClass')]
+    public function testClass(string $name, string $extends, array $methods, array $attributes, bool $isFinal): void
+    {
+        self::assertTrue(true);
+    }
+
+    #[DataProvider('dataProvidertestClassLikes')]
+    public function testClassLikes(array $classLikes): void
+    {
+        self::assertTrue(true);
+    }
+
+    #[DataProvider('dataProvidertestConstruct')]
+    public function testConstruct(string $name, array $uses, array $classLikes): void
+    {
+        self::assertTrue(true);
+    }
+
+    public function testGenerate(): void
+    {
+        self::assertTrue(true);
+    }
+
+    public function testName(): void
+    {
+        self::assertTrue(true);
+    }
+
+    public function testUses(): void
+    {
+        self::assertTrue(true);
+    }
+
+    #[DataProvider('dataProvidertestUsesClass')]
+    public function testUsesClass(string $class): void
+    {
+        self::assertTrue(true);
+    }
+
+    #[DataProvider('dataProvidertestUsesConstant')]
+    public function testUsesConstant(string $constant): void
+    {
+        self::assertTrue(true);
+    }
+
+    #[DataProvider('dataProvidertestUsesFunction')]
+    public function testUsesFunction(string $function): void
+    {
+        self::assertTrue(true);
+    }
+
+    public static function dataProvidertestClass(): Generator
     {
         yield from [
             'testClass' => ['parameter-0', 'parameter-1', 'parameter-2', 'parameter-3', 'parameter-4'],
         ];
     }
 
-    #[DataProvider('testClassDataProvider')]
-    public function testClass(string $name, string $extends, array $methods, array $attributes, bool $isFinal): void
-    {
-        self::markTestSkipped('Not implemented yet.');
-    }
-
-    public static function testClassLikesDataProvider(): Generator
+    public static function dataProvidertestClassLikes(): Generator
     {
         yield from [
             'testClassLikes' => ['parameter-0'],
         ];
     }
 
-    #[DataProvider('testClassLikesDataProvider')]
-    public function testClassLikes(array $classLikes): void
+    public static function dataProvidertestConstruct(): Generator
     {
-        self::markTestSkipped('Not implemented yet.');
+        yield from [
+            'testConstruct' => ['parameter-0', 'parameter-1', 'parameter-2'],
+        ];
     }
 
-    public function testGenerate(): void
-    {
-        self::markTestSkipped('Not implemented yet.');
-    }
-
-    public function testName(): void
-    {
-        self::markTestSkipped('Not implemented yet.');
-    }
-
-    public function testUses(): void
-    {
-        self::markTestSkipped('Not implemented yet.');
-    }
-
-    public static function testUsesClassDataProvider(): Generator
+    public static function dataProvidertestUsesClass(): Generator
     {
         yield from [
             'testUsesClass' => ['parameter-0'],
         ];
     }
 
-    #[DataProvider('testUsesClassDataProvider')]
-    public function testUsesClass(string $class): void
-    {
-        self::markTestSkipped('Not implemented yet.');
-    }
-
-    public static function testUsesConstantDataProvider(): Generator
+    public static function dataProvidertestUsesConstant(): Generator
     {
         yield from [
             'testUsesConstant' => ['parameter-0'],
         ];
     }
 
-    #[DataProvider('testUsesConstantDataProvider')]
-    public function testUsesConstant(string $constant): void
-    {
-        self::markTestSkipped('Not implemented yet.');
-    }
-
-    public static function testUsesFunctionDataProvider(): Generator
+    public static function dataProvidertestUsesFunction(): Generator
     {
         yield from [
             'testUsesFunction' => ['parameter-0'],
         ];
-    }
-
-    #[DataProvider('testUsesFunctionDataProvider')]
-    public function testUsesFunction(string $function): void
-    {
-        self::markTestSkipped('Not implemented yet.');
     }
 }
