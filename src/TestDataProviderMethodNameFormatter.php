@@ -12,6 +12,6 @@ final readonly class TestDataProviderMethodNameFormatter implements FormatterInt
 {
     public function format(string $name): string
     {
-        return sprintf('%sDataProvider', $name);
+        return sprintf('dataProvider%s', $name);
     }
 }
