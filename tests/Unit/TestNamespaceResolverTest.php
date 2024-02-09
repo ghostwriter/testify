@@ -18,13 +18,13 @@ final class TestNamespaceResolverTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProvidertestResolve')]
+    #[DataProvider('dataProviderTestResolve')]
     public function testResolve(string $namespace): void
     {
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestResolve(): Generator
+    public static function dataProviderTestResolve(): Generator
     {
         yield from [
             'testResolve' => ['parameter-0'],
