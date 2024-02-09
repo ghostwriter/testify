@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Generator;
 
 use Ghostwriter\Testify\Interface\Generator\ClassLike\TraitGeneratorInterface;
+use Ghostwriter\Testify\Interface\Generator\ClassLikeGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\ConstantGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\MethodGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\PropertyGeneratorInterface;
@@ -26,6 +27,11 @@ final class TraitGenerator implements TraitGeneratorInterface
         private array $methods = [],
         private array $traitUses = [],
     ) {
+    }
+
+    public function compare(ClassLikeGeneratorInterface $other): int
+    {
+        return $this->name() <=> $other->name();
     }
 
     public function generate(): string
