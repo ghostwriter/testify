@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -14,29 +14,34 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(TestMethodNameNormalizer::class)]
 final class TestMethodNameNormalizerTest extends TestCase
 {
-    public static function testConstructDataProvider(): Generator
+    protected function setUp(): void
+    {
+        self::markTestSkipped('Not implemented yet.');
+    }
+
+    #[DataProvider('dataProvidertestConstruct')]
+    public function testConstruct(TestMethodNameFormatter $testMethodNameFormatter): void
+    {
+        self::assertTrue(true);
+    }
+
+    #[DataProvider('dataProvidertestNormalize')]
+    public function testNormalize(string $name): void
+    {
+        self::assertTrue(true);
+    }
+
+    public static function dataProvidertestConstruct(): Generator
     {
         yield from [
             'testConstruct' => ['parameter-0'],
         ];
     }
 
-    #[DataProvider('testConstructDataProvider')]
-    public function testConstruct(TestMethodNameFormatter $testMethodNameFormatter): void
-    {
-        self::markTestSkipped('Not implemented yet.');
-    }
-
-    public static function testNormalizeDataProvider(): Generator
+    public static function dataProvidertestNormalize(): Generator
     {
         yield from [
             'testNormalize' => ['parameter-0'],
         ];
-    }
-
-    #[DataProvider('testNormalizeDataProvider')]
-    public function testNormalize(string $name): void
-    {
-        self::markTestSkipped('Not implemented yet.');
     }
 }
