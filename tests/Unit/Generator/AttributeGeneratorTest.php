@@ -18,7 +18,7 @@ final class AttributeGeneratorTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProvidertestConstruct')]
+    #[DataProvider('dataProviderTestConstruct')]
     public function testConstruct(string $name, array $params): void
     {
         self::assertTrue(true);
@@ -29,7 +29,7 @@ final class AttributeGeneratorTest extends TestCase
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestConstruct(): Generator
+    public static function dataProviderTestConstruct(): Generator
     {
         yield from [
             'testConstruct' => ['parameter-0', 'parameter-1'],
