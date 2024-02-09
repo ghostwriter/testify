@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -14,16 +14,21 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(ServiceProvider::class)]
 final class ServiceProviderTest extends TestCase
 {
-    public static function testInvokeDataProvider(): Generator
+    protected function setUp(): void
+    {
+        self::markTestSkipped('Not implemented yet.');
+    }
+
+    #[DataProvider('dataProvidertestInvoke')]
+    public function testInvoke(ContainerInterface $container): void
+    {
+        self::assertTrue(true);
+    }
+
+    public static function dataProvidertestInvoke(): Generator
     {
         yield from [
             'testInvoke' => ['parameter-0'],
         ];
-    }
-
-    #[DataProvider('testInvokeDataProvider')]
-    public function testInvoke(ContainerInterface $container): void
-    {
-        self::markTestSkipped('Not implemented yet.');
     }
 }
