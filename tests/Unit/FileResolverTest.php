@@ -19,26 +19,26 @@ final class FileResolverTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProvidertestConstruct')]
+    #[DataProvider('dataProviderTestConstruct')]
     public function testConstruct(TestNamespaceResolver $testNamespaceResolver): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestResolve')]
+    #[DataProvider('dataProviderTestResolve')]
     public function testResolve(array $tokens): void
     {
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestConstruct(): Generator
+    public static function dataProviderTestConstruct(): Generator
     {
         yield from [
             'testConstruct' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestResolve(): Generator
+    public static function dataProviderTestResolve(): Generator
     {
         yield from [
             'testResolve' => ['parameter-0'],
