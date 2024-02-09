@@ -19,13 +19,13 @@ final class ServiceProviderTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProvidertestInvoke')]
+    #[DataProvider('dataProviderTestInvoke')]
     public function testInvoke(ContainerInterface $container): void
     {
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestInvoke(): Generator
+    public static function dataProviderTestInvoke(): Generator
     {
         yield from [
             'testInvoke' => ['parameter-0'],
