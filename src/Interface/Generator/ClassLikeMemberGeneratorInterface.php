@@ -8,4 +8,7 @@ use Ghostwriter\Testify\Interface\GeneratorInterface;
 
 interface ClassLikeMemberGeneratorInterface extends GeneratorInterface
 {
+    public function compare(self $right): int;
+
+    public function name(): string;
 }
