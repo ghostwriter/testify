@@ -6,6 +6,7 @@ namespace Ghostwriter\TestifyTests\Unit\Generator;
 
 use Generator;
 use Ghostwriter\Testify\Generator\TraitGenerator;
+use Ghostwriter\Testify\Interface\Generator\ClassLikeGeneratorInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -16,6 +17,12 @@ final class TraitGeneratorTest extends TestCase
     protected function setUp(): void
     {
         self::markTestSkipped('Not implemented yet.');
+    }
+
+    #[DataProvider('dataProvidertestCompare')]
+    public function testCompare(ClassLikeGeneratorInterface $other): void
+    {
+        self::assertTrue(true);
     }
 
     #[DataProvider('dataProvidertestConstruct')]
@@ -43,6 +50,13 @@ final class TraitGeneratorTest extends TestCase
     public function testUses(): void
     {
         self::assertTrue(true);
+    }
+
+    public static function dataProvidertestCompare(): Generator
+    {
+        yield from [
+            'testCompare' => ['parameter-0'],
+        ];
     }
 
     public static function dataProvidertestConstruct(): Generator
