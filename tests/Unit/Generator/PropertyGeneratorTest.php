@@ -6,6 +6,7 @@ namespace Ghostwriter\TestifyTests\Unit\Generator;
 
 use Generator;
 use Ghostwriter\Testify\Generator\PropertyGenerator;
+use Ghostwriter\Testify\Interface\Generator\ClassLikeMemberGeneratorInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -16,6 +17,12 @@ final class PropertyGeneratorTest extends TestCase
     protected function setUp(): void
     {
         self::markTestSkipped('Not implemented yet.');
+    }
+
+    #[DataProvider('dataProvidertestCompare')]
+    public function testCompare(ClassLikeMemberGeneratorInterface $right): void
+    {
+        self::assertTrue(true);
     }
 
     #[DataProvider('dataProvidertestConstruct')]
@@ -34,6 +41,18 @@ final class PropertyGeneratorTest extends TestCase
     public function testGenerate(): void
     {
         self::assertTrue(true);
+    }
+
+    public function testName(): void
+    {
+        self::assertTrue(true);
+    }
+
+    public static function dataProvidertestCompare(): Generator
+    {
+        yield from [
+            'testCompare' => ['parameter-0'],
+        ];
     }
 
     public static function dataProvidertestConstruct(): Generator
