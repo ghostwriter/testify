@@ -49,7 +49,7 @@ final class FileGenerator implements FileGeneratorInterface
             }
         );
 
-        $code = '<?php ' . self::NEWLINES;
+        $code = '<?php' . self::NEWLINES;
 
         foreach ($this->namespaces as $namespace) {
             $code .= $namespace->generate() . self::NEWLINES;
