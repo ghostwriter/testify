@@ -6,6 +6,7 @@ namespace Ghostwriter\TestifyTests\Unit\Generator;
 
 use Generator;
 use Ghostwriter\Testify\Generator\InterfaceGenerator;
+use Ghostwriter\Testify\Interface\Generator\ClassLikeGeneratorInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -20,6 +21,12 @@ final class InterfaceGeneratorTest extends TestCase
 
     #[DataProvider('dataProvidertestAddMethod')]
     public function testAddMethod(GeneratorInterface $method): void
+    {
+        self::assertTrue(true);
+    }
+
+    #[DataProvider('dataProvidertestCompare')]
+    public function testCompare(ClassLikeGeneratorInterface $other): void
     {
         self::assertTrue(true);
     }
@@ -49,6 +56,13 @@ final class InterfaceGeneratorTest extends TestCase
     {
         yield from [
             'testAddMethod' => ['parameter-0'],
+        ];
+    }
+
+    public static function dataProvidertestCompare(): Generator
+    {
+        yield from [
+            'testCompare' => ['parameter-0'],
         ];
     }
 
