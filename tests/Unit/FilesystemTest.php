@@ -18,13 +18,13 @@ final class FilesystemTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProviderBasename')]
+    #[DataProvider('dataProvidertestBasename')]
     public function testBasename(string $path, string $suffix): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProviderCreateDirectory')]
+    #[DataProvider('dataProvidertestCreateDirectory')]
     public function testCreateDirectory(string $path, int $mode, bool $recursive): void
     {
         self::assertTrue(true);
@@ -35,108 +35,121 @@ final class FilesystemTest extends TestCase
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProviderExists')]
+    #[DataProvider('dataProvidertestExists')]
     public function testExists(string $path): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProviderIsFile')]
+    #[DataProvider('dataProvidertestIsFile')]
     public function testIsFile(string $path): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProviderIsReadable')]
+    #[DataProvider('dataProvidertestIsReadable')]
     public function testIsReadable(string $path): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProviderMissing')]
+    #[DataProvider('dataProvidertestMissing')]
     public function testMissing(string $path): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProviderParentDirectory')]
+    #[DataProvider('dataProvidertestParentDirectory')]
     public function testParentDirectory(string $path, int $levels): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProviderRead')]
+    #[DataProvider('dataProvidertestRead')]
     public function testRead(string $path): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProviderSave')]
+    #[DataProvider('dataProvidertestRecursiveDirectoryIterator')]
+    public function testRecursiveDirectoryIterator(string $directory): void
+    {
+        self::assertTrue(true);
+    }
+
+    #[DataProvider('dataProvidertestSave')]
     public function testSave(string $path, string $content): void
     {
         self::assertTrue(true);
     }
 
-    public static function dataProviderBasename(): Generator
+    public static function dataProvidertestBasename(): Generator
     {
         yield from [
-            'example' => [true],
+            'testBasename' => ['parameter-0', 'parameter-1'],
         ];
     }
 
-    public static function dataProviderCreateDirectory(): Generator
+    public static function dataProvidertestCreateDirectory(): Generator
     {
         yield from [
-            'example' => [true],
+            'testCreateDirectory' => ['parameter-0', 'parameter-1', 'parameter-2'],
         ];
     }
 
-    public static function dataProviderExists(): Generator
+    public static function dataProvidertestExists(): Generator
     {
         yield from [
-            'example' => [true],
+            'testExists' => ['parameter-0'],
         ];
     }
 
-    public static function dataProviderIsFile(): Generator
+    public static function dataProvidertestIsFile(): Generator
     {
         yield from [
-            'example' => [true],
+            'testIsFile' => ['parameter-0'],
         ];
     }
 
-    public static function dataProviderIsReadable(): Generator
+    public static function dataProvidertestIsReadable(): Generator
     {
         yield from [
-            'example' => [true],
+            'testIsReadable' => ['parameter-0'],
         ];
     }
 
-    public static function dataProviderMissing(): Generator
+    public static function dataProvidertestMissing(): Generator
     {
         yield from [
-            'example' => [true],
+            'testMissing' => ['parameter-0'],
         ];
     }
 
-    public static function dataProviderParentDirectory(): Generator
+    public static function dataProvidertestParentDirectory(): Generator
     {
         yield from [
-            'example' => [true],
+            'testParentDirectory' => ['parameter-0', 'parameter-1'],
         ];
     }
 
-    public static function dataProviderRead(): Generator
+    public static function dataProvidertestRead(): Generator
     {
         yield from [
-            'example' => [true],
+            'testRead' => ['parameter-0'],
         ];
     }
 
-    public static function dataProviderSave(): Generator
+    public static function dataProvidertestRecursiveDirectoryIterator(): Generator
     {
         yield from [
-            'example' => [true],
+            'testRecursiveDirectoryIterator' => ['parameter-0'],
+        ];
+    }
+
+    public static function dataProvidertestSave(): Generator
+    {
+        yield from [
+            'testSave' => ['parameter-0', 'parameter-1'],
         ];
     }
 }
