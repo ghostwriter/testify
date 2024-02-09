@@ -19,13 +19,13 @@ final class PropertyGeneratorTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProvidertestCompare')]
+    #[DataProvider('dataProviderTestCompare')]
     public function testCompare(ClassLikeMemberGeneratorInterface $right): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestConstruct')]
+    #[DataProvider('dataProviderTestConstruct')]
     public function testConstruct(
         string $name,
         mixed $value,
@@ -48,14 +48,14 @@ final class PropertyGeneratorTest extends TestCase
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestCompare(): Generator
+    public static function dataProviderTestCompare(): Generator
     {
         yield from [
             'testCompare' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestConstruct(): Generator
+    public static function dataProviderTestConstruct(): Generator
     {
         yield from [
             'testConstruct' => [
