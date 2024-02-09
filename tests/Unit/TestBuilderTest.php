@@ -6,6 +6,7 @@ namespace Ghostwriter\TestifyTests\Unit;
 
 use Generator;
 use Ghostwriter\Testify\FileResolver;
+use Ghostwriter\Testify\Normalizer\ClassNameNormalizer;
 use Ghostwriter\Testify\TestBuilder;
 use Ghostwriter\Testify\TestMethodsResolver;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -20,29 +21,32 @@ final class TestBuilderTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProvidertestBuild')]
+    #[DataProvider('dataProviderTestBuild')]
     public function testBuild(string $file, string $testFile): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestConstruct')]
-    public function testConstruct(TestMethodsResolver $testMethodsResolver, FileResolver $fileResolver): void
-    {
+    #[DataProvider('dataProviderTestConstruct')]
+    public function testConstruct(
+        TestMethodsResolver $testMethodsResolver,
+        FileResolver $fileResolver,
+        ClassNameNormalizer $classNameNormalizer
+    ): void {
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestBuild(): Generator
+    public static function dataProviderTestBuild(): Generator
     {
         yield from [
             'testBuild' => ['parameter-0', 'parameter-1'],
         ];
     }
 
-    public static function dataProvidertestConstruct(): Generator
+    public static function dataProviderTestConstruct(): Generator
     {
         yield from [
-            'testConstruct' => ['parameter-0', 'parameter-1'],
+            'testConstruct' => ['parameter-0', 'parameter-1', 'parameter-2'],
         ];
     }
 }
