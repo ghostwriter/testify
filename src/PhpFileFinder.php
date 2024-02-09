@@ -6,6 +6,8 @@ namespace Ghostwriter\Testify;
 
 use Closure;
 use Generator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 use SplFileInfo;
 
 use function mb_strtolower;
@@ -14,8 +16,10 @@ use function str_starts_with;
 
 final readonly class PhpFileFinder
 {
-    private Closure $isPhpFile;
     private Closure $isNotSupported;
+
+    private Closure $isPhpFile;
+
     public function __construct(
         private Filesystem $filesystem,
     ) {
@@ -36,30 +40,28 @@ final readonly class PhpFileFinder
     }
 
     /**
-     * @param null|Closure(SplFileInfo):bool $match
-     * @param null|Closure(SplFileInfo):bool $skip
-     *
      * @return Generator<string>
      */
-    public function find(string $path, ?Closure $match = null, ?Closure $skip = null): Generator
+    public function find(string $directory): Generator
     {
-        $match ??= $this->isPhpFile;
-        $skip ??= $this->isNotSupported;
+        $match = $this->isPhpFile;
+        $skip = $this->isNotSupported;
 
-        foreach ($this->filesystem->recursiveDirectoryIterator($path) as $file) {
+        foreach ($this->recursiveDirectoryIterator($directory) as $file) {
             if (! $file instanceof SplFileInfo) {
                 continue;
             }
 
-            if (false === ($this->isPhpFile)($file) || true === ($this->isNotSupported)($file)) {
-                continue;
-            }
-
-            if (false === $match($file) || true === $skip($file)) {
+            if ($match($file) === false || $skip($file) === true) {
                 continue;
             }
 
             yield $file->getPathname();
         }
+    }
+
+    private function recursiveDirectoryIterator(string $directory): Generator
+    {
+        yield from new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory));
     }
 }
