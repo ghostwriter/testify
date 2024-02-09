@@ -8,6 +8,7 @@ use Ghostwriter\Testify\Interface\GeneratorInterface;
 
 use function rtrim;
 use function sprintf;
+use function str_contains;
 
 final class StaticCallGenerator implements GeneratorInterface
 {
