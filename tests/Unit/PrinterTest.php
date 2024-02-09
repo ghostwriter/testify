@@ -19,13 +19,13 @@ final class PrinterTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProvidertestPrint')]
+    #[DataProvider('dataProviderTestPrint')]
     public function testPrint(GeneratorInterface $generator): void
     {
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestPrint(): Generator
+    public static function dataProviderTestPrint(): Generator
     {
         yield from [
             'testPrint' => ['parameter-0'],
