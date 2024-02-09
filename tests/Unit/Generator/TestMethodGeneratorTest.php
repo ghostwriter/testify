@@ -6,7 +6,7 @@ namespace Ghostwriter\TestifyTests\Unit\Generator;
 
 use Generator;
 use Ghostwriter\Testify\Generator\TestMethodGenerator;
-use Ghostwriter\Testify\TestMethodNameNormalizer;
+use Ghostwriter\Testify\Normalizer\TestMethodNameNormalizer;
 use PhpParser\BuilderFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -20,7 +20,7 @@ final class TestMethodGeneratorTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProvidertestConstruct')]
+    #[DataProvider('dataProviderTestConstruct')]
     public function testConstruct(
         BuilderFactory $builderFactory,
         TestMethodNameNormalizer $testMethodNameNormalizer
@@ -28,7 +28,7 @@ final class TestMethodGeneratorTest extends TestCase
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestInvoke')]
+    #[DataProvider('dataProviderTestInvoke')]
     public function testInvoke(
         string $className,
         string $methodName,
@@ -44,14 +44,14 @@ final class TestMethodGeneratorTest extends TestCase
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestConstruct(): Generator
+    public static function dataProviderTestConstruct(): Generator
     {
         yield from [
             'testConstruct' => ['parameter-0', 'parameter-1'],
         ];
     }
 
-    public static function dataProvidertestInvoke(): Generator
+    public static function dataProviderTestInvoke(): Generator
     {
         yield from [
             'testInvoke' => [
