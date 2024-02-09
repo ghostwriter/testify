@@ -42,9 +42,15 @@ final readonly class TestMethodsResolver
     {
         $reflectionClass = new ReflectionClass($class);
 
-        $methods = [];
-
         $staticCallGenerator = new StaticCallGenerator('self', 'markTestSkipped', ['Not implemented yet.']);
+
+        $assertTrue = new StaticCallGenerator('self', 'assertTrue', ['true']);
+
+        $methods = [
+            'setUp' => new MethodGenerator('setUp', 'void', [], [], [
+                $staticCallGenerator,
+            ], [], false, false, false, true, false, false),
+        ];
 
         foreach ($reflectionClass->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
             $testMethodName = $this->testMethodNameNormalizer->normalize($method->getName());
@@ -118,7 +124,7 @@ final readonly class TestMethodsResolver
                 'void',
                 [],
                 $parameters,
-                [$staticCallGenerator],
+                [$assertTrue],
                 $attributes,
                 $method->isStatic(),
                 $method->isFinal(),
