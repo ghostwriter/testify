@@ -11,6 +11,8 @@ use Ghostwriter\Testify\Generator\ParameterGenerator;
 use Ghostwriter\Testify\Generator\StaticCallGenerator;
 use Ghostwriter\Testify\Generator\TestDataProviderGenerator;
 use Ghostwriter\Testify\Generator\UseClassGenerator;
+use Ghostwriter\Testify\Normalizer\TestDataProviderMethodNameNormalizer;
+use Ghostwriter\Testify\Normalizer\TestMethodNameNormalizer;
 use PHPUnit\Framework\Attributes\DataProvider;
 use ReflectionClass;
 use ReflectionMethod;
