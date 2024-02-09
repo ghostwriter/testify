@@ -9,6 +9,7 @@ use Ghostwriter\Testify\Exception\PathDoesNotExistException;
 use Ghostwriter\Testify\Exception\PathIsEmptyException;
 use Ghostwriter\Testify\Exception\PathIsNotDirectoryException;
 use Ghostwriter\Testify\Exception\PathIsNotStringException;
+use Ghostwriter\Testify\Interface\ProjectInterface;
 use Symfony\Component\Console\Input\InputInterface;
 
 use const DIRECTORY_SEPARATOR;
@@ -19,12 +20,13 @@ use function mkdir;
 use function realpath;
 use function trim;
 
-final readonly class Project
+final readonly class Project implements ProjectInterface
 {
     private function __construct(
         public string $source,
         public string $tests,
         public bool $dryRun = false,
+        public bool $force = false,
     ) {
     }
 
@@ -75,6 +77,11 @@ final readonly class Project
             throw new PathDoesNotExistException($tests);
         }
 
-        return new self($sourceDirectory, $testsDirectory, (bool) $input->getOption('dry-run'));
+        return new self(
+            $sourceDirectory,
+            $testsDirectory,
+            (bool) $input->getOption('dry-run'),
+            (bool) $input->getOption('force')
+        );
     }
 }
