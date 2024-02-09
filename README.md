@@ -32,13 +32,38 @@ You can also star (🌟) this repo to find it easier later.
 Call the `testify` command with the path to the directory you want to generate tests for.
 
 ```sh
-vendor/bin/testify --dry-run
+vendor/bin/testify --verbose --dry-run
 ```
 
-```sh
-vendor/bin/testify app --dry-run
+### Commands
 
-vendor/bin/testify app/Middleware --dry-run
+```sh
+Description:
+  Generate missing Tests.
+
+Usage:
+  bin/testify [options] [--] [<source> [<tests>]]
+
+Arguments:
+  source                The path to search for missing tests. [default: "src"]
+  tests                 The path used to create tests. [default: "tests"]
+
+Options:
+  -d, --dry-run         Do not write any files.
+  -f, --force           Overwrite existing files.
+  -h, --help            Display help for the given command. When no command is given display help for the bin/testify command
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+      --ansi|--no-ansi  Force (or disable --no-ansi) ANSI output
+  -n, --no-interaction  Do not ask any interactive question
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+```
+
+#### Example
+```sh
+vendor/bin/testify app tests --dry-run
+
+vendor/bin/testify app/Middleware --dry-run --verbose
 
 vendor/bin/testify # default path is `src`
 ```
