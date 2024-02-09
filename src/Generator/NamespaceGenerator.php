@@ -89,6 +89,14 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
 
         $code .= self::NEWLINE;
 
+        usort(
+            $this->classLikes,
+            static fn (
+                ClassLikeGeneratorInterface $left,
+                ClassLikeGeneratorInterface $right
+            ): int => $left->compare($right)
+        );
+
         foreach ($this->classLikes as $class) {
             $code .= $class->generate() . self::NEWLINES;
         }
