@@ -5,12 +5,17 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Generator;
 
 use Ghostwriter\Testify\Interface\Generator\ClassLikeGeneratorInterface;
+use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\ConstantGeneratorInterface;
+use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\MethodGeneratorInterface;
+use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\PropertyGeneratorInterface;
+use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\TraitUseGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\NameGeneratorInterface;
 
 use function array_map;
 use function array_merge;
 use function implode;
 use function rtrim;
+use function usort;
 
 final class ClassGenerator implements ClassLikeGeneratorInterface
 {
@@ -29,6 +34,11 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
         private bool $isFinal = false,
         private bool $isReadonly = false,
     ) {
+    }
+
+    public function compare(ClassLikeGeneratorInterface $other): int
+    {
+        return $this->name() <=> $other->name();
     }
 
     public function generate(): string
@@ -70,17 +80,49 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
 
         $code .= self::NEWLINE . '{' . self::NEWLINE;
 
+        usort(
+            $this->traitUses,
+            static fn (
+                TraitUseGeneratorInterface $left,
+                TraitUseGeneratorInterface $right
+            ): int => $left->compare($right)
+        );
+
         foreach ($this->traitUses as $traitUse) {
             $code .= self::INDENT . $traitUse->generate() . self::NEWLINE;
         }
+
+        usort(
+            $this->constants,
+            static fn (
+                ConstantGeneratorInterface $left,
+                ConstantGeneratorInterface $right
+            ): int => $left->compare($right)
+        );
 
         foreach ($this->constants as $constant) {
             $code .= self::INDENT . $constant->generate() . self::NEWLINE;
         }
 
+        usort(
+            $this->properties,
+            static fn (
+                PropertyGeneratorInterface $left,
+                PropertyGeneratorInterface $right
+            ): int => $left->compare($right)
+        );
+
         foreach ($this->properties as $property) {
             $code .= self::INDENT . $property->generate() . self::NEWLINE;
         }
+
+        usort(
+            $this->methods,
+            static fn (
+                MethodGeneratorInterface $left,
+                MethodGeneratorInterface $right
+            ): int => $left->compare($right)
+        );
 
         foreach ($this->methods as $method) {
             $code .= self::INDENT . $method->generate() . self::NEWLINES;
