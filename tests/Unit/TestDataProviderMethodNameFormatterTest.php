@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -13,16 +13,21 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(TestDataProviderMethodNameFormatter::class)]
 final class TestDataProviderMethodNameFormatterTest extends TestCase
 {
-    public static function testFormatDataProvider(): Generator
+    protected function setUp(): void
+    {
+        self::markTestSkipped('Not implemented yet.');
+    }
+
+    #[DataProvider('dataProvidertestFormat')]
+    public function testFormat(string $name): void
+    {
+        self::assertTrue(true);
+    }
+
+    public static function dataProvidertestFormat(): Generator
     {
         yield from [
             'testFormat' => ['parameter-0'],
         ];
-    }
-
-    #[DataProvider('testFormatDataProvider')]
-    public function testFormat(string $name): void
-    {
-        self::markTestSkipped('Not implemented yet.');
     }
 }
