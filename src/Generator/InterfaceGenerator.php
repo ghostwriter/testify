@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Generator;
 
 use Ghostwriter\Testify\Interface\Generator\ClassLike\InterfaceGeneratorInterface;
+use Ghostwriter\Testify\Interface\Generator\ClassLikeGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\ConstantGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\MethodGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\UseGeneratorInterface;
@@ -31,6 +32,11 @@ final class InterfaceGenerator implements InterfaceGeneratorInterface
     public function addMethod(GeneratorInterface $method): void
     {
         $this->methods[] = $method;
+    }
+
+    public function compare(ClassLikeGeneratorInterface $other): int
+    {
+        return $this->name() <=> $other->name();
     }
 
     public function generate(): string
