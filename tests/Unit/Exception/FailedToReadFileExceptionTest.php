@@ -18,7 +18,7 @@ final class FailedToReadFileExceptionTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProvidertestConstruct')]
+    #[DataProvider('dataProviderTestConstruct')]
     public function testConstruct(string $message, int $code, Throwable $previous): void
     {
         self::assertTrue(true);
@@ -69,7 +69,7 @@ final class FailedToReadFileExceptionTest extends TestCase
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestConstruct(): Generator
+    public static function dataProviderTestConstruct(): Generator
     {
         yield from [
             'testConstruct' => ['parameter-0', 'parameter-1', 'parameter-2'],
