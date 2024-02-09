@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -14,16 +14,21 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Printer::class)]
 final class PrinterTest extends TestCase
 {
-    public static function testPrintDataProvider(): Generator
+    protected function setUp(): void
+    {
+        self::markTestSkipped('Not implemented yet.');
+    }
+
+    #[DataProvider('dataProvidertestPrint')]
+    public function testPrint(GeneratorInterface $generator): void
+    {
+        self::assertTrue(true);
+    }
+
+    public static function dataProvidertestPrint(): Generator
     {
         yield from [
             'testPrint' => ['parameter-0'],
         ];
-    }
-
-    #[DataProvider('testPrintDataProvider')]
-    public function testPrint(GeneratorInterface $generator): void
-    {
-        self::markTestSkipped('Not implemented yet.');
     }
 }
