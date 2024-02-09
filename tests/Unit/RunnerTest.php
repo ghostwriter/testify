@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -16,29 +16,34 @@ use Symfony\Component\Console\Helper\ProgressBar;
 #[CoversClass(Runner::class)]
 final class RunnerTest extends TestCase
 {
-    public static function testConstructDataProvider(): Generator
+    protected function setUp(): void
+    {
+        self::markTestSkipped('Not implemented yet.');
+    }
+
+    #[DataProvider('dataProvidertestConstruct')]
+    public function testConstruct(ProgressBar $progressBar, PhpFileFinder $phpFileFinder): void
+    {
+        self::assertTrue(true);
+    }
+
+    #[DataProvider('dataProvidertestRun')]
+    public function testRun(ProjectInterface $project): void
+    {
+        self::assertTrue(true);
+    }
+
+    public static function dataProvidertestConstruct(): Generator
     {
         yield from [
             'testConstruct' => ['parameter-0', 'parameter-1'],
         ];
     }
 
-    #[DataProvider('testConstructDataProvider')]
-    public function testConstruct(ProgressBar $progressBar, PhpFileFinder $phpFileFinder): void
-    {
-        self::markTestSkipped('Not implemented yet.');
-    }
-
-    public static function testRunDataProvider(): Generator
+    public static function dataProvidertestRun(): Generator
     {
         yield from [
             'testRun' => ['parameter-0'],
         ];
-    }
-
-    #[DataProvider('testRunDataProvider')]
-    public function testRun(ProjectInterface $project): void
-    {
-        self::markTestSkipped('Not implemented yet.');
     }
 }
