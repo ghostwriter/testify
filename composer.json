@@ -33,14 +33,8 @@
     ],
     "require": {
         "php": "^8.3",
-        "ghostwriter/clock": "^2.0",
-        "ghostwriter/collection": "^1.4",
-        "ghostwriter/config": "^0.4",
-        "ghostwriter/container": "^2.0",
-        "ghostwriter/event-dispatcher": "^3.0",
-        "ghostwriter/json": "^2.0",
-        "ghostwriter/option": "^1.5",
-        "ghostwriter/result": "^1.3",
+        "ghostwriter/container": "^3.0.1",
+        "ghostwriter/event-dispatcher": "^4.0.0",
         "symfony/console": "^7.0"
     },
     "require-dev": {
@@ -61,10 +55,7 @@
             "Ghostwriter\\TestifyTests\\": "tests"
         }
     },
-    "bin": [
-        "bin/testify",
-        "bin/testify.php"
-    ],
+    "bin": ["bin/testify"],
     "config": {
         "discard-changes": true,
         "optimize-autoloader": true,
