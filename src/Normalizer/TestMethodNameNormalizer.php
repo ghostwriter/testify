@@ -10,7 +10,7 @@ use Ghostwriter\Testify\Interface\NormalizerInterface;
 final readonly class TestMethodNameNormalizer implements NormalizerInterface
 {
     public function __construct(
-        private TestMethodNameFormatter   $testMethodNameFormatter,
+        private TestMethodNameFormatter $testMethodNameFormatter,
         private ClassMethodNameNormalizer $classMethodNormalizer,
     ) {
     }
