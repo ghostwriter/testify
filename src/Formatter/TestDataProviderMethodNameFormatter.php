@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify;
+namespace Ghostwriter\Testify\Formatter;
 
 use Ghostwriter\Testify\Interface\FormatterInterface;
 
@@ -12,6 +12,6 @@ final readonly class TestDataProviderMethodNameFormatter implements FormatterInt
 {
     public function format(string $name): string
     {
-        return sprintf('dataProvider%s', $name);
+        return sprintf('dataProvider_%s', $name);
     }
 }
