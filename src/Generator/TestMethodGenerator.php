@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Generator;
 
-use Ghostwriter\Testify\TestMethodNameNormalizer;
+use Ghostwriter\Testify\Normalizer\TestMethodNameNormalizer;
 use PhpParser\BuilderFactory;
 use PhpParser\Node;
 
 final readonly class TestMethodGenerator
 {
     public function __construct(
-        private BuilderFactory $builderFactory = new BuilderFactory(),
-        private TestMethodNameNormalizer $testMethodNameNormalizer = new TestMethodNameNormalizer(),
+        private BuilderFactory $builderFactory,
+        private TestMethodNameNormalizer $testMethodNameNormalizer,
     ) {
     }
 
