@@ -18,7 +18,7 @@ final class ParameterGeneratorTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProvidertestConstruct')]
+    #[DataProvider('dataProviderTestConstruct')]
     public function testConstruct(
         string $name,
         string $type,
@@ -48,7 +48,7 @@ final class ParameterGeneratorTest extends TestCase
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestConstruct(): Generator
+    public static function dataProviderTestConstruct(): Generator
     {
         yield from [
             'testConstruct' => [
