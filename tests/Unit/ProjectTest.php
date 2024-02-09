@@ -19,14 +19,14 @@ final class ProjectTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    public static function dataProvidertestNew(): Generator
+    public static function dataProviderTestNew(): Generator
     {
         yield from [
             'testNew' => ['parameter-0'],
         ];
     }
 
-    #[DataProvider('dataProvidertestNew')]
+    #[DataProvider('dataProviderTestNew')]
     public static function testNew(InputInterface $input): void
     {
         self::assertTrue(true);
