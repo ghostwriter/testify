@@ -9,6 +9,7 @@ use Ghostwriter\Testify\Generator\ClassGenerator;
 use Ghostwriter\Testify\Generator\FileGenerator;
 use Ghostwriter\Testify\Interface\BuilderInterface;
 use Ghostwriter\Testify\Interface\GeneratorInterface;
+use Ghostwriter\Testify\Normalizer\ClassNameNormalizer;
 use PhpToken;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
@@ -22,6 +23,7 @@ final readonly class TestBuilder implements BuilderInterface
     public function __construct(
         private TestMethodsResolver $testMethodsResolver,
         private FileResolver $fileResolver,
+        private ClassNameNormalizer $classNameNormalizer,
     ) {
     }
 
@@ -37,11 +39,14 @@ final readonly class TestBuilder implements BuilderInterface
 
         $namespaces = $this->fileResolver->resolve($tokens);
 
-        $class = basename($file, '.php');
-        $testClass = basename($testFile, '.php');
+        $class = $this->classNameNormalizer->normalize(basename($file, '.php'));
+
+        $testClass = $this->classNameNormalizer->normalize(basename($testFile, '.php'));
+
         foreach ($namespaces as $namespace => [$testNamespace, $namespaceGenerator]) {
             $namespaceClass = $namespace . '\\' . $class;
             $testNamespaceClass = $testNamespace . '\\' . $testClass;
+
             $namespaces[$namespace] = $namespaceGenerator->classLikes([
                 $testNamespaceClass => new ClassGenerator(
                     name: $testClass,
