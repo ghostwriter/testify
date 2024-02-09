@@ -13,7 +13,6 @@ use Ghostwriter\Testify\Exception\FileNotFoundException;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
-use SplFileInfo;
 use function basename;
 use function dirname;
 use function file_exists;
