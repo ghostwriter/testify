@@ -19,19 +19,19 @@ final class InterfaceGeneratorTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProvidertestAddMethod')]
+    #[DataProvider('dataProviderTestAddMethod')]
     public function testAddMethod(GeneratorInterface $method): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestCompare')]
+    #[DataProvider('dataProviderTestCompare')]
     public function testCompare(ClassLikeGeneratorInterface $other): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestConstruct')]
+    #[DataProvider('dataProviderTestConstruct')]
     public function testConstruct(string $name, array $uses, array $extends, array $constants, array $methods): void
     {
         self::assertTrue(true);
@@ -52,21 +52,21 @@ final class InterfaceGeneratorTest extends TestCase
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestAddMethod(): Generator
+    public static function dataProviderTestAddMethod(): Generator
     {
         yield from [
             'testAddMethod' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestCompare(): Generator
+    public static function dataProviderTestCompare(): Generator
     {
         yield from [
             'testCompare' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestConstruct(): Generator
+    public static function dataProviderTestConstruct(): Generator
     {
         yield from [
             'testConstruct' => ['parameter-0', 'parameter-1', 'parameter-2', 'parameter-3', 'parameter-4'],
