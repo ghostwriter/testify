@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -15,29 +15,36 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(TestMethodsResolver::class)]
 final class TestMethodsResolverTest extends TestCase
 {
-    public static function testConstructDataProvider(): Generator
+    protected function setUp(): void
+    {
+        self::markTestSkipped('Not implemented yet.');
+    }
+
+    #[DataProvider('dataProvidertestConstruct')]
+    public function testConstruct(
+        TestMethodNameNormalizer $testMethodNameNormalizer,
+        TestDataProviderMethodNameNormalizer $testDataProviderMethodNameNormalizer
+    ): void {
+        self::assertTrue(true);
+    }
+
+    #[DataProvider('dataProvidertestResolve')]
+    public function testResolve(string $class): void
+    {
+        self::assertTrue(true);
+    }
+
+    public static function dataProvidertestConstruct(): Generator
     {
         yield from [
             'testConstruct' => ['parameter-0', 'parameter-1'],
         ];
     }
 
-    #[DataProvider('testConstructDataProvider')]
-    public function testConstruct(TestMethodNameNormalizer $testMethodNameNormalizer, TestDataProviderMethodNameNormalizer $testDataProviderMethodNameNormalizer): void
-    {
-        self::markTestSkipped('Not implemented yet.');
-    }
-
-    public static function testResolveDataProvider(): Generator
+    public static function dataProvidertestResolve(): Generator
     {
         yield from [
             'testResolve' => ['parameter-0'],
         ];
-    }
-
-    #[DataProvider('testResolveDataProvider')]
-    public function testResolve(string $class): void
-    {
-        self::markTestSkipped('Not implemented yet.');
     }
 }
