@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Ghostwriter\TestifyTests\Unit;
 
 use Generator;
-use Ghostwriter\Testify\TestDataProviderMethodNameNormalizer;
-use Ghostwriter\Testify\TestMethodNameNormalizer;
+use Ghostwriter\Testify\Normalizer\TestDataProviderMethodNameNormalizer;
+use Ghostwriter\Testify\Normalizer\TestMethodNameNormalizer;
 use Ghostwriter\Testify\TestMethodsResolver;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -20,7 +20,7 @@ final class TestMethodsResolverTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProvidertestConstruct')]
+    #[DataProvider('dataProviderTestConstruct')]
     public function testConstruct(
         TestMethodNameNormalizer $testMethodNameNormalizer,
         TestDataProviderMethodNameNormalizer $testDataProviderMethodNameNormalizer
@@ -28,20 +28,20 @@ final class TestMethodsResolverTest extends TestCase
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestResolve')]
+    #[DataProvider('dataProviderTestResolve')]
     public function testResolve(string $class): void
     {
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestConstruct(): Generator
+    public static function dataProviderTestConstruct(): Generator
     {
         yield from [
             'testConstruct' => ['parameter-0', 'parameter-1'],
         ];
     }
 
-    public static function dataProvidertestResolve(): Generator
+    public static function dataProviderTestResolve(): Generator
     {
         yield from [
             'testResolve' => ['parameter-0'],
