@@ -1,169 +1,586 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.20.0@3f284e96c9d9be6fe6b15c79416e1d1903dcfef4">
+<files psalm-version="5.21.1@8c473e2437be8b6a8fd8f630f0f11a16b114c494">
   <file src="src/Command/TestifyCommand.php">
-    <InternalClass>
-      <code>new FileProvider()</code>
-      <code>new IncludeCollector()</code>
-      <code>new ProjectAnalyzer(
-                $config,
-                new Providers(new FileProvider()),
-                $stdout_report_options,
-                [],
-                1,
-                new VoidProgress(),
-            )</code>
-      <code>new Providers(new FileProvider())</code>
-    </InternalClass>
-    <InternalMethod>
-      <code>new ProjectAnalyzer(
-                $config,
-                new Providers(new FileProvider()),
-                $stdout_report_options,
-                [],
-                1,
-                new VoidProgress(),
-            )</code>
-      <code>new Providers(new FileProvider())</code>
-    </InternalMethod>
-    <InternalProperty>
-      <code><![CDATA[$config->cache_directory]]></code>
-    </InternalProperty>
+    <MixedArgument>
+      <code>$file</code>
+      <code>$testFile</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$file</code>
+      <code>$testFile</code>
+    </MixedAssignment>
+    <MixedOperand>
+      <code>$file</code>
+      <code>$testFile</code>
+    </MixedOperand>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/FileResolver.php">
+    <MixedAssignment>
+      <code>$text</code>
+      <code>$token</code>
+      <code>$token</code>
+      <code>$tokenId</code>
+      <code>$tokenId</code>
+    </MixedAssignment>
+    <MixedOperand>
+      <code>$text</code>
+    </MixedOperand>
+    <MixedPropertyFetch>
+      <code><![CDATA[$token->id]]></code>
+      <code><![CDATA[$token->text]]></code>
+    </MixedPropertyFetch>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Filesystem.php">
     <PossiblyUnusedMethod>
       <code>basename</code>
+      <code>currentWorkingDirectory</code>
       <code>exists</code>
       <code>isFile</code>
       <code>isReadable</code>
       <code>parentDirectory</code>
       <code>read</code>
+      <code>recursiveDirectoryIterator</code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/NodeVisitor/ImportFullyQualifiedNamesNodeVisitor.php">
+  <file src="src/Generator/AttributeGenerator.php">
+    <MixedAssignment>
+      <code>$param</code>
+    </MixedAssignment>
+    <MixedOperand>
+      <code>$param</code>
+    </MixedOperand>
+  </file>
+  <file src="src/Generator/ClassGenerator.php">
     <MixedArgument>
-      <code><![CDATA[$this->aliases[$type]]]></code>
+      <code><![CDATA[$method->uses()]]></code>
+      <code><![CDATA[$property->uses()]]></code>
     </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[usort(
+            $this->constants,
+            static fn (
+                ConstantGeneratorInterface $left,
+                ConstantGeneratorInterface $right
+            ): int => $left->compare($right)
+        )]]></code>
+      <code><![CDATA[usort(
+            $this->methods,
+            static fn (
+                MethodGeneratorInterface $left,
+                MethodGeneratorInterface $right
+            ): int => $left->compare($right)
+        )]]></code>
+      <code><![CDATA[usort(
+            $this->properties,
+            static fn (
+                PropertyGeneratorInterface $left,
+                PropertyGeneratorInterface $right
+            ): int => $left->compare($right)
+        )]]></code>
+      <code><![CDATA[usort(
+            $this->traitUses,
+            static fn (
+                TraitUseGeneratorInterface $left,
+                TraitUseGeneratorInterface $right
+            ): int => $left->compare($right)
+        )]]></code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment>
+      <code>$attribute</code>
+      <code>$constant</code>
+      <code>$dockBlock</code>
+      <code>$method</code>
+      <code>$method</code>
+      <code>$property</code>
+      <code>$property</code>
+      <code>$traitUse</code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code>generate</code>
+      <code>generate</code>
+      <code>generate</code>
+      <code>generate</code>
+      <code>generate</code>
+      <code>generate</code>
+      <code>uses</code>
+      <code>uses</code>
+    </MixedMethodCall>
+    <MixedOperand>
+      <code><![CDATA[$attribute->generate()]]></code>
+      <code><![CDATA[$constant->generate()]]></code>
+      <code><![CDATA[$dockBlock->generate()]]></code>
+      <code><![CDATA[$method->generate()]]></code>
+      <code><![CDATA[$property->generate()]]></code>
+      <code><![CDATA[$traitUse->generate()]]></code>
+    </MixedOperand>
   </file>
-  <file src="src/NodeVisitor/UseStatement.php">
+  <file src="src/Generator/FileGenerator.php">
+    <InvalidArrayOffset>
+      <code><![CDATA[$this->namespaces[DeclareStrictTypesGeneratorInterface::class]]]></code>
+    </InvalidArrayOffset>
+    <PropertyTypeCoercion>
+      <code><![CDATA[$this->namespaces]]></code>
+    </PropertyTypeCoercion>
+  </file>
+  <file src="src/Generator/InterfaceGenerator.php">
     <PossiblyUnusedMethod>
-      <code>full</code>
+      <code>__construct</code>
+      <code>addMethod</code>
+    </PossiblyUnusedMethod>
+    <UndefinedClass>
+      <code>GeneratorInterface</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$method</code>
+    </UnusedParam>
+  </file>
+  <file src="src/Generator/InterfaceNameGenerator.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/NodeVisitor/UseStatements.php">
-    <MixedInferredReturnType>
-      <code>UseStatement</code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement>
-      <code><![CDATA[$this->uses[$name] ?? throw new UseStatementNotFoundException($name)]]></code>
-    </MixedReturnStatement>
+  <file src="src/Generator/MethodGenerator.php">
+    <MixedArgument>
+      <code><![CDATA[$parameter->uses()]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$attribute</code>
+      <code>$line</code>
+      <code>$parameter</code>
+      <code>$parameter</code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code>generate</code>
+      <code>generate</code>
+      <code>generate</code>
+      <code>uses</code>
+    </MixedMethodCall>
+    <MixedOperand>
+      <code><![CDATA[$attribute->generate()]]></code>
+      <code><![CDATA[$line->generate()]]></code>
+      <code><![CDATA[$parameter->generate()]]></code>
+    </MixedOperand>
+    <PossiblyUnusedMethod>
+      <code>uses</code>
+    </PossiblyUnusedMethod>
+    <RedundantCondition>
+      <code><![CDATA[$this->returnType !== null]]></code>
+    </RedundantCondition>
+  </file>
+  <file src="src/Generator/NamespaceGenerator.php">
+    <MixedArgument>
+      <code>$returnType</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[usort(
+            $this->classLikes,
+            static fn (
+                ClassLikeGeneratorInterface $left,
+                ClassLikeGeneratorInterface $right
+            ): int => $left->compare($right)
+        )]]></code>
+      <code><![CDATA[usort(
+            $uses,
+            static fn (
+                UseGeneratorInterface $left,
+                UseGeneratorInterface $right
+            ): int => $left->compare($right)
+        )]]></code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAssignment>
+      <code><![CDATA[$this->classLikes[ClassGenerator::class][$name]]]></code>
+    </MixedArrayAssignment>
+    <MixedArrayOffset>
+      <code><![CDATA[$uses[$use->name()]]]></code>
+    </MixedArrayOffset>
+    <MixedAssignment>
+      <code>$class</code>
+      <code>$classLike</code>
+      <code>$use</code>
+      <code>$use</code>
+      <code><![CDATA[$uses[$use->name()]]]></code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code>generate</code>
+      <code>generate</code>
+      <code>name</code>
+      <code>uses</code>
+    </MixedMethodCall>
+    <MixedOperand>
+      <code><![CDATA[$class->generate()]]></code>
+      <code><![CDATA[$use->generate()]]></code>
+    </MixedOperand>
+    <PossiblyNullArgument>
+      <code>$returnType</code>
+    </PossiblyNullArgument>
+    <PossiblyUnusedMethod>
+      <code>class</code>
+      <code>classLikes</code>
+      <code>usesClass</code>
+      <code>usesConstant</code>
+      <code>usesFunction</code>
+    </PossiblyUnusedMethod>
+    <PropertyTypeCoercion>
+      <code><![CDATA[$this->uses]]></code>
+      <code><![CDATA[$this->uses]]></code>
+      <code><![CDATA[$this->uses]]></code>
+    </PropertyTypeCoercion>
+    <UnusedMethod>
+      <code>method</code>
+    </UnusedMethod>
+  </file>
+  <file src="src/Generator/ParameterGenerator.php">
+    <PossiblyUnusedMethod>
+      <code>uses</code>
+    </PossiblyUnusedMethod>
+    <UnusedProperty>
+      <code>$attributes</code>
+      <code>$defaultValue</code>
+      <code>$isDefaultValueAvailable</code>
+      <code>$isOptional</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Generator/PropertyGenerator.php">
+    <MixedOperand>
+      <code><![CDATA[$this->value]]></code>
+    </MixedOperand>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Generator/StaticCallGenerator.php">
+    <MixedArgument>
+      <code>$arg</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$arg</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Generator/TestMethodGenerator.php">
+    <MixedArgument>
+      <code>$param</code>
+      <code>$returnType</code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code>$param</code>
+    </MixedAssignment>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <TooFewArguments>
+      <code>new TestMethodNameNormalizer()</code>
+    </TooFewArguments>
+    <UnusedParam>
+      <code>$className</code>
+    </UnusedParam>
+  </file>
+  <file src="src/Generator/TraitGenerator.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Interface/Generator/ClassLike/ClassGeneratorInterface.php">
+    <UnusedClass>
+      <code>ClassGeneratorInterface</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Interface/Generator/ClassLike/EnumGeneratorInterface.php">
+    <UnusedClass>
+      <code>EnumGeneratorInterface</code>
+    </UnusedClass>
+  </file>
+  <file src="src/Interface/Generator/ClassLikeGeneratorInterface.php">
     <PossiblyUnusedMethod>
       <code>uses</code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/Resource/test.view.php">
-    <MixedArgument>
-      <code>$class</code>
-      <code><![CDATA[$method['dataProviderName']]]></code>
-      <code><![CDATA[$method['dataProviderName']]]></code>
-      <code><![CDATA[$method['testMethodName']]]></code>
-      <code><![CDATA[$method['testMethodName']]]></code>
-      <code><![CDATA[$method['testMethodParamsString']]]></code>
-      <code><![CDATA[$method['testMethodParamsString']]]></code>
-      <code><![CDATA[$params['fakerMethod']]]></code>
-      <code>$testClass</code>
-      <code>$testNamespace</code>
-    </MixedArgument>
-    <MixedArrayAccess>
-      <code><![CDATA[$method['dataProviderName']]]></code>
-      <code><![CDATA[$method['dataProviderName']]]></code>
-      <code><![CDATA[$method['testMethodName']]]></code>
-      <code><![CDATA[$method['testMethodName']]]></code>
-      <code><![CDATA[$method['testMethodParams']]]></code>
-      <code><![CDATA[$method['testMethodParamsString']]]></code>
-      <code><![CDATA[$method['testMethodParamsString']]]></code>
-      <code><![CDATA[$params['fakerMethod']]]></code>
-    </MixedArrayAccess>
-    <MixedAssignment>
-      <code>$method</code>
-      <code>$params</code>
-    </MixedAssignment>
-    <MixedOperand>
-      <code>$class</code>
-      <code>$classNamespace</code>
-    </MixedOperand>
-    <UndefinedGlobalVariable>
-      <code>$class</code>
-      <code>$class</code>
-      <code>$classNamespace</code>
-      <code>$methods</code>
-      <code>$testClass</code>
-      <code>$testNamespace</code>
-    </UndefinedGlobalVariable>
+  <file src="src/Interface/Generator/NameGeneratorInterface.php">
+    <PossiblyUnusedMethod>
+      <code>name</code>
+    </PossiblyUnusedMethod>
   </file>
-  <file src="src/TestBuilder.php">
-    <InternalMethod>
-      <code>checkFile</code>
-      <code>get</code>
-      <code>getAll</code>
-      <code>getCodebase</code>
-    </InternalMethod>
-    <InvalidOperand>
-      <code>$namespace</code>
-    </InvalidOperand>
+  <file src="src/Interface/Generator/UseGeneratorInterface.php">
+    <PossiblyUnusedMethod>
+      <code>alias</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/PhpFileFinder.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+    <UnusedProperty>
+      <code>$filesystem</code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Project.php">
+    <PossiblyUnusedProperty>
+      <code>$source</code>
+      <code>$tests</code>
+    </PossiblyUnusedProperty>
+  </file>
+  <file src="src/Runner.php">
     <MixedArgument>
-      <code>$class</code>
-      <code><![CDATA[$classInfo['Imports'] ?? []]]></code>
-      <code>$dataProviderName</code>
-      <code>$method</code>
-      <code>$methodInfo</code>
-      <code><![CDATA[$methodInfo['return']]]></code>
-      <code>$param</code>
-      <code>$type</code>
-      <code>$use</code>
-      <code>$use</code>
+      <code>$sourceDirectory</code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$namespace</code>
+      <code><![CDATA[[$testsDirectory, 'Test.php']]]></code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayAccess>
-      <code><![CDATA[$classInfo['Imports']]]></code>
-      <code><![CDATA[$classInfo['Methods']]]></code>
-      <code><![CDATA[$methodInfo['Params']]]></code>
-      <code><![CDATA[$methodInfo['return']]]></code>
-    </MixedArrayAccess>
-    <MixedArrayOffset>
-      <code>$imports[$use]</code>
-    </MixedArrayOffset>
     <MixedAssignment>
-      <code>$class</code>
-      <code>$classInfo</code>
-      <code>$classes</code>
-      <code>$dataProviderName</code>
-      <code>$imports[$use]</code>
-      <code>$method</code>
-      <code>$methodInfo</code>
-      <code>$methods</code>
-      <code>$param</code>
-      <code>$type</code>
-      <code>$use</code>
+      <code>$sourceDirectory</code>
+      <code>$testsDirectory</code>
     </MixedAssignment>
+    <NoInterfaceProperties>
+      <code><![CDATA[$project->source]]></code>
+      <code><![CDATA[$project->tests]]></code>
+    </NoInterfaceProperties>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/TestBuilder.php">
+    <ArgumentTypeCoercion>
+      <code>$namespaces</code>
+    </ArgumentTypeCoercion>
+    <InvalidOperand>
+      <code>$namespace</code>
+      <code>$namespace</code>
+    </InvalidOperand>
+    <MixedArrayAccess>
+      <code>$namespaceGenerator</code>
+      <code>$testNamespace</code>
+    </MixedArrayAccess>
+    <MixedAssignment>
+      <code>$namespaces[$namespace]</code>
+      <code>[$testNamespace, $namespaceGenerator]</code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code>classLikes</code>
+      <code>usesClass</code>
+      <code>usesClass</code>
+      <code>usesClass</code>
+    </MixedMethodCall>
     <MixedOperand>
-      <code>$class</code>
-      <code>$class</code>
+      <code>$testNamespace</code>
     </MixedOperand>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/TestDataProviderMethodNameNormalizer.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/TestMethodsResolver.php">
+    <ArgumentTypeCoercion>
+      <code>$class</code>
+    </ArgumentTypeCoercion>
+    <PossiblyFalseOperand>
+      <code><![CDATA[mb_strrpos($type, '\\')]]></code>
+    </PossiblyFalseOperand>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="tests/Unit/Command/TestifyCommandTest.php">
+    <UndefinedClass>
+      <code>array|Closure $suggestedValues</code>
+      <code>array|Closure $suggestedValues</code>
+    </UndefinedClass>
     <UnusedParam>
+      <code>$aliases</code>
+      <code>$application</code>
+      <code>$autoExit</code>
+      <code>$code</code>
+      <code>$default</code>
+      <code>$default</code>
+      <code>$definition</code>
+      <code>$description</code>
+      <code>$description</code>
+      <code>$description</code>
       <code>$filesystem</code>
+      <code>$help</code>
+      <code>$helperSet</code>
+      <code>$hidden</code>
       <code>$input</code>
+      <code>$input</code>
+      <code>$mergeArgs</code>
+      <code>$mode</code>
+      <code>$mode</code>
+      <code>$name</code>
+      <code>$name</code>
+      <code>$name</code>
+      <code>$name</code>
       <code>$output</code>
-      <code>$phpFileFinder</code>
+      <code>$printer</code>
+      <code>$runner</code>
+      <code>$short</code>
+      <code>$shortcut</code>
+      <code>$suggestedValues</code>
+      <code>$suggestedValues</code>
+      <code>$suggestions</code>
       <code>$testBuilder</code>
+      <code>$title</code>
+      <code>$usage</code>
+      <code>$version</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Exception/FailedToCreateDirectoryExceptionTest.php">
+    <UndefinedClass>
+      <code>Throwable</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$code</code>
+      <code>$message</code>
+      <code>$previous</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Exception/FailedToDetermineCurrentWorkingDirectoryExceptionTest.php">
+    <UndefinedClass>
+      <code>Throwable</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$code</code>
+      <code>$message</code>
+      <code>$previous</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Exception/FailedToReadFileExceptionTest.php">
+    <UndefinedClass>
+      <code>Throwable</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$code</code>
+      <code>$message</code>
+      <code>$previous</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Exception/FailedToWriteFileExceptionTest.php">
+    <UndefinedClass>
+      <code>Throwable</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$code</code>
+      <code>$message</code>
+      <code>$previous</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Exception/FileNotFoundExceptionTest.php">
+    <UndefinedClass>
+      <code>Throwable</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$code</code>
+      <code>$message</code>
+      <code>$previous</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Exception/NoNamespaceFoundExceptionTest.php">
+    <UndefinedClass>
+      <code>Throwable</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$code</code>
+      <code>$message</code>
+      <code>$previous</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Exception/PathDoesNotExistExceptionTest.php">
+    <UndefinedClass>
+      <code>Throwable</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$code</code>
+      <code>$message</code>
+      <code>$previous</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Exception/PathIsEmptyExceptionTest.php">
+    <UndefinedClass>
+      <code>Throwable</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$code</code>
+      <code>$message</code>
+      <code>$previous</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Exception/PathIsNotDirectoryExceptionTest.php">
+    <UndefinedClass>
+      <code>Throwable</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$code</code>
+      <code>$message</code>
+      <code>$previous</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Exception/PathIsNotStringExceptionTest.php">
+    <UndefinedClass>
+      <code>Throwable</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$code</code>
+      <code>$message</code>
+      <code>$previous</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Exception/StubNotAFileExceptionTest.php">
+    <UndefinedClass>
+      <code>Throwable</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$code</code>
+      <code>$message</code>
+      <code>$previous</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Exception/StubNotFoundExceptionTest.php">
+    <UndefinedClass>
+      <code>Throwable</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$code</code>
+      <code>$message</code>
+      <code>$previous</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Exception/StubNotReadableExceptionTest.php">
+    <UndefinedClass>
+      <code>Throwable</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$code</code>
+      <code>$message</code>
+      <code>$previous</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Exception/UseStatementNotFoundExceptionTest.php">
+    <UndefinedClass>
+      <code>Throwable</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$code</code>
+      <code>$message</code>
+      <code>$previous</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/FileResolverTest.php">
+    <UnusedParam>
+      <code>$testNamespaceResolver</code>
+      <code>$tokens</code>
     </UnusedParam>
   </file>
   <file src="tests/Unit/FilesystemTest.php">
     <UnusedParam>
       <code>$content</code>
+      <code>$directory</code>
       <code>$levels</code>
       <code>$mode</code>
       <code>$path</code>
@@ -179,17 +596,196 @@
       <code>$suffix</code>
     </UnusedParam>
   </file>
+  <file src="tests/Unit/Generator/AttributeGeneratorTest.php">
+    <UnusedParam>
+      <code>$name</code>
+      <code>$params</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Generator/ClassGeneratorTest.php">
+    <UnusedParam>
+      <code>$attributes</code>
+      <code>$constants</code>
+      <code>$dockBlocks</code>
+      <code>$extends</code>
+      <code>$interfaces</code>
+      <code>$isAbstract</code>
+      <code>$isFinal</code>
+      <code>$isReadonly</code>
+      <code>$methods</code>
+      <code>$name</code>
+      <code>$other</code>
+      <code>$properties</code>
+      <code>$traitUses</code>
+      <code>$uses</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Generator/FileGeneratorTest.php">
+    <UnusedParam>
+      <code>$namespaces</code>
+      <code>$namespaces</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Generator/InterfaceGeneratorTest.php">
+    <UndefinedClass>
+      <code>GeneratorInterface</code>
+    </UndefinedClass>
+    <UnusedParam>
+      <code>$constants</code>
+      <code>$extends</code>
+      <code>$method</code>
+      <code>$methods</code>
+      <code>$name</code>
+      <code>$other</code>
+      <code>$uses</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Generator/InterfaceNameGeneratorTest.php">
+    <UnusedParam>
+      <code>$name</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Generator/MethodGeneratorTest.php">
+    <UnusedParam>
+      <code>$attributes</code>
+      <code>$body</code>
+      <code>$isAbstract</code>
+      <code>$isAnonymous</code>
+      <code>$isFinal</code>
+      <code>$isPrivate</code>
+      <code>$isProtected</code>
+      <code>$isPublic</code>
+      <code>$isStatic</code>
+      <code>$name</code>
+      <code>$parameters</code>
+      <code>$returnType</code>
+      <code>$right</code>
+      <code>$uses</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Generator/NamespaceGeneratorTest.php">
+    <UnusedParam>
+      <code>$attributes</code>
+      <code>$class</code>
+      <code>$classLikes</code>
+      <code>$classLikes</code>
+      <code>$constant</code>
+      <code>$extends</code>
+      <code>$function</code>
+      <code>$isFinal</code>
+      <code>$methods</code>
+      <code>$name</code>
+      <code>$name</code>
+      <code>$uses</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Generator/ParameterGeneratorTest.php">
+    <UnusedParam>
+      <code>$attributes</code>
+      <code>$defaultValue</code>
+      <code>$isDefaultValueAvailable</code>
+      <code>$isOptional</code>
+      <code>$isPassedByReference</code>
+      <code>$isVariadic</code>
+      <code>$name</code>
+      <code>$type</code>
+      <code>$uses</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Generator/PropertyGeneratorTest.php">
+    <UnusedParam>
+      <code>$isPrivate</code>
+      <code>$isProtected</code>
+      <code>$isPublic</code>
+      <code>$isReadonly</code>
+      <code>$isStatic</code>
+      <code>$name</code>
+      <code>$right</code>
+      <code>$value</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Generator/StaticCallGeneratorTest.php">
+    <UnusedParam>
+      <code>$args</code>
+      <code>$class</code>
+      <code>$method</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Generator/TestDataProviderGeneratorTest.php">
+    <UnusedParam>
+      <code>$name</code>
+      <code>$parameters</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Generator/TestMethodGeneratorTest.php">
+    <UnusedParam>
+      <code>$builderFactory</code>
+      <code>$className</code>
+      <code>$isAbstract</code>
+      <code>$isFinal</code>
+      <code>$isPrivate</code>
+      <code>$isProtected</code>
+      <code>$isPublic</code>
+      <code>$isStatic</code>
+      <code>$methodName</code>
+      <code>$params</code>
+      <code>$returnType</code>
+      <code>$testMethodNameNormalizer</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Generator/TraitGeneratorTest.php">
+    <UnusedParam>
+      <code>$constants</code>
+      <code>$methods</code>
+      <code>$name</code>
+      <code>$other</code>
+      <code>$properties</code>
+      <code>$traitUses</code>
+      <code>$uses</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Generator/UseClassGeneratorTest.php">
+    <UnusedParam>
+      <code>$alias</code>
+      <code>$generator</code>
+      <code>$name</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Generator/UseConstantGeneratorTest.php">
+    <UnusedParam>
+      <code>$alias</code>
+      <code>$generator</code>
+      <code>$name</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/Generator/UseFunctionGeneratorTest.php">
+    <UnusedParam>
+      <code>$alias</code>
+      <code>$generator</code>
+      <code>$name</code>
+    </UnusedParam>
+  </file>
   <file src="tests/Unit/NodeVisitor/ChangeToShortArrayNodeVisitorTest.php">
+    <UndefinedClass>
+      <code>ChangeToShortArrayNodeVisitor</code>
+    </UndefinedClass>
     <UnusedParam>
       <code>$node</code>
     </UnusedParam>
   </file>
   <file src="tests/Unit/NodeVisitor/HashNodeVisitorTest.php">
+    <UndefinedClass>
+      <code>HashNodeVisitor</code>
+    </UndefinedClass>
     <UnusedParam>
       <code>$node</code>
     </UnusedParam>
   </file>
   <file src="tests/Unit/NodeVisitor/ImportFullyQualifiedNamesNodeVisitorTest.php">
+    <UndefinedClass>
+      <code>ImportFullyQualifiedNamesNodeVisitor</code>
+      <code>UseStatements</code>
+    </UndefinedClass>
     <UnusedParam>
       <code>$node</code>
       <code>$node</code>
@@ -200,16 +796,25 @@
     </UnusedParam>
   </file>
   <file src="tests/Unit/NodeVisitor/SortUseStatementsAlphabeticallyNodeVisitorTest.php">
+    <UndefinedClass>
+      <code>SortUseStatementsAlphabeticallyNodeVisitor</code>
+    </UndefinedClass>
     <UnusedParam>
       <code>$node</code>
     </UnusedParam>
   </file>
   <file src="tests/Unit/NodeVisitor/UseStatementTest.php">
+    <UndefinedClass>
+      <code>UseStatement</code>
+    </UndefinedClass>
     <UnusedParam>
       <code>$full</code>
     </UnusedParam>
   </file>
   <file src="tests/Unit/NodeVisitor/UseStatementsTest.php">
+    <UndefinedClass>
+      <code>UseStatements</code>
+    </UndefinedClass>
     <UnusedParam>
       <code>$name</code>
       <code>$name</code>
@@ -217,33 +822,73 @@
     </UnusedParam>
   </file>
   <file src="tests/Unit/PhpFileFinderTest.php">
-    <UndefinedClass>
-      <code>Closure</code>
-      <code>Closure</code>
-    </UndefinedClass>
     <UnusedParam>
-      <code>$match</code>
-      <code>$path</code>
-      <code>$skip</code>
+      <code>$directory</code>
+      <code>$filesystem</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/PrinterTest.php">
+    <UnusedParam>
+      <code>$generator</code>
     </UnusedParam>
   </file>
   <file src="tests/Unit/ProjectTest.php">
     <UnusedParam>
-      <code>$dryRun</code>
       <code>$input</code>
-      <code>$source</code>
-      <code>$tests</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/RunnerTest.php">
+    <UnusedParam>
+      <code>$phpFileFinder</code>
+      <code>$progressBar</code>
+      <code>$project</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/ServiceProviderTest.php">
+    <UnusedParam>
+      <code>$container</code>
     </UnusedParam>
   </file>
   <file src="tests/Unit/TestBuilderTest.php">
     <UnusedParam>
-      <code>$builderFactory</code>
       <code>$file</code>
-      <code>$file</code>
-      <code>$printer</code>
-      <code>$projectAnalyzer</code>
-      <code>$testsDirectory</code>
-      <code>$traverser</code>
+      <code>$fileResolver</code>
+      <code>$testFile</code>
+      <code>$testMethodsResolver</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/TestDataProviderMethodNameFormatterTest.php">
+    <UnusedParam>
+      <code>$name</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/TestDataProviderMethodNameNormalizerTest.php">
+    <UnusedParam>
+      <code>$name</code>
+      <code>$testDataProviderMethodNameFormatter</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/TestMethodNameFormatterTest.php">
+    <UnusedParam>
+      <code>$name</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/TestMethodNameNormalizerTest.php">
+    <UnusedParam>
+      <code>$name</code>
+      <code>$testMethodNameFormatter</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/TestMethodsResolverTest.php">
+    <UnusedParam>
+      <code>$class</code>
+      <code>$testDataProviderMethodNameNormalizer</code>
+      <code>$testMethodNameNormalizer</code>
+    </UnusedParam>
+  </file>
+  <file src="tests/Unit/TestNamespaceResolverTest.php">
+    <UnusedParam>
+      <code>$namespace</code>
     </UnusedParam>
   </file>
 </files>
