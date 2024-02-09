@@ -29,7 +29,7 @@ final class TestifyCommandTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProvidertestAddArgument')]
+    #[DataProvider('dataProviderTestAddArgument')]
     public function testAddArgument(
         string $name,
         int $mode,
@@ -40,7 +40,7 @@ final class TestifyCommandTest extends TestCase
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestAddOption')]
+    #[DataProvider('dataProviderTestAddOption')]
     public function testAddOption(
         string $name,
         null|array|string $shortcut,
@@ -52,19 +52,19 @@ final class TestifyCommandTest extends TestCase
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestAddUsage')]
+    #[DataProvider('dataProviderTestAddUsage')]
     public function testAddUsage(string $usage): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestComplete')]
+    #[DataProvider('dataProviderTestComplete')]
     public function testComplete(CompletionInput $input, CompletionSuggestions $suggestions): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestConstruct')]
+    #[DataProvider('dataProviderTestConstruct')]
     public function testConstruct(
         Filesystem $filesystem,
         RunnerInterface $runner,
@@ -99,7 +99,7 @@ final class TestifyCommandTest extends TestCase
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestGetHelper')]
+    #[DataProvider('dataProviderTestGetHelper')]
     public function testGetHelper(string $name): void
     {
         self::assertTrue(true);
@@ -125,7 +125,7 @@ final class TestifyCommandTest extends TestCase
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestGetSynopsis')]
+    #[DataProvider('dataProviderTestGetSynopsis')]
     public function testGetSynopsis(bool $short): void
     {
         self::assertTrue(true);
@@ -151,98 +151,98 @@ final class TestifyCommandTest extends TestCase
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestMergeApplicationDefinition')]
+    #[DataProvider('dataProviderTestMergeApplicationDefinition')]
     public function testMergeApplicationDefinition(bool $mergeArgs): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestRun')]
+    #[DataProvider('dataProviderTestRun')]
     public function testRun(InputInterface $input, OutputInterface $output): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestSetAliases')]
+    #[DataProvider('dataProviderTestSetAliases')]
     public function testSetAliases(iterable $aliases): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestSetApplication')]
+    #[DataProvider('dataProviderTestSetApplication')]
     public function testSetApplication(Application $application): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestSetAutoExit')]
+    #[DataProvider('dataProviderTestSetAutoExit')]
     public function testSetAutoExit(bool $autoExit): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestSetCode')]
+    #[DataProvider('dataProviderTestSetCode')]
     public function testSetCode(callable $code): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestSetDefinition')]
+    #[DataProvider('dataProviderTestSetDefinition')]
     public function testSetDefinition(array|InputDefinition $definition): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestSetDescription')]
+    #[DataProvider('dataProviderTestSetDescription')]
     public function testSetDescription(string $description): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestSetHelp')]
+    #[DataProvider('dataProviderTestSetHelp')]
     public function testSetHelp(string $help): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestSetHelperSet')]
+    #[DataProvider('dataProviderTestSetHelperSet')]
     public function testSetHelperSet(HelperSet $helperSet): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestSetHidden')]
+    #[DataProvider('dataProviderTestSetHidden')]
     public function testSetHidden(bool $hidden): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestSetName')]
+    #[DataProvider('dataProviderTestSetName')]
     public function testSetName(string $name): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestSetProcessTitle')]
+    #[DataProvider('dataProviderTestSetProcessTitle')]
     public function testSetProcessTitle(string $title): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProvidertestSetVersion')]
+    #[DataProvider('dataProviderTestSetVersion')]
     public function testSetVersion(string $version): void
     {
         self::assertTrue(true);
     }
 
-    public static function dataProvidertestAddArgument(): Generator
+    public static function dataProviderTestAddArgument(): Generator
     {
         yield from [
             'testAddArgument' => ['parameter-0', 'parameter-1', 'parameter-2', 'parameter-3', 'parameter-4'],
         ];
     }
 
-    public static function dataProvidertestAddOption(): Generator
+    public static function dataProviderTestAddOption(): Generator
     {
         yield from [
             'testAddOption' => [
@@ -256,133 +256,133 @@ final class TestifyCommandTest extends TestCase
         ];
     }
 
-    public static function dataProvidertestAddUsage(): Generator
+    public static function dataProviderTestAddUsage(): Generator
     {
         yield from [
             'testAddUsage' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestComplete(): Generator
+    public static function dataProviderTestComplete(): Generator
     {
         yield from [
             'testComplete' => ['parameter-0', 'parameter-1'],
         ];
     }
 
-    public static function dataProvidertestConstruct(): Generator
+    public static function dataProviderTestConstruct(): Generator
     {
         yield from [
             'testConstruct' => ['parameter-0', 'parameter-1', 'parameter-2', 'parameter-3'],
         ];
     }
 
-    public static function dataProvidertestGetHelper(): Generator
+    public static function dataProviderTestGetHelper(): Generator
     {
         yield from [
             'testGetHelper' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestGetSynopsis(): Generator
+    public static function dataProviderTestGetSynopsis(): Generator
     {
         yield from [
             'testGetSynopsis' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestMergeApplicationDefinition(): Generator
+    public static function dataProviderTestMergeApplicationDefinition(): Generator
     {
         yield from [
             'testMergeApplicationDefinition' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestRun(): Generator
+    public static function dataProviderTestRun(): Generator
     {
         yield from [
             'testRun' => ['parameter-0', 'parameter-1'],
         ];
     }
 
-    public static function dataProvidertestSetAliases(): Generator
+    public static function dataProviderTestSetAliases(): Generator
     {
         yield from [
             'testSetAliases' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestSetApplication(): Generator
+    public static function dataProviderTestSetApplication(): Generator
     {
         yield from [
             'testSetApplication' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestSetAutoExit(): Generator
+    public static function dataProviderTestSetAutoExit(): Generator
     {
         yield from [
             'testSetAutoExit' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestSetCode(): Generator
+    public static function dataProviderTestSetCode(): Generator
     {
         yield from [
             'testSetCode' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestSetDefinition(): Generator
+    public static function dataProviderTestSetDefinition(): Generator
     {
         yield from [
             'testSetDefinition' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestSetDescription(): Generator
+    public static function dataProviderTestSetDescription(): Generator
     {
         yield from [
             'testSetDescription' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestSetHelp(): Generator
+    public static function dataProviderTestSetHelp(): Generator
     {
         yield from [
             'testSetHelp' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestSetHelperSet(): Generator
+    public static function dataProviderTestSetHelperSet(): Generator
     {
         yield from [
             'testSetHelperSet' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestSetHidden(): Generator
+    public static function dataProviderTestSetHidden(): Generator
     {
         yield from [
             'testSetHidden' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestSetName(): Generator
+    public static function dataProviderTestSetName(): Generator
     {
         yield from [
             'testSetName' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestSetProcessTitle(): Generator
+    public static function dataProviderTestSetProcessTitle(): Generator
     {
         yield from [
             'testSetProcessTitle' => ['parameter-0'],
         ];
     }
 
-    public static function dataProvidertestSetVersion(): Generator
+    public static function dataProviderTestSetVersion(): Generator
     {
         yield from [
             'testSetVersion' => ['parameter-0'],
