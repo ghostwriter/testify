@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace Ghostwriter\TestifyTests\Unit;
 
 use Generator;
+use Ghostwriter\Testify\FileResolver;
 use Ghostwriter\Testify\TestBuilder;
-use PhpParser\BuilderFactory;
-use PhpParser\NodeTraverser;
-use PhpParser\PrettyPrinter\Standard;
+use Ghostwriter\Testify\TestMethodsResolver;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Psalm\Internal\Analyzer\ProjectAnalyzer;
 
 #[CoversClass(TestBuilder::class)]
 final class TestBuilderTest extends TestCase
@@ -22,46 +20,29 @@ final class TestBuilderTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProviderBuild')]
-    public function testBuild(string $file, string $testsDirectory): void
+    #[DataProvider('dataProvidertestBuild')]
+    public function testBuild(string $file, string $testFile): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProviderCheck')]
-    public function testCheck(string $file): void
+    #[DataProvider('dataProvidertestConstruct')]
+    public function testConstruct(TestMethodsResolver $testMethodsResolver, FileResolver $fileResolver): void
     {
         self::assertTrue(true);
     }
 
-    #[DataProvider('dataProviderConstruct')]
-    public function testConstruct(
-        ProjectAnalyzer $projectAnalyzer,
-        BuilderFactory $builderFactory,
-        Standard $printer,
-        NodeTraverser $traverser
-    ): void {
-        self::assertTrue(true);
-    }
-
-    public static function dataProviderBuild(): Generator
+    public static function dataProvidertestBuild(): Generator
     {
         yield from [
-            'example' => [true],
+            'testBuild' => ['parameter-0', 'parameter-1'],
         ];
     }
 
-    public static function dataProviderCheck(): Generator
+    public static function dataProvidertestConstruct(): Generator
     {
         yield from [
-            'example' => [true],
-        ];
-    }
-
-    public static function dataProviderConstruct(): Generator
-    {
-        yield from [
-            'example' => [true],
+            'testConstruct' => ['parameter-0', 'parameter-1'],
         ];
     }
 }
