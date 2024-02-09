@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 declare(strict_types=1);
 
@@ -13,16 +13,21 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(TestNamespaceResolver::class)]
 final class TestNamespaceResolverTest extends TestCase
 {
-    public static function testResolveDataProvider(): Generator
+    protected function setUp(): void
+    {
+        self::markTestSkipped('Not implemented yet.');
+    }
+
+    #[DataProvider('dataProvidertestResolve')]
+    public function testResolve(string $namespace): void
+    {
+        self::assertTrue(true);
+    }
+
+    public static function dataProvidertestResolve(): Generator
     {
         yield from [
             'testResolve' => ['parameter-0'],
         ];
-    }
-
-    #[DataProvider('testResolveDataProvider')]
-    public function testResolve(string $namespace): void
-    {
-        self::markTestSkipped('Not implemented yet.');
     }
 }
