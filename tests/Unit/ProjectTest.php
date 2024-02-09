@@ -19,29 +19,16 @@ final class ProjectTest extends TestCase
         self::markTestSkipped('Not implemented yet.');
     }
 
-    #[DataProvider('dataProviderConstruct')]
-    public function testConstruct(string $source, string $tests, bool $dryRun): void
-    {
-        self::assertTrue(true);
-    }
-
-    #[DataProvider('dataProviderNew')]
-    public function testNew(InputInterface $input): void
-    {
-        self::assertTrue(true);
-    }
-
-    public static function dataProviderConstruct(): Generator
+    public static function dataProvidertestNew(): Generator
     {
         yield from [
-            'example' => [true],
+            'testNew' => ['parameter-0'],
         ];
     }
 
-    public static function dataProviderNew(): Generator
+    #[DataProvider('dataProvidertestNew')]
+    public static function testNew(InputInterface $input): void
     {
-        yield from [
-            'example' => [true],
-        ];
+        self::assertTrue(true);
     }
 }
