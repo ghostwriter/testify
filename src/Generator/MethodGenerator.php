@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Generator;
 
-use Ghostwriter\Testify\Interface\GeneratorInterface;
+use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\MethodGeneratorInterface;
+use Ghostwriter\Testify\Interface\Generator\ClassLikeMemberGeneratorInterface;
 
 use function array_merge;
 use function rtrim;
 
-final readonly class MethodGenerator implements GeneratorInterface
+final readonly class MethodGenerator implements MethodGeneratorInterface
 {
     public function __construct(
         private string $name,
@@ -26,6 +27,11 @@ final readonly class MethodGenerator implements GeneratorInterface
         private bool $isPrivate = false,
         private bool $isAnonymous = false,
     ) {
+    }
+
+    public function compare(ClassLikeMemberGeneratorInterface $right): int
+    {
+        return $this->name <=> $right->name();
     }
 
     public function generate(): string
@@ -86,6 +92,11 @@ final readonly class MethodGenerator implements GeneratorInterface
         }
 
         return rtrim($method) . self::NEWLINE . self::INDENT . '}';
+    }
+
+    public function name(): string
+    {
+        return $this->name;
     }
 
     public function uses(): array
