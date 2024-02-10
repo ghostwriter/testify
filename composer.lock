@@ -4,8 +4,81 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b7f3bd5eaa5348f80cce3c454160ada",
+    "content-hash": "8ceb9e3b47ba4aa1dbe2b8ca762dde39",
     "packages": [
+        {
+            "name": "ghostwriter/case-converter",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ghostwriter/case-converter.git",
+                "reference": "69a981f3532d86313e5b5a4b37ca1d64659a0caa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ghostwriter/case-converter/zipball/69a981f3532d86313e5b5a4b37ca1d64659a0caa",
+                "reference": "69a981f3532d86313e5b5a4b37ca1d64659a0caa",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^8.3"
+            },
+            "require-dev": {
+                "ghostwriter/coding-standard": "dev-main",
+                "ghostwriter/psalm-plugin": "^0.2 || ^0.3 || ^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ghostwriter\\CaseConverter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nathanael Esayeas",
+                    "email": "nathanael.esayeas@protonmail.com",
+                    "homepage": "https://github.com/ghostwriter",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Convert strings from and to Ada, Camel, Cobol, Kebab, Lower, Macro, Pascal, Sentence, Snake, Title, Train, and Upper cases",
+            "homepage": "https://github.com/ghostwriter/case-converter",
+            "keywords": [
+                "ada-case",
+                "camel-case",
+                "case-converter",
+                "cobol-case",
+                "ghostwriter",
+                "kebab-case",
+                "lower-case",
+                "macro-case",
+                "pascal-case",
+                "sentence-case",
+                "snake-case",
+                "title-case",
+                "train-case",
+                "upper-case"
+            ],
+            "support": {
+                "docs": "https://github.com/ghostwriter/case-converter",
+                "forum": "https://github.com/ghostwriter/case-converter/discussions",
+                "issues": "https://github.com/ghostwriter/case-converter/issues",
+                "rss": "https://github.com/ghostwriter/case-converter/releases.atom",
+                "source": "https://github.com/ghostwriter/case-converter"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/ghostwriter",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-02-10T19:54:53+00:00"
+        },
         {
             "name": "ghostwriter/container",
             "version": "3.0.1",
@@ -1393,12 +1466,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "19a1395533b8bdb73e0d5c653d7bf0adac5b6dec"
+                "reference": "16d42cd5af818333f1b1d9832c735778cccc395a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/19a1395533b8bdb73e0d5c653d7bf0adac5b6dec",
-                "reference": "19a1395533b8bdb73e0d5c653d7bf0adac5b6dec",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/16d42cd5af818333f1b1d9832c735778cccc395a",
+                "reference": "16d42cd5af818333f1b1d9832c735778cccc395a",
                 "shasum": ""
             },
             "require": {
@@ -1458,7 +1531,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-08T17:26:18+00:00"
+            "time": "2024-02-09T18:04:16+00:00"
         },
         {
             "name": "ghostwriter/psalm-plugin",
