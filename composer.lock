@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ceb9e3b47ba4aa1dbe2b8ca762dde39",
+    "content-hash": "82724147d6be082209aaa89a2475a859",
     "packages": [
         {
             "name": "ghostwriter/case-converter",
@@ -81,16 +81,16 @@
         },
         {
             "name": "ghostwriter/container",
-            "version": "3.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/container.git",
-                "reference": "1752d1da4e2e06286413eeed207632c2eae9b8d5"
+                "reference": "f0aaf48118aec90dd5bae69a55c17bbb17ddae06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/container/zipball/1752d1da4e2e06286413eeed207632c2eae9b8d5",
-                "reference": "1752d1da4e2e06286413eeed207632c2eae9b8d5",
+                "url": "https://api.github.com/repos/ghostwriter/container/zipball/f0aaf48118aec90dd5bae69a55c17bbb17ddae06",
+                "reference": "f0aaf48118aec90dd5bae69a55c17bbb17ddae06",
                 "shasum": ""
             },
             "require": {
@@ -126,7 +126,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ghostwriter/container/issues",
-                "source": "https://github.com/ghostwriter/container/tree/3.0.1"
+                "source": "https://github.com/ghostwriter/container/tree/3.0.2"
             },
             "funding": [
                 {
@@ -134,7 +134,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-06T18:55:15+00:00"
+            "time": "2024-02-19T03:38:42+00:00"
         },
         {
             "name": "ghostwriter/event-dispatcher",
@@ -1466,18 +1466,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "16d42cd5af818333f1b1d9832c735778cccc395a"
+                "reference": "a7e89cc7fec4156d5b6bd2e2314e942432d0488a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/16d42cd5af818333f1b1d9832c735778cccc395a",
-                "reference": "16d42cd5af818333f1b1d9832c735778cccc395a",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/a7e89cc7fec4156d5b6bd2e2314e942432d0488a",
+                "reference": "a7e89cc7fec4156d5b6bd2e2314e942432d0488a",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.1",
-                "phpunit/phpunit": "^10.5.10 || ^11.0.2",
-                "vimeo/psalm": "^5.21 || 6.x-dev"
+                "phpunit/phpunit": ">=10.5.10 || >=11.0.3",
+                "vimeo/psalm": ">=5.22.1 || >=6.0 || dev-main as 6.0"
             },
             "default-branch": true,
             "bin": [
@@ -1531,7 +1531,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-02-09T18:04:16+00:00"
+            "time": "2024-02-22T19:24:57+00:00"
         },
         {
             "name": "ghostwriter/psalm-plugin",
@@ -1996,16 +1996,16 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.8.0",
+            "version": "1.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "fad452781b3d774e3337b0c0b245dd8e5a4455fc"
+                "reference": "bc3dc91a5e9b14aa06d1d9e90647c5c5a2cc5353"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/fad452781b3d774e3337b0c0b245dd8e5a4455fc",
-                "reference": "fad452781b3d774e3337b0c0b245dd8e5a4455fc",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/bc3dc91a5e9b14aa06d1d9e90647c5c5a2cc5353",
+                "reference": "bc3dc91a5e9b14aa06d1d9e90647c5c5a2cc5353",
                 "shasum": ""
             },
             "require": {
@@ -2048,9 +2048,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.8.0"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.8.1"
             },
-            "time": "2024-01-11T11:49:22+00:00"
+            "time": "2024-01-18T19:15:27+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
@@ -3613,89 +3613,6 @@
             "time": "2024-01-23T15:02:46+00:00"
         },
         {
-            "name": "symfony/var-dumper",
-            "version": "v7.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "a7a061abbf6fe3d4a79032cbc5149a4d65a10234"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/a7a061abbf6fe3d4a79032cbc5149a4d65a10234",
-                "reference": "a7a061abbf6fe3d4a79032cbc5149a4d65a10234",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2",
-                "symfony/polyfill-mbstring": "~1.0"
-            },
-            "conflict": {
-                "symfony/console": "<6.4"
-            },
-            "require-dev": {
-                "ext-iconv": "*",
-                "symfony/console": "^6.4|^7.0",
-                "symfony/http-kernel": "^6.4|^7.0",
-                "symfony/process": "^6.4|^7.0",
-                "symfony/uid": "^6.4|^7.0",
-                "twig/twig": "^3.0.4"
-            },
-            "bin": [
-                "Resources/bin/var-dump-server"
-            ],
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "Resources/functions/dump.php"
-                ],
-                "psr-4": {
-                    "Symfony\\Component\\VarDumper\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Provides mechanisms for walking through any arbitrary PHP variable",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "debug",
-                "dump"
-            ],
-            "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v7.0.3"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2024-01-23T15:02:46+00:00"
-        },
-        {
             "name": "theseer/tokenizer",
             "version": "1.2.2",
             "source": {
@@ -3747,16 +3664,16 @@
         },
         {
             "name": "vimeo/psalm",
-            "version": "5.21.1",
+            "version": "5.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vimeo/psalm.git",
-                "reference": "8c473e2437be8b6a8fd8f630f0f11a16b114c494"
+                "reference": "e9dad66e11274315dac27e08349c628c7d6a1a43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/8c473e2437be8b6a8fd8f630f0f11a16b114c494",
-                "reference": "8c473e2437be8b6a8fd8f630f0f11a16b114c494",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/e9dad66e11274315dac27e08349c628c7d6a1a43",
+                "reference": "e9dad66e11274315dac27e08349c628c7d6a1a43",
                 "shasum": ""
             },
             "require": {
@@ -3779,7 +3696,7 @@
                 "netresearch/jsonmapper": "^1.0 || ^2.0 || ^3.0 || ^4.0",
                 "nikic/php-parser": "^4.16",
                 "php": "^7.4 || ~8.0.0 || ~8.1.0 || ~8.2.0 || ~8.3.0",
-                "sebastian/diff": "^4.0 || ^5.0",
+                "sebastian/diff": "^4.0 || ^5.0 || ^6.0",
                 "spatie/array-to-xml": "^2.17.0 || ^3.0",
                 "symfony/console": "^4.1.6 || ^5.0 || ^6.0 || ^7.0",
                 "symfony/filesystem": "^5.4 || ^6.0 || ^7.0"
@@ -3853,7 +3770,7 @@
                 "issues": "https://github.com/vimeo/psalm/issues",
                 "source": "https://github.com/vimeo/psalm"
             },
-            "time": "2024-02-01T01:04:32+00:00"
+            "time": "2024-02-15T22:52:31+00:00"
         },
         {
             "name": "webmozart/assert",
