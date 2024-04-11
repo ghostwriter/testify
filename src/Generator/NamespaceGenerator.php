@@ -20,8 +20,7 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
         private readonly string $name,
         private array $uses = [],
         private array $classLikes = [],
-    ) {
-    }
+    ) {}
 
     public function class(
         string $name,
