@@ -19,8 +19,7 @@ final class FileGenerator implements FileGeneratorInterface
      */
     public function __construct(
         private array $namespaces
-    ) {
-    }
+    ) {}
 
     public function declareStrictTypes(): self
     {
