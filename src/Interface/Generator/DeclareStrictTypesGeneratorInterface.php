@@ -6,6 +6,4 @@ namespace Ghostwriter\Testify\Interface\Generator;
 
 use Ghostwriter\Testify\Interface\GeneratorInterface;
 
-interface DeclareStrictTypesGeneratorInterface extends GeneratorInterface
-{
-}
+interface DeclareStrictTypesGeneratorInterface extends GeneratorInterface {}
