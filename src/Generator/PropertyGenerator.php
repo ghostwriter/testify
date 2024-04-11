@@ -17,8 +17,7 @@ final readonly class PropertyGenerator implements PropertyGeneratorInterface
         private bool $isProtected = false,
         private bool $isPrivate = false,
         private bool $isReadonly = false,
-    ) {
-    }
+    ) {}
 
     public function compare(ClassLikeMemberGeneratorInterface $right): int
     {
