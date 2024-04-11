@@ -10,8 +10,7 @@ final readonly class InterfaceNameGenerator implements NameGeneratorInterface
 {
     public function __construct(
         private string $name
-    ) {
-    }
+    ) {}
 
     public function generate(): string
     {
