@@ -37,11 +37,19 @@ final readonly class TestMethodsResolver
     public function __construct(
         private TestMethodNameNormalizer $testMethodNameNormalizer,
         private TestDataProviderMethodNameNormalizer $testDataProviderMethodNameNormalizer
-    ) {
-    }
+    ) {}
 
     public function resolve(string $class): array
     {
+        return [
+            'testExample' => new MethodGenerator(
+                name: 'testExample',
+                returnType: 'void',
+                body: [new StaticCallGenerator('self', 'assertTrue', ['true'])],
+                isPublic: true
+            ),
+        ];
+
         $reflectionClass = new ReflectionClass($class);
 
         $staticCallGenerator = new StaticCallGenerator('self', 'markTestSkipped', ['Not implemented yet.']);
