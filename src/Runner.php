@@ -16,8 +16,7 @@ final readonly class Runner implements RunnerInterface
     public function __construct(
         private ProgressBar $progressBar,
         private PhpFileFinder $phpFileFinder,
-    ) {
-    }
+    ) {}
 
     public function run(ProjectInterface $project): Generator
     {
