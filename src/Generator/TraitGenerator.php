@@ -26,8 +26,7 @@ final class TraitGenerator implements TraitGeneratorInterface
         private array $properties = [],
         private array $methods = [],
         private array $traitUses = [],
-    ) {
-    }
+    ) {}
 
     public function compare(ClassLikeGeneratorInterface $other): int
     {
