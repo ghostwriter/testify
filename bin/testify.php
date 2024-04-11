@@ -11,9 +11,6 @@ use Ghostwriter\Testify\Command\TestifyCommand;
 use Ghostwriter\Testify\ServiceProvider;
 use Throwable;
 
-use const PHP_EOL;
-use const STDERR;
-
 use function define;
 use function defined;
 use function error_reporting;
@@ -23,6 +20,9 @@ use function ini_set;
 use function restore_error_handler;
 use function set_error_handler;
 use function sprintf;
+
+use const PHP_EOL;
+use const STDERR;
 
 /** @var ?string $_composer_autoload_path */
 (static function (string $composerAutoloadPath): void {
