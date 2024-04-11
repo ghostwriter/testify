@@ -6,6 +6,4 @@ namespace Ghostwriter\Testify\Exception;
 
 use RuntimeException;
 
-final class FailedToReadFileException extends RuntimeException
-{
-}
+final class FailedToReadFileException extends RuntimeException {}
