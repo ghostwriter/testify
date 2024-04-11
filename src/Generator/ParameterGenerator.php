@@ -18,8 +18,7 @@ final class ParameterGenerator implements GeneratorInterface
         private ?string $defaultValue = null,
         private array $attributes = [],
         private array $uses = [],
-    ) {
-    }
+    ) {}
 
     public function generate(): string
     {
