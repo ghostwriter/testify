@@ -26,8 +26,7 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
         private bool $isProtected = false,
         private bool $isPrivate = false,
         private bool $isAnonymous = false,
-    ) {
-    }
+    ) {}
 
     public function compare(ClassLikeMemberGeneratorInterface $right): int
     {
