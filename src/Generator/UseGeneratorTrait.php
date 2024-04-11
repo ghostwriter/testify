@@ -11,8 +11,7 @@ trait UseGeneratorTrait
     public function __construct(
         public readonly string $name,
         public readonly string $alias = '',
-    ) {
-    }
+    ) {}
 
     final public function alias(): string
     {
