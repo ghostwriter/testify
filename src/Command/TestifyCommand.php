@@ -18,9 +18,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\SingleCommandApplication;
 use Throwable;
 
-use const PHP_EOL;
-
 use function sprintf;
+
+use const PHP_EOL;
 
 /** @see TestifyTest */
 final class TestifyCommand extends SingleCommandApplication
