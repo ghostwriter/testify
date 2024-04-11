@@ -33,8 +33,7 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
         private bool $isAbstract = false,
         private bool $isFinal = false,
         private bool $isReadonly = false,
-    ) {
-    }
+    ) {}
 
     public function compare(ClassLikeGeneratorInterface $other): int
     {
