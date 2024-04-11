@@ -26,8 +26,7 @@ final class InterfaceGenerator implements InterfaceGeneratorInterface
         private array $extends = [],
         private array $constants = [],
         private array $methods = []
-    ) {
-    }
+    ) {}
 
     public function addMethod(GeneratorInterface $method): void
     {
