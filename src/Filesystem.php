@@ -31,7 +31,7 @@ final readonly class Filesystem
         return basename($path, $suffix);
     }
 
-    public function createDirectory(string $path, int $mode = 0777, bool $recursive = true): void
+    public function createDirectory(string $path, int $mode = 0o777, bool $recursive = true): void
     {
         $makeDirectory = mkdir($path, $mode, $recursive);
         if (! $makeDirectory || ! is_dir($path)) {
