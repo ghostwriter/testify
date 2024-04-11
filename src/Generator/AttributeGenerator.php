@@ -13,8 +13,7 @@ final readonly class AttributeGenerator implements GeneratorInterface
     public function __construct(
         public string $name,
         public array $params = [],
-    ) {
-    }
+    ) {}
 
     public function generate(): string
     {
