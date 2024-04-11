@@ -12,8 +12,7 @@ final readonly class TestMethodNameNormalizer implements NormalizerInterface
     public function __construct(
         private TestMethodNameFormatter $testMethodNameFormatter,
         private ClassMethodNameNormalizer $classMethodNormalizer,
-    ) {
-    }
+    ) {}
 
     public function normalize(string $name): string
     {
