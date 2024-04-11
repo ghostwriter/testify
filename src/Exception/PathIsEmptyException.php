@@ -6,6 +6,4 @@ namespace Ghostwriter\Testify\Exception;
 
 use RuntimeException;
 
-final class PathIsEmptyException extends RuntimeException
-{
-}
+final class PathIsEmptyException extends RuntimeException {}
