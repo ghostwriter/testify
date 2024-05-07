@@ -6,6 +6,7 @@ namespace Ghostwriter\Testify\Generator;
 
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\MethodGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMemberGeneratorInterface;
+use Override;
 
 use function array_merge;
 use function rtrim;
@@ -28,11 +29,13 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
         private bool $isAnonymous = false,
     ) {}
 
+    #[Override]
     public function compare(ClassLikeMemberGeneratorInterface $right): int
     {
         return $this->name <=> $right->name();
     }
 
+    #[Override]
     public function generate(): string
     {
         $method = '';
@@ -93,6 +96,7 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
         return rtrim($method) . self::NEWLINE . self::INDENT . '}';
     }
 
+    #[Override]
     public function name(): string
     {
         return $this->name;
