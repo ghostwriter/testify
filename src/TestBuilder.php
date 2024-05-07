@@ -17,6 +17,7 @@ use RuntimeException;
 
 use function basename;
 use function file_get_contents;
+use function ltrim;
 
 final readonly class TestBuilder implements BuilderInterface
 {
@@ -43,14 +44,14 @@ final readonly class TestBuilder implements BuilderInterface
         $testClass = $this->classNameNormalizer->normalize(basename($testFile, '.php'));
 
         foreach ($namespaces as $namespace => [$testNamespace, $namespaceGenerator]) {
-            $namespaceClass = $namespace . '\\' . $class;
-            $testNamespaceClass = $testNamespace . '\\' . $testClass;
+            $namespaceClass = ltrim($namespace . '\\' . $class, '\\');
+            $testNamespaceClass = ltrim($testNamespace . '\\' . $testClass, '\\');
 
             $namespaces[$namespace] = $namespaceGenerator->classLikes([
                 $testNamespaceClass => new ClassGenerator(
                     name: $testClass,
                     extends: 'TestCase',
-                    methods: $this->testMethodsResolver->resolve($namespace . '\\' . $class),
+                    methods: $this->testMethodsResolver->resolve($namespaceClass),
                     attributes: [new AttributeGenerator('CoversClass', [$class . '::class'])],
                     isFinal: true
                 ),
