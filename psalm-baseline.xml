@@ -50,6 +50,15 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Generator/ClassGenerator.php">
+    <ImplementedReturnTypeMismatch>
+      <code><![CDATA[list<class-string<Attribute>>]]></code>
+    </ImplementedReturnTypeMismatch>
+    <InvalidMethodCall>
+      <code><![CDATA[generate]]></code>
+    </InvalidMethodCall>
+    <LessSpecificReturnStatement>
+      <code><![CDATA[$uses]]></code>
+    </LessSpecificReturnStatement>
     <MixedArgument>
       <code><![CDATA[$method->uses()]]></code>
       <code><![CDATA[$property->uses()]]></code>
@@ -85,7 +94,6 @@
         )]]></code>
     </MixedArgumentTypeCoercion>
     <MixedAssignment>
-      <code><![CDATA[$attribute]]></code>
       <code><![CDATA[$constant]]></code>
       <code><![CDATA[$dockBlock]]></code>
       <code><![CDATA[$method]]></code>
@@ -94,8 +102,10 @@
       <code><![CDATA[$property]]></code>
       <code><![CDATA[$traitUse]]></code>
     </MixedAssignment>
+    <MixedInferredReturnType>
+      <code><![CDATA[list<class-string<Attribute>>]]></code>
+    </MixedInferredReturnType>
     <MixedMethodCall>
-      <code><![CDATA[generate]]></code>
       <code><![CDATA[generate]]></code>
       <code><![CDATA[generate]]></code>
       <code><![CDATA[generate]]></code>
@@ -105,13 +115,21 @@
       <code><![CDATA[uses]]></code>
     </MixedMethodCall>
     <MixedOperand>
-      <code><![CDATA[$attribute->generate()]]></code>
       <code><![CDATA[$constant->generate()]]></code>
       <code><![CDATA[$dockBlock->generate()]]></code>
       <code><![CDATA[$method->generate()]]></code>
       <code><![CDATA[$property->generate()]]></code>
       <code><![CDATA[$traitUse->generate()]]></code>
     </MixedOperand>
+    <MoreSpecificReturnType>
+      <code><![CDATA[array]]></code>
+    </MoreSpecificReturnType>
+    <UndefinedDocblockClass>
+      <code><![CDATA[list<class-string<Attribute>>]]></code>
+    </UndefinedDocblockClass>
+    <UnusedProperty>
+      <code><![CDATA[$attributes]]></code>
+    </UnusedProperty>
   </file>
   <file src="src/Generator/FileGenerator.php">
     <LessSpecificReturnType>
@@ -122,16 +140,19 @@
     </PropertyTypeCoercion>
   </file>
   <file src="src/Generator/InterfaceGenerator.php">
+    <LessSpecificReturnStatement>
+      <code><![CDATA[$this->attributes]]></code>
+    </LessSpecificReturnStatement>
+    <MoreSpecificReturnType>
+      <code><![CDATA[list<AttributeGeneratorInterface>]]></code>
+    </MoreSpecificReturnType>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
       <code><![CDATA[addMethod]]></code>
     </PossiblyUnusedMethod>
-    <UndefinedClass>
-      <code><![CDATA[GeneratorInterface]]></code>
-    </UndefinedClass>
-    <UnusedParam>
-      <code><![CDATA[$method]]></code>
-    </UnusedParam>
+    <PropertyTypeCoercion>
+      <code><![CDATA[$this->methods]]></code>
+    </PropertyTypeCoercion>
   </file>
   <file src="src/Generator/InterfaceNameGenerator.php">
     <PossiblyUnusedMethod>
@@ -159,6 +180,10 @@
       <code><![CDATA[$line->generate()]]></code>
       <code><![CDATA[$parameter->generate()]]></code>
     </MixedOperand>
+    <MixedReturnTypeCoercion>
+      <code><![CDATA[$this->attributes]]></code>
+      <code><![CDATA[array<class-string<AttributeGeneratorInterface>>]]></code>
+    </MixedReturnTypeCoercion>
     <PossiblyUnusedMethod>
       <code><![CDATA[uses]]></code>
     </PossiblyUnusedMethod>
@@ -167,48 +192,48 @@
     </RedundantCondition>
   </file>
   <file src="src/Generator/NamespaceGenerator.php">
-    <MixedArgument>
-      <code><![CDATA[$returnType]]></code>
-    </MixedArgument>
-    <MixedArgumentTypeCoercion>
+    <InvalidArgument>
+      <code><![CDATA[ClassLikeGeneratorInterface]]></code>
       <code><![CDATA[usort(
-            $this->classLikes,
+            $classLikes,
             static fn (
                 ClassLikeGeneratorInterface $left,
                 ClassLikeGeneratorInterface $right
             ): int => $left->compare($right)
         )]]></code>
-      <code><![CDATA[usort(
-            $uses,
-            static fn (
-                UseGeneratorInterface $left,
-                UseGeneratorInterface $right
-            ): int => $left->compare($right)
-        )]]></code>
-    </MixedArgumentTypeCoercion>
-    <MixedArrayAssignment>
-      <code><![CDATA[$this->classLikes[ClassGenerator::class][$name]]]></code>
-    </MixedArrayAssignment>
+    </InvalidArgument>
+    <InvalidMethodCall>
+      <code><![CDATA[uses]]></code>
+    </InvalidMethodCall>
+    <InvalidPropertyAssignmentValue>
+      <code><![CDATA[$this->classLikes]]></code>
+    </InvalidPropertyAssignmentValue>
+    <LessSpecificReturnType>
+      <code><![CDATA[string]]></code>
+    </LessSpecificReturnType>
+    <MixedArgument>
+      <code><![CDATA[$returnType]]></code>
+    </MixedArgument>
     <MixedArrayOffset>
       <code><![CDATA[$uses[$use->name()]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code><![CDATA[$class]]></code>
-      <code><![CDATA[$classLike]]></code>
-      <code><![CDATA[$use]]></code>
       <code><![CDATA[$use]]></code>
       <code><![CDATA[$uses[$use->name()]]]></code>
     </MixedAssignment>
+    <MixedInferredReturnType>
+      <code><![CDATA[string]]></code>
+    </MixedInferredReturnType>
     <MixedMethodCall>
-      <code><![CDATA[generate]]></code>
-      <code><![CDATA[generate]]></code>
       <code><![CDATA[name]]></code>
-      <code><![CDATA[uses]]></code>
     </MixedMethodCall>
-    <MixedOperand>
-      <code><![CDATA[$class->generate()]]></code>
-      <code><![CDATA[$use->generate()]]></code>
-    </MixedOperand>
+    <MixedReturnStatement>
+      <code><![CDATA[array_reduce(
+            $classLikes,
+            static fn (string $code, ClassLikeGeneratorInterface $class): string => $code . $class->generate() . self::NEWLINES,
+            $code
+        )]]></code>
+    </MixedReturnStatement>
     <PossiblyUnusedMethod>
       <code><![CDATA[class]]></code>
       <code><![CDATA[classLikes]]></code>
@@ -224,6 +249,9 @@
     <UnusedMethod>
       <code><![CDATA[method]]></code>
     </UnusedMethod>
+    <UnusedVariable>
+      <code><![CDATA[$name]]></code>
+    </UnusedVariable>
   </file>
   <file src="src/Generator/ParameterGenerator.php">
     <PossiblyUnusedMethod>
@@ -241,6 +269,10 @@
     <MixedOperand>
       <code><![CDATA[$this->value]]></code>
     </MixedOperand>
+    <MixedReturnTypeCoercion>
+      <code><![CDATA[$this->attributes]]></code>
+      <code><![CDATA[array<class-string<AttributeGeneratorInterface>>]]></code>
+    </MixedReturnTypeCoercion>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -277,6 +309,21 @@
     </UnusedParam>
   </file>
   <file src="src/Generator/TraitGenerator.php">
+    <InvalidReturnStatement>
+      <code><![CDATA[$this->attributes]]></code>
+    </InvalidReturnStatement>
+    <InvalidReturnType>
+      <code><![CDATA[array<class-string<AttributeGeneratorInterface>>]]></code>
+    </InvalidReturnType>
+    <LessSpecificImplementedReturnType>
+      <code><![CDATA[array<class-string<AttributeGeneratorInterface>>]]></code>
+    </LessSpecificImplementedReturnType>
+    <LessSpecificReturnStatement>
+      <code><![CDATA[$this->uses]]></code>
+    </LessSpecificReturnStatement>
+    <MoreSpecificReturnType>
+      <code><![CDATA[array]]></code>
+    </MoreSpecificReturnType>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -309,6 +356,11 @@
   <file src="src/Interface/Generator/ClassLikeGeneratorInterface.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[uses]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Interface/Generator/ClassLikeMemberGeneratorInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[attributes]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Interface/Generator/NameGeneratorInterface.php">
