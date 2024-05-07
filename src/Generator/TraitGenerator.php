@@ -10,8 +10,9 @@ use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\ConstantGeneratorInt
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\MethodGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\PropertyGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\TraitUseGeneratorInterface;
+use Override;
 
-final class TraitGenerator implements TraitGeneratorInterface
+final readonly class TraitGenerator implements TraitGeneratorInterface
 {
     /**
      * @param array<ConstantGeneratorInterface> $constants
@@ -28,11 +29,13 @@ final class TraitGenerator implements TraitGeneratorInterface
         private array $traitUses = [],
     ) {}
 
+    #[Override]
     public function compare(ClassLikeGeneratorInterface $other): int
     {
         return $this->name() <=> $other->name();
     }
 
+    #[Override]
     public function generate(): string
     {
         $code = 'trait ' . $this->name . ' {' . self::NEWLINES;
@@ -56,11 +59,13 @@ final class TraitGenerator implements TraitGeneratorInterface
         return $code . '}' . self::NEWLINE;
     }
 
+    #[Override]
     public function name(): string
     {
         return $this->name;
     }
 
+    #[Override]
     public function uses(): array
     {
         return $this->uses;
