@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Generator;
 
+use Ghostwriter\Testify\Interface\Generator\AttributeGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\PropertyGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMemberGeneratorInterface;
 use Override;
@@ -18,6 +19,7 @@ final readonly class PropertyGenerator implements PropertyGeneratorInterface
         private bool $isProtected = false,
         private bool $isPrivate = false,
         private bool $isReadonly = false,
+        private array $attributes = [],
     ) {}
 
     #[Override]
@@ -64,5 +66,12 @@ final readonly class PropertyGenerator implements PropertyGeneratorInterface
     public function name(): string
     {
         return $this->name;
+    }
+
+    /** @return array<class-string<AttributeGeneratorInterface>> */
+    #[Override]
+    public function attributes(): array
+    {
+        return $this->attributes;
     }
 }
