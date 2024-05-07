@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\TestifyTests\Unit\Generator;
+namespace Tests\Unit\Generator;
 
 use Ghostwriter\Testify\Generator\FileGenerator;
 use PHPUnit\Framework\Attributes\CoversClass;
