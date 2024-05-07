@@ -8,14 +8,16 @@ use Ghostwriter\Testify\Interface\Generator\DeclareStrictTypesGeneratorInterface
 use Ghostwriter\Testify\Interface\Generator\FileGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\NamespaceGeneratorInterface;
 use Ghostwriter\Testify\Interface\GeneratorInterface;
+use Override;
 
 use function rtrim;
 use function usort;
+use function array_reduce;
 
 final class FileGenerator implements FileGeneratorInterface
 {
     /**
-     * @param list<DeclareStrictTypesGeneratorInterface|NamespaceGeneratorInterface> $namespaces
+     * @param array<class-string<GeneratorInterface>,DeclareStrictTypesGeneratorInterface|NamespaceGeneratorInterface> $namespaces
      */
     public function __construct(
         private array $namespaces
@@ -28,10 +30,13 @@ final class FileGenerator implements FileGeneratorInterface
         return $this;
     }
 
+    #[Override]
     public function generate(): string
     {
+        $namespaces = $this->namespaces;
+
         usort(
-            $this->namespaces,
+            $namespaces,
             static function (GeneratorInterface $left, GeneratorInterface $right) {
                 return match (true) {
                     $left instanceof NamespaceGeneratorInterface => match (true) {
@@ -48,17 +53,18 @@ final class FileGenerator implements FileGeneratorInterface
             }
         );
 
-        $code = '<?php' . self::NEWLINES;
-
-        foreach ($this->namespaces as $namespace) {
-            $code .= $namespace->generate() . self::NEWLINES;
-        }
-
-        return rtrim($code) . self::NEWLINE;
+        return rtrim(array_reduce(
+            $namespaces,
+            static fn (
+                string $buffer,
+                GeneratorInterface $generator
+            ): string => $buffer . $generator->generate() . self::NEWLINES,
+            '<?php' . self::NEWLINES
+        )) . self::NEWLINE;
     }
 
     /**
-     * @param list<DeclareStrictTypesGeneratorInterface|NamespaceGeneratorInterface> $namespaces
+     * @param array<class-string<GeneratorInterface>,DeclareStrictTypesGeneratorInterface|NamespaceGeneratorInterface> $namespaces
      */
     public static function new(array $namespaces = []): self
     {
