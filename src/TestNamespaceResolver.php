@@ -11,9 +11,15 @@ final readonly class TestNamespaceResolver
 {
     public function resolve(string $namespace): string
     {
-        $namespaces = explode('\\', $namespace);
+        /** @var list<string> $namespaces */
+        $namespaces = explode('\\', $namespace, 3);
+        if ($namespaces === []) {
+            return 'Tests\\Unit';
+        }
 
-        $namespaces[1] .= 'Tests\\Unit';
+        $namespaces[0] = 'Tests';
+
+        $namespaces[1] = 'Unit';
 
         return implode('\\', $namespaces);
     }
