@@ -10,6 +10,7 @@ use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\MethodGeneratorInter
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\PropertyGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\TraitUseGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\NameGeneratorInterface;
+use Override;
 
 use function array_map;
 use function array_merge;
@@ -35,11 +36,13 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
         private bool $isReadonly = false,
     ) {}
 
+    #[Override]
     public function compare(ClassLikeGeneratorInterface $other): int
     {
         return $this->name() <=> $other->name();
     }
 
+    #[Override]
     public function generate(): string
     {
         $code = '';
@@ -130,11 +133,13 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
         return rtrim($code) . self::NEWLINE . '}' . self::NEWLINE;
     }
 
+    #[Override]
     public function name(): string
     {
         return $this->name;
     }
 
+    #[Override]
     public function uses(): array
     {
         $uses = $this->uses;
