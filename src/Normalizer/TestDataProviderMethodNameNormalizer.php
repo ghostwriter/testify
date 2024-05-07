@@ -6,6 +6,7 @@ namespace Ghostwriter\Testify\Normalizer;
 
 use Ghostwriter\Testify\Formatter\TestDataProviderMethodNameFormatter;
 use Ghostwriter\Testify\Interface\NormalizerInterface;
+use Override;
 
 final readonly class TestDataProviderMethodNameNormalizer implements NormalizerInterface
 {
@@ -14,6 +15,7 @@ final readonly class TestDataProviderMethodNameNormalizer implements NormalizerI
         private ClassMethodNameNormalizer $classMethodNormalizer,
     ) {}
 
+    #[Override]
     public function normalize(string $name): string
     {
         return $this->classMethodNormalizer->normalize($this->testDataProviderMethodNameFormatter->format($name));
