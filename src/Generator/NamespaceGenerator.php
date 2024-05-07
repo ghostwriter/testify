@@ -8,6 +8,7 @@ use Ghostwriter\Testify\Interface\Generator\ClassLikeGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\NamespaceGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\UseGeneratorInterface;
 use InvalidArgumentException;
+use Override;
 
 use function usort;
 
@@ -52,6 +53,7 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
         return $this;
     }
 
+    #[Override]
     public function generate(): string
     {
         $code = 'namespace ' . $this->name . ';' . self::NEWLINE;
@@ -103,6 +105,7 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
         return $code;
     }
 
+    #[Override]
     public function name(): string
     {
         return $this->name;
