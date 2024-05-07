@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\TestifyTests\Unit\Exception;
+namespace Tests\Unit\Exception;
 
 use Ghostwriter\Testify\Exception\StubNotAFileException;
 use PHPUnit\Framework\Attributes\CoversClass;
