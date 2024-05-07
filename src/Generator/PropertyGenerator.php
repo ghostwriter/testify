@@ -6,6 +6,7 @@ namespace Ghostwriter\Testify\Generator;
 
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\PropertyGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMemberGeneratorInterface;
+use Override;
 
 final readonly class PropertyGenerator implements PropertyGeneratorInterface
 {
@@ -19,11 +20,13 @@ final readonly class PropertyGenerator implements PropertyGeneratorInterface
         private bool $isReadonly = false,
     ) {}
 
+    #[Override]
     public function compare(ClassLikeMemberGeneratorInterface $right): int
     {
         return $this->name <=> $right->name();
     }
 
+    #[Override]
     public function generate(): string
     {
         $code = '';
@@ -57,6 +60,7 @@ final readonly class PropertyGenerator implements PropertyGeneratorInterface
         return $code;
     }
 
+    #[Override]
     public function name(): string
     {
         return $this->name;
