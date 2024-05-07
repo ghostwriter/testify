@@ -9,6 +9,7 @@ use Ghostwriter\Testify\Interface\Generator\ClassLikeGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\ConstantGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\MethodGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\UseGeneratorInterface;
+use Override;
 
 use function implode;
 
@@ -33,11 +34,13 @@ final class InterfaceGenerator implements InterfaceGeneratorInterface
         $this->methods[] = $method;
     }
 
+    #[Override]
     public function compare(ClassLikeGeneratorInterface $other): int
     {
         return $this->name() <=> $other->name();
     }
 
+    #[Override]
     public function generate(): string
     {
         $newLine = "\n";
@@ -70,11 +73,13 @@ final class InterfaceGenerator implements InterfaceGeneratorInterface
         return $code . '}' . $newLine;
     }
 
+    #[Override]
     public function name(): string
     {
         return $this->name;
     }
 
+    #[Override]
     public function uses(): array
     {
         return $this->uses;
