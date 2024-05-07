@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\TestifyTests\Unit\Formatter;
+namespace Tests\Unit\Formatter;
 
 use Ghostwriter\Testify\Formatter\TestMethodNameFormatter;
 use PHPUnit\Framework\Attributes\CoversClass;
