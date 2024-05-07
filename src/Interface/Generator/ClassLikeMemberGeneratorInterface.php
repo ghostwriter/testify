@@ -11,4 +11,7 @@ interface ClassLikeMemberGeneratorInterface extends GeneratorInterface
     public function compare(self $right): int;
 
     public function name(): string;
+
+    /** @return array<class-string<AttributeGeneratorInterface>> */
+    public function attributes(): array;
 }
