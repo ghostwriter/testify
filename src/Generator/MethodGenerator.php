@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Generator;
 
+use Ghostwriter\Testify\Interface\Generator\AttributeGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\MethodGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeMemberGeneratorInterface;
 use Override;
@@ -51,6 +52,7 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
         if ($this->isAbstract) {
             $method .= 'abstract ';
         }
+
         if ($this->isPublic) {
             $method .= 'public ';
         }
@@ -111,5 +113,12 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
         }
 
         return $uses;
+    }
+
+    /** @return array<class-string<AttributeGeneratorInterface>> */
+    #[Override]
+    public function attributes(): array
+    {
+        return $this->attributes;
     }
 }
