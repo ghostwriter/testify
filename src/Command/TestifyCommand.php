@@ -55,6 +55,7 @@ final class TestifyCommand extends SingleCommandApplication
                 '#BlackLivesMatter'
             )
         );
+
         try {
             $project = Project::new($input);
         } catch (Throwable $exception) {
