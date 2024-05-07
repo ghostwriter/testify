@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Generator;
 
 use Ghostwriter\Testify\Interface\GeneratorInterface;
+use Override;
 
 use function implode;
 use function sprintf;
@@ -19,6 +20,7 @@ final readonly class TestDataProviderGenerator implements GeneratorInterface
         private array $parameters
     ) {}
 
+    #[Override]
     public function generate(): string
     {
         $data = [];
