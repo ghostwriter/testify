@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Generator;
 
 use Ghostwriter\Testify\Interface\Generator\UseClassGeneratorInterface;
+use Ghostwriter\Testify\Trait\UseGeneratorTrait;
 
 final readonly class UseClassGenerator implements UseClassGeneratorInterface
 {
