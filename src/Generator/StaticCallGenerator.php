@@ -10,7 +10,7 @@ use function rtrim;
 use function sprintf;
 use function str_contains;
 
-final class StaticCallGenerator implements GeneratorInterface
+final readonly class StaticCallGenerator implements GeneratorInterface
 {
     public function __construct(
         private string $class,
