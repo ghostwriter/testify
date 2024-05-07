@@ -11,11 +11,13 @@ use InvalidArgumentException;
 use Override;
 
 use function usort;
+use function array_reduce;
 
 final class NamespaceGenerator implements NamespaceGeneratorInterface
 {
     /**
-     * @param list<UseGeneratorInterface> $uses
+     * @param list<UseGeneratorInterface>                                                                $uses
+     * @param array<class-string<ClassLikeGeneratorInterface>,array<string,ClassLikeGeneratorInterface>> $classLikes
      */
     public function __construct(
         private readonly string $name,
@@ -33,8 +35,8 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
         $this->classLikes[ClassGenerator::class][$name] = new ClassGenerator(
             name: $name,
             extends: $extends,
-            methods: $methods,
             attributes: $attributes,
+            methods: $methods,
             isFinal: $isFinal
         );
 
@@ -57,13 +59,6 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
     public function generate(): string
     {
         $code = 'namespace ' . $this->name . ';' . self::NEWLINE;
-
-        //        dd($this->classLikes);
-
-        //        foreach ($this->getUses() as $use) {
-        //            $code .= $use->generate() . self::NEWLINE;
-        //        }
-        //       /
 
         $uses = $this->uses();
 
@@ -90,19 +85,25 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
 
         $code .= self::NEWLINE;
 
+        $classLikes = $this->classLikes;
+
         usort(
-            $this->classLikes,
+            $classLikes,
             static fn (
                 ClassLikeGeneratorInterface $left,
                 ClassLikeGeneratorInterface $right
             ): int => $left->compare($right)
         );
 
-        foreach ($this->classLikes as $class) {
-            $code .= $class->generate() . self::NEWLINES;
-        }
+        //        foreach ($classLikes as $class) {
+        //            $code .= $class->generate() . self::NEWLINES;
+        //        }
 
-        return $code;
+        return array_reduce(
+            $classLikes,
+            static fn (string $code, ClassLikeGeneratorInterface $class): string => $code . $class->generate() . self::NEWLINES,
+            $code
+        );
     }
 
     #[Override]
@@ -111,20 +112,29 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
         return $this->name;
     }
 
+    /**
+     * @return array<string,UseGeneratorInterface>
+     */
     public function uses(): array
     {
+        /** @var array<string,UseGeneratorInterface> $uses */
         $uses = [];
 
         foreach ($this->uses as $use) {
             $uses[$use->name()] = $use;
         }
 
-        foreach ($this->classLikes as $classLike) {
+        foreach ($this->classLikes as $name => $classLike) {
+            //            if (! ($classLike instanceof ClassLikeGeneratorInterface)) {
+            //                continue;
+            //            }
+
             foreach ($classLike->uses() as $use) {
                 $uses[$use->name()] = $use;
             }
         }
 
+        /** @var array<string,UseGeneratorInterface> $uses */
         return $uses;
     }
 
