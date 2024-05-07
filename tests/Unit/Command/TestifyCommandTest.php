@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\TestifyTests\Unit\Command;
+namespace Tests\Unit\Command;
 
 use Ghostwriter\Testify\Command\TestifyCommand;
 use PHPUnit\Framework\Attributes\CoversClass;
