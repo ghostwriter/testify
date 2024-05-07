@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\TestifyTests\Unit\Normalizer;
+namespace Tests\Unit\Normalizer;
 
 use Ghostwriter\Testify\Normalizer\TestDataProviderMethodNameNormalizer;
 use PHPUnit\Framework\Attributes\CoversClass;
