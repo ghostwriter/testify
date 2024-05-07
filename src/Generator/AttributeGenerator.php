@@ -5,16 +5,21 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Generator;
 
 use Ghostwriter\Testify\Interface\GeneratorInterface;
+use Override;
 
 use function rtrim;
 
 final readonly class AttributeGenerator implements GeneratorInterface
 {
+    /**
+     * @param array<string> $params
+     */
     public function __construct(
         public string $name,
         public array $params = [],
     ) {}
 
+    #[Override]
     public function generate(): string
     {
         $code = '#[';
