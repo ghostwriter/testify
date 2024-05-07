@@ -6,6 +6,7 @@ namespace Ghostwriter\Testify\Normalizer;
 
 use Ghostwriter\CaseConverter\CaseConverter;
 use Ghostwriter\Testify\Interface\NormalizerInterface;
+use Override;
 
 final readonly class ClassMethodNameNormalizer implements NormalizerInterface
 {
@@ -13,6 +14,7 @@ final readonly class ClassMethodNameNormalizer implements NormalizerInterface
         private CaseConverter $caseConverter,
     ) {}
 
+    #[Override]
     public function normalize(string $name): string
     {
         return $this->caseConverter->camelCase($name);
