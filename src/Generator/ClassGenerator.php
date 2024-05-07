@@ -42,6 +42,13 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
         return $this->name() <=> $other->name();
     }
 
+    /** @return list<class-string<Attribute>> */
+    #[Override]
+    public function attributes(): array
+    {
+        return $this->attributes;
+    }
+
     #[Override]
     public function generate(): string
     {
@@ -51,7 +58,7 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
             $code .= $dockBlock->generate() . self::NEWLINE;
         }
 
-        foreach ($this->attributes as $attribute) {
+        foreach ($this->attributes() as $attribute) {
             $code .= $attribute->generate() . self::NEWLINE;
         }
 
