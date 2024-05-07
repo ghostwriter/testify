@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Generator;
 
 use Ghostwriter\Testify\Interface\GeneratorInterface;
+use Override;
 
 final class ParameterGenerator implements GeneratorInterface
 {
@@ -20,6 +21,7 @@ final class ParameterGenerator implements GeneratorInterface
         private array $uses = [],
     ) {}
 
+    #[Override]
     public function generate(): string
     {
         $parameter = '';
