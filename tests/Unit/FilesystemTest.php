@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\TestifyTests\Unit;
+namespace Tests\Unit;
 
 use Ghostwriter\Testify\Filesystem;
 use PHPUnit\Framework\Attributes\CoversClass;
