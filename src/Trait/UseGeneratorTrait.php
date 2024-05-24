@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Trait;
 
-use Ghostwriter\Testify\Generator\UseClassGenerator;
-use Ghostwriter\Testify\Generator\UseConstantGenerator;
-use Ghostwriter\Testify\Generator\UseFunctionGenerator;
+use Ghostwriter\Testify\Generator\Use\UseClassGenerator;
+use Ghostwriter\Testify\Generator\Use\UseConstantGenerator;
+use Ghostwriter\Testify\Generator\Use\UseFunctionGenerator;
 use Ghostwriter\Testify\Interface\Generator\UseGeneratorInterface;
 
 trait UseGeneratorTrait
