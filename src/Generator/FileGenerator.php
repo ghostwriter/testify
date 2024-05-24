@@ -13,6 +13,7 @@ use Override;
 use function rtrim;
 use function usort;
 use function array_reduce;
+use function array_unshift;
 
 final class FileGenerator implements FileGeneratorInterface
 {
@@ -20,20 +21,19 @@ final class FileGenerator implements FileGeneratorInterface
      * @param array<class-string<GeneratorInterface>,DeclareStrictTypesGeneratorInterface|NamespaceGeneratorInterface> $namespaces
      */
     public function __construct(
-        private array $namespaces
+        private readonly array $namespaces,
+        private readonly bool $declareStrictTypes,
     ) {}
-
-    public function declareStrictTypes(): self
-    {
-        $this->namespaces[DeclareStrictTypesGeneratorInterface::class] ??= new DeclareStrictTypesGenerator();
-
-        return $this;
-    }
 
     #[Override]
     public function generate(): string
     {
         $namespaces = $this->namespaces;
+
+        if ($this->declareStrictTypes) {
+//            array_unshift($namespaces, new DeclareStrictTypesGenerator());
+            $namespaces[] = new DeclareStrictTypesGenerator();
+        }
 
         usort(
             $namespaces,
@@ -66,8 +66,8 @@ final class FileGenerator implements FileGeneratorInterface
     /**
      * @param array<class-string<GeneratorInterface>,DeclareStrictTypesGeneratorInterface|NamespaceGeneratorInterface> $namespaces
      */
-    public static function new(array $namespaces = []): self
+    public static function new(array $namespaces = [], bool $declareStrictTypes = true): self
     {
-        return new self($namespaces);
+        return new self($namespaces, $declareStrictTypes);
     }
 }
