@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify;
 
 use Ghostwriter\Testify\Generator\AttributeGenerator;
-use Ghostwriter\Testify\Generator\ClassGenerator;
+use Ghostwriter\Testify\Generator\ClassLike\ClassGenerator;
 use Ghostwriter\Testify\Generator\FileGenerator;
+use Ghostwriter\Testify\Generator\Name\ClassNameGenerator;
 use Ghostwriter\Testify\Interface\BuilderInterface;
 use Ghostwriter\Testify\Interface\GeneratorInterface;
 use Ghostwriter\Testify\Normalizer\ClassNameNormalizer;
@@ -50,7 +51,7 @@ final readonly class TestBuilder implements BuilderInterface
             $namespaces[$namespace] = $namespaceGenerator->classLikes([
                 $testNamespaceClass => new ClassGenerator(
                     name: $testClass,
-                    extends: 'TestCase',
+                    extends: [new ClassNameGenerator('TestCase')],
                     methods: $this->testMethodsResolver->resolve($namespaceClass),
                     attributes: [new AttributeGenerator('CoversClass', [$class . '::class'])],
                     isFinal: true
@@ -61,6 +62,6 @@ final readonly class TestBuilder implements BuilderInterface
                 ->usesClass($namespaceClass);
         }
 
-        return FileGenerator::new($namespaces)->declareStrictTypes();
+        return FileGenerator::new($namespaces);
     }
 }
