@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Generator;
 
+use Ghostwriter\Testify\Generator\ClassLike\ClassGenerator;
+use Ghostwriter\Testify\Generator\ClassLikeMember\MethodGenerator;
+use Ghostwriter\Testify\Generator\Use\UseClassGenerator;
+use Ghostwriter\Testify\Generator\Use\UseConstantGenerator;
+use Ghostwriter\Testify\Generator\Use\UseFunctionGenerator;
 use Ghostwriter\Testify\Interface\Generator\ClassLikeGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\NamespaceGeneratorInterface;
 use Ghostwriter\Testify\Interface\Generator\UseGeneratorInterface;
 use InvalidArgumentException;
 use Override;
 
-use function usort;
 use function array_reduce;
+use function usort;
 
 final class NamespaceGenerator implements NamespaceGeneratorInterface
 {
@@ -98,6 +103,8 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
         //        foreach ($classLikes as $class) {
         //            $code .= $class->generate() . self::NEWLINES;
         //        }
+
+        //        return $code;
 
         return array_reduce(
             $classLikes,
