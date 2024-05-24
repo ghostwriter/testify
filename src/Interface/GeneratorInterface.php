@@ -14,6 +14,8 @@ interface GeneratorInterface
 
     public const string INDENT = '    ';
 
+    public const string SPACE = ' ';
+
     public const string NEWLINE = "\n";
 
     public const string NEWLINES = "\n\n";
