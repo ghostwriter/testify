@@ -6,7 +6,4 @@ namespace Ghostwriter\Testify\Interface\Generator;
 
 use Ghostwriter\Testify\Interface\GeneratorInterface;
 
-interface NameGeneratorInterface extends GeneratorInterface
-{
-    public function name(): string;
-}
+interface NameGeneratorInterface extends GeneratorInterface {}
