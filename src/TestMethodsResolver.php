@@ -6,11 +6,11 @@ namespace Ghostwriter\Testify;
 
 use Generator;
 use Ghostwriter\Testify\Generator\AttributeGenerator;
-use Ghostwriter\Testify\Generator\MethodGenerator;
+use Ghostwriter\Testify\Generator\ClassLikeMember\MethodGenerator;
 use Ghostwriter\Testify\Generator\ParameterGenerator;
 use Ghostwriter\Testify\Generator\StaticCallGenerator;
 use Ghostwriter\Testify\Generator\TestDataProviderGenerator;
-use Ghostwriter\Testify\Generator\UseClassGenerator;
+use Ghostwriter\Testify\Generator\Use\UseClassGenerator;
 use Ghostwriter\Testify\Normalizer\TestDataProviderMethodNameNormalizer;
 use Ghostwriter\Testify\Normalizer\TestMethodNameNormalizer;
 use PHPUnit\Framework\Attributes\DataProvider;
