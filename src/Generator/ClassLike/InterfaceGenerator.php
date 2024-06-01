@@ -11,13 +11,13 @@ use Ghostwriter\Testify\Interface\GeneratorInterface;
 use Ghostwriter\Testify\Trait\ClassLikeGeneratorTrait;
 use Override;
 
-use function implode;
 use function array_reduce;
 
 final class InterfaceGenerator implements InterfaceGeneratorInterface
 {
     use ClassLikeGeneratorTrait;
 
+    #[Override]
     public function addMethod(GeneratorInterface $method): void
     {
         $this->methods[] = $method;
@@ -55,7 +55,7 @@ final class InterfaceGenerator implements InterfaceGeneratorInterface
             return $methods;
         }, []);
 
-        foreach ($this->methods as $method) {
+        foreach ($methods as $method) {
             if (! $method instanceof MethodGeneratorInterface) {
                 continue;
             }
