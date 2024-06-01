@@ -297,11 +297,6 @@
       <code><![CDATA[NameGeneratorInterface]]></code>
     </UnusedClass>
   </file>
-  <file src="src/Middleware/CommandMiddleware.php">
-    <InvalidReturnType>
-      <code><![CDATA[int]]></code>
-    </InvalidReturnType>
-  </file>
   <file src="src/Middleware/ErrorHandlerMiddleware.php">
     <LessSpecificReturnType>
       <code><![CDATA[bool]]></code>
@@ -316,14 +311,9 @@
       <code><![CDATA[printException]]></code>
     </UndefinedInterfaceMethod>
   </file>
-  <file src="src/Middleware/TestifyCommandMiddleware.php">
-    <MissingThrowsDocblock>
-      <code><![CDATA[execute]]></code>
-    </MissingThrowsDocblock>
-  </file>
   <file src="src/Middlewares.php">
     <MissingThrowsDocblock>
-      <code><![CDATA[throw new RuntimeException('Middleware must implement Middleware interface');]]></code>
+      <code><![CDATA[new self($middlewares)]]></code>
     </MissingThrowsDocblock>
   </file>
   <file src="src/Normalizer/ClassConstantNameNormalizer.php">
@@ -563,6 +553,8 @@
     <MissingThrowsDocblock>
       <code><![CDATA[get]]></code>
       <code><![CDATA[get]]></code>
+      <code><![CDATA[process]]></code>
+      <code><![CDATA[process]]></code>
     </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
