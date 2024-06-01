@@ -13,7 +13,7 @@ use function sprintf;
 use const STDERR;
 
 /** @var ?string $_composer_autoload_path */
-(static function (string $composerAutoloadPath): void {
+(static function (string $composerAutoloadPath): never {
     if (! file_exists($composerAutoloadPath)) {
         fwrite(
             STDERR,
@@ -28,8 +28,5 @@ use const STDERR;
     /**
      * #BlackLivesMatter.
      */
-    $exitCode = Testify::new()
-        ->run();
-
-    exit($exitCode);
+    exit(Testify::new()->run());
 })($_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php');
