@@ -39,23 +39,35 @@ final readonly class Testify implements CommandBusInterface, HandlerInterface, M
         return $container->build(self::class, $middlewares);
     }
 
+    /**
+     * @throws Throwable
+     */
     public function run(): int
     {
         return $this->dispatch($this->container->get(TestifyCommand::class));
     }
 
+    /**
+     * @throws Throwable
+     */
     #[Override]
     public function dispatch(CommandInterface $command): int
     {
         return $this->middlewares->process($command, $this);
     }
 
+    /**
+     * @throws Throwable
+     */
     #[Override]
     public function handle(CommandInterface $command): int
     {
         return $this->handlers->handle($command);
     }
 
+    /**
+     * @throws Throwable
+     */
     #[Override]
     public function process(CommandInterface $command, HandlerInterface $handler): int
     {
