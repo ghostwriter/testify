@@ -8,5 +8,8 @@ use Generator;
 
 interface RunnerInterface
 {
+    /**
+     * @return Generator<string,string>
+     */
     public function run(ProjectInterface $project): Generator;
 }
