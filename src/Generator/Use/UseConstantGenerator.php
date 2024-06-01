@@ -6,11 +6,13 @@ namespace Ghostwriter\Testify\Generator\Use;
 
 use Ghostwriter\Testify\Interface\Generator\UseConstantGeneratorInterface;
 use Ghostwriter\Testify\Trait\UseGeneratorTrait;
+use Override;
 
 final readonly class UseConstantGenerator implements UseConstantGeneratorInterface
 {
     use UseGeneratorTrait;
 
+    #[Override]
     public function generate(): string
     {
         $code = 'use const ' . $this->name;
