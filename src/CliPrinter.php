@@ -15,6 +15,7 @@ use const PHP_EOL;
 
 final readonly class CliPrinter implements CliPrinterInterface
 {
+    #[Override]
     public function print(CommandInterface $command): string
     {
         return sprintf(PHP_EOL . 'Command: %s' . PHP_EOL, $command::class);
