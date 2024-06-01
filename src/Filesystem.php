@@ -31,6 +31,9 @@ final readonly class Filesystem
         return basename($path, $suffix);
     }
 
+    /**
+     * @throws FailedToCreateDirectoryException
+     */
     public function createDirectory(string $path, int $mode = 0o777, bool $recursive = true): void
     {
         $makeDirectory = mkdir($path, $mode, $recursive);
@@ -39,6 +42,9 @@ final readonly class Filesystem
         }
     }
 
+    /**
+     * @throws FailedToDetermineCurrentWorkingDirectoryException
+     */
     public function currentWorkingDirectory(): string
     {
         $currentWorkingDirectory = getcwd();
@@ -78,6 +84,10 @@ final readonly class Filesystem
         return dirname($path, $levels);
     }
 
+    /**
+     * @throws FileNotFoundException
+     * @throws FailedToReadFileException
+     */
     public function read(string $path): string
     {
         if (! file_exists($path)) {
@@ -98,10 +108,14 @@ final readonly class Filesystem
         yield from new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory));
     }
 
+    /**
+     * @throws FailedToWriteFileException
+     * @throws FailedToCreateDirectoryException
+     */
     public function save(string $path, string $content): void
     {
         if (! file_exists($path)) {
-            $parentDirectory = dirname($path);
+            $parentDirectory = $this->parentDirectory($path);
 
             if (! file_exists($parentDirectory)) {
                 $this->createDirectory($parentDirectory);
