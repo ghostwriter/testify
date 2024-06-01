@@ -49,122 +49,39 @@
       <code><![CDATA[recursiveDirectoryIterator]]></code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/Generator/ClassGenerator.php">
-    <ImplementedReturnTypeMismatch>
-      <code><![CDATA[list<class-string<Attribute>>]]></code>
-    </ImplementedReturnTypeMismatch>
-    <InvalidMethodCall>
-      <code><![CDATA[generate]]></code>
-    </InvalidMethodCall>
-    <LessSpecificReturnStatement>
-      <code><![CDATA[$uses]]></code>
-    </LessSpecificReturnStatement>
-    <MixedArgument>
-      <code><![CDATA[$method->uses()]]></code>
-      <code><![CDATA[$property->uses()]]></code>
-    </MixedArgument>
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[usort(
-            $this->constants,
-            static fn (
-                ConstantGeneratorInterface $left,
-                ConstantGeneratorInterface $right
-            ): int => $left->compare($right)
-        )]]></code>
-      <code><![CDATA[usort(
-            $this->methods,
-            static fn (
-                MethodGeneratorInterface $left,
-                MethodGeneratorInterface $right
-            ): int => $left->compare($right)
-        )]]></code>
-      <code><![CDATA[usort(
-            $this->properties,
-            static fn (
-                PropertyGeneratorInterface $left,
-                PropertyGeneratorInterface $right
-            ): int => $left->compare($right)
-        )]]></code>
-      <code><![CDATA[usort(
-            $this->traitUses,
-            static fn (
-                TraitUseGeneratorInterface $left,
-                TraitUseGeneratorInterface $right
-            ): int => $left->compare($right)
-        )]]></code>
-    </MixedArgumentTypeCoercion>
-    <MixedAssignment>
-      <code><![CDATA[$constant]]></code>
-      <code><![CDATA[$dockBlock]]></code>
-      <code><![CDATA[$method]]></code>
-      <code><![CDATA[$method]]></code>
-      <code><![CDATA[$property]]></code>
-      <code><![CDATA[$property]]></code>
-      <code><![CDATA[$traitUse]]></code>
-    </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[list<class-string<Attribute>>]]></code>
-    </MixedInferredReturnType>
-    <MixedMethodCall>
-      <code><![CDATA[generate]]></code>
-      <code><![CDATA[generate]]></code>
-      <code><![CDATA[generate]]></code>
-      <code><![CDATA[generate]]></code>
-      <code><![CDATA[generate]]></code>
-      <code><![CDATA[uses]]></code>
-      <code><![CDATA[uses]]></code>
-    </MixedMethodCall>
-    <MixedOperand>
-      <code><![CDATA[$constant->generate()]]></code>
-      <code><![CDATA[$dockBlock->generate()]]></code>
-      <code><![CDATA[$method->generate()]]></code>
-      <code><![CDATA[$property->generate()]]></code>
-      <code><![CDATA[$traitUse->generate()]]></code>
-    </MixedOperand>
-    <MoreSpecificReturnType>
-      <code><![CDATA[array]]></code>
-    </MoreSpecificReturnType>
-    <UndefinedDocblockClass>
-      <code><![CDATA[list<class-string<Attribute>>]]></code>
-    </UndefinedDocblockClass>
-    <UnusedProperty>
-      <code><![CDATA[$attributes]]></code>
-    </UnusedProperty>
-  </file>
-  <file src="src/Generator/FileGenerator.php">
+  <file src="src/Generator/ClassLike/ClassGenerator.php">
     <LessSpecificReturnType>
       <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
+      <code><![CDATA[string]]></code>
     </LessSpecificReturnType>
-    <PropertyTypeCoercion>
-      <code><![CDATA[$this->namespaces]]></code>
-    </PropertyTypeCoercion>
-  </file>
-  <file src="src/Generator/InterfaceGenerator.php">
-    <LessSpecificReturnStatement>
-      <code><![CDATA[$this->attributes]]></code>
-    </LessSpecificReturnStatement>
-    <MoreSpecificReturnType>
-      <code><![CDATA[list<AttributeGeneratorInterface>]]></code>
-    </MoreSpecificReturnType>
     <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-      <code><![CDATA[addMethod]]></code>
+      <code><![CDATA[generater]]></code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Generator/ClassLike/InterfaceGenerator.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function addMethod(GeneratorInterface $method): void]]></code>
+    </MissingOverrideAttribute>
     <PropertyTypeCoercion>
       <code><![CDATA[$this->methods]]></code>
     </PropertyTypeCoercion>
+    <UnusedVariable>
+      <code><![CDATA[$methods]]></code>
+    </UnusedVariable>
   </file>
-  <file src="src/Generator/InterfaceNameGenerator.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Generator/MethodGenerator.php">
+  <file src="src/Generator/ClassLikeMember/MethodGenerator.php">
+    <InvalidMethodCall>
+      <code><![CDATA[generate]]></code>
+    </InvalidMethodCall>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function uses(): array]]></code>
+    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$parameter->uses()]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code><![CDATA[$attribute]]></code>
       <code><![CDATA[$line]]></code>
       <code><![CDATA[$parameter]]></code>
       <code><![CDATA[$parameter]]></code>
@@ -172,27 +89,49 @@
     <MixedMethodCall>
       <code><![CDATA[generate]]></code>
       <code><![CDATA[generate]]></code>
-      <code><![CDATA[generate]]></code>
       <code><![CDATA[uses]]></code>
     </MixedMethodCall>
     <MixedOperand>
-      <code><![CDATA[$attribute->generate()]]></code>
       <code><![CDATA[$line->generate()]]></code>
       <code><![CDATA[$parameter->generate()]]></code>
     </MixedOperand>
     <MixedReturnTypeCoercion>
-      <code><![CDATA[$this->attributes]]></code>
-      <code><![CDATA[array<class-string<AttributeGeneratorInterface>>]]></code>
+      <code><![CDATA[$uses]]></code>
+      <code><![CDATA[array]]></code>
     </MixedReturnTypeCoercion>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[uses]]></code>
-    </PossiblyUnusedMethod>
+    <ParamNameMismatch>
+      <code><![CDATA[$right]]></code>
+    </ParamNameMismatch>
     <RedundantCondition>
       <code><![CDATA[$this->returnType !== null]]></code>
     </RedundantCondition>
   </file>
+  <file src="src/Generator/ClassLikeMember/PropertyGenerator.php">
+    <MixedMethodCall>
+      <code><![CDATA[name]]></code>
+    </MixedMethodCall>
+    <MixedOperand>
+      <code><![CDATA[$this->value]]></code>
+    </MixedOperand>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+    <UndefinedVariable>
+      <code><![CDATA[$right]]></code>
+    </UndefinedVariable>
+  </file>
+  <file src="src/Generator/FileGenerator.php">
+    <LessSpecificReturnType>
+      <code><![CDATA[string]]></code>
+    </LessSpecificReturnType>
+  </file>
   <file src="src/Generator/NamespaceGenerator.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$attributes]]></code>
+      <code><![CDATA[$methods]]></code>
+    </ArgumentTypeCoercion>
     <InvalidArgument>
+      <code><![CDATA[$extends]]></code>
       <code><![CDATA[ClassLikeGeneratorInterface]]></code>
       <code><![CDATA[usort(
             $classLikes,
@@ -214,6 +153,9 @@
     <MixedArgument>
       <code><![CDATA[$returnType]]></code>
     </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$attributes]]></code>
+    </MixedArgumentTypeCoercion>
     <MixedArrayOffset>
       <code><![CDATA[$uses[$use->name()]]]></code>
     </MixedArrayOffset>
@@ -265,18 +207,6 @@
       <code><![CDATA[$isOptional]]></code>
     </UnusedProperty>
   </file>
-  <file src="src/Generator/PropertyGenerator.php">
-    <MixedOperand>
-      <code><![CDATA[$this->value]]></code>
-    </MixedOperand>
-    <MixedReturnTypeCoercion>
-      <code><![CDATA[$this->attributes]]></code>
-      <code><![CDATA[array<class-string<AttributeGeneratorInterface>>]]></code>
-    </MixedReturnTypeCoercion>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
   <file src="src/Generator/StaticCallGenerator.php">
     <MissingOverrideAttribute>
       <code><![CDATA[public function generate(): string]]></code>
@@ -308,37 +238,7 @@
       <code><![CDATA[$className]]></code>
     </UnusedParam>
   </file>
-  <file src="src/Generator/TraitGenerator.php">
-    <InvalidReturnStatement>
-      <code><![CDATA[$this->attributes]]></code>
-    </InvalidReturnStatement>
-    <InvalidReturnType>
-      <code><![CDATA[array<class-string<AttributeGeneratorInterface>>]]></code>
-    </InvalidReturnType>
-    <LessSpecificImplementedReturnType>
-      <code><![CDATA[array<class-string<AttributeGeneratorInterface>>]]></code>
-    </LessSpecificImplementedReturnType>
-    <LessSpecificReturnStatement>
-      <code><![CDATA[$this->uses]]></code>
-    </LessSpecificReturnStatement>
-    <MoreSpecificReturnType>
-      <code><![CDATA[array]]></code>
-    </MoreSpecificReturnType>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Generator/UseClassGenerator.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function generate(): string]]></code>
-    </MissingOverrideAttribute>
-  </file>
-  <file src="src/Generator/UseConstantGenerator.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function generate(): string]]></code>
-    </MissingOverrideAttribute>
-  </file>
-  <file src="src/Generator/UseFunctionGenerator.php">
+  <file src="src/Generator/Use/UseConstantGenerator.php">
     <MissingOverrideAttribute>
       <code><![CDATA[public function generate(): string]]></code>
     </MissingOverrideAttribute>
@@ -355,23 +255,30 @@
   </file>
   <file src="src/Interface/Generator/ClassLikeGeneratorInterface.php">
     <PossiblyUnusedMethod>
+      <code><![CDATA[addAttribute]]></code>
+      <code><![CDATA[addConstant]]></code>
+      <code><![CDATA[addMethod]]></code>
+      <code><![CDATA[addProperty]]></code>
+      <code><![CDATA[addTraitUse]]></code>
+      <code><![CDATA[addUse]]></code>
       <code><![CDATA[uses]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Interface/Generator/ClassLikeMemberGeneratorInterface.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[attributes]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Interface/Generator/NameGeneratorInterface.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[name]]></code>
+      <code><![CDATA[uses]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Interface/Generator/UseGeneratorInterface.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[alias]]></code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Interface/NameGeneratorInterface.php">
+    <UnusedClass>
+      <code><![CDATA[NameGeneratorInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Normalizer/ClassConstantNameNormalizer.php">
     <PossiblyUnusedMethod>
@@ -462,6 +369,12 @@
     </MissingOverrideAttribute>
   </file>
   <file src="src/TestBuilder.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$this->testMethodsResolver->resolve($namespaceClass)]]></code>
+    </ArgumentTypeCoercion>
+    <InvalidArgument>
+      <code><![CDATA[[new AttributeGenerator('CoversClass', [$class . '::class'])]]]></code>
+    </InvalidArgument>
     <InvalidOperand>
       <code><![CDATA[$namespace]]></code>
     </InvalidOperand>
@@ -599,6 +512,19 @@
       <code><![CDATA[$testDataProviderMethodNameNormalizer]]></code>
       <code><![CDATA[$testMethodNameNormalizer]]></code>
     </UnusedProperty>
+  </file>
+  <file src="src/Trait/ClassLikeGeneratorTrait.php">
+    <InvalidReturnType>
+      <code><![CDATA[list<DocBlockGeneratorInterface>]]></code>
+    </InvalidReturnType>
+    <PropertyTypeCoercion>
+      <code><![CDATA[$this->attributes]]></code>
+      <code><![CDATA[$this->constants]]></code>
+      <code><![CDATA[$this->methods]]></code>
+      <code><![CDATA[$this->properties]]></code>
+      <code><![CDATA[$this->traitUses]]></code>
+      <code><![CDATA[$this->uses]]></code>
+    </PropertyTypeCoercion>
   </file>
   <file src="src/Trait/UseGeneratorTrait.php">
     <MissingOverrideAttribute>
