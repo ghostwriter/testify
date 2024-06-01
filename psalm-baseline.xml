@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.24.0@462c80e31c34e58cc4f750c656be3927e80e550e">
-  <file src="src/CliPrinter.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function print(CommandInterface $command): string]]></code>
-    </MissingOverrideAttribute>
-  </file>
   <file src="src/Command/TestifyCommand.php">
     <LessSpecificReturnType>
       <code><![CDATA[int]]></code>
@@ -19,22 +14,13 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Filesystem.php">
-    <MissingThrowsDocblock>
-      <code><![CDATA[throw new FailedToCreateDirectoryException($path);]]></code>
-      <code><![CDATA[throw new FailedToDetermineCurrentWorkingDirectoryException();]]></code>
-      <code><![CDATA[throw new FailedToReadFileException($path);]]></code>
-      <code><![CDATA[throw new FailedToWriteFileException($path);]]></code>
-      <code><![CDATA[throw new FileNotFoundException($path);]]></code>
-    </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
       <code><![CDATA[basename]]></code>
       <code><![CDATA[currentWorkingDirectory]]></code>
       <code><![CDATA[exists]]></code>
       <code><![CDATA[isFile]]></code>
       <code><![CDATA[isReadable]]></code>
-      <code><![CDATA[parentDirectory]]></code>
       <code><![CDATA[read]]></code>
-      <code><![CDATA[recursiveDirectoryIterator]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Generator/ClassLike/ClassGenerator.php">
@@ -49,15 +35,9 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Generator/ClassLike/InterfaceGenerator.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function addMethod(GeneratorInterface $method): void]]></code>
-    </MissingOverrideAttribute>
     <PropertyTypeCoercion>
       <code><![CDATA[$this->methods]]></code>
     </PropertyTypeCoercion>
-    <UnusedVariable>
-      <code><![CDATA[$methods]]></code>
-    </UnusedVariable>
   </file>
   <file src="src/Generator/ClassLikeMember/MethodGenerator.php">
     <InvalidMethodCall>
@@ -226,11 +206,6 @@
       <code><![CDATA[$className]]></code>
     </UnusedParam>
   </file>
-  <file src="src/Generator/Use/UseConstantGenerator.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function generate(): string]]></code>
-    </MissingOverrideAttribute>
-  </file>
   <file src="src/Handler/NotFoundHandler.php">
     <MissingOverrideAttribute>
       <code><![CDATA[#[Override]]]></code>
@@ -342,36 +317,11 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/PhpFileFinder.php">
-    <LessSpecificReturnType>
-      <code><![CDATA[Generator]]></code>
-    </LessSpecificReturnType>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
-    <UnusedProperty>
-      <code><![CDATA[$filesystem]]></code>
-    </UnusedProperty>
-  </file>
-  <file src="src/Printer.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function print(GeneratorInterface $generator): string]]></code>
-    </MissingOverrideAttribute>
   </file>
   <file src="src/Project.php">
-    <MissingThrowsDocblock>
-      <code><![CDATA[getArgument]]></code>
-      <code><![CDATA[getArgument]]></code>
-      <code><![CDATA[getOption]]></code>
-      <code><![CDATA[getOption]]></code>
-      <code><![CDATA[throw new FailedToCreateDirectoryException($testsUnitDirectory);]]></code>
-      <code><![CDATA[throw new PathDoesNotExistException($source);]]></code>
-      <code><![CDATA[throw new PathDoesNotExistException($tests);]]></code>
-      <code><![CDATA[throw new PathIsEmptyException();]]></code>
-      <code><![CDATA[throw new PathIsEmptyException();]]></code>
-      <code><![CDATA[throw new PathIsNotDirectoryException($source);]]></code>
-      <code><![CDATA[throw new PathIsNotStringException();]]></code>
-      <code><![CDATA[throw new PathIsNotStringException();]]></code>
-    </MissingThrowsDocblock>
     <PossiblyUnusedProperty>
       <code><![CDATA[$source]]></code>
       <code><![CDATA[$tests]]></code>
@@ -550,12 +500,6 @@
     </UnusedProperty>
   </file>
   <file src="src/Testify.php">
-    <MissingThrowsDocblock>
-      <code><![CDATA[get]]></code>
-      <code><![CDATA[get]]></code>
-      <code><![CDATA[process]]></code>
-      <code><![CDATA[process]]></code>
-    </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
       <code><![CDATA[new]]></code>
@@ -574,12 +518,5 @@
       <code><![CDATA[$this->traitUses]]></code>
       <code><![CDATA[$this->uses]]></code>
     </PropertyTypeCoercion>
-  </file>
-  <file src="src/Trait/UseGeneratorTrait.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[final public function alias(): string]]></code>
-      <code><![CDATA[final public function compare(UseGeneratorInterface $generator): int]]></code>
-      <code><![CDATA[final public function name(): string]]></code>
-    </MissingOverrideAttribute>
   </file>
 </files>
