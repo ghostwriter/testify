@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.24.0@462c80e31c34e58cc4f750c656be3927e80e550e">
   <file src="src/Command/TestifyCommand.php">
-    <MissingThrowsDocblock>
-      <code><![CDATA[addArgument]]></code>
-      <code><![CDATA[addArgument]]></code>
-      <code><![CDATA[addOption]]></code>
-      <code><![CDATA[addOption]]></code>
-      <code><![CDATA[parent::__construct('Testify')]]></code>
-      <code><![CDATA[setName]]></code>
-    </MissingThrowsDocblock>
     <MixedArgument>
       <code><![CDATA[$file]]></code>
       <code><![CDATA[$testFile]]></code>
@@ -512,6 +504,27 @@
       <code><![CDATA[$testDataProviderMethodNameNormalizer]]></code>
       <code><![CDATA[$testMethodNameNormalizer]]></code>
     </UnusedProperty>
+  </file>
+  <file src="src/Testify.php">
+    <LessSpecificReturnType>
+      <code><![CDATA[bool]]></code>
+    </LessSpecificReturnType>
+    <MissingThrowsDocblock>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[provide]]></code>
+      <code><![CDATA[provide]]></code>
+      <code><![CDATA[provide]]></code>
+      <code><![CDATA[run]]></code>
+      <code><![CDATA[throw new RuntimeException('Middleware must implement Middleware interface');]]></code>
+    </MissingThrowsDocblock>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[add]]></code>
+      <code><![CDATA[new]]></code>
+      <code><![CDATA[run]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Trait/ClassLikeGeneratorTrait.php">
     <InvalidReturnType>
