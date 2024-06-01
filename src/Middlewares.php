@@ -9,6 +9,7 @@ use Ghostwriter\Testify\Interface\HandlerInterface;
 use Ghostwriter\Testify\Interface\MiddlewareInterface;
 use Override;
 use RuntimeException;
+use Throwable;
 
 use function array_shift;
 
@@ -16,6 +17,8 @@ final class Middlewares implements MiddlewareInterface
 {
     /**
      * @param array<MiddlewareInterface> $middlewares
+     *
+     * @throws Throwable
      */
     public function __construct(
         private array $middlewares = []
@@ -37,6 +40,9 @@ final class Middlewares implements MiddlewareInterface
         $this->middlewares = [...$this->middlewares, ...$middlewares];
     }
 
+    /**
+     * @throws Throwable
+     */
     #[Override]
     public function process(CommandInterface $command, HandlerInterface $handler): int
     {
