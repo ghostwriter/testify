@@ -36,7 +36,7 @@
         "ghostwriter/case-converter": "^1.0.0",
         "ghostwriter/container": "^3.0.3",
         "ghostwriter/event-dispatcher": "^4.0.0",
-        "symfony/console": "^6.4.7 || ^7.0.7"
+        "symfony/console": "^6.4.7 || ^7.1.0"
     },
     "require-dev": {
         "ghostwriter/coding-standard": "dev-main",
@@ -91,7 +91,8 @@
             "@psalm:security",
             "@psalm:dry-run"
         ],
-        "ecs": "@bin_ecs check --fix",
+        "ecs": "@bin_ecs --fix",
+        "git:submodule:update": "git submodule update --depth=1 --init --recursive --recommend-shallow --remote",
         "infection": "@bin_infection",
         "phpunit": "@bin_phpunit",
         "phpunit:migrate": "@bin_phpunit --migrate-configuration",
