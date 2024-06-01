@@ -51,7 +51,6 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Ghostwriter\\TestifyTests\\": "tests",
             "Tests\\": "tests"
         }
     },
