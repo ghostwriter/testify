@@ -6,8 +6,6 @@ namespace Ghostwriter\Testify;
 
 use Closure;
 use Generator;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 use SplFileInfo;
 
 use function mb_strtolower;
@@ -47,7 +45,7 @@ final readonly class PhpFileFinder
         $match = $this->isPhpFile;
         $skip = $this->isNotSupported;
 
-        foreach ($this->recursiveDirectoryIterator($directory) as $file) {
+        foreach ($this->filesystem->recursiveDirectoryIterator($directory) as $file) {
             if (! $file instanceof SplFileInfo) {
                 continue;
             }
@@ -58,10 +56,5 @@ final readonly class PhpFileFinder
 
             yield $file->getPathname();
         }
-    }
-
-    private function recursiveDirectoryIterator(string $directory): Generator
-    {
-        yield from new RecursiveIteratorIterator(new RecursiveDirectoryIterator($directory));
     }
 }
