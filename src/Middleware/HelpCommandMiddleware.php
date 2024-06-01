@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Ghostwriter\Testify\Middleware;
+
+use Ghostwriter\Testify\Command\HelpCommand;
+use Ghostwriter\Testify\Interface\CommandInterface;
+use Ghostwriter\Testify\Interface\HandlerInterface;
+use Ghostwriter\Testify\Interface\MiddlewareInterface;
+use Override;
+
+final class HelpCommandMiddleware implements MiddlewareInterface
+{
+    #[Override]
+    public function process(CommandInterface $command, HandlerInterface $handler): int
+    {
+        if ($command instanceof HelpCommand) {
+            return $command->execute();
+        }
+
+        return $handler->handle($command);
+    }
+}
