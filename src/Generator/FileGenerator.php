@@ -13,7 +13,6 @@ use Override;
 use function rtrim;
 use function usort;
 use function array_reduce;
-use function array_unshift;
 
 final class FileGenerator implements FileGeneratorInterface
 {
@@ -31,7 +30,6 @@ final class FileGenerator implements FileGeneratorInterface
         $namespaces = $this->namespaces;
 
         if ($this->declareStrictTypes) {
-//            array_unshift($namespaces, new DeclareStrictTypesGenerator());
             $namespaces[] = new DeclareStrictTypesGenerator();
         }
 
