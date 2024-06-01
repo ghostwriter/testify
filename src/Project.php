@@ -10,6 +10,7 @@ use Ghostwriter\Testify\Exception\PathIsEmptyException;
 use Ghostwriter\Testify\Exception\PathIsNotDirectoryException;
 use Ghostwriter\Testify\Exception\PathIsNotStringException;
 use Ghostwriter\Testify\Interface\ProjectInterface;
+use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 
 use function is_dir;
@@ -29,6 +30,14 @@ final readonly class Project implements ProjectInterface
         public bool $force = false,
     ) {}
 
+    /**
+     * @throws FailedToCreateDirectoryException
+     * @throws PathDoesNotExistException
+     * @throws PathIsEmptyException
+     * @throws PathIsNotDirectoryException
+     * @throws PathIsNotStringException
+     * @throws InvalidArgumentException
+     */
     public static function new(InputInterface $input): self
     {
         $source = $input->getArgument('source');
