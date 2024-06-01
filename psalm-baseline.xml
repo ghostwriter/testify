@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.24.0@462c80e31c34e58cc4f750c656be3927e80e550e">
+  <file src="src/CliPrinter.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function print(CommandInterface $command): string]]></code>
+    </MissingOverrideAttribute>
+  </file>
   <file src="src/Command/TestifyCommand.php">
-    <MixedArgument>
-      <code><![CDATA[$file]]></code>
-      <code><![CDATA[$testFile]]></code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code><![CDATA[$file]]></code>
-      <code><![CDATA[$testFile]]></code>
-    </MixedAssignment>
-    <MixedOperand>
-      <code><![CDATA[$file]]></code>
-      <code><![CDATA[$testFile]]></code>
-    </MixedOperand>
+    <LessSpecificReturnType>
+      <code><![CDATA[int]]></code>
+    </LessSpecificReturnType>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -235,6 +231,35 @@
       <code><![CDATA[public function generate(): string]]></code>
     </MissingOverrideAttribute>
   </file>
+  <file src="src/Handler/NotFoundHandler.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[#[Override]]]></code>
+    </MissingOverrideAttribute>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+    <UndefinedAttributeClass>
+      <code><![CDATA[Override]]></code>
+    </UndefinedAttributeClass>
+  </file>
+  <file src="src/Handler/TestifyCommandHandler.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+    <UnusedProperty>
+      <code><![CDATA[$printer]]></code>
+    </UnusedProperty>
+  </file>
+  <file src="src/Handlers.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[toArray]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Interface/CliPrinterInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[printThrowable]]></code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Interface/Generator/ClassLike/ClassGeneratorInterface.php">
     <UnusedClass>
       <code><![CDATA[ClassGeneratorInterface]]></code>
@@ -271,6 +296,35 @@
     <UnusedClass>
       <code><![CDATA[NameGeneratorInterface]]></code>
     </UnusedClass>
+  </file>
+  <file src="src/Middleware/CommandMiddleware.php">
+    <InvalidReturnType>
+      <code><![CDATA[int]]></code>
+    </InvalidReturnType>
+  </file>
+  <file src="src/Middleware/ErrorHandlerMiddleware.php">
+    <LessSpecificReturnType>
+      <code><![CDATA[bool]]></code>
+    </LessSpecificReturnType>
+    <MixedArgument>
+      <code><![CDATA[$this->printer->printException($e)]]></code>
+    </MixedArgument>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[new]]></code>
+    </PossiblyUnusedMethod>
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[printException]]></code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Middleware/TestifyCommandMiddleware.php">
+    <MissingThrowsDocblock>
+      <code><![CDATA[execute]]></code>
+    </MissingThrowsDocblock>
+  </file>
+  <file src="src/Middlewares.php">
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new RuntimeException('Middleware must implement Middleware interface');]]></code>
+    </MissingThrowsDocblock>
   </file>
   <file src="src/Normalizer/ClassConstantNameNormalizer.php">
     <PossiblyUnusedMethod>
@@ -506,22 +560,12 @@
     </UnusedProperty>
   </file>
   <file src="src/Testify.php">
-    <LessSpecificReturnType>
-      <code><![CDATA[bool]]></code>
-    </LessSpecificReturnType>
     <MissingThrowsDocblock>
       <code><![CDATA[get]]></code>
       <code><![CDATA[get]]></code>
-      <code><![CDATA[get]]></code>
-      <code><![CDATA[has]]></code>
-      <code><![CDATA[provide]]></code>
-      <code><![CDATA[provide]]></code>
-      <code><![CDATA[provide]]></code>
-      <code><![CDATA[run]]></code>
-      <code><![CDATA[throw new RuntimeException('Middleware must implement Middleware interface');]]></code>
     </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
-      <code><![CDATA[add]]></code>
+      <code><![CDATA[__construct]]></code>
       <code><![CDATA[new]]></code>
       <code><![CDATA[run]]></code>
     </PossiblyUnusedMethod>
