@@ -25,6 +25,9 @@ use const PHP_EOL;
 /** @see TestifyTest */
 final class TestifyCommand extends SingleCommandApplication
 {
+    /**
+     * @throws Throwable
+     */
     public function __construct(
         private readonly Filesystem $filesystem,
         private readonly RunnerInterface $runner,
