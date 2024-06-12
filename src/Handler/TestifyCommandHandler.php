@@ -13,7 +13,8 @@ final readonly class TestifyCommandHandler implements HandlerInterface
 {
     public function __construct(
         private CliPrinterInterface $printer
-    ) {}
+    ) {
+    }
 
     #[Override]
     public function handle(CommandInterface $command): int
