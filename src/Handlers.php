@@ -26,19 +26,9 @@ final class Handlers implements HandlerInterface
         }
     }
 
-    public static function new(HandlerInterface ...$handlers): self
-    {
-        return new self($handlers);
-    }
-
     public function add(HandlerInterface ...$handlers): void
     {
         $this->handlers = [...$this->handlers, ...$handlers];
-    }
-
-    public function toArray(): array
-    {
-        return $this->handlers;
     }
 
     #[Override]
@@ -51,5 +41,15 @@ final class Handlers implements HandlerInterface
         }
 
         return $handler->handle($command);
+    }
+
+    public function toArray(): array
+    {
+        return $this->handlers;
+    }
+
+    public static function new(HandlerInterface ...$handlers): self
+    {
+        return new self($handlers);
     }
 }
