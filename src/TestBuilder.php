@@ -26,7 +26,8 @@ final readonly class TestBuilder implements BuilderInterface
         private TestMethodsResolver $testMethodsResolver,
         private FileResolver $fileResolver,
         private ClassNameNormalizer $classNameNormalizer,
-    ) {}
+    ) {
+    }
 
     public function build(string $file, string $testFile): GeneratorInterface
     {
