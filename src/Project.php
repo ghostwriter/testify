@@ -13,13 +13,13 @@ use Ghostwriter\Testify\Interface\ProjectInterface;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 
+use const DIRECTORY_SEPARATOR;
+
 use function is_dir;
 use function is_string;
 use function mkdir;
 use function realpath;
 use function trim;
-
-use const DIRECTORY_SEPARATOR;
 
 final readonly class Project implements ProjectInterface
 {
@@ -28,7 +28,8 @@ final readonly class Project implements ProjectInterface
         public string $tests,
         public bool $dryRun = false,
         public bool $force = false,
-    ) {}
+    ) {
+    }
 
     /**
      * @throws FailedToCreateDirectoryException
