@@ -15,7 +15,8 @@ final readonly class FileResolver
 {
     public function __construct(
         private TestNamespaceResolver $testNamespaceResolver,
-    ) {}
+    ) {
+    }
 
     /**
      * @param list<PhpToken> $tokens
