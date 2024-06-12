@@ -43,25 +43,37 @@ trait ClassLikeGeneratorTrait
         private readonly bool $isAbstract = false,
         private readonly bool $isFinal = false,
         private readonly bool $isReadonly = false,
-    ) {}
-
-    #[Override]
-    final public function compare(ClassLikeGeneratorInterface $other): int
-    {
-        return $this->name() <=> $other->name();
+    ) {
     }
 
     #[Override]
-    final public function name(): string
+    final public function addAttribute(AttributeGeneratorInterface $attribute): void
     {
-        return $this->name;
+        $this->attributes[$attribute->name()] = $attribute;
     }
 
-    /** @return list<UseGeneratorInterface> */
     #[Override]
-    final public function uses(): array
+    final public function addConstant(ConstantGeneratorInterface $constant): void
     {
-        return $this->uses;
+        $this->constants[$constant->name()] = $constant;
+    }
+
+    #[Override]
+    final public function addMethod(MethodGeneratorInterface $method): void
+    {
+        $this->methods[$method->name()] = $method;
+    }
+
+    #[Override]
+    final public function addProperty(PropertyGeneratorInterface $property): void
+    {
+        $this->properties[$property->name()] = $property;
+    }
+
+    #[Override]
+    final public function addTraitUse(TraitUseGeneratorInterface $traitUse): void
+    {
+        $this->traitUses[$traitUse->name()] = $traitUse;
     }
 
     #[Override]
@@ -77,17 +89,10 @@ trait ClassLikeGeneratorTrait
         return $this->attributes;
     }
 
-    /** @return list<DocBlockGeneratorInterface> */
     #[Override]
-    final public function dockBlocks(): array
+    final public function compare(ClassLikeGeneratorInterface $other): int
     {
-        return $this->dockBlocks;
-    }
-
-    #[Override]
-    final public function addAttribute(AttributeGeneratorInterface $attribute): void
-    {
-        $this->attributes[$attribute->name()] = $attribute;
+        return $this->name() <=> $other->name();
     }
 
     /** @return list<ConstantGeneratorInterface> */
@@ -97,10 +102,11 @@ trait ClassLikeGeneratorTrait
         return $this->constants;
     }
 
+    /** @return list<DocBlockGeneratorInterface> */
     #[Override]
-    final public function addConstant(ConstantGeneratorInterface $constant): void
+    final public function dockBlocks(): array
     {
-        $this->constants[$constant->name()] = $constant;
+        return $this->dockBlocks;
     }
 
     /** @return list<MethodGeneratorInterface> */
@@ -111,9 +117,9 @@ trait ClassLikeGeneratorTrait
     }
 
     #[Override]
-    final public function addMethod(MethodGeneratorInterface $method): void
+    final public function name(): string
     {
-        $this->methods[$method->name()] = $method;
+        return $this->name;
     }
 
     /** @return list<PropertyGeneratorInterface> */
@@ -123,12 +129,6 @@ trait ClassLikeGeneratorTrait
         return $this->properties;
     }
 
-    #[Override]
-    final public function addProperty(PropertyGeneratorInterface $property): void
-    {
-        $this->properties[$property->name()] = $property;
-    }
-
     /** @return list<TraitUseGeneratorInterface> */
     #[Override]
     final public function traitUses(): array
@@ -136,9 +136,10 @@ trait ClassLikeGeneratorTrait
         return $this->traitUses;
     }
 
+    /** @return list<UseGeneratorInterface> */
     #[Override]
-    final public function addTraitUse(TraitUseGeneratorInterface $traitUse): void
+    final public function uses(): array
     {
-        $this->traitUses[$traitUse->name()] = $traitUse;
+        return $this->uses;
     }
 }
