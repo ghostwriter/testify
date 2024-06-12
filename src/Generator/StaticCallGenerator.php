@@ -16,7 +16,8 @@ final readonly class StaticCallGenerator implements GeneratorInterface
         private string $class,
         private string $method,
         private array $args = [],
-    ) {}
+    ) {
+    }
 
     public function generate(): string
     {
