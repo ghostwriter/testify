@@ -14,7 +14,8 @@ final readonly class NotFoundHandler implements HandlerInterface
 {
     public function __construct(
         private CliPrinterInterface $printer
-    ) {}
+    ) {
+    }
 
     #[Override]
     public function handle(CommandInterface $command): int
