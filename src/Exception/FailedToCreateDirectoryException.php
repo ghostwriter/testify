@@ -6,4 +6,6 @@ namespace Ghostwriter\Testify\Exception;
 
 use RuntimeException;
 
-final class FailedToCreateDirectoryException extends RuntimeException {}
+final class FailedToCreateDirectoryException extends RuntimeException
+{
+}
