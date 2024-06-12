@@ -6,4 +6,6 @@ namespace Ghostwriter\Testify\Exception;
 
 use RuntimeException;
 
-final class PathIsNotStringException extends RuntimeException {}
+final class PathIsNotStringException extends RuntimeException
+{
+}
