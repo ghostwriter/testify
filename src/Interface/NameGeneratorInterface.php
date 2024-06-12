@@ -4,4 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Interface;
 
-interface NameGeneratorInterface extends GeneratorInterface {}
+interface NameGeneratorInterface extends GeneratorInterface
+{
+}
