@@ -7,11 +7,11 @@ namespace Ghostwriter\Testify\Factory;
 use Composer\InstalledVersions;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\FactoryInterface;
+use Override;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\SingleCommandApplication;
 use Throwable;
-use Override;
 
 /**
  * @implements FactoryInterface<SingleCommandApplication>
