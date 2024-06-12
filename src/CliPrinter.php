@@ -9,9 +9,9 @@ use Ghostwriter\Testify\Interface\CommandInterface;
 use Override;
 use Throwable;
 
-use function sprintf;
-
 use const PHP_EOL;
+
+use function sprintf;
 
 final readonly class CliPrinter implements CliPrinterInterface
 {
