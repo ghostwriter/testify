@@ -17,7 +17,8 @@ final readonly class AttributeGenerator implements GeneratorInterface
     public function __construct(
         public string $name,
         public array $params = [],
-    ) {}
+    ) {
+    }
 
     #[Override]
     public function generate(): string
