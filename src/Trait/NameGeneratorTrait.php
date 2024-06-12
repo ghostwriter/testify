@@ -10,7 +10,8 @@ trait NameGeneratorTrait
 {
     public function __construct(
         private readonly string $name
-    ) {}
+    ) {
+    }
 
     #[Override]
     final public function generate(): string
