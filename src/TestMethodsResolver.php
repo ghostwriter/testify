@@ -37,7 +37,8 @@ final readonly class TestMethodsResolver
     public function __construct(
         private TestMethodNameNormalizer $testMethodNameNormalizer,
         private TestDataProviderMethodNameNormalizer $testDataProviderMethodNameNormalizer
-    ) {}
+    ) {
+    }
 
     public function resolve(string $class): array
     {
