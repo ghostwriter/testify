@@ -17,9 +17,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\SingleCommandApplication;
 use Throwable;
 
-use function sprintf;
-
 use const PHP_EOL;
+
+use function sprintf;
 
 final readonly class TestifyCommand implements CommandInterface
 {
@@ -32,7 +32,8 @@ final readonly class TestifyCommand implements CommandInterface
         private RunnerInterface $runner,
         private PrinterInterface $printer,
         private TestBuilder $testBuilder,
-    ) {}
+    ) {
+    }
 
     /**
      * @throws Throwable
