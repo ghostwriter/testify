@@ -12,40 +12,40 @@ use Ghostwriter\Testify\Interface\GeneratorInterface;
 
 interface ClassLikeGeneratorInterface extends GeneratorInterface
 {
-    public function compare(self $other): int;
+    public function addAttribute(AttributeGeneratorInterface $attribute): void;
 
-    /** @return list<DocBlockGeneratorInterface> */
-    public function dockBlocks(): array;
+    public function addConstant(ConstantGeneratorInterface $constant): void;
 
-    public function name(): string;
+    public function addMethod(MethodGeneratorInterface $method): void;
 
-    /** @return list<UseGeneratorInterface> */
-    public function uses(): array;
+    public function addProperty(PropertyGeneratorInterface $property): void;
+
+    public function addTraitUse(TraitUseGeneratorInterface $traitUse): void;
 
     public function addUse(UseGeneratorInterface $use): void;
 
     /** @return list<AttributeGeneratorInterface> */
     public function attributes(): array;
 
-    public function addAttribute(AttributeGeneratorInterface $attribute): void;
+    public function compare(self $other): int;
 
     /** @return list<ConstantGeneratorInterface> */
     public function constants(): array;
 
-    public function addConstant(ConstantGeneratorInterface $constant): void;
+    /** @return list<DocBlockGeneratorInterface> */
+    public function dockBlocks(): array;
 
     /** @return list<MethodGeneratorInterface> */
     public function methods(): array;
 
-    public function addMethod(MethodGeneratorInterface $method): void;
+    public function name(): string;
 
     /** @return list<PropertyGeneratorInterface> */
     public function properties(): array;
 
-    public function addProperty(PropertyGeneratorInterface $property): void;
-
     /** @return list<TraitUseGeneratorInterface> */
     public function traitUses(): array;
 
-    public function addTraitUse(TraitUseGeneratorInterface $traitUse): void;
+    /** @return list<UseGeneratorInterface> */
+    public function uses(): array;
 }
