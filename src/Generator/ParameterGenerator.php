@@ -19,7 +19,8 @@ final class ParameterGenerator implements GeneratorInterface
         private ?string $defaultValue = null,
         private array $attributes = [],
         private array $uses = [],
-    ) {}
+    ) {
+    }
 
     #[Override]
     public function generate(): string
