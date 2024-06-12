@@ -26,7 +26,15 @@ final readonly class PropertyGenerator implements PropertyGeneratorInterface
         private bool $isReadonly = false,
         private array $attributes = [],
         private array $uses = [],
-    ) {}
+    ) {
+    }
+
+    /** @return array<class-string<AttributeGeneratorInterface>> */
+    #[Override]
+    public function attributes(): array
+    {
+        return $this->attributes;
+    }
 
     #[Override]
     public function compare(ClassLikeMemberGeneratorInterface $other): int
@@ -72,13 +80,6 @@ final readonly class PropertyGenerator implements PropertyGeneratorInterface
     public function name(): string
     {
         return $this->name;
-    }
-
-    /** @return array<class-string<AttributeGeneratorInterface>> */
-    #[Override]
-    public function attributes(): array
-    {
-        return $this->attributes;
     }
 
     /** @return array<class-string<UseGeneratorInterface>> */
