@@ -30,11 +30,6 @@ final class Middlewares implements MiddlewareInterface
         }
     }
 
-    public static function new(MiddlewareInterface ...$middlewares): self
-    {
-        return new self($middlewares);
-    }
-
     public function add(MiddlewareInterface ...$middlewares): void
     {
         $this->middlewares = [...$this->middlewares, ...$middlewares];
@@ -57,5 +52,10 @@ final class Middlewares implements MiddlewareInterface
         }
 
         return $middleware->process($command, $handler);
+    }
+
+    public static function new(MiddlewareInterface ...$middlewares): self
+    {
+        return new self($middlewares);
     }
 }
