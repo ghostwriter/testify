@@ -6,11 +6,11 @@ namespace Ghostwriter\Testify\Console;
 
 use Ghostwriter\Testify\Testify;
 
+use const STDERR;
+
 use function file_exists;
 use function fwrite;
 use function sprintf;
-
-use const STDERR;
 
 /** @var ?string $_composer_autoload_path */
 (static function (string $composerAutoloadPath): never {
