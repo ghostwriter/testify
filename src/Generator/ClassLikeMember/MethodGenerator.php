@@ -32,7 +32,15 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
         private bool $isProtected = false,
         private bool $isPrivate = false,
         private bool $isAnonymous = false,
-    ) {}
+    ) {
+    }
+
+    /** @return array<class-string<AttributeGeneratorInterface>> */
+    #[Override]
+    public function attributes(): array
+    {
+        return $this->attributes;
+    }
 
     #[Override]
     public function compare(ClassLikeMemberGeneratorInterface $right): int
@@ -117,12 +125,5 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
         }
 
         return $uses;
-    }
-
-    /** @return array<class-string<AttributeGeneratorInterface>> */
-    #[Override]
-    public function attributes(): array
-    {
-        return $this->attributes;
     }
 }
