@@ -13,7 +13,8 @@ final readonly class TestMethodGenerator
     public function __construct(
         private BuilderFactory $builderFactory,
         private TestMethodNameNormalizer $testMethodNameNormalizer,
-    ) {}
+    ) {
+    }
 
     public function __invoke(
         string $className,
