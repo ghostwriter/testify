@@ -18,7 +18,8 @@ final readonly class TestDataProviderGenerator implements GeneratorInterface
     public function __construct(
         private string $name,
         private array $parameters
-    ) {}
+    ) {
+    }
 
     #[Override]
     public function generate(): string
