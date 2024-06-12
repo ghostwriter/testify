@@ -12,7 +12,8 @@ final readonly class ClassNameNormalizer implements NormalizerInterface
 {
     public function __construct(
         private CaseConverter $caseConverter,
-    ) {}
+    ) {
+    }
 
     #[Override]
     public function normalize(string $name): string
