@@ -6,4 +6,6 @@ namespace Ghostwriter\Testify\Exception;
 
 use RuntimeException;
 
-final class StubNotAFileException extends RuntimeException {}
+final class StubNotAFileException extends RuntimeException
+{
+}
