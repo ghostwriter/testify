@@ -36,11 +36,10 @@
         "ghostwriter/case-converter": "^1.0.0",
         "ghostwriter/container": "^3.0.3",
         "ghostwriter/event-dispatcher": "^5.0.0",
-        "symfony/console": "^6.4.7 || ^7.1.0"
+        "symfony/console": "^6.4.7 || ^7.1.1"
     },
     "require-dev": {
-        "ghostwriter/coding-standard": "dev-main",
-        "ghostwriter/psalm-plugin": "^0.2 || ^1.0"
+        "ghostwriter/coding-standard": "dev-main"
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
