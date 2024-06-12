@@ -20,15 +20,11 @@ use function set_error_handler;
 
 final readonly class ErrorHandlerMiddleware implements MiddlewareInterface
 {
-    public static function new(): self
-    {
-        return new self(new ExceptionHandler(new CliPrinter()), new CliPrinter());
-    }
-
     public function __construct(
         private ExceptionHandler $handler,
         private CliPrinterInterface $printer
-    ) {}
+    ) {
+    }
 
     /**
      * @throws Throwable
@@ -55,5 +51,10 @@ final readonly class ErrorHandlerMiddleware implements MiddlewareInterface
         }
 
         return $exitCode;
+    }
+
+    public static function new(): self
+    {
+        return new self(new ExceptionHandler(new CliPrinter()), new CliPrinter());
     }
 }
