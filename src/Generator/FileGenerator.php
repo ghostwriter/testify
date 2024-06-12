@@ -10,9 +10,9 @@ use Ghostwriter\Testify\Interface\Generator\NamespaceGeneratorInterface;
 use Ghostwriter\Testify\Interface\GeneratorInterface;
 use Override;
 
+use function array_reduce;
 use function rtrim;
 use function usort;
-use function array_reduce;
 
 final class FileGenerator implements FileGeneratorInterface
 {
@@ -22,7 +22,8 @@ final class FileGenerator implements FileGeneratorInterface
     public function __construct(
         private readonly array $namespaces,
         private readonly bool $declareStrictTypes,
-    ) {}
+    ) {
+    }
 
     #[Override]
     public function generate(): string
