@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Command;
 
+use Ghostwriter\Container\Attribute\Factory;
+use Ghostwriter\Container\Attribute\Inject;
+use Ghostwriter\Testify\Factory\SingleCommandApplicationFactory;
 use Ghostwriter\Testify\Filesystem;
 use Ghostwriter\Testify\Interface\CommandInterface;
 use Ghostwriter\Testify\Interface\PrinterInterface;
 use Ghostwriter\Testify\Interface\RunnerInterface;
+use Ghostwriter\Testify\Printer;
 use Ghostwriter\Testify\Project;
+use Ghostwriter\Testify\Runner;
 use Ghostwriter\Testify\TestBuilder;
 use Override;
 use Symfony\Component\Console\Command\Command;
@@ -27,9 +32,12 @@ final readonly class TestifyCommand implements CommandInterface
      * @throws Throwable
      */
     public function __construct(
+        #[Factory(SingleCommandApplicationFactory::class)]
         private SingleCommandApplication $application,
         private Filesystem $filesystem,
+        #[Inject(Runner::class)]
         private RunnerInterface $runner,
+        #[Inject(Printer::class)]
         private PrinterInterface $printer,
         private TestBuilder $testBuilder,
     ) {
