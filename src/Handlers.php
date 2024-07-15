@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify;
 
+use Ghostwriter\Container\Attribute\Factory;
+use Ghostwriter\Testify\Factory\HandlersFactory;
 use Ghostwriter\Testify\Interface\CommandInterface;
 use Ghostwriter\Testify\Interface\HandlerInterface;
 use Override;
@@ -11,6 +13,7 @@ use RuntimeException;
 
 use function array_shift;
 
+#[Factory(HandlersFactory::class)]
 final class Handlers implements HandlerInterface
 {
     /**
