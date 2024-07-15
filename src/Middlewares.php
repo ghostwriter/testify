@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify;
 
+use Ghostwriter\Container\Attribute\Factory;
+use Ghostwriter\Testify\Factory\MiddlewaresFactory;
 use Ghostwriter\Testify\Interface\CommandInterface;
 use Ghostwriter\Testify\Interface\HandlerInterface;
 use Ghostwriter\Testify\Interface\MiddlewareInterface;
@@ -13,6 +15,7 @@ use Throwable;
 
 use function array_shift;
 
+#[Factory(MiddlewaresFactory::class)]
 final class Middlewares implements MiddlewareInterface
 {
     /**
@@ -54,6 +57,9 @@ final class Middlewares implements MiddlewareInterface
         return $middleware->process($command, $handler);
     }
 
+    /**
+     * @throws Throwable
+     */
     public static function new(MiddlewareInterface ...$middlewares): self
     {
         return new self($middlewares);
