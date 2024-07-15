@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.24.0@462c80e31c34e58cc4f750c656be3927e80e550e">
+<files psalm-version="5.25.0@01a8eb06b9e9cc6cfb6a320bf9fb14331919d505">
   <file src="src/Command/TestifyCommand.php">
     <LessSpecificReturnType>
       <code><![CDATA[int]]></code>
@@ -207,23 +207,14 @@
     </UnusedParam>
   </file>
   <file src="src/Handler/NotFoundHandler.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[#[Override]]]></code>
-    </MissingOverrideAttribute>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
-    <UndefinedAttributeClass>
-      <code><![CDATA[Override]]></code>
-    </UndefinedAttributeClass>
   </file>
   <file src="src/Handler/TestifyCommandHandler.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
-    <UnusedProperty>
-      <code><![CDATA[$printer]]></code>
-    </UnusedProperty>
   </file>
   <file src="src/Handlers.php">
     <PossiblyUnusedMethod>
@@ -286,11 +277,6 @@
       <code><![CDATA[printException]]></code>
     </UndefinedInterfaceMethod>
   </file>
-  <file src="src/Middlewares.php">
-    <MissingThrowsDocblock>
-      <code><![CDATA[new self($middlewares)]]></code>
-    </MissingThrowsDocblock>
-  </file>
   <file src="src/Normalizer/ClassConstantNameNormalizer.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
@@ -348,11 +334,6 @@
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
-  </file>
-  <file src="src/ServiceProvider.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function __invoke(ContainerInterface $container): void]]></code>
-    </MissingOverrideAttribute>
   </file>
   <file src="src/TestBuilder.php">
     <ArgumentTypeCoercion>
