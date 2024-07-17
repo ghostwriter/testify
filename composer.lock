@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f4c902b245a5e170b752629adf4b9394",
+    "content-hash": "73e8d75bd30f47a09ce622c6d800a7d6",
     "packages": [
         {
             "name": "ghostwriter/case-converter",
@@ -141,20 +141,20 @@
         },
         {
             "name": "ghostwriter/event-dispatcher",
-            "version": "5.0.1",
+            "version": "5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/event-dispatcher.git",
-                "reference": "945fe049e8d76b647fc777f2dbe3bd4a831279fe"
+                "reference": "3fd8e9b0714298930b2a250a4c369c05c614a33a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/event-dispatcher/zipball/945fe049e8d76b647fc777f2dbe3bd4a831279fe",
-                "reference": "945fe049e8d76b647fc777f2dbe3bd4a831279fe",
+                "url": "https://api.github.com/repos/ghostwriter/event-dispatcher/zipball/3fd8e9b0714298930b2a250a4c369c05c614a33a",
+                "reference": "3fd8e9b0714298930b2a250a4c369c05c614a33a",
                 "shasum": ""
             },
             "require": {
-                "ghostwriter/container": "^4.0.0",
+                "ghostwriter/container": "^4.0.2",
                 "php": ">=8.3"
             },
             "require-dev": {
@@ -197,7 +197,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-06-21T02:09:06+00:00"
+            "time": "2024-07-15T22:32:15+00:00"
         },
         {
             "name": "psr/container",
