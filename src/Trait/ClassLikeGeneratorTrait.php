@@ -47,39 +47,39 @@ trait ClassLikeGeneratorTrait
     }
 
     #[Override]
-    final public function addAttribute(AttributeGeneratorInterface $attribute): void
+    final public function addAttribute(AttributeGeneratorInterface $attributeGenerator): void
     {
-        $this->attributes[$attribute->name()] = $attribute;
+        $this->attributes[$attributeGenerator->name()] = $attributeGenerator;
     }
 
     #[Override]
-    final public function addConstant(ConstantGeneratorInterface $constant): void
+    final public function addConstant(ConstantGeneratorInterface $constantGenerator): void
     {
-        $this->constants[$constant->name()] = $constant;
+        $this->constants[$constantGenerator->name()] = $constantGenerator;
     }
 
     #[Override]
-    final public function addMethod(MethodGeneratorInterface $method): void
+    final public function addMethod(MethodGeneratorInterface $methodGenerator): void
     {
-        $this->methods[$method->name()] = $method;
+        $this->methods[$methodGenerator->name()] = $methodGenerator;
     }
 
     #[Override]
-    final public function addProperty(PropertyGeneratorInterface $property): void
+    final public function addProperty(PropertyGeneratorInterface $propertyGenerator): void
     {
-        $this->properties[$property->name()] = $property;
+        $this->properties[$propertyGenerator->name()] = $propertyGenerator;
     }
 
     #[Override]
-    final public function addTraitUse(TraitUseGeneratorInterface $traitUse): void
+    final public function addTraitUse(TraitUseGeneratorInterface $traitUseGenerator): void
     {
-        $this->traitUses[$traitUse->name()] = $traitUse;
+        $this->traitUses[$traitUseGenerator->name()] = $traitUseGenerator;
     }
 
     #[Override]
-    final public function addUse(UseGeneratorInterface $use): void
+    final public function addUse(UseGeneratorInterface $useGenerator): void
     {
-        $this->uses[$use->name()] = $use;
+        $this->uses[$useGenerator->name()] = $useGenerator;
     }
 
     /** @return list<AttributeGeneratorInterface> */
@@ -90,9 +90,9 @@ trait ClassLikeGeneratorTrait
     }
 
     #[Override]
-    final public function compare(ClassLikeGeneratorInterface $other): int
+    final public function compare(ClassLikeGeneratorInterface $classLikeGenerator): int
     {
-        return $this->name() <=> $other->name();
+        return $this->name() <=> $classLikeGenerator->name();
     }
 
     /** @return list<ConstantGeneratorInterface> */
