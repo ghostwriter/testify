@@ -18,9 +18,9 @@ final class InterfaceGenerator implements InterfaceGeneratorInterface
     use ClassLikeGeneratorTrait;
 
     #[Override]
-    public function addMethod(GeneratorInterface $method): void
+    public function addMethod(GeneratorInterface $generator): void
     {
-        $this->methods[] = $method;
+        $this->methods[] = $generator;
     }
 
     #[Override]
@@ -47,10 +47,8 @@ final class InterfaceGenerator implements InterfaceGeneratorInterface
             $code .= $constant->generate() . self::NEWLINES;
         }
 
-        $methods = array_reduce($this->methods, static function (array $methods, GeneratorInterface $method): array {
-            if ($method instanceof MethodGeneratorInterface) {
-                $methods[] = $method;
-            }
+        $methods = array_reduce($this->methods, static function (array $methods, GeneratorInterface $generator): array {
+            $methods[] = $generator;
 
             return $methods;
         }, []);
