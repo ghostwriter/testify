@@ -11,6 +11,7 @@ use Ghostwriter\Testify\Generator\Name\ClassNameGenerator;
 use Ghostwriter\Testify\Interface\BuilderInterface;
 use Ghostwriter\Testify\Interface\GeneratorInterface;
 use Ghostwriter\Testify\Normalizer\ClassNameNormalizer;
+use Override;
 use PhpToken;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
@@ -29,6 +30,7 @@ final readonly class TestBuilder implements BuilderInterface
     ) {
     }
 
+    #[Override]
     public function build(string $file, string $testFile): GeneratorInterface
     {
         $code = file_get_contents($file);
