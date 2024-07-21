@@ -29,9 +29,9 @@ final class Handlers implements HandlerInterface
         }
     }
 
-    public function add(HandlerInterface ...$handlers): void
+    public function add(HandlerInterface ...$handler): void
     {
-        $this->handlers = [...$this->handlers, ...$handlers];
+        $this->handlers = [...$this->handlers, ...$handler];
     }
 
     #[Override]
@@ -51,8 +51,8 @@ final class Handlers implements HandlerInterface
         return $this->handlers;
     }
 
-    public static function new(HandlerInterface ...$handlers): self
+    public static function new(HandlerInterface ...$handler): self
     {
-        return new self($handlers);
+        return new self($handler);
     }
 }
