@@ -63,7 +63,7 @@ final readonly class Testify implements CommandBusInterface, HandlerInterface, M
     /**
      * @throws Throwable
      */
-    public static function new(MiddlewareInterface ...$middlewares): self
+    public static function new(MiddlewareInterface ...$middleware): self
     {
         $container = Container::getInstance();
 
@@ -71,6 +71,6 @@ final readonly class Testify implements CommandBusInterface, HandlerInterface, M
             $container->provide(ServiceProvider::class);
         }
 
-        return $container->build(self::class, $middlewares);
+        return $container->build(self::class, $middleware);
     }
 }
