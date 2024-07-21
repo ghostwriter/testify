@@ -14,14 +14,14 @@ use function array_reduce;
 use function rtrim;
 use function usort;
 
-final class FileGenerator implements FileGeneratorInterface
+final readonly class FileGenerator implements FileGeneratorInterface
 {
     /**
      * @param array<class-string<GeneratorInterface>,DeclareStrictTypesGeneratorInterface|NamespaceGeneratorInterface> $namespaces
      */
     public function __construct(
-        private readonly array $namespaces,
-        private readonly bool $declareStrictTypes,
+        private array $namespaces,
+        private bool $declareStrictTypes,
     ) {
     }
 
@@ -36,19 +36,17 @@ final class FileGenerator implements FileGeneratorInterface
 
         usort(
             $namespaces,
-            static function (GeneratorInterface $left, GeneratorInterface $right) {
-                return match (true) {
-                    $left instanceof NamespaceGeneratorInterface => match (true) {
-                        $right instanceof NamespaceGeneratorInterface => $left->name() <=> $right->name(),
-                        $right instanceof DeclareStrictTypesGeneratorInterface => self::ORDER_AFTER,
-                        default => self::ORDER_SAME,
-                    },
-                    $left instanceof DeclareStrictTypesGeneratorInterface => match (true) {
-                        $right instanceof NamespaceGeneratorInterface => self::ORDER_BEFORE,
-                        default => self::ORDER_SAME,
-                    },
+            static fn (GeneratorInterface $left, GeneratorInterface $right): int => match (true) {
+                $left instanceof NamespaceGeneratorInterface => match (true) {
+                    $right instanceof NamespaceGeneratorInterface => $left->name() <=> $right->name(),
+                    $right instanceof DeclareStrictTypesGeneratorInterface => self::ORDER_AFTER,
                     default => self::ORDER_SAME,
-                };
+                },
+                $left instanceof DeclareStrictTypesGeneratorInterface => match (true) {
+                    $right instanceof NamespaceGeneratorInterface => self::ORDER_BEFORE,
+                    default => self::ORDER_SAME,
+                },
+                default => self::ORDER_SAME,
             }
         );
 
