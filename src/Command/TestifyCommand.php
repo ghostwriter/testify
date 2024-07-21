@@ -33,7 +33,7 @@ final readonly class TestifyCommand implements CommandInterface
      */
     public function __construct(
         #[Factory(SingleCommandApplicationFactory::class)]
-        private SingleCommandApplication $application,
+        private SingleCommandApplication $singleCommandApplication,
         private Filesystem $filesystem,
         #[Inject(Runner::class)]
         private RunnerInterface $runner,
@@ -49,7 +49,7 @@ final readonly class TestifyCommand implements CommandInterface
     #[Override]
     public function execute(): int
     {
-        return $this->application->setCode(
+        return $this->singleCommandApplication->setCode(
             function (InputInterface $input, OutputInterface $output): int {
                 $output->writeln(
                     sprintf(
@@ -62,13 +62,13 @@ final readonly class TestifyCommand implements CommandInterface
 
                 try {
                     $project = Project::new($input);
-                } catch (Throwable $exception) {
+                } catch (Throwable $throwable) {
                     $output->writeln(
                         sprintf(
                             '<error>%s: %s</error>' . PHP_EOL . PHP_EOL . '%s',
-                            $exception::class,
-                            $exception->getMessage(),
-                            $exception->getTraceAsString()
+                            $throwable::class,
+                            $throwable->getMessage(),
+                            $throwable->getTraceAsString()
                         )
                     );
 
