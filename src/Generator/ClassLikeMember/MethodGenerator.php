@@ -43,9 +43,9 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
     }
 
     #[Override]
-    public function compare(ClassLikeMemberGeneratorInterface $right): int
+    public function compare(ClassLikeMemberGeneratorInterface $classLikeMemberGenerator): int
     {
-        return $this->name <=> $right->name();
+        return $this->name <=> $classLikeMemberGenerator->name();
     }
 
     #[Override]
@@ -116,6 +116,7 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
         return $this->name;
     }
 
+    #[Override]
     public function uses(): array
     {
         $uses = $this->uses;
