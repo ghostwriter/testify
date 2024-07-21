@@ -7,7 +7,7 @@ namespace Ghostwriter\Testify\Generator;
 use Ghostwriter\Testify\Interface\GeneratorInterface;
 use Override;
 
-final class ParameterGenerator implements GeneratorInterface
+final readonly class ParameterGenerator implements GeneratorInterface
 {
     public function __construct(
         private string $name,
@@ -41,9 +41,9 @@ final class ParameterGenerator implements GeneratorInterface
 
         $parameter .= '$' . $this->name;
 
-        //        if ($this->isDefaultValueAvailable) {
-        //            $parameter .= ' = ' . $this->defaultValue;
-        //        }
+        if ($this->isDefaultValueAvailable) {
+            $parameter .= ' = ' . $this->defaultValue;
+        }
 
         return $parameter;
     }
