@@ -37,7 +37,7 @@ final readonly class PropertyGenerator implements PropertyGeneratorInterface
     }
 
     #[Override]
-    public function compare(ClassLikeMemberGeneratorInterface $other): int
+    public function compare(ClassLikeMemberGeneratorInterface $classLikeMemberGenerator): int
     {
         return $this->name <=> $right->name();
     }
