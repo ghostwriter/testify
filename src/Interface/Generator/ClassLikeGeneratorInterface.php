@@ -12,17 +12,17 @@ use Ghostwriter\Testify\Interface\GeneratorInterface;
 
 interface ClassLikeGeneratorInterface extends GeneratorInterface
 {
-    public function addAttribute(AttributeGeneratorInterface $attribute): void;
+    public function addAttribute(AttributeGeneratorInterface $attributeGenerator): void;
 
-    public function addConstant(ConstantGeneratorInterface $constant): void;
+    public function addConstant(ConstantGeneratorInterface $constantGenerator): void;
 
-    public function addMethod(MethodGeneratorInterface $method): void;
+    public function addMethod(MethodGeneratorInterface $methodGenerator): void;
 
-    public function addProperty(PropertyGeneratorInterface $property): void;
+    public function addProperty(PropertyGeneratorInterface $propertyGenerator): void;
 
-    public function addTraitUse(TraitUseGeneratorInterface $traitUse): void;
+    public function addTraitUse(TraitUseGeneratorInterface $traitUseGenerator): void;
 
-    public function addUse(UseGeneratorInterface $use): void;
+    public function addUse(UseGeneratorInterface $useGenerator): void;
 
     /** @return list<AttributeGeneratorInterface> */
     public function attributes(): array;
