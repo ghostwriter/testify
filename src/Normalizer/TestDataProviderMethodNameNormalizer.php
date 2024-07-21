@@ -12,13 +12,13 @@ final readonly class TestDataProviderMethodNameNormalizer implements NormalizerI
 {
     public function __construct(
         private TestDataProviderMethodNameFormatter $testDataProviderMethodNameFormatter,
-        private ClassMethodNameNormalizer $classMethodNormalizer,
+        private ClassMethodNameNormalizer $classMethodNameNormalizer,
     ) {
     }
 
     #[Override]
     public function normalize(string $name): string
     {
-        return $this->classMethodNormalizer->normalize($this->testDataProviderMethodNameFormatter->format($name));
+        return $this->classMethodNameNormalizer->normalize($this->testDataProviderMethodNameFormatter->format($name));
     }
 }
