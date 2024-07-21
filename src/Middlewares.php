@@ -33,9 +33,9 @@ final class Middlewares implements MiddlewareInterface
         }
     }
 
-    public function add(MiddlewareInterface ...$middlewares): void
+    public function add(MiddlewareInterface ...$middleware): void
     {
-        $this->middlewares = [...$this->middlewares, ...$middlewares];
+        $this->middlewares = [...$this->middlewares, ...$middleware];
     }
 
     /**
@@ -60,8 +60,8 @@ final class Middlewares implements MiddlewareInterface
     /**
      * @throws Throwable
      */
-    public static function new(MiddlewareInterface ...$middlewares): self
+    public static function new(MiddlewareInterface ...$middleware): self
     {
-        return new self($middlewares);
+        return new self($middleware);
     }
 }
