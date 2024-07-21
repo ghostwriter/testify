@@ -68,39 +68,39 @@ final readonly class TestMethodsResolver
 
             $uses = [];
             $parameters = array_map(
-                static function (ReflectionParameter $parameter) use ($uses): ParameterGenerator {
-                    $parameterType = $parameter->getType()?->__toString() ?? 'mixed';
+                static function (ReflectionParameter $reflectionParameter) use ($uses): ParameterGenerator {
+                    $parameterType = $reflectionParameter->getType()?->__toString() ?? 'mixed';
 
                     $parameterTypes = explode('|', $parameterType);
                     $types = [];
-                    foreach ($parameterTypes as $type) {
-                        if (str_starts_with($type, '?')) {
-                            $type = ltrim($type, '?');
+                    foreach ($parameterTypes as $parameterType) {
+                        if (str_starts_with($parameterType, '?')) {
+                            $parameterType = ltrim($parameterType, '?');
                         }
 
-                        if (str_contains($type, '\\')) {
+                        if (str_contains($parameterType, '\\')) {
                             if (
-                                class_exists($type)
-                                || interface_exists($type)
-                                || trait_exists($type)
-                                || enum_exists($type)
+                                class_exists($parameterType)
+                                || interface_exists($parameterType)
+                                || trait_exists($parameterType)
+                                || enum_exists($parameterType)
                             ) {
-                                $uses[$type] = new UseClassGenerator($type);
+                                $uses[$parameterType] = new UseClassGenerator($parameterType);
                             }
 
-                            $type = mb_substr($type, mb_strrpos($type, '\\') + 1);
+                            $parameterType = mb_substr($parameterType, mb_strrpos($parameterType, '\\') + 1);
                         }
 
-                        $types[] = $type;
+                        $types[] = $parameterType;
                     }
 
                     return new ParameterGenerator(
-                        name: $parameter->getName(),
+                        name: $reflectionParameter->getName(),
                         type: implode('|', $types),
-                        isOptional: $parameter->isOptional(),
-                        isVariadic: $parameter->isVariadic(),
-                        isPassedByReference: $parameter->isPassedByReference(),
-                        isDefaultValueAvailable: $parameter->isDefaultValueAvailable(),
+                        isOptional: $reflectionParameter->isOptional(),
+                        isVariadic: $reflectionParameter->isVariadic(),
+                        isPassedByReference: $reflectionParameter->isPassedByReference(),
+                        isDefaultValueAvailable: $reflectionParameter->isDefaultValueAvailable(),
                         uses: $uses,
                     );
                 },
@@ -145,6 +145,7 @@ final readonly class TestMethodsResolver
                 $method->isPrivate()
             );
         }
+
         return $methods;
     }
 }
