@@ -25,12 +25,12 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
     {
         $code = '';
 
-        foreach ($this->dockBlocks() as $dockBlock) {
-            $code .= $dockBlock->generate() . self::NEWLINE;
+        foreach ($this->dockBlocks() as $docBlockGenerator) {
+            $code .= $docBlockGenerator->generate() . self::NEWLINE;
         }
 
-        foreach ($this->attributes() as $attribute) {
-            $code .= $attribute->generate() . self::NEWLINE;
+        foreach ($this->attributes() as $attributeGenerator) {
+            $code .= $attributeGenerator->generate() . self::NEWLINE;
         }
 
         if ($this->isFinal) {
@@ -60,8 +60,8 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
         if ($this->implements !== []) {
             $code .= ' implements ';
 
-            foreach ($this->implements as $interface) {
-                $code .= $interface->generate() . ', ';
+            foreach ($this->implements as $implement) {
+                $code .= $implement->generate() . ', ';
             }
 
             $code = rtrim($code, ', ');
@@ -126,26 +126,26 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
             $this->methods(),
             static fn (
                 string $code,
-                MethodGeneratorInterface $method
-            ): string => $code . $method->generate() . self::NEWLINE,
+                MethodGeneratorInterface $methodGenerator
+            ): string => $code . $methodGenerator->generate() . self::NEWLINE,
             array_reduce(
                 $this->properties(),
                 static fn (
                     string $code,
-                    PropertyGeneratorInterface $property
-                ): string => $code . $property->generate() . self::NEWLINE,
+                    PropertyGeneratorInterface $propertyGenerator
+                ): string => $code . $propertyGenerator->generate() . self::NEWLINE,
                 array_reduce(
                     $this->constants(),
                     static fn (
                         string $code,
-                        ConstantGeneratorInterface $constant
-                    ): string => $code . $constant->generate() . self::NEWLINE,
+                        ConstantGeneratorInterface $constantGenerator
+                    ): string => $code . $constantGenerator->generate() . self::NEWLINE,
                     array_reduce(
                         $this->traitUses(),
                         static fn (
                             string $code,
-                            TraitUseGeneratorInterface $traitUse
-                        ): string => $code . $traitUse->generate() . self::NEWLINE,
+                            TraitUseGeneratorInterface $traitUseGenerator
+                        ): string => $code . $traitUseGenerator->generate() . self::NEWLINE,
                         'trait ' . $this->name . ' {' . self::NEWLINES
                     )
                 )
