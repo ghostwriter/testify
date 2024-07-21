@@ -18,9 +18,9 @@ final class TraitGenerator implements TraitGeneratorInterface
     use ClassLikeGeneratorTrait;
 
     #[Override]
-    public function compare(ClassLikeGeneratorInterface $other): int
+    public function compare(ClassLikeGeneratorInterface $classLikeGenerator): int
     {
-        return $this->name() <=> $other->name();
+        return $this->name() <=> $classLikeGenerator->name();
     }
 
     #[Override]
