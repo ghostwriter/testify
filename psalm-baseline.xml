@@ -35,17 +35,25 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Generator/ClassLike/InterfaceGenerator.php">
+    <LessSpecificReturnType>
+      <code><![CDATA[array]]></code>
+    </LessSpecificReturnType>
+    <ParamNameMismatch>
+      <code><![CDATA[$generator]]></code>
+    </ParamNameMismatch>
     <PropertyTypeCoercion>
       <code><![CDATA[$this->methods]]></code>
     </PropertyTypeCoercion>
+  </file>
+  <file src="src/Generator/ClassLike/TraitGenerator.php">
+    <ParamNameMismatch>
+      <code><![CDATA[$classLikeGenerator]]></code>
+    </ParamNameMismatch>
   </file>
   <file src="src/Generator/ClassLikeMember/MethodGenerator.php">
     <InvalidMethodCall>
       <code><![CDATA[generate]]></code>
     </InvalidMethodCall>
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function uses(): array]]></code>
-    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$parameter->uses()]]></code>
     </MixedArgument>
@@ -68,7 +76,7 @@
       <code><![CDATA[array]]></code>
     </MixedReturnTypeCoercion>
     <ParamNameMismatch>
-      <code><![CDATA[$right]]></code>
+      <code><![CDATA[$classLikeMemberGenerator]]></code>
     </ParamNameMismatch>
     <RedundantCondition>
       <code><![CDATA[$this->returnType !== null]]></code>
@@ -81,6 +89,9 @@
     <MixedOperand>
       <code><![CDATA[$this->value]]></code>
     </MixedOperand>
+    <ParamNameMismatch>
+      <code><![CDATA[$classLikeMemberGenerator]]></code>
+    </ParamNameMismatch>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -90,6 +101,7 @@
   </file>
   <file src="src/Generator/FileGenerator.php">
     <LessSpecificReturnType>
+      <code><![CDATA[int]]></code>
       <code><![CDATA[string]]></code>
     </LessSpecificReturnType>
   </file>
@@ -140,7 +152,7 @@
     <MixedReturnStatement>
       <code><![CDATA[array_reduce(
             $classLikes,
-            static fn (string $code, ClassLikeGeneratorInterface $class): string => $code . $class->generate() . self::NEWLINES,
+            static fn (string $code, ClassLikeGeneratorInterface $classLikeGenerator): string => $code . $classLikeGenerator->generate() . self::NEWLINES,
             $code
         )]]></code>
     </MixedReturnStatement>
@@ -164,27 +176,28 @@
     </UnusedVariable>
   </file>
   <file src="src/Generator/ParameterGenerator.php">
+    <PossiblyNullOperand>
+      <code><![CDATA[$this->defaultValue]]></code>
+    </PossiblyNullOperand>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
       <code><![CDATA[uses]]></code>
     </PossiblyUnusedMethod>
     <UnusedProperty>
       <code><![CDATA[$attributes]]></code>
-      <code><![CDATA[$defaultValue]]></code>
-      <code><![CDATA[$isDefaultValueAvailable]]></code>
       <code><![CDATA[$isOptional]]></code>
     </UnusedProperty>
   </file>
   <file src="src/Generator/StaticCallGenerator.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function generate(): string]]></code>
-    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$arg]]></code>
     </MixedArgument>
     <MixedAssignment>
       <code><![CDATA[$arg]]></code>
     </MixedAssignment>
+    <MixedOperand>
+      <code><![CDATA[$arg]]></code>
+    </MixedOperand>
   </file>
   <file src="src/Generator/TestDataProviderGenerator.php">
     <PossiblyUnusedMethod>
@@ -268,7 +281,7 @@
       <code><![CDATA[bool]]></code>
     </LessSpecificReturnType>
     <MixedArgument>
-      <code><![CDATA[$this->printer->printException($e)]]></code>
+      <code><![CDATA[$this->cliPrinter->printException($throwable)]]></code>
     </MixedArgument>
     <PossiblyUnusedMethod>
       <code><![CDATA[new]]></code>
@@ -314,9 +327,6 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="src/Runner.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function run(ProjectInterface $project): Generator]]></code>
-    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$sourceDirectory]]></code>
     </MixedArgument>
@@ -345,9 +355,6 @@
     <InvalidOperand>
       <code><![CDATA[$namespace]]></code>
     </InvalidOperand>
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function build(string $file, string $testFile): GeneratorInterface]]></code>
-    </MissingOverrideAttribute>
     <MissingThrowsDocblock>
       <code><![CDATA[throw new RuntimeException('Could not read file: ' . $file);]]></code>
     </MissingThrowsDocblock>
@@ -393,39 +400,39 @@
 
             $uses = [];
             $parameters = array_map(
-                static function (ReflectionParameter $parameter) use ($uses): ParameterGenerator {
-                    $parameterType = $parameter->getType()?->__toString() ?? 'mixed';
+                static function (ReflectionParameter $reflectionParameter) use ($uses): ParameterGenerator {
+                    $parameterType = $reflectionParameter->getType()?->__toString() ?? 'mixed';
 
                     $parameterTypes = explode('|', $parameterType);
                     $types = [];
-                    foreach ($parameterTypes as $type) {
-                        if (str_starts_with($type, '?')) {
-                            $type = ltrim($type, '?');
+                    foreach ($parameterTypes as $parameterType) {
+                        if (str_starts_with($parameterType, '?')) {
+                            $parameterType = ltrim($parameterType, '?');
                         }
 
-                        if (str_contains($type, '\\')) {
+                        if (str_contains($parameterType, '\\')) {
                             if (
-                                class_exists($type)
-                                || interface_exists($type)
-                                || trait_exists($type)
-                                || enum_exists($type)
+                                class_exists($parameterType)
+                                || interface_exists($parameterType)
+                                || trait_exists($parameterType)
+                                || enum_exists($parameterType)
                             ) {
-                                $uses[$type] = new UseClassGenerator($type);
+                                $uses[$parameterType] = new UseClassGenerator($parameterType);
                             }
 
-                            $type = mb_substr($type, mb_strrpos($type, '\\') + 1);
+                            $parameterType = mb_substr($parameterType, mb_strrpos($parameterType, '\\') + 1);
                         }
 
-                        $types[] = $type;
+                        $types[] = $parameterType;
                     }
 
                     return new ParameterGenerator(
-                        name: $parameter->getName(),
+                        name: $reflectionParameter->getName(),
                         type: implode('|', $types),
-                        isOptional: $parameter->isOptional(),
-                        isVariadic: $parameter->isVariadic(),
-                        isPassedByReference: $parameter->isPassedByReference(),
-                        isDefaultValueAvailable: $parameter->isDefaultValueAvailable(),
+                        isOptional: $reflectionParameter->isOptional(),
+                        isVariadic: $reflectionParameter->isVariadic(),
+                        isPassedByReference: $reflectionParameter->isPassedByReference(),
+                        isDefaultValueAvailable: $reflectionParameter->isDefaultValueAvailable(),
                         uses: $uses,
                     );
                 },
@@ -491,6 +498,9 @@
     <InvalidReturnType>
       <code><![CDATA[list<DocBlockGeneratorInterface>]]></code>
     </InvalidReturnType>
+    <ParamNameMismatch>
+      <code><![CDATA[$classLikeGenerator]]></code>
+    </ParamNameMismatch>
     <PropertyTypeCoercion>
       <code><![CDATA[$this->attributes]]></code>
       <code><![CDATA[$this->constants]]></code>
@@ -499,5 +509,10 @@
       <code><![CDATA[$this->traitUses]]></code>
       <code><![CDATA[$this->uses]]></code>
     </PropertyTypeCoercion>
+  </file>
+  <file src="src/Trait/UseGeneratorTrait.php">
+    <ParamNameMismatch>
+      <code><![CDATA[$useGenerator]]></code>
+    </ParamNameMismatch>
   </file>
 </files>
