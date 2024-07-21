@@ -21,8 +21,8 @@ use function set_error_handler;
 final readonly class ErrorHandlerMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private ExceptionHandler $handler,
-        private CliPrinterInterface $printer
+        private ExceptionHandler $exceptionHandler,
+        private CliPrinterInterface $cliPrinter
     ) {
     }
 
@@ -42,10 +42,10 @@ final readonly class ErrorHandlerMiddleware implements MiddlewareInterface
 
         try {
             $exitCode = $handler->handle($command);
-        } catch (Throwable $e) {
-            $exitCode = $this->handler->handle($command);
+        } catch (Throwable $throwable) {
+            $exitCode = $this->exceptionHandler->handle($command);
 
-            echo $this->printer->printException($e);
+            echo $this->cliPrinter->printException($throwable);
         } finally {
             restore_error_handler();
         }
