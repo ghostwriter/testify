@@ -24,15 +24,25 @@ final readonly class SingleCommandApplicationFactory implements FactoryInterface
     #[Override]
     public function __invoke(ContainerInterface $container): SingleCommandApplication
     {
-        $application = $container->build(SingleCommandApplication::class);
-        $application->addArgument('source', InputArgument::OPTIONAL, 'The path to search for missing tests.', 'src');
-        $application->addArgument('tests', InputArgument::OPTIONAL, 'The path used to create tests.', 'tests');
-        $application->addOption('dry-run', 'd', InputOption::VALUE_NONE, 'Do not write any files.');
-        $application->addOption('force', 'f', InputOption::VALUE_NONE, 'Overwrite existing files.');
-        $application->setAutoExit(false);
-        $application->setDescription('Generate missing Tests.');
-        $application->setName('Testify');
-        $application->setVersion(InstalledVersions::getPrettyVersion('ghostwriter/testify') ?? 'UNKNOWN');
-        return $application;
+        $singleCommandApplication = $container->build(SingleCommandApplication::class);
+        $singleCommandApplication->addArgument(
+            'source',
+            InputArgument::OPTIONAL,
+            'The path to search for missing tests.',
+            'src'
+        );
+        $singleCommandApplication->addArgument(
+            'tests',
+            InputArgument::OPTIONAL,
+            'The path used to create tests.',
+            'tests'
+        );
+        $singleCommandApplication->addOption('dry-run', 'd', InputOption::VALUE_NONE, 'Do not write any files.');
+        $singleCommandApplication->addOption('force', 'f', InputOption::VALUE_NONE, 'Overwrite existing files.');
+        $singleCommandApplication->setAutoExit(false);
+        $singleCommandApplication->setDescription('Generate missing Tests.');
+        $singleCommandApplication->setName('Testify');
+        $singleCommandApplication->setVersion(InstalledVersions::getPrettyVersion('ghostwriter/testify') ?? 'UNKNOWN');
+        return $singleCommandApplication;
     }
 }
