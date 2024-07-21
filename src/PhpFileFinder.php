@@ -50,7 +50,11 @@ final readonly class PhpFileFinder
                 continue;
             }
 
-            if ($match($file) === false || $skip($file) === true) {
+            if ($match($file) === false) {
+                continue;
+            }
+
+            if ($skip($file) === true) {
                 continue;
             }
 
