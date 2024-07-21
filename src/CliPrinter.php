@@ -22,13 +22,13 @@ final readonly class CliPrinter implements CliPrinterInterface
     }
 
     #[Override]
-    public function printThrowable(Throwable $exception): string
+    public function printThrowable(Throwable $throwable): string
     {
         return sprintf(
             PHP_EOL . '[%s] %s: ' . PHP_EOL . '%s' . PHP_EOL,
-            $exception::class,
-            $exception->getMessage(),
-            $exception->getTraceAsString()
+            $throwable::class,
+            $throwable->getMessage(),
+            $throwable->getTraceAsString()
         );
     }
 }
