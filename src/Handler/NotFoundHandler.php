@@ -17,14 +17,14 @@ final readonly class NotFoundHandler implements HandlerInterface
 {
     public function __construct(
         #[Inject(CliPrinter::class)]
-        private CliPrinterInterface $printer
+        private CliPrinterInterface $cliPrinter
     ) {
     }
 
     #[Override]
     public function handle(CommandInterface $command): int
     {
-        echo $this->printer->print($command);
+        echo $this->cliPrinter->print($command);
 
         echo 'Command handler not found' . PHP_EOL;
 
