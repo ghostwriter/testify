@@ -10,5 +10,5 @@ interface CliPrinterInterface
 {
     public function print(CommandInterface $command): string;
 
-    public function printThrowable(Throwable $exception): string;
+    public function printThrowable(Throwable $throwable): string;
 }
