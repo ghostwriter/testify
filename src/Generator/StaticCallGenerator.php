@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Generator;
 
 use Ghostwriter\Testify\Interface\GeneratorInterface;
+use Override;
 
 use function rtrim;
 use function sprintf;
@@ -19,12 +20,13 @@ final readonly class StaticCallGenerator implements GeneratorInterface
     ) {
     }
 
+    #[Override]
     public function generate(): string
     {
         $code = sprintf('%s::%s(', $this->class, $this->method);
 
         foreach ($this->args as $arg) {
-            if (str_contains($arg, ' ')) {
+            if (str_contains((string) $arg, ' ')) {
                 $arg = sprintf("'%s'", $arg);
             }
 
