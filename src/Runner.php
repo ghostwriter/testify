@@ -7,6 +7,7 @@ namespace Ghostwriter\Testify;
 use Generator;
 use Ghostwriter\Testify\Interface\ProjectInterface;
 use Ghostwriter\Testify\Interface\RunnerInterface;
+use Override;
 use Symfony\Component\Console\Helper\ProgressBar;
 
 use function str_replace;
@@ -19,6 +20,7 @@ final readonly class Runner implements RunnerInterface
     ) {
     }
 
+    #[Override]
     public function run(ProjectInterface $project): Generator
     {
         $sourceDirectory = $project->source;
