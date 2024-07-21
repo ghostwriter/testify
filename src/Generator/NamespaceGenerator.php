@@ -55,6 +55,7 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
             if (! ($classLike instanceof ClassLikeGeneratorInterface)) {
                 throw new InvalidArgumentException('Invalid class like type');
             }
+
             $this->classLikes[$classLike->name()] = $classLike;
         }
 
@@ -109,7 +110,7 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
 
         return array_reduce(
             $classLikes,
-            static fn (string $code, ClassLikeGeneratorInterface $class): string => $code . $class->generate() . self::NEWLINES,
+            static fn (string $code, ClassLikeGeneratorInterface $classLikeGenerator): string => $code . $classLikeGenerator->generate() . self::NEWLINES,
             $code
         );
     }
