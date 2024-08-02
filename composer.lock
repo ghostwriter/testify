@@ -1546,12 +1546,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "d470f1f60ff264e5f5df3810a436f701bec289c6"
+                "reference": "36710ce964d5f20d57d6af9a02c50eb2e948a529"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/d470f1f60ff264e5f5df3810a436f701bec289c6",
-                "reference": "d470f1f60ff264e5f5df3810a436f701bec289c6",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/36710ce964d5f20d57d6af9a02c50eb2e948a529",
+                "reference": "36710ce964d5f20d57d6af9a02c50eb2e948a529",
                 "shasum": ""
             },
             "require": {
@@ -1560,7 +1560,7 @@
                 "composer/composer": "^2.7.7",
                 "mockery/mockery": "^1.6.12",
                 "php": "^8.2",
-                "phpunit/phpunit": "^11.2.9"
+                "phpunit/phpunit": "^11.3.0"
             },
             "conflict": {
                 "vimeo/psalm": "<4.30"
@@ -1617,7 +1617,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-07-30T13:37:34+00:00"
+            "time": "2024-08-02T04:27:37+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -2379,16 +2379,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "11.2.9",
+            "version": "11.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c197bbaaca360efda351369bf1fd9cc1ca6bcbf7"
+                "reference": "a8dce73a8938dfec7ac0daa91bdbcaae7d7188a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c197bbaaca360efda351369bf1fd9cc1ca6bcbf7",
-                "reference": "c197bbaaca360efda351369bf1fd9cc1ca6bcbf7",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a8dce73a8938dfec7ac0daa91bdbcaae7d7188a3",
+                "reference": "a8dce73a8938dfec7ac0daa91bdbcaae7d7188a3",
                 "shasum": ""
             },
             "require": {
@@ -2427,7 +2427,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "11.2-dev"
+                    "dev-main": "11.3-dev"
                 }
             },
             "autoload": {
@@ -2459,7 +2459,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.2.9"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/11.3.0"
             },
             "funding": [
                 {
@@ -2475,7 +2475,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-30T11:09:23+00:00"
+            "time": "2024-08-02T03:56:43+00:00"
         },
         {
             "name": "psr/log",
