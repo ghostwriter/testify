@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify;
+namespace Ghostwriter\Testify\Resolver;
 
 use Ghostwriter\Testify\Generator\NamespaceGenerator;
 use PhpToken;
@@ -19,7 +19,7 @@ final readonly class FileResolver
     }
 
     /**
-     * @param list<PhpToken> $tokens
+     * @param PhpToken $tokens
      */
     public function resolve(array $tokens): array
     {
