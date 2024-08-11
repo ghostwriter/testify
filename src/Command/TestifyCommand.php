@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Command;
 
-use Ghostwriter\Container\Attribute\Factory;
 use Ghostwriter\Container\Attribute\Inject;
-use Ghostwriter\Testify\Factory\SingleCommandApplicationFactory;
 use Ghostwriter\Testify\Filesystem;
 use Ghostwriter\Testify\Interface\CommandInterface;
 use Ghostwriter\Testify\Interface\PrinterInterface;
@@ -16,14 +14,16 @@ use Ghostwriter\Testify\Project;
 use Ghostwriter\Testify\Runner;
 use Ghostwriter\Testify\TestBuilder;
 use Override;
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\SingleCommandApplication;
 use Throwable;
 
 use const PHP_EOL;
+use const STDOUT;
 
+use function array_key_exists;
+use function array_slice;
+use function fwrite;
+use function getopt;
+use function in_array;
 use function sprintf;
 
 final readonly class TestifyCommand implements CommandInterface
@@ -32,8 +32,6 @@ final readonly class TestifyCommand implements CommandInterface
      * @throws Throwable
      */
     public function __construct(
-        #[Factory(SingleCommandApplicationFactory::class)]
-        private SingleCommandApplication $singleCommandApplication,
         private Filesystem $filesystem,
         #[Inject(Runner::class)]
         private RunnerInterface $runner,
@@ -49,81 +47,99 @@ final readonly class TestifyCommand implements CommandInterface
     #[Override]
     public function execute(): int
     {
-        return $this->singleCommandApplication->setCode(
-            function (InputInterface $input, OutputInterface $output): int {
-                $output->writeln(
-                    sprintf(
-                        '<info>%s</info> by <comment>%s</comment> and contributors. <error>%s</error>' . PHP_EOL,
-                        'Testify',
-                        'Nathanael Esayeas',
-                        '#BlackLivesMatter'
-                    )
-                );
+        global $argv;
+        //        $short_opts = "df";
+        //        $long_opts = [
+        //            'source' => 'The path to search for missing tests.',
+        //            'tests' => 'The path used to create tests.',
+        //            'dry-run' => 'Whether to write the files or not',
+        //            'force' => 'Whether to overwrite existing files',
+        //        ];
 
-                try {
-                    $project = Project::new($input);
-                } catch (Throwable $throwable) {
-                    $output->writeln(
-                        sprintf(
-                            '<error>%s: %s</error>' . PHP_EOL . PHP_EOL . '%s',
-                            $throwable::class,
-                            $throwable->getMessage(),
-                            $throwable->getTraceAsString()
-                        )
-                    );
+        //        $app->setDescription('Generate missing Tests.');
+        //        $app->setName('Testify');
+        //        $app->setVersion(InstalledVersions::getPrettyVersion('ghostwriter/testify') ?? 'UNKNOWN');
 
-                    return Command::INVALID;
-                }
+        $rest_index = 0;
+        $opts = getopt('df', ['dry-run', 'force'], $rest_index);
+        $options = array_slice($argv, $rest_index);
 
-                $count = 0;
-                $dryRun = $project->dryRun;
-                $force = $project->force;
-                foreach ($this->runner->run($project) as $file => $testFile) {
-                    $output->writeln([
-                        'Class <comment>' . $file . '</comment> is missing a test.',
-                        'Generating <info>' . $testFile . '</info>.',
-                        PHP_EOL,
-                    ], OutputInterface::VERBOSITY_VERBOSE);
+        $dryRun = (
+            array_key_exists('d', $opts)
+            || array_key_exists('dry-run', $opts)
+            || in_array('-d', $options, true)
+            || in_array('--dry-run', $options, true)
+        );
 
-                    $fileGenerator = $this->testBuilder->build($file, $testFile);
+        $force = (
+            array_key_exists('f', $opts)
+            || array_key_exists('force', $opts)
+            || in_array('-f', $options, true)
+            || in_array('--force', $options, true)
+        );
 
-                    $testFileContent = $this->printer->print($fileGenerator);
+        $project = new Project($options[0] ?? 'src', $options[1] ?? 'tests', $dryRun, $force);
 
-                    $output->writeln(
-                        ['------', PHP_EOL . $testFileContent . PHP_EOL],
-                        OutputInterface::VERBOSITY_VERBOSE
-                    );
+        fwrite(STDOUT, sprintf(
+            '%s by %s and contributors. %s' . PHP_EOL,
+            'Testify',
+            'Nathanael Esayeas',
+            '#BlackLivesMatter'
+        ));
 
-                    if ($dryRun) {
-                        $output->writeln('<info>Dry run, not writing file.</info>');
+        //        try {
+        //            $project = Project::new($input);
+        //        } catch (Throwable $throwable) {
+        //            $output->writeln(
+        //                sprintf(
+        //                    '<error>%s: %s</error>' . PHP_EOL . PHP_EOL . '%s',
+        //                    $throwable::class,
+        //                    $throwable->getMessage(),
+        //                    $throwable->getTraceAsString()
+        //                )
+        //            );
+        //
+        //            return Command::INVALID;
+        //        }
+        //        dd($options, $opts, $project);
 
-                        continue;
-                    }
+        $count = 0;
+        $dryRun = $project->dryRun;
+        $force = $project->force;
+        foreach ($this->runner->run($project) as $file => $testFile) {
+            $this->writeln(['Class ' . $file . ' is missing a test.', 'Generating ' . $testFile . '.', PHP_EOL]);
 
-                    if ($force || $this->filesystem->missing($testFile)) {
-                        ++$count;
-                        $this->filesystem->save($testFile, $testFileContent);
+            $fileGenerator = $this->testBuilder->build($file, $testFile);
 
-                        $output->writeln(
-                            sprintf('<info>File "%s" written.</info>' . PHP_EOL, $testFile),
-                            OutputInterface::VERBOSITY_VERBOSE
-                        );
+            $testFileContent = $this->printer->print($fileGenerator);
 
-                        continue;
-                    }
+            $this->writeln(['------', PHP_EOL . $testFileContent . PHP_EOL]);
 
-                    $output->writeln(
-                        '<info>File already exists</info>;<comment>(use "--force|-f" to overwrite)</comment>' . PHP_EOL,
-                        OutputInterface::VERBOSITY_VERBOSE
-                    );
-                }
-
-                $output->writeln(
-                    [PHP_EOL, sprintf('<comment>Generated <info>%d</info> missing tests.</comment>', $count)]
-                );
-
-                return Command::SUCCESS;
+            if ($dryRun) {
+                $this->writeln('Dry run, not writing file.');
+                continue;
             }
-        )->run();
+
+            if ($force || $this->filesystem->missing($testFile)) {
+                ++$count;
+                $this->filesystem->save($testFile, $testFileContent);
+
+                $this->writeln(sprintf('File "%s" written.' . PHP_EOL, $testFile));
+                continue;
+            }
+
+            $this->writeln('File already exists;(use "--force|-f" to overwrite)' . PHP_EOL);
+        }
+
+        $this->writeln([PHP_EOL, sprintf('Generated %d missing tests.', $count)]);
+
+        return 0;
+    }
+
+    private function writeln(array|string $message): void
+    {
+        foreach ((array) $message as $line) {
+            fwrite(STDOUT, $line . PHP_EOL);
+        }
     }
 }
