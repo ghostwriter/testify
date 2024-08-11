@@ -25,10 +25,11 @@ final readonly class Runner implements RunnerInterface
     public function run(WorkspaceInterface $project): Generator
     {
         $sourceDirectory = $project->source;
-        $testsDirectory = $project->tests . DIRECTORY_SEPARATOR . 'Unit';
+
+        $unitTestsDirectory = $project->tests . DIRECTORY_SEPARATOR . 'Unit';
 
         foreach ($this->phpFileFinder->find($sourceDirectory) as $file) {
-            yield $file => str_replace([$sourceDirectory, '.php'], [$testsDirectory, 'Test.php'], $file);
+            yield $file => str_replace([$sourceDirectory, '.php'], [$unitTestsDirectory, 'Test.php'], $file);
         }
     }
 }
