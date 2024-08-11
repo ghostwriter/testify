@@ -6,7 +6,10 @@ namespace Ghostwriter\Testify;
 
 use Ghostwriter\Container\Container;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Testify\Command\TestifyCommand;
+use Ghostwriter\Testify\Console\Command\TestifyCommand;
+use Ghostwriter\Testify\Console\Handlers;
+use Ghostwriter\Testify\Console\Middlewares;
+use Ghostwriter\Testify\Container\ServiceProvider;
 use Ghostwriter\Testify\Interface\CommandBusInterface;
 use Ghostwriter\Testify\Interface\CommandInterface;
 use Ghostwriter\Testify\Interface\HandlerInterface;
@@ -71,6 +74,6 @@ final readonly class Testify implements CommandBusInterface, HandlerInterface, M
             $container->provide(ServiceProvider::class);
         }
 
-        return $container->build(self::class, $middleware);
+        return $container->get(self::class);
     }
 }
