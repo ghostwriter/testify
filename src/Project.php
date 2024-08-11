@@ -10,8 +10,6 @@ use Ghostwriter\Testify\Exception\PathIsEmptyException;
 use Ghostwriter\Testify\Exception\PathIsNotDirectoryException;
 use Ghostwriter\Testify\Exception\PathIsNotStringException;
 use Ghostwriter\Testify\Interface\ProjectInterface;
-use Symfony\Component\Console\Exception\InvalidArgumentException;
-use Symfony\Component\Console\Input\InputInterface;
 
 use const DIRECTORY_SEPARATOR;
 
@@ -31,66 +29,66 @@ final readonly class Project implements ProjectInterface
     ) {
     }
 
-    /**
-     * @throws FailedToCreateDirectoryException
-     * @throws PathDoesNotExistException
-     * @throws PathIsEmptyException
-     * @throws PathIsNotDirectoryException
-     * @throws PathIsNotStringException
-     * @throws InvalidArgumentException
-     */
-    public static function new(InputInterface $input): self
-    {
-        $source = $input->getArgument('source');
-
-        if (! is_string($source)) {
-            throw new PathIsNotStringException();
-        }
-
-        if (trim($source) === '') {
-            throw new PathIsEmptyException();
-        }
-
-        $sourceDirectory = realpath($source);
-
-        if ($sourceDirectory === false) {
-            throw new PathDoesNotExistException($source);
-        }
-
-        if (! is_dir($sourceDirectory)) {
-            throw new PathIsNotDirectoryException($source);
-        }
-
-        $tests = $input->getArgument('tests');
-
-        if (! is_string($tests)) {
-            throw new PathIsNotStringException();
-        }
-
-        if (trim($tests) === '') {
-            throw new PathIsEmptyException();
-        }
-
-        $testsUnitDirectory = $tests . DIRECTORY_SEPARATOR . 'Unit';
-
-        if (! is_dir($testsUnitDirectory)) {
-            $makeDirectory = mkdir($testsUnitDirectory, 0o777, true);
-            if (! $makeDirectory || ! is_dir($testsUnitDirectory)) {
-                throw new FailedToCreateDirectoryException($testsUnitDirectory);
-            }
-        }
-
-        $testsDirectory = realpath($testsUnitDirectory);
-
-        if ($testsDirectory === false) {
-            throw new PathDoesNotExistException($tests);
-        }
-
-        return new self(
-            $sourceDirectory,
-            $testsDirectory,
-            (bool) $input->getOption('dry-run'),
-            (bool) $input->getOption('force')
-        );
-    }
+    //    /**
+    //     * @throws FailedToCreateDirectoryException
+    //     * @throws PathDoesNotExistException
+    //     * @throws PathIsEmptyException
+    //     * @throws PathIsNotDirectoryException
+    //     * @throws PathIsNotStringException
+    //     * @throws InvalidArgumentException
+    //     */
+    //    public static function new(InputInterface $input): self
+    //    {
+    //        $source = $input->getArgument('source');
+    //
+    //        if (! is_string($source)) {
+    //            throw new PathIsNotStringException();
+    //        }
+    //
+    //        if (trim($source) === '') {
+    //            throw new PathIsEmptyException();
+    //        }
+    //
+    //        $sourceDirectory = realpath($source);
+    //
+    //        if ($sourceDirectory === false) {
+    //            throw new PathDoesNotExistException($source);
+    //        }
+    //
+    //        if (! is_dir($sourceDirectory)) {
+    //            throw new PathIsNotDirectoryException($source);
+    //        }
+    //
+    //        $tests = $input->getArgument('tests');
+    //
+    //        if (! is_string($tests)) {
+    //            throw new PathIsNotStringException();
+    //        }
+    //
+    //        if (trim($tests) === '') {
+    //            throw new PathIsEmptyException();
+    //        }
+    //
+    //        $testsUnitDirectory = $tests . DIRECTORY_SEPARATOR . 'Unit';
+    //
+    //        if (! is_dir($testsUnitDirectory)) {
+    //            $makeDirectory = mkdir($testsUnitDirectory, 0o777, true);
+    //            if (! $makeDirectory || ! is_dir($testsUnitDirectory)) {
+    //                throw new FailedToCreateDirectoryException($testsUnitDirectory);
+    //            }
+    //        }
+    //
+    //        $testsDirectory = realpath($testsUnitDirectory);
+    //
+    //        if ($testsDirectory === false) {
+    //            throw new PathDoesNotExistException($tests);
+    //        }
+    //
+    //        return new self(
+    //            $sourceDirectory,
+    //            $testsDirectory,
+    //            (bool) $input->getOption('dry-run'),
+    //            (bool) $input->getOption('force')
+    //        );
+    //    }
 }
