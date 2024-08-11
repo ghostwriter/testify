@@ -6,10 +6,13 @@ namespace Ghostwriter\Testify\Console;
 
 use Ghostwriter\Testify\Testify;
 
+use const DIRECTORY_SEPARATOR;
 use const STDERR;
 
+use function dirname;
 use function file_exists;
 use function fwrite;
+use function implode;
 use function sprintf;
 
 /** @var ?string $_composer_autoload_path */
@@ -29,4 +32,4 @@ use function sprintf;
      * #BlackLivesMatter.
      */
     exit(Testify::new()->run());
-})($_composer_autoload_path ?? __DIR__ . '/../vendor/autoload.php');
+})($_composer_autoload_path ?? implode(DIRECTORY_SEPARATOR, [dirname(__DIR__), 'vendor', 'autoload.php']));
