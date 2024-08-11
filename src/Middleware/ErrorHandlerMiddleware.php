@@ -45,7 +45,7 @@ final readonly class ErrorHandlerMiddleware implements MiddlewareInterface
         } catch (Throwable $throwable) {
             $exitCode = $this->exceptionHandler->handle($command);
 
-            echo $this->cliPrinter->printException($throwable);
+            echo $this->cliPrinter->printThrowable($throwable);
         } finally {
             restore_error_handler();
         }
