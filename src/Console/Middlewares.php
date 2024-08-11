@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify;
+namespace Ghostwriter\Testify\Console;
 
 use Ghostwriter\Container\Attribute\Factory;
-use Ghostwriter\Testify\Factory\MiddlewaresFactory;
+use Ghostwriter\Testify\Container\Factory\MiddlewaresFactory;
 use Ghostwriter\Testify\Interface\CommandInterface;
 use Ghostwriter\Testify\Interface\HandlerInterface;
 use Ghostwriter\Testify\Interface\MiddlewareInterface;
