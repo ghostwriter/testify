@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Tests\Unit\Resolver;
 
-use Ghostwriter\Testify\TestNamespaceResolver;
+use Ghostwriter\Testify\Resolver\TestNamespaceResolver;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
