@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Tests\Unit\Printer;
 
-use Ghostwriter\Testify\CliPrinter;
+use Ghostwriter\Testify\Printer\CliPrinter;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
