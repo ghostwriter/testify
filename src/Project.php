@@ -23,7 +23,7 @@ use function trim;
 
 final readonly class Project implements ProjectInterface
 {
-    private function __construct(
+    public function __construct(
         public string $source,
         public string $tests,
         public bool $dryRun = false,
