@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Factory;
+namespace Tests\Unit\Container\Factory;
 
-use Ghostwriter\Testify\Factory\HandlersFactory;
+use Ghostwriter\Testify\Container\Factory\HandlersFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
