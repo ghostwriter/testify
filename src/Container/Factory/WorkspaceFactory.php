@@ -25,10 +25,10 @@ final readonly class WorkspaceFactory implements FactoryInterface
         $config = $container->get(ConfigInterface::class);
 
         return new Workspace(
-            source: $config->get('source'),
-            tests: $config->get('tests'),
-            dryRun: $config->get('dryRun'),
-            force: $config->get('force'),
+            source: $config->get('source', 'src'),
+            tests: $config->get('tests', 'tests'),
+            dryRun: $config->get('dryRun', false),
+            force: $config->get('force', false),
         );
     }
 }
