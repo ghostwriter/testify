@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Factory;
+namespace Ghostwriter\Testify\Container\Factory;
 
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\FactoryInterface;
-use Ghostwriter\Testify\Handler\TestifyCommandHandler;
-use Ghostwriter\Testify\Handlers;
+use Ghostwriter\Testify\Console\Handler\TestifyCommandHandler;
+use Ghostwriter\Testify\Console\Handlers;
 use Override;
 use Throwable;
 
