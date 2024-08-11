@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Middleware;
+namespace Ghostwriter\Testify\Console\Middleware;
 
 use ErrorException;
-use Ghostwriter\Testify\CliPrinter;
-use Ghostwriter\Testify\Handler\ExceptionHandler;
+use Ghostwriter\Testify\Console\Handler\ExceptionHandler;
 use Ghostwriter\Testify\Interface\CliPrinterInterface;
 use Ghostwriter\Testify\Interface\CommandInterface;
 use Ghostwriter\Testify\Interface\HandlerInterface;
 use Ghostwriter\Testify\Interface\MiddlewareInterface;
+use Ghostwriter\Testify\Printer\CliPrinter;
 use Override;
 use Throwable;
 
@@ -32,12 +32,22 @@ final readonly class ErrorHandlerMiddleware implements MiddlewareInterface
     #[Override]
     public function process(CommandInterface $command, HandlerInterface $handler): int
     {
+        //1: Catchall for general errors
+        //2: Misuse of shell builtins (according to Bash documentation)
+        //126: Command invoked cannot execute
+        //127: "command not found"
+        //128: Invalid argument to exit
+        //128+n: Fatal error signal "n"
+        //255: Exit status out of range (exit takes only integer args in the range 0 - 255)
+        #define EX_NOPERM       77      /* permission denied */
+        #define EX_CONFIG       78      /* configuration error */
+        #define EX_IOERR        74      /* input/output error */
         set_error_handler(static function (int $severity, string $message, string $filename, int $line): bool {
             if (0 === ($severity & error_reporting())) {
                 return false;
             }
 
-            throw new ErrorException($message, 0, $severity, $filename, $line);
+            throw new ErrorException($message, 128, $severity, $filename, $line);
         });
 
         try {
