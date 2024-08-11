@@ -11,6 +11,8 @@ use Ghostwriter\Testify\Generator\Name\ClassNameGenerator;
 use Ghostwriter\Testify\Interface\BuilderInterface;
 use Ghostwriter\Testify\Interface\GeneratorInterface;
 use Ghostwriter\Testify\Normalizer\ClassNameNormalizer;
+use Ghostwriter\Testify\Resolver\FileResolver;
+use Ghostwriter\Testify\Resolver\TestMethodsResolver;
 use Override;
 use PhpToken;
 use PHPUnit\Framework\Attributes\CoversClass;
