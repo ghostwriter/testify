@@ -21,7 +21,7 @@ use function usort;
 final class NamespaceGenerator implements NamespaceGeneratorInterface
 {
     /**
-     * @param list<UseGeneratorInterface>                                                                $uses
+     * @param UseGeneratorInterface                                                                      $uses
      * @param array<class-string<ClassLikeGeneratorInterface>,array<string,ClassLikeGeneratorInterface>> $classLikes
      */
     public function __construct(
