@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify;
+namespace Ghostwriter\Testify\Printer;
 
 use Ghostwriter\Testify\Interface\CliPrinterInterface;
 use Ghostwriter\Testify\Interface\CommandInterface;
@@ -18,7 +18,7 @@ final readonly class CliPrinter implements CliPrinterInterface
     #[Override]
     public function print(CommandInterface $command): string
     {
-        return sprintf(PHP_EOL . 'Command: %s' . PHP_EOL, $command::class);
+        return sprintf('Command: %s' . PHP_EOL, $command::class);
     }
 
     #[Override]
