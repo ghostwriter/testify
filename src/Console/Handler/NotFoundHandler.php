@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Handler;
+namespace Ghostwriter\Testify\Console\Handler;
 
 use Ghostwriter\Container\Attribute\Inject;
-use Ghostwriter\Testify\CliPrinter;
 use Ghostwriter\Testify\Interface\CliPrinterInterface;
 use Ghostwriter\Testify\Interface\CommandInterface;
 use Ghostwriter\Testify\Interface\HandlerInterface;
+use Ghostwriter\Testify\Printer\CliPrinter;
 use Override;
 
 use const PHP_EOL;
