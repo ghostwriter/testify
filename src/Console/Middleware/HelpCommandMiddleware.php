@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Middleware;
+namespace Ghostwriter\Testify\Console\Middleware;
 
-use Ghostwriter\Testify\Command\HelpCommand;
+use Ghostwriter\Testify\Console\Command\HelpCommand;
 use Ghostwriter\Testify\Interface\CommandInterface;
 use Ghostwriter\Testify\Interface\HandlerInterface;
 use Ghostwriter\Testify\Interface\MiddlewareInterface;
