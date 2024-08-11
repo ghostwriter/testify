@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify;
+namespace Ghostwriter\Testify\Resolver;
 
 use Generator;
 use Ghostwriter\Testify\Generator\AttributeGenerator;
