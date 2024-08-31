@@ -9,9 +9,7 @@ use Ghostwriter\Testify\Generator\ClassLikeMember\MethodGenerator;
 use Ghostwriter\Testify\Generator\Use\UseClassGenerator;
 use Ghostwriter\Testify\Generator\Use\UseConstantGenerator;
 use Ghostwriter\Testify\Generator\Use\UseFunctionGenerator;
-use Ghostwriter\Testify\Interface\Generator\ClassLikeGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\NamespaceGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\UseGeneratorInterface;
+use Ghostwriter\Testify\Generator\Use\UseGeneratorInterface;
 use InvalidArgumentException;
 use Override;
 
@@ -134,9 +132,9 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
         }
 
         foreach ($this->classLikes as $name => $classLike) {
-            //            if (! ($classLike instanceof ClassLikeGeneratorInterface)) {
-            //                continue;
-            //            }
+            if (! ($classLike instanceof ClassLikeGeneratorInterface)) {
+                continue;
+            }
 
             foreach ($classLike->uses() as $use) {
                 $uses[$use->name()] = $use;
