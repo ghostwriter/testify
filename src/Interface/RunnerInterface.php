@@ -11,5 +11,5 @@ interface RunnerInterface
     /**
      * @return Generator<string,string>
      */
-    public function run(ProjectInterface $project): Generator;
+    public function run(WorkspaceInterface $project): Generator;
 }

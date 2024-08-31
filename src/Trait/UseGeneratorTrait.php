@@ -7,7 +7,7 @@ namespace Ghostwriter\Testify\Trait;
 use Ghostwriter\Testify\Generator\Use\UseClassGenerator;
 use Ghostwriter\Testify\Generator\Use\UseConstantGenerator;
 use Ghostwriter\Testify\Generator\Use\UseFunctionGenerator;
-use Ghostwriter\Testify\Interface\Generator\UseGeneratorInterface;
+use Ghostwriter\Testify\Generator\Use\UseGeneratorInterface;
 use Override;
 
 trait UseGeneratorTrait

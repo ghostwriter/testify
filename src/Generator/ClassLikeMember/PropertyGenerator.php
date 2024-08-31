@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Generator\ClassLikeMember;
 
-use Ghostwriter\Testify\Interface\Generator\AttributeGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\PropertyGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\ClassLikeMemberGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\UseGeneratorInterface;
+use Ghostwriter\Testify\Generator\AttributeGeneratorInterface;
+use Ghostwriter\Testify\Generator\ClassLikeMemberGeneratorInterface;
+use Ghostwriter\Testify\Generator\Use\UseGeneratorInterface;
 use Override;
 
 final readonly class PropertyGenerator implements PropertyGeneratorInterface

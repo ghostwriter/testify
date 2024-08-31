@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Generator\ClassLike;
 
-use Ghostwriter\Testify\Interface\Generator\ClassLike\InterfaceGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\ConstantGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\MethodGeneratorInterface;
-use Ghostwriter\Testify\Interface\GeneratorInterface;
+use Ghostwriter\Testify\Generator\ClassLikeMember\ConstantGeneratorInterface;
+use Ghostwriter\Testify\Generator\ClassLikeMember\MethodGeneratorInterface;
+use Ghostwriter\Testify\Generator\GeneratorInterface;
 use Ghostwriter\Testify\Trait\ClassLikeGeneratorTrait;
 use Override;
 

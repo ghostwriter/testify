@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Command;
 
-use Ghostwriter\Testify\Interface\CommandInterface;
 use Override;
 
 final readonly class HelpCommand implements CommandInterface
@@ -13,5 +12,11 @@ final readonly class HelpCommand implements CommandInterface
     public function execute(): int
     {
         return 0;
+    }
+
+    #[Override]
+    public function name(): string
+    {
+        return 'help';
     }
 }
