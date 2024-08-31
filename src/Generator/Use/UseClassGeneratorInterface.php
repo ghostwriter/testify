@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Interface\Generator;
+namespace Ghostwriter\Testify\Generator\Use;
 
 interface UseClassGeneratorInterface extends UseGeneratorInterface
 {
