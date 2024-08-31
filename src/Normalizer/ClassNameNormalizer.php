@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Normalizer;
 
 use Ghostwriter\CaseConverter\CaseConverter;
-use Ghostwriter\Testify\Interface\NormalizerInterface;
 use Override;
 
 final readonly class ClassNameNormalizer implements NormalizerInterface
