@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Console\Handler;
+namespace Tests\Unit\Handler;
 
-use Ghostwriter\Testify\Console\Handler\NotFoundHandler;
+use Ghostwriter\Testify\Handler\NotFoundHandler;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
