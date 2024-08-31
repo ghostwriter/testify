@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Interface;
+namespace Ghostwriter\Testify\Command;
 
 interface CommandBusInterface
 {
