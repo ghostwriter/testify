@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Trait;
 
-use Ghostwriter\Testify\Interface\Generator\AttributeGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\ClassLikeGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\ConstantGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\MethodGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\PropertyGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\TraitUseGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\DocBlockGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\DockBlockGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\NameGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\UseGeneratorInterface;
+use Ghostwriter\Testify\Generator\AttributeGeneratorInterface;
+use Ghostwriter\Testify\Generator\ClassLikeGeneratorInterface;
+use Ghostwriter\Testify\Generator\ClassLikeMember\ConstantGeneratorInterface;
+use Ghostwriter\Testify\Generator\ClassLikeMember\MethodGeneratorInterface;
+use Ghostwriter\Testify\Generator\ClassLikeMember\PropertyGeneratorInterface;
+use Ghostwriter\Testify\Generator\ClassLikeMember\TraitUseGeneratorInterface;
+use Ghostwriter\Testify\Generator\DocBlockGeneratorInterface;
+use Ghostwriter\Testify\Generator\Name\NameGeneratorInterface;
+use Ghostwriter\Testify\Generator\Use\UseGeneratorInterface;
 use Override;
 
 trait ClassLikeGeneratorTrait
@@ -22,7 +21,7 @@ trait ClassLikeGeneratorTrait
      * @param list<AttributeGeneratorInterface> $attributes
      * @param list<NameGeneratorInterface>      $extends
      * @param list<ConstantGeneratorInterface>  $constants
-     * @param list<DockBlockGeneratorInterface> $dockBlocks
+     * @param list<DocBlockGeneratorInterface>  $dockBlocks
      * @param list<MethodGeneratorInterface>    $methods
      * @param list<NameGeneratorInterface>      $implements
      * @param list<PropertyGeneratorInterface>  $properties

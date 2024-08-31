@@ -4,26 +4,23 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Command;
 
+use Ghostwriter\Container\Attribute\Factory;
 use Ghostwriter\Container\Attribute\Inject;
-use Ghostwriter\Testify\Filesystem;
-use Ghostwriter\Testify\Interface\CommandInterface;
-use Ghostwriter\Testify\Interface\PrinterInterface;
+use Ghostwriter\Testify\Application\Filesystem;
+use Ghostwriter\Testify\Builder\TestBuilder;
+use Ghostwriter\Testify\Container\Factory\WorkspaceFactory;
 use Ghostwriter\Testify\Interface\RunnerInterface;
-use Ghostwriter\Testify\Printer;
-use Ghostwriter\Testify\Project;
-use Ghostwriter\Testify\Runner;
-use Ghostwriter\Testify\TestBuilder;
+use Ghostwriter\Testify\Interface\WorkspaceInterface;
+use Ghostwriter\Testify\Printer\Printer;
+use Ghostwriter\Testify\Printer\PrinterInterface;
+use Ghostwriter\Testify\Runner\Runner;
 use Override;
 use Throwable;
 
 use const PHP_EOL;
 use const STDOUT;
 
-use function array_key_exists;
-use function array_slice;
 use function fwrite;
-use function getopt;
-use function in_array;
 use function sprintf;
 
 final readonly class TestifyCommand implements CommandInterface
@@ -38,6 +35,8 @@ final readonly class TestifyCommand implements CommandInterface
         #[Inject(Printer::class)]
         private PrinterInterface $printer,
         private TestBuilder $testBuilder,
+        #[Factory(WorkspaceFactory::class)]
+        private WorkspaceInterface $workspace,
     ) {
     }
 
@@ -47,38 +46,9 @@ final readonly class TestifyCommand implements CommandInterface
     #[Override]
     public function execute(): int
     {
-        global $argv;
-        //        $short_opts = "df";
-        //        $long_opts = [
-        //            'source' => 'The path to search for missing tests.',
-        //            'tests' => 'The path used to create tests.',
-        //            'dry-run' => 'Whether to write the files or not',
-        //            'force' => 'Whether to overwrite existing files',
-        //        ];
 
-        //        $app->setDescription('Generate missing Tests.');
-        //        $app->setName('Testify');
-        //        $app->setVersion(InstalledVersions::getPrettyVersion('ghostwriter/testify') ?? 'UNKNOWN');
-
-        $rest_index = 0;
-        $opts = getopt('df', ['dry-run', 'force'], $rest_index);
-        $options = array_slice($argv, $rest_index);
-
-        $dryRun = (
-            array_key_exists('d', $opts)
-            || array_key_exists('dry-run', $opts)
-            || in_array('-d', $options, true)
-            || in_array('--dry-run', $options, true)
-        );
-
-        $force = (
-            array_key_exists('f', $opts)
-            || array_key_exists('force', $opts)
-            || in_array('-f', $options, true)
-            || in_array('--force', $options, true)
-        );
-
-        $project = new Project($options[0] ?? 'src', $options[1] ?? 'tests', $dryRun, $force);
+        $project = $this->workspace;
+        //            new Workspace($options[0] ?? 'src', $options[1] ?? 'tests', $dryRun, $force);
 
         fwrite(STDOUT, sprintf(
             '%s by %s and contributors. %s' . PHP_EOL,
@@ -104,8 +74,9 @@ final readonly class TestifyCommand implements CommandInterface
         //        dd($options, $opts, $project);
 
         $count = 0;
-        $dryRun = $project->dryRun;
-        $force = $project->force;
+        $dryRun = $project->dryRun();
+        $force = $project->force();
+
         foreach ($this->runner->run($project) as $file => $testFile) {
             $this->writeln(['Class ' . $file . ' is missing a test.', 'Generating ' . $testFile . '.', PHP_EOL]);
 
@@ -136,10 +107,18 @@ final readonly class TestifyCommand implements CommandInterface
         return 0;
     }
 
+    public function name(): string
+    {
+        return 'testify';
+    }
+
+    /**
+     * @param list<string>|string $message
+     */
     private function writeln(array|string $message): void
     {
         foreach ((array) $message as $line) {
-            fwrite(STDOUT, $line . PHP_EOL);
+            fwrite(STDOUT, sprintf('%s%s', $line, PHP_EOL));
         }
     }
 }

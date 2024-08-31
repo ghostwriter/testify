@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Generator;
 
-use Ghostwriter\Testify\Interface\Generator\DeclareStrictTypesGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\FileGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\NamespaceGeneratorInterface;
-use Ghostwriter\Testify\Interface\GeneratorInterface;
 use Override;
 
 use function array_reduce;
@@ -17,7 +13,7 @@ use function usort;
 final readonly class FileGenerator implements FileGeneratorInterface
 {
     /**
-     * @param array<class-string<GeneratorInterface>,DeclareStrictTypesGeneratorInterface|NamespaceGeneratorInterface> $namespaces
+     * @param NamespaceGeneratorInterface $namespaces
      */
     public function __construct(
         private array $namespaces,
@@ -61,7 +57,7 @@ final readonly class FileGenerator implements FileGeneratorInterface
     }
 
     /**
-     * @param array<class-string<GeneratorInterface>,DeclareStrictTypesGeneratorInterface|NamespaceGeneratorInterface> $namespaces
+     * @param NamespaceGeneratorInterface $namespaces
      */
     public static function new(array $namespaces = [], bool $declareStrictTypes = true): self
     {

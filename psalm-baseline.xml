@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.25.0@01a8eb06b9e9cc6cfb6a320bf9fb14331919d505">
-  <file src="src/Command/TestifyCommand.php">
-    <LessSpecificReturnType>
-      <code><![CDATA[int]]></code>
-    </LessSpecificReturnType>
+  <file src="src/Application/Application.php">
+    <MissingThrowsDocblock>
+      <code><![CDATA[process]]></code>
+      <code><![CDATA[process]]></code>
+    </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$container]]></code>
+    </PossiblyUnusedProperty>
   </file>
-  <file src="src/FileResolver.php">
+  <file src="src/Application/ApplicationInterface.php">
     <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[run]]></code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/Filesystem.php">
+  <file src="src/Application/Filesystem.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[basename]]></code>
       <code><![CDATA[currentWorkingDirectory]]></code>
@@ -22,6 +26,89 @@
       <code><![CDATA[isReadable]]></code>
       <code><![CDATA[read]]></code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Application/PhpFileFinder.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Builder/TestBuilder.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$this->testMethodsResolver->resolve($namespaceClass)]]></code>
+    </ArgumentTypeCoercion>
+    <InvalidArgument>
+      <code><![CDATA[$namespaces]]></code>
+      <code><![CDATA[$tokens]]></code>
+      <code><![CDATA[[new AttributeGenerator('CoversClass', [$class . '::class'])]]]></code>
+    </InvalidArgument>
+    <InvalidOperand>
+      <code><![CDATA[$namespace]]></code>
+    </InvalidOperand>
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new RuntimeException('Could not read file: ' . $file);]]></code>
+    </MissingThrowsDocblock>
+    <MixedArrayAccess>
+      <code><![CDATA[$namespaceGenerator]]></code>
+      <code><![CDATA[$testNamespace]]></code>
+    </MixedArrayAccess>
+    <MixedAssignment>
+      <code><![CDATA[$namespaces[$namespace]]]></code>
+      <code><![CDATA[[$testNamespace, $namespaceGenerator]]]></code>
+    </MixedAssignment>
+    <MixedMethodCall>
+      <code><![CDATA[classLikes]]></code>
+      <code><![CDATA[usesClass]]></code>
+      <code><![CDATA[usesClass]]></code>
+      <code><![CDATA[usesClass]]></code>
+    </MixedMethodCall>
+    <MixedOperand>
+      <code><![CDATA[$testNamespace]]></code>
+    </MixedOperand>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Command/CommandInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[name]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Command/Handlers.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[toArray]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Command/TestifyCommand.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function name(): string]]></code>
+    </MissingOverrideAttribute>
+    <MixedAssignment>
+      <code><![CDATA[$dryRun]]></code>
+      <code><![CDATA[$force]]></code>
+    </MixedAssignment>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[dryRun]]></code>
+      <code><![CDATA[force]]></code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Container/Extension/ConfigExtension.php">
+    <ImplementedReturnTypeMismatch>
+      <code><![CDATA[ConfigInterface]]></code>
+    </ImplementedReturnTypeMismatch>
+    <MoreSpecificImplementedParamType>
+      <code><![CDATA[$service]]></code>
+    </MoreSpecificImplementedParamType>
+  </file>
+  <file src="src/Container/Factory/WorkspaceFactory.php">
+    <MixedArgument>
+      <code><![CDATA[$config->get('dryRun', false)]]></code>
+      <code><![CDATA[$config->get('force', false)]]></code>
+      <code><![CDATA[$config->get('source', 'src')]]></code>
+      <code><![CDATA[$config->get('tests', 'tests')]]></code>
+    </MixedArgument>
   </file>
   <file src="src/Generator/ClassLike/ClassGenerator.php">
     <LessSpecificReturnType>
@@ -33,6 +120,16 @@
     <PossiblyUnusedMethod>
       <code><![CDATA[generater]]></code>
     </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Generator/ClassLike/ClassGeneratorInterface.php">
+    <UnusedClass>
+      <code><![CDATA[ClassGeneratorInterface]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Generator/ClassLike/EnumGeneratorInterface.php">
+    <UnusedClass>
+      <code><![CDATA[EnumGeneratorInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Generator/ClassLike/InterfaceGenerator.php">
     <LessSpecificReturnType>
@@ -49,6 +146,16 @@
     <ParamNameMismatch>
       <code><![CDATA[$classLikeGenerator]]></code>
     </ParamNameMismatch>
+  </file>
+  <file src="src/Generator/ClassLikeGeneratorInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[addAttribute]]></code>
+      <code><![CDATA[addConstant]]></code>
+      <code><![CDATA[addMethod]]></code>
+      <code><![CDATA[addProperty]]></code>
+      <code><![CDATA[addTraitUse]]></code>
+      <code><![CDATA[addUse]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Generator/ClassLikeMember/MethodGenerator.php">
     <InvalidMethodCall>
@@ -99,11 +206,30 @@
       <code><![CDATA[$right]]></code>
     </UndefinedVariable>
   </file>
+  <file src="src/Generator/ClassLikeMemberGeneratorInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[attributes]]></code>
+      <code><![CDATA[uses]]></code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Generator/FileGenerator.php">
+    <InvalidArgument>
+      <code><![CDATA[$namespaces]]></code>
+    </InvalidArgument>
     <LessSpecificReturnType>
       <code><![CDATA[int]]></code>
       <code><![CDATA[string]]></code>
     </LessSpecificReturnType>
+    <MismatchingDocblockParamType>
+      <code><![CDATA[NamespaceGeneratorInterface]]></code>
+      <code><![CDATA[NamespaceGeneratorInterface]]></code>
+    </MismatchingDocblockParamType>
+    <MismatchingDocblockPropertyType>
+      <code><![CDATA[NamespaceGeneratorInterface]]></code>
+    </MismatchingDocblockPropertyType>
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[$namespaces]]></code>
+    </UndefinedInterfaceMethod>
   </file>
   <file src="src/Generator/NamespaceGenerator.php">
     <ArgumentTypeCoercion>
@@ -121,15 +247,18 @@
             ): int => $left->compare($right)
         )]]></code>
     </InvalidArgument>
-    <InvalidMethodCall>
-      <code><![CDATA[uses]]></code>
-    </InvalidMethodCall>
     <InvalidPropertyAssignmentValue>
       <code><![CDATA[$this->classLikes]]></code>
     </InvalidPropertyAssignmentValue>
     <LessSpecificReturnType>
       <code><![CDATA[string]]></code>
     </LessSpecificReturnType>
+    <MismatchingDocblockParamType>
+      <code><![CDATA[UseGeneratorInterface]]></code>
+    </MismatchingDocblockParamType>
+    <MismatchingDocblockPropertyType>
+      <code><![CDATA[UseGeneratorInterface]]></code>
+    </MismatchingDocblockPropertyType>
     <MixedArgument>
       <code><![CDATA[$returnType]]></code>
     </MixedArgument>
@@ -163,11 +292,17 @@
       <code><![CDATA[usesConstant]]></code>
       <code><![CDATA[usesFunction]]></code>
     </PossiblyUnusedMethod>
-    <PropertyTypeCoercion>
+    <RawObjectIteration>
+      <code><![CDATA[$this->uses]]></code>
+    </RawObjectIteration>
+    <UndefinedInterfaceMethod>
       <code><![CDATA[$this->uses]]></code>
       <code><![CDATA[$this->uses]]></code>
       <code><![CDATA[$this->uses]]></code>
-    </PropertyTypeCoercion>
+      <code><![CDATA[$this->uses]]></code>
+      <code><![CDATA[$this->uses]]></code>
+      <code><![CDATA[$this->uses]]></code>
+    </UndefinedInterfaceMethod>
     <UnusedMethod>
       <code><![CDATA[method]]></code>
     </UnusedMethod>
@@ -219,6 +354,11 @@
       <code><![CDATA[$className]]></code>
     </UnusedParam>
   </file>
+  <file src="src/Generator/Use/UseGeneratorInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[alias]]></code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Handler/NotFoundHandler.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
@@ -227,48 +367,6 @@
   <file src="src/Handler/TestifyCommandHandler.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Handlers.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[toArray]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Interface/CliPrinterInterface.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[printThrowable]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Interface/Generator/ClassLike/ClassGeneratorInterface.php">
-    <UnusedClass>
-      <code><![CDATA[ClassGeneratorInterface]]></code>
-    </UnusedClass>
-  </file>
-  <file src="src/Interface/Generator/ClassLike/EnumGeneratorInterface.php">
-    <UnusedClass>
-      <code><![CDATA[EnumGeneratorInterface]]></code>
-    </UnusedClass>
-  </file>
-  <file src="src/Interface/Generator/ClassLikeGeneratorInterface.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[addAttribute]]></code>
-      <code><![CDATA[addConstant]]></code>
-      <code><![CDATA[addMethod]]></code>
-      <code><![CDATA[addProperty]]></code>
-      <code><![CDATA[addTraitUse]]></code>
-      <code><![CDATA[addUse]]></code>
-      <code><![CDATA[uses]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Interface/Generator/ClassLikeMemberGeneratorInterface.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[attributes]]></code>
-      <code><![CDATA[uses]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Interface/Generator/UseGeneratorInterface.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[alias]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Interface/NameGeneratorInterface.php">
@@ -280,15 +378,9 @@
     <LessSpecificReturnType>
       <code><![CDATA[bool]]></code>
     </LessSpecificReturnType>
-    <MixedArgument>
-      <code><![CDATA[$this->cliPrinter->printException($throwable)]]></code>
-    </MixedArgument>
     <PossiblyUnusedMethod>
       <code><![CDATA[new]]></code>
     </PossiblyUnusedMethod>
-    <UndefinedInterfaceMethod>
-      <code><![CDATA[printException]]></code>
-    </UndefinedInterfaceMethod>
   </file>
   <file src="src/Normalizer/ClassConstantNameNormalizer.php">
     <PossiblyUnusedMethod>
@@ -315,74 +407,30 @@
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/PhpFileFinder.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Project.php">
-    <PossiblyUnusedProperty>
-      <code><![CDATA[$source]]></code>
-      <code><![CDATA[$tests]]></code>
-    </PossiblyUnusedProperty>
-  </file>
-  <file src="src/Runner.php">
-    <MixedArgument>
-      <code><![CDATA[$sourceDirectory]]></code>
-    </MixedArgument>
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[[$testsDirectory, 'Test.php']]]></code>
-    </MixedArgumentTypeCoercion>
+  <file src="src/Resolver/FileResolver.php">
+    <MismatchingDocblockParamType>
+      <code><![CDATA[PhpToken]]></code>
+    </MismatchingDocblockParamType>
     <MixedAssignment>
-      <code><![CDATA[$sourceDirectory]]></code>
-      <code><![CDATA[$testsDirectory]]></code>
+      <code><![CDATA[$text]]></code>
+      <code><![CDATA[$token]]></code>
+      <code><![CDATA[$tokenId]]></code>
     </MixedAssignment>
-    <NoInterfaceProperties>
-      <code><![CDATA[$project->source]]></code>
-      <code><![CDATA[$project->tests]]></code>
-    </NoInterfaceProperties>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/TestBuilder.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$this->testMethodsResolver->resolve($namespaceClass)]]></code>
-    </ArgumentTypeCoercion>
-    <InvalidArgument>
-      <code><![CDATA[[new AttributeGenerator('CoversClass', [$class . '::class'])]]]></code>
-    </InvalidArgument>
-    <InvalidOperand>
-      <code><![CDATA[$namespace]]></code>
-    </InvalidOperand>
-    <MissingThrowsDocblock>
-      <code><![CDATA[throw new RuntimeException('Could not read file: ' . $file);]]></code>
-    </MissingThrowsDocblock>
-    <MixedArgumentTypeCoercion>
-      <code><![CDATA[$namespaces]]></code>
-    </MixedArgumentTypeCoercion>
-    <MixedArrayAccess>
-      <code><![CDATA[$namespaceGenerator]]></code>
-      <code><![CDATA[$testNamespace]]></code>
-    </MixedArrayAccess>
-    <MixedAssignment>
-      <code><![CDATA[$namespaces[$namespace]]]></code>
-      <code><![CDATA[[$testNamespace, $namespaceGenerator]]]></code>
-    </MixedAssignment>
-    <MixedMethodCall>
-      <code><![CDATA[classLikes]]></code>
-      <code><![CDATA[usesClass]]></code>
-      <code><![CDATA[usesClass]]></code>
-      <code><![CDATA[usesClass]]></code>
-    </MixedMethodCall>
     <MixedOperand>
-      <code><![CDATA[$testNamespace]]></code>
+      <code><![CDATA[$text]]></code>
     </MixedOperand>
+    <MixedPropertyFetch>
+      <code><![CDATA[$token->id]]></code>
+      <code><![CDATA[$token->text]]></code>
+    </MixedPropertyFetch>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
+    <RawObjectIteration>
+      <code><![CDATA[$tokens]]></code>
+    </RawObjectIteration>
   </file>
-  <file src="src/TestMethodsResolver.php">
+  <file src="src/Resolver/TestMethodsResolver.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -487,17 +535,32 @@
       <code><![CDATA[$testMethodNameNormalizer]]></code>
     </UnusedProperty>
   </file>
+  <file src="src/Runner/Runner.php">
+    <MixedArgument>
+      <code><![CDATA[$sourceDirectory]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$sourceDirectory]]></code>
+    </MixedAssignment>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[source]]></code>
+      <code><![CDATA[tests]]></code>
+    </UndefinedInterfaceMethod>
+  </file>
   <file src="src/Testify.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
       <code><![CDATA[new]]></code>
       <code><![CDATA[run]]></code>
     </PossiblyUnusedMethod>
+    <UnusedParam>
+      <code><![CDATA[$middleware]]></code>
+    </UnusedParam>
   </file>
   <file src="src/Trait/ClassLikeGeneratorTrait.php">
-    <InvalidReturnType>
-      <code><![CDATA[list<DocBlockGeneratorInterface>]]></code>
-    </InvalidReturnType>
     <ParamNameMismatch>
       <code><![CDATA[$classLikeGenerator]]></code>
     </ParamNameMismatch>
@@ -514,5 +577,13 @@
     <ParamNameMismatch>
       <code><![CDATA[$useGenerator]]></code>
     </ParamNameMismatch>
+  </file>
+  <file src="src/Value/Workspace.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[dryRun]]></code>
+      <code><![CDATA[force]]></code>
+      <code><![CDATA[source]]></code>
+      <code><![CDATA[tests]]></code>
+    </PossiblyUnusedMethod>
   </file>
 </files>

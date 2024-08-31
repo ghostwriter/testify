@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Generator\Use;
 
-use Ghostwriter\Testify\Interface\Generator\UseClassGeneratorInterface;
 use Ghostwriter\Testify\Trait\UseGeneratorTrait;
 use Override;
 

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Generator;
 
-use Ghostwriter\Testify\Interface\GeneratorInterface;
 use Override;
 
 final readonly class ParameterGenerator implements GeneratorInterface
