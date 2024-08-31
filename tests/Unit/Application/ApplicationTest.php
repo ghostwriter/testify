@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Console;
+namespace Tests\Unit\Application;
 
-use Ghostwriter\Testify\Console\Application;
+use Ghostwriter\Testify\Application\Application;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
