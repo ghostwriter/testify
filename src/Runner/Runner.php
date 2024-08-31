@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Console;
+namespace Ghostwriter\Testify\Runner;
 
 use Generator;
+use Ghostwriter\Testify\Application\PhpFileFinder;
 use Ghostwriter\Testify\Interface\RunnerInterface;
 use Ghostwriter\Testify\Interface\WorkspaceInterface;
-use Ghostwriter\Testify\PhpFileFinder;
 use Override;
 
 use const DIRECTORY_SEPARATOR;
@@ -24,9 +24,9 @@ final readonly class Runner implements RunnerInterface
     #[Override]
     public function run(WorkspaceInterface $project): Generator
     {
-        $sourceDirectory = $project->source;
+        $sourceDirectory = $project->source();
 
-        $unitTestsDirectory = $project->tests . DIRECTORY_SEPARATOR . 'Unit';
+        $unitTestsDirectory = $project->tests() . DIRECTORY_SEPARATOR . 'Unit';
 
         foreach ($this->phpFileFinder->find($sourceDirectory) as $file) {
             yield $file => str_replace([$sourceDirectory, '.php'], [$unitTestsDirectory, 'Test.php'], $file);
