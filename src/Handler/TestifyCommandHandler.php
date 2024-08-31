@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Console\Handler;
+namespace Ghostwriter\Testify\Handler;
 
 use Ghostwriter\Container\Attribute\Inject;
-use Ghostwriter\Testify\Interface\CliPrinterInterface;
-use Ghostwriter\Testify\Interface\CommandInterface;
-use Ghostwriter\Testify\Interface\HandlerInterface;
+use Ghostwriter\Testify\Command\CommandInterface;
 use Ghostwriter\Testify\Printer\CliPrinter;
+use Ghostwriter\Testify\Printer\CliPrinterInterface;
 use Override;
 
 final readonly class TestifyCommandHandler implements HandlerInterface
