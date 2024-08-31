@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Console;
+namespace Ghostwriter\Testify\Command;
 
 use Ghostwriter\Container\Attribute\Factory;
 use Ghostwriter\Testify\Container\Factory\MiddlewaresFactory;
-use Ghostwriter\Testify\Interface\CommandInterface;
-use Ghostwriter\Testify\Interface\HandlerInterface;
-use Ghostwriter\Testify\Interface\MiddlewareInterface;
+use Ghostwriter\Testify\Handler\HandlerInterface;
+use Ghostwriter\Testify\Middleware\MiddlewareInterface;
 use Override;
 use RuntimeException;
 use Throwable;
