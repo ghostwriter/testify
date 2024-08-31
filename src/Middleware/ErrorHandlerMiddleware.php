@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Console\Middleware;
+namespace Ghostwriter\Testify\Middleware;
 
 use ErrorException;
-use Ghostwriter\Testify\Console\Handler\ExceptionHandler;
-use Ghostwriter\Testify\Interface\CliPrinterInterface;
-use Ghostwriter\Testify\Interface\CommandInterface;
-use Ghostwriter\Testify\Interface\HandlerInterface;
-use Ghostwriter\Testify\Interface\MiddlewareInterface;
+use Ghostwriter\Testify\Command\CommandInterface;
+use Ghostwriter\Testify\Handler\ExceptionHandler;
+use Ghostwriter\Testify\Handler\HandlerInterface;
 use Ghostwriter\Testify\Printer\CliPrinter;
+use Ghostwriter\Testify\Printer\CliPrinterInterface;
 use Override;
 use Throwable;
 
