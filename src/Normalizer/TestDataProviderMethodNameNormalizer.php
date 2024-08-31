@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Normalizer;
 
 use Ghostwriter\Testify\Formatter\TestDataProviderMethodNameFormatter;
-use Ghostwriter\Testify\Interface\NormalizerInterface;
 use Override;
 
 final readonly class TestDataProviderMethodNameNormalizer implements NormalizerInterface
