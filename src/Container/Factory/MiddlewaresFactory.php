@@ -6,9 +6,9 @@ namespace Ghostwriter\Testify\Container\Factory;
 
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\FactoryInterface;
-use Ghostwriter\Testify\Console\Middleware\ErrorHandlerMiddleware;
-use Ghostwriter\Testify\Console\Middleware\TestifyCommandMiddleware;
-use Ghostwriter\Testify\Console\Middlewares;
+use Ghostwriter\Testify\Command\Middlewares;
+use Ghostwriter\Testify\Middleware\ErrorHandlerMiddleware;
+use Ghostwriter\Testify\Middleware\TestifyCommandMiddleware;
 use Override;
 use Throwable;
 
