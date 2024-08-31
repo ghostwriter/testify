@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Interface;
+namespace Ghostwriter\Testify\Printer;
+
+use Ghostwriter\Testify\Generator\GeneratorInterface;
 
 interface PrinterInterface
 {
