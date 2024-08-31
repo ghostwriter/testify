@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Console;
+namespace Ghostwriter\Testify\Application;
 
 use Ghostwriter\Container\Container;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Testify\Interface\CommandInterface;
-use Ghostwriter\Testify\Interface\Console\ApplicationInterface;
-use Ghostwriter\Testify\Interface\HandlerInterface;
+use Ghostwriter\Testify\Command\CommandInterface;
+use Ghostwriter\Testify\Command\Handlers;
+use Ghostwriter\Testify\Command\Middlewares;
+use Ghostwriter\Testify\Handler\HandlerInterface;
 use Override;
 use Throwable;
 
