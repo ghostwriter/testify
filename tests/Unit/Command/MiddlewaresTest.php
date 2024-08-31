@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Console;
+namespace Tests\Unit\Command;
 
-use Ghostwriter\Testify\Console\Middlewares;
+use Ghostwriter\Testify\Command\Middlewares;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
