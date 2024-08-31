@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Interface\Generator;
-
-use Ghostwriter\Testify\Interface\GeneratorInterface;
+namespace Ghostwriter\Testify\Generator;
 
 interface AttributeGeneratorInterface extends GeneratorInterface
 {
