@@ -6,8 +6,8 @@ namespace Ghostwriter\Testify\Container\Factory;
 
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\FactoryInterface;
-use Ghostwriter\Testify\Console\Handler\TestifyCommandHandler;
-use Ghostwriter\Testify\Console\Handlers;
+use Ghostwriter\Testify\Command\Handlers;
+use Ghostwriter\Testify\Handler\TestifyCommandHandler;
 use Override;
 use Throwable;
 
