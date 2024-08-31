@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Interface;
+namespace Ghostwriter\Testify\Handler;
 
+use Ghostwriter\Testify\Command\CommandInterface;
 use Throwable;
 
 interface HandlerInterface
