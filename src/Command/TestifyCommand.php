@@ -2,19 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Console\Command;
+namespace Ghostwriter\Testify\Command;
 
 use Ghostwriter\Container\Attribute\Factory;
 use Ghostwriter\Container\Attribute\Inject;
-use Ghostwriter\Testify\Console\Runner;
+use Ghostwriter\Testify\Application\Filesystem;
+use Ghostwriter\Testify\Builder\TestBuilder;
 use Ghostwriter\Testify\Container\Factory\WorkspaceFactory;
-use Ghostwriter\Testify\Filesystem;
-use Ghostwriter\Testify\Interface\CommandInterface;
-use Ghostwriter\Testify\Interface\PrinterInterface;
 use Ghostwriter\Testify\Interface\RunnerInterface;
 use Ghostwriter\Testify\Interface\WorkspaceInterface;
 use Ghostwriter\Testify\Printer\Printer;
-use Ghostwriter\Testify\TestBuilder;
+use Ghostwriter\Testify\Printer\PrinterInterface;
+use Ghostwriter\Testify\Runner\Runner;
 use Override;
 use Throwable;
 
@@ -75,8 +74,9 @@ final readonly class TestifyCommand implements CommandInterface
         //        dd($options, $opts, $project);
 
         $count = 0;
-        $dryRun = $project->dryRun;
-        $force = $project->force;
+        $dryRun = $project->dryRun();
+        $force = $project->force();
+
         foreach ($this->runner->run($project) as $file => $testFile) {
             $this->writeln(['Class ' . $file . ' is missing a test.', 'Generating ' . $testFile . '.', PHP_EOL]);
 
@@ -107,10 +107,18 @@ final readonly class TestifyCommand implements CommandInterface
         return 0;
     }
 
+    public function name(): string
+    {
+        return 'testify';
+    }
+
+    /**
+     * @param list<string>|string $message
+     */
     private function writeln(array|string $message): void
     {
         foreach ((array) $message as $line) {
-            fwrite(STDOUT, $line . PHP_EOL);
+            fwrite(STDOUT, sprintf('%s%s', $line, PHP_EOL));
         }
     }
 }
