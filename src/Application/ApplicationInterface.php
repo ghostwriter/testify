@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Interface\Console;
+namespace Ghostwriter\Testify\Application;
 
-use Ghostwriter\Testify\Interface\CommandBusInterface;
-use Ghostwriter\Testify\Interface\HandlerInterface;
-use Ghostwriter\Testify\Interface\MiddlewareInterface;
+use Ghostwriter\Testify\Command\CommandBusInterface;
+use Ghostwriter\Testify\Handler\HandlerInterface;
+use Ghostwriter\Testify\Middleware\MiddlewareInterface;
 use Throwable;
 
 interface ApplicationInterface extends CommandBusInterface, HandlerInterface, MiddlewareInterface
