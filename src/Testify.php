@@ -6,14 +6,14 @@ namespace Ghostwriter\Testify;
 
 use Ghostwriter\Container\Container;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Testify\Console\Command\TestifyCommand;
-use Ghostwriter\Testify\Console\Handlers;
-use Ghostwriter\Testify\Console\Middlewares;
+use Ghostwriter\Testify\Command\CommandBusInterface;
+use Ghostwriter\Testify\Command\CommandInterface;
+use Ghostwriter\Testify\Command\Handlers;
+use Ghostwriter\Testify\Command\Middlewares;
+use Ghostwriter\Testify\Command\TestifyCommand;
 use Ghostwriter\Testify\Container\ServiceProvider;
-use Ghostwriter\Testify\Interface\CommandBusInterface;
-use Ghostwriter\Testify\Interface\CommandInterface;
-use Ghostwriter\Testify\Interface\HandlerInterface;
-use Ghostwriter\Testify\Interface\MiddlewareInterface;
+use Ghostwriter\Testify\Handler\HandlerInterface;
+use Ghostwriter\Testify\Middleware\MiddlewareInterface;
 use Override;
 use Throwable;
 
