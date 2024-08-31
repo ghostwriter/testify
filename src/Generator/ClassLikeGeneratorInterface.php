@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Interface\Generator;
+namespace Ghostwriter\Testify\Generator;
 
-use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\ConstantGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\MethodGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\PropertyGeneratorInterface;
-use Ghostwriter\Testify\Interface\Generator\ClassLikeMember\TraitUseGeneratorInterface;
-use Ghostwriter\Testify\Interface\GeneratorInterface;
+use Ghostwriter\Testify\Generator\ClassLikeMember\ConstantGeneratorInterface;
+use Ghostwriter\Testify\Generator\ClassLikeMember\MethodGeneratorInterface;
+use Ghostwriter\Testify\Generator\ClassLikeMember\PropertyGeneratorInterface;
+use Ghostwriter\Testify\Generator\ClassLikeMember\TraitUseGeneratorInterface;
+use Ghostwriter\Testify\Generator\Use\UseGeneratorInterface;
 
 interface ClassLikeGeneratorInterface extends GeneratorInterface
 {
