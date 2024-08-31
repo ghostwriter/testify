@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Interface;
+namespace Ghostwriter\Testify\Middleware;
+
+use Ghostwriter\Testify\Command\CommandInterface;
+use Ghostwriter\Testify\Handler\HandlerInterface;
 
 interface MiddlewareInterface
 {
