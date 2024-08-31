@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Interface\Generator;
+namespace Ghostwriter\Testify\Generator;
 
-use Ghostwriter\Testify\Interface\GeneratorInterface;
+use Ghostwriter\Testify\Generator\Use\UseGeneratorInterface;
 
 interface ClassLikeMemberGeneratorInterface extends GeneratorInterface
 {
