@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify;
+namespace Ghostwriter\Testify\Builder;
 
 use Ghostwriter\Testify\Generator\AttributeGenerator;
 use Ghostwriter\Testify\Generator\ClassLike\ClassGenerator;
 use Ghostwriter\Testify\Generator\FileGenerator;
+use Ghostwriter\Testify\Generator\GeneratorInterface;
 use Ghostwriter\Testify\Generator\Name\ClassNameGenerator;
-use Ghostwriter\Testify\Interface\BuilderInterface;
-use Ghostwriter\Testify\Interface\GeneratorInterface;
 use Ghostwriter\Testify\Normalizer\ClassNameNormalizer;
 use Ghostwriter\Testify\Resolver\FileResolver;
 use Ghostwriter\Testify\Resolver\TestMethodsResolver;
@@ -51,6 +50,7 @@ final readonly class TestBuilder implements BuilderInterface
 
         foreach ($namespaces as $namespace => [$testNamespace, $namespaceGenerator]) {
             $namespaceClass = ltrim($namespace . '\\' . $class, '\\');
+
             $testNamespaceClass = ltrim($testNamespace . '\\' . $testClass, '\\');
 
             $namespaces[$namespace] = $namespaceGenerator->classLikes([
