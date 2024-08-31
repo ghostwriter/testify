@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Printer;
 
-use Ghostwriter\Testify\Interface\CliPrinterInterface;
-use Ghostwriter\Testify\Interface\CommandInterface;
+use Ghostwriter\Testify\Command\CommandInterface;
 use Override;
 use Throwable;
 
