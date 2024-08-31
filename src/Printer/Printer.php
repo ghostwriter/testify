@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Printer;
 
-use Ghostwriter\Testify\Interface\GeneratorInterface;
-use Ghostwriter\Testify\Interface\PrinterInterface;
+use Ghostwriter\Testify\Generator\GeneratorInterface;
 use Override;
 
 final readonly class Printer implements PrinterInterface
