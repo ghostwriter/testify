@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit;
+namespace Tests\Unit\Application;
 
-use Ghostwriter\Testify\PhpFileFinder;
+use Ghostwriter\Testify\Application\PhpFileFinder;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
