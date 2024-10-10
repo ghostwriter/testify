@@ -10,8 +10,6 @@ use Ghostwriter\Testify\Handler\HandlerInterface;
 use Override;
 use RuntimeException;
 
-use function array_shift;
-
 #[Factory(HandlersFactory::class)]
 final class Handlers implements HandlerInterface
 {
@@ -28,6 +26,11 @@ final class Handlers implements HandlerInterface
         }
     }
 
+    public static function new(HandlerInterface ...$handler): self
+    {
+        return new self($handler);
+    }
+
     public function add(HandlerInterface ...$handler): void
     {
         $this->handlers = [...$this->handlers, ...$handler];
@@ -36,7 +39,7 @@ final class Handlers implements HandlerInterface
     #[Override]
     public function handle(CommandInterface $command): int
     {
-        $handler = array_shift($this->handlers);
+        $handler = \array_shift($this->handlers);
 
         if (! $handler instanceof HandlerInterface) {
             return $command->execute();
@@ -48,10 +51,5 @@ final class Handlers implements HandlerInterface
     public function toArray(): array
     {
         return $this->handlers;
-    }
-
-    public static function new(HandlerInterface ...$handler): self
-    {
-        return new self($handler);
     }
 }
