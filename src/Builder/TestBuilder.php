@@ -18,10 +18,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-use function basename;
-use function file_get_contents;
-use function ltrim;
-
 final readonly class TestBuilder implements BuilderInterface
 {
     public function __construct(
@@ -34,7 +30,7 @@ final readonly class TestBuilder implements BuilderInterface
     #[Override]
     public function build(string $file, string $testFile): GeneratorInterface
     {
-        $code = file_get_contents($file);
+        $code = \file_get_contents($file);
 
         if ($code === false) {
             throw new RuntimeException('Could not read file: ' . $file);
@@ -44,14 +40,14 @@ final readonly class TestBuilder implements BuilderInterface
 
         $namespaces = $this->fileResolver->resolve($tokens);
 
-        $class = $this->classNameNormalizer->normalize(basename($file, '.php'));
+        $class = $this->classNameNormalizer->normalize(\basename($file, '.php'));
 
-        $testClass = $this->classNameNormalizer->normalize(basename($testFile, '.php'));
+        $testClass = $this->classNameNormalizer->normalize(\basename($testFile, '.php'));
 
         foreach ($namespaces as $namespace => [$testNamespace, $namespaceGenerator]) {
-            $namespaceClass = ltrim($namespace . '\\' . $class, '\\');
+            $namespaceClass = \ltrim($namespace . '\\' . $class, '\\');
 
-            $testNamespaceClass = ltrim($testNamespace . '\\' . $testClass, '\\');
+            $testNamespaceClass = \ltrim($testNamespace . '\\' . $testClass, '\\');
 
             $namespaces[$namespace] = $namespaceGenerator->classLikes([
                 $testNamespaceClass => new ClassGenerator(
