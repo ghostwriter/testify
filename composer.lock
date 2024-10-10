@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9818bf3fd97a4ed80aa97eff577e95a2",
+    "content-hash": "1f73104104825c9e3d49141ebdcf5ae1",
     "packages": [
         {
             "name": "ghostwriter/case-converter",
@@ -257,6 +257,66 @@
                 }
             ],
             "time": "2024-07-15T22:32:15+00:00"
+        },
+        {
+            "name": "ghostwriter/filesystem",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ghostwriter/filesystem.git",
+                "reference": "48779b1db050cdeb3c1d9ff9752f75acd1318398"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ghostwriter/filesystem/zipball/48779b1db050cdeb3c1d9ff9752f75acd1318398",
+                "reference": "48779b1db050cdeb3c1d9ff9752f75acd1318398",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.3"
+            },
+            "require-dev": {
+                "ghostwriter/coding-standard": "dev-main"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ghostwriter\\Filesystem\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nathanael Esayeas",
+                    "email": "nathanael.esayeas@protonmail.com",
+                    "homepage": "https://github.com/ghostwriter",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Filesystem implementation for PHP",
+            "homepage": "https://github.com/ghostwriter/filesystem",
+            "keywords": [
+                "filesystem",
+                "ghostwriter"
+            ],
+            "support": {
+                "docs": "https://github.com/ghostwriter/filesystem",
+                "forum": "https://github.com/ghostwriter/filesystem/discussions",
+                "issues": "https://github.com/ghostwriter/filesystem/issues",
+                "rss": "https://github.com/ghostwriter/filesystem/releases.atom",
+                "security": "https://github.com/ghostwriter/filesystem/security/advisories/new",
+                "source": "https://github.com/ghostwriter/filesystem"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/sponsors/ghostwriter",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-10-10T16:28:42+00:00"
         }
     ],
     "packages-dev": [
