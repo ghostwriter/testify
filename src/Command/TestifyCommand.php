@@ -6,7 +6,8 @@ namespace Ghostwriter\Testify\Command;
 
 use Ghostwriter\Container\Attribute\Factory;
 use Ghostwriter\Container\Attribute\Inject;
-use Ghostwriter\Testify\Application\Filesystem;
+use Ghostwriter\Filesystem\Filesystem;
+use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Ghostwriter\Testify\Builder\TestBuilder;
 use Ghostwriter\Testify\Container\Factory\WorkspaceFactory;
 use Ghostwriter\Testify\Interface\RunnerInterface;
@@ -20,7 +21,6 @@ use Throwable;
 use const PHP_EOL;
 use const STDOUT;
 
-use function fwrite;
 use function sprintf;
 
 final readonly class TestifyCommand implements CommandInterface
@@ -29,7 +29,8 @@ final readonly class TestifyCommand implements CommandInterface
      * @throws Throwable
      */
     public function __construct(
-        private Filesystem $filesystem,
+        #[Inject(Filesystem::class)]
+        private FilesystemInterface $filesystem,
         #[Inject(Runner::class)]
         private RunnerInterface $runner,
         #[Inject(Printer::class)]
@@ -50,7 +51,7 @@ final readonly class TestifyCommand implements CommandInterface
         $project = $this->workspace;
         //            new Workspace($options[0] ?? 'src', $options[1] ?? 'tests', $dryRun, $force);
 
-        fwrite(STDOUT, sprintf(
+        \fwrite(STDOUT, \sprintf(
             '%s by %s and contributors. %s' . PHP_EOL,
             'Testify',
             'Nathanael Esayeas',
@@ -93,20 +94,21 @@ final readonly class TestifyCommand implements CommandInterface
 
             if ($force || $this->filesystem->missing($testFile)) {
                 ++$count;
-                $this->filesystem->save($testFile, $testFileContent);
+                $this->filesystem->write($testFile, $testFileContent);
 
-                $this->writeln(sprintf('File "%s" written.' . PHP_EOL, $testFile));
+                $this->writeln(\sprintf('File "%s" written.' . PHP_EOL, $testFile));
                 continue;
             }
 
             $this->writeln('File already exists;(use "--force|-f" to overwrite)' . PHP_EOL);
         }
 
-        $this->writeln([PHP_EOL, sprintf('Generated %d missing tests.', $count)]);
+        $this->writeln([PHP_EOL, \sprintf('Generated %d missing tests.', $count)]);
 
         return 0;
     }
 
+    #[Override]
     public function name(): string
     {
         return 'testify';
@@ -118,7 +120,7 @@ final readonly class TestifyCommand implements CommandInterface
     private function writeln(array|string $message): void
     {
         foreach ((array) $message as $line) {
-            fwrite(STDOUT, sprintf('%s%s', $line, PHP_EOL));
+            \fwrite(STDOUT, \sprintf('%s%s', $line, PHP_EOL));
         }
     }
 }
