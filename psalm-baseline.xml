@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.25.0@01a8eb06b9e9cc6cfb6a320bf9fb14331919d505">
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
   <file src="src/Application/Application.php">
     <MissingThrowsDocblock>
       <code><![CDATA[process]]></code>
@@ -17,15 +17,10 @@
       <code><![CDATA[run]]></code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/Application/Filesystem.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[basename]]></code>
-      <code><![CDATA[currentWorkingDirectory]]></code>
-      <code><![CDATA[exists]]></code>
-      <code><![CDATA[isFile]]></code>
-      <code><![CDATA[isReadable]]></code>
-      <code><![CDATA[read]]></code>
-    </PossiblyUnusedMethod>
+  <file src="src/Application/FinderInterface.php">
+    <UnusedClass>
+      <code><![CDATA[FinderInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Application/PhpFileFinder.php">
     <PossiblyUnusedMethod>
@@ -79,9 +74,6 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Command/TestifyCommand.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function name(): string]]></code>
-    </MissingOverrideAttribute>
     <MixedAssignment>
       <code><![CDATA[$dryRun]]></code>
       <code><![CDATA[$force]]></code>
@@ -239,7 +231,7 @@
     <InvalidArgument>
       <code><![CDATA[$extends]]></code>
       <code><![CDATA[ClassLikeGeneratorInterface]]></code>
-      <code><![CDATA[usort(
+      <code><![CDATA[\usort(
             $classLikes,
             static fn (
                 ClassLikeGeneratorInterface $left,
@@ -279,7 +271,7 @@
       <code><![CDATA[name]]></code>
     </MixedMethodCall>
     <MixedReturnStatement>
-      <code><![CDATA[array_reduce(
+      <code><![CDATA[\array_reduce(
             $classLikes,
             static fn (string $code, ClassLikeGeneratorInterface $classLikeGenerator): string => $code . $classLikeGenerator->generate() . self::NEWLINES,
             $code
@@ -447,28 +439,28 @@
             $testMethodName = $this->testMethodNameNormalizer->normalize($method->getName());
 
             $uses = [];
-            $parameters = array_map(
+            $parameters = \array_map(
                 static function (ReflectionParameter $reflectionParameter) use ($uses): ParameterGenerator {
                     $parameterType = $reflectionParameter->getType()?->__toString() ?? 'mixed';
 
-                    $parameterTypes = explode('|', $parameterType);
+                    $parameterTypes = \explode('|', $parameterType);
                     $types = [];
                     foreach ($parameterTypes as $parameterType) {
-                        if (str_starts_with($parameterType, '?')) {
-                            $parameterType = ltrim($parameterType, '?');
+                        if (\str_starts_with($parameterType, '?')) {
+                            $parameterType = \ltrim($parameterType, '?');
                         }
 
-                        if (str_contains($parameterType, '\\')) {
+                        if (\str_contains($parameterType, '\\')) {
                             if (
-                                class_exists($parameterType)
-                                || interface_exists($parameterType)
-                                || trait_exists($parameterType)
-                                || enum_exists($parameterType)
+                                \class_exists($parameterType)
+                                || \interface_exists($parameterType)
+                                || \trait_exists($parameterType)
+                                || \enum_exists($parameterType)
                             ) {
                                 $uses[$parameterType] = new UseClassGenerator($parameterType);
                             }
 
-                            $parameterType = mb_substr($parameterType, mb_strrpos($parameterType, '\\') + 1);
+                            $parameterType = \mb_substr($parameterType, \mb_strrpos($parameterType, '\\') + 1);
                         }
 
                         $types[] = $parameterType;
@@ -476,7 +468,7 @@
 
                     return new ParameterGenerator(
                         name: $reflectionParameter->getName(),
-                        type: implode('|', $types),
+                        type: \implode('|', $types),
                         isOptional: $reflectionParameter->isOptional(),
                         isVariadic: $reflectionParameter->isVariadic(),
                         isPassedByReference: $reflectionParameter->isPassedByReference(),
@@ -507,7 +499,7 @@
                     false,
                 );
 
-                $attributes[] = new AttributeGenerator('DataProvider', [sprintf("'%s'", $dataProvider)]);
+                $attributes[] = new AttributeGenerator('DataProvider', [\sprintf("'%s'", $dataProvider)]);
             }
 
             $methods[$testMethodName] = new MethodGenerator(
