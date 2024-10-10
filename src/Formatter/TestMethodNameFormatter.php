@@ -6,13 +6,11 @@ namespace Ghostwriter\Testify\Formatter;
 
 use Override;
 
-use function sprintf;
-
 final readonly class TestMethodNameFormatter implements FormatterInterface
 {
     #[Override]
     public function format(string $name): string
     {
-        return sprintf('test_%s', $name);
+        return \sprintf('test_%s', $name);
     }
 }
