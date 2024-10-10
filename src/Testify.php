@@ -31,6 +31,20 @@ final readonly class Testify implements CommandBusInterface, HandlerInterface, M
     /**
      * @throws Throwable
      */
+    public static function new(MiddlewareInterface ...$middleware): self
+    {
+        $container = Container::getInstance();
+
+        if (! $container->has(ServiceProvider::class)) {
+            $container->provide(ServiceProvider::class);
+        }
+
+        return $container->get(self::class);
+    }
+
+    /**
+     * @throws Throwable
+     */
     #[Override]
     public function dispatch(CommandInterface $command): int
     {
@@ -61,19 +75,5 @@ final readonly class Testify implements CommandBusInterface, HandlerInterface, M
     public function run(): int
     {
         return $this->dispatch($this->container->get(TestifyCommand::class));
-    }
-
-    /**
-     * @throws Throwable
-     */
-    public static function new(MiddlewareInterface ...$middleware): self
-    {
-        $container = Container::getInstance();
-
-        if (! $container->has(ServiceProvider::class)) {
-            $container->provide(ServiceProvider::class);
-        }
-
-        return $container->get(self::class);
     }
 }
