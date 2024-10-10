@@ -13,16 +13,17 @@ use Ghostwriter\Testify\Printer\CliPrinterInterface;
 use Override;
 use Throwable;
 
-use function error_reporting;
-use function restore_error_handler;
-use function set_error_handler;
-
 final readonly class ErrorHandlerMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private ExceptionHandler $exceptionHandler,
         private CliPrinterInterface $cliPrinter
     ) {
+    }
+
+    public static function new(): self
+    {
+        return new self(new ExceptionHandler(new CliPrinter()), new CliPrinter());
     }
 
     /**
@@ -41,8 +42,8 @@ final readonly class ErrorHandlerMiddleware implements MiddlewareInterface
         #define EX_NOPERM       77      /* permission denied */
         #define EX_CONFIG       78      /* configuration error */
         #define EX_IOERR        74      /* input/output error */
-        set_error_handler(static function (int $severity, string $message, string $filename, int $line): bool {
-            if (0 === ($severity & error_reporting())) {
+        \set_error_handler(static function (int $severity, string $message, string $filename, int $line): bool {
+            if (0 === ($severity & \error_reporting())) {
                 return false;
             }
 
@@ -56,14 +57,9 @@ final readonly class ErrorHandlerMiddleware implements MiddlewareInterface
 
             echo $this->cliPrinter->printThrowable($throwable);
         } finally {
-            restore_error_handler();
+            \restore_error_handler();
         }
 
         return $exitCode;
-    }
-
-    public static function new(): self
-    {
-        return new self(new ExceptionHandler(new CliPrinter()), new CliPrinter());
     }
 }
