@@ -4,37 +4,16 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Application;
 
-use Closure;
 use Generator;
+use Ghostwriter\Filesystem\Interface\FilesystemInterface;
+use Ghostwriter\Testify\Exception\ShouldNotHappenException;
 use SplFileInfo;
-
-use function mb_strtolower;
-use function str_ends_with;
-use function str_starts_with;
 
 final readonly class PhpFileFinder
 {
-    private Closure $isNotSupported;
-
-    private Closure $isPhpFile;
-
     public function __construct(
-        private Filesystem $filesystem,
+        private FilesystemInterface $filesystem,
     ) {
-        $this->isPhpFile = static fn (SplFileInfo $file): bool => $file->getExtension() === 'php';
-
-        $this->isNotSupported = static function (SplFileInfo $file): bool {
-            $filename = $file->getFilename();
-            return match (true) {
-                // if the first letter is lowercase, it's not a class
-                mb_strtolower($filename[0]) === $filename[0],
-                str_starts_with($filename, 'Abstract'),
-                str_ends_with($filename, 'Trait.php'),
-                str_ends_with($filename, 'Interface.php'),
-                str_ends_with($filename, 'Test.php') => true,
-                default => false,
-            };
-        };
     }
 
     /**
@@ -42,19 +21,26 @@ final readonly class PhpFileFinder
      */
     public function find(string $directory): Generator
     {
-        $match = $this->isPhpFile;
-        $skip = $this->isNotSupported;
+        $directory = $this->filesystem->realpath($directory);
 
-        foreach ($this->filesystem->recursiveDirectoryIterator($directory) as $file) {
+        foreach (
+            $this->filesystem->regexIterator($directory, '#.+\.php$#iu') as $file
+        ) {
             if (! $file instanceof SplFileInfo) {
-                continue;
+                throw new ShouldNotHappenException('Invalid file');
             }
 
-            if ($match($file) === false) {
-                continue;
-            }
+            $filename = $file->getBasename('.php');
 
-            if ($skip($file) === true) {
+            if (match (true) {
+                // if the first letter is lowercase, it's not a class
+                \mb_strtolower($filename[0]) === $filename[0],
+                \str_starts_with($filename, 'Abstract'),
+                \str_ends_with($filename, 'Trait'),
+                \str_ends_with($filename, 'Interface'),
+                \str_ends_with($filename, 'Test') => true,
+                default => false,
+            }) {
                 continue;
             }
 
