@@ -9,11 +9,6 @@ use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\ExtensionInterface;
 use Override;
 
-use function array_key_exists;
-use function array_slice;
-use function getopt;
-use function in_array;
-
 /**
  * @implements ExtensionInterface<ConfigInterface>
  */
@@ -42,22 +37,22 @@ final readonly class ConfigExtension implements ExtensionInterface
         //        $app->setVersion(InstalledVersions::getPrettyVersion('ghostwriter/testify') ?? 'UNKNOWN');
 
         $rest_index = -1;
-        $opts = getopt('df', ['dry-run', 'force'], $rest_index);
-        $options = array_slice($argv, $rest_index);
+        $opts = \getopt('df', ['dry-run', 'force'], $rest_index);
+        $options = \array_slice($argv, $rest_index);
 
         $service->set('source', $options[0] ?? 'src');
         $service->set('tests', $options[1] ?? 'tests');
         $service->set('dryRun', (
-            array_key_exists('d', $opts)
-            || array_key_exists('dry-run', $opts)
-            || in_array('-d', $options, true)
-            || in_array('--dry-run', $options, true)
+            \array_key_exists('d', $opts)
+            || \array_key_exists('dry-run', $opts)
+            || \in_array('-d', $options, true)
+            || \in_array('--dry-run', $options, true)
         ));
         $service->set('force', (
-            array_key_exists('f', $opts)
-            || array_key_exists('force', $opts)
-            || in_array('-f', $options, true)
-            || in_array('--force', $options, true)
+            \array_key_exists('f', $opts)
+            || \array_key_exists('force', $opts)
+            || \in_array('-f', $options, true)
+            || \in_array('--force', $options, true)
         ));
 
         return $service;
