@@ -12,8 +12,6 @@ use Override;
 use RuntimeException;
 use Throwable;
 
-use function array_shift;
-
 #[Factory(MiddlewaresFactory::class)]
 final class Middlewares implements MiddlewareInterface
 {
@@ -32,6 +30,14 @@ final class Middlewares implements MiddlewareInterface
         }
     }
 
+    /**
+     * @throws Throwable
+     */
+    public static function new(MiddlewareInterface ...$middleware): self
+    {
+        return new self($middleware);
+    }
+
     public function add(MiddlewareInterface ...$middleware): void
     {
         $this->middlewares = [...$this->middlewares, ...$middleware];
@@ -47,20 +53,12 @@ final class Middlewares implements MiddlewareInterface
             return $handler->handle($command);
         }
 
-        $middleware = array_shift($this->middlewares);
+        $middleware = \array_shift($this->middlewares);
 
         if (! $middleware instanceof MiddlewareInterface) {
             throw new RuntimeException('Middleware must implement Middleware interface');
         }
 
         return $middleware->process($command, $handler);
-    }
-
-    /**
-     * @throws Throwable
-     */
-    public static function new(MiddlewareInterface ...$middleware): self
-    {
-        return new self($middleware);
     }
 }
