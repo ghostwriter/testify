@@ -2,26 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Command;
+namespace Ghostwriter\Testify\Feature\Testify;
 
-use Ghostwriter\Container\Attribute\Factory;
-use Ghostwriter\Container\Attribute\Inject;
-use Ghostwriter\Filesystem\Filesystem;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
-use Ghostwriter\Testify\Builder\TestBuilder;
-use Ghostwriter\Testify\Container\Factory\WorkspaceFactory;
-use Ghostwriter\Testify\Interface\RunnerInterface;
-use Ghostwriter\Testify\Interface\WorkspaceInterface;
-use Ghostwriter\Testify\Printer\Printer;
-use Ghostwriter\Testify\Printer\PrinterInterface;
-use Ghostwriter\Testify\Runner\Runner;
+use Ghostwriter\Testify\Builder\TestBuilderInterface;
+use Ghostwriter\Testify\Command\CommandInterface;
+use Ghostwriter\Testify\Runner\RunnerInterface;
+use Ghostwriter\Testify\Value\WorkspaceInterface;
 use Override;
 use Throwable;
 
 use const PHP_EOL;
 use const STDOUT;
-
-use function sprintf;
 
 final readonly class TestifyCommand implements CommandInterface
 {
@@ -29,14 +21,9 @@ final readonly class TestifyCommand implements CommandInterface
      * @throws Throwable
      */
     public function __construct(
-        #[Inject(Filesystem::class)]
         private FilesystemInterface $filesystem,
-        #[Inject(Runner::class)]
         private RunnerInterface $runner,
-        #[Inject(Printer::class)]
-        private PrinterInterface $printer,
-        private TestBuilder $testBuilder,
-        #[Factory(WorkspaceFactory::class)]
+        private TestBuilderInterface $testBuilder,
         private WorkspaceInterface $workspace,
     ) {
     }
@@ -45,8 +32,10 @@ final readonly class TestifyCommand implements CommandInterface
      * @throws Throwable
      */
     #[Override]
-    public function execute(): int
-    {
+    public function execute(
+        //        ArgumentListInterface $argumentList,
+        //        OptionListInterface $optionList,
+    ): int {
 
         $project = $this->workspace;
         //            new Workspace($options[0] ?? 'src', $options[1] ?? 'tests', $dryRun, $force);
@@ -73,6 +62,15 @@ final readonly class TestifyCommand implements CommandInterface
         //            return Command::INVALID;
         //        }
         //        dd($options, $opts, $project);
+        //                $count = 0;
+        //                $dryRun = $project->dryRun;
+        //                $force = $project->force;
+        //                foreach ($this->runner->run($project) as $file => $testFile) {
+        //                    $output->writeln([
+        //                        'ClassLike <comment>' . $file . '</comment> is missing a test.',
+        //                        'Generating <info>' . $testFile . '</info>.',
+        //                        PHP_EOL,
+        //                    ], OutputInterface::VERBOSITY_VERBOSE);
 
         $count = 0;
         $dryRun = $project->dryRun();
@@ -83,7 +81,7 @@ final readonly class TestifyCommand implements CommandInterface
 
             $fileGenerator = $this->testBuilder->build($file, $testFile);
 
-            $testFileContent = $this->printer->print($fileGenerator);
+            $testFileContent = $fileGenerator->generate();
 
             $this->writeln(['------', PHP_EOL . $testFileContent . PHP_EOL]);
 
@@ -108,7 +106,6 @@ final readonly class TestifyCommand implements CommandInterface
         return 0;
     }
 
-    #[Override]
     public function name(): string
     {
         return 'testify';
