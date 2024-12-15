@@ -1,38 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
   <file src="src/Application/Application.php">
-    <MissingDependency>
-      <code><![CDATA[ApplicationInterface]]></code>
-    </MissingDependency>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
-      <code><![CDATA[handle]]></code>
+      <code><![CDATA[new]]></code>
     </PossiblyUnusedMethod>
-    <PossiblyUnusedProperty>
-      <code><![CDATA[$container]]></code>
-      <code><![CDATA[$handlers]]></code>
-      <code><![CDATA[$middlewares]]></code>
-    </PossiblyUnusedProperty>
-    <UnusedParam>
-      <code><![CDATA[$command]]></code>
-    </UnusedParam>
   </file>
   <file src="src/Application/ApplicationInterface.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[run]]></code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/Application/Filesystem.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[basename]]></code>
-      <code><![CDATA[currentWorkingDirectory]]></code>
-      <code><![CDATA[exists]]></code>
-      <code><![CDATA[isFile]]></code>
-      <code><![CDATA[isReadable]]></code>
-      <code><![CDATA[missing]]></code>
-      <code><![CDATA[read]]></code>
-      <code><![CDATA[save]]></code>
-    </PossiblyUnusedMethod>
+  <file src="src/Application/FinderInterface.php">
+    <UnusedClass>
+      <code><![CDATA[FinderInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Application/PhpFileFinder.php">
     <PossiblyUnusedMethod>
@@ -51,9 +33,6 @@
     <InvalidOperand>
       <code><![CDATA[$namespace]]></code>
     </InvalidOperand>
-    <MissingThrowsDocblock>
-      <code><![CDATA[throw new RuntimeException('Could not read file: ' . $file);]]></code>
-    </MissingThrowsDocblock>
     <MixedArrayAccess>
       <code><![CDATA[$namespaceGenerator]]></code>
       <code><![CDATA[$testNamespace]]></code>
@@ -77,43 +56,83 @@
   </file>
   <file src="src/Command/CommandInterface.php">
     <PossiblyUnusedMethod>
-      <code><![CDATA[execute]]></code>
       <code><![CDATA[name]]></code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/Command/Handler/CommandNotFoundHandler.php">
+  <file src="src/Command/CommandProviderInterface.php">
     <UnusedClass>
-      <code><![CDATA[CommandNotFoundHandler]]></code>
+      <code><![CDATA[CommandProviderInterface]]></code>
     </UnusedClass>
   </file>
-  <file src="src/Command/Handler/TestifyCommandHandler.php">
+  <file src="src/CommandHandler/CommandHandlerProvider.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
-      <code><![CDATA[handle]]></code>
-    </PossiblyUnusedMethod>
-    <UndefinedClass>
-      <code><![CDATA[CommandHandlerInterface]]></code>
-    </UndefinedClass>
-    <UnusedParam>
-      <code><![CDATA[$command]]></code>
-    </UnusedParam>
-    <UnusedProperty>
-      <code><![CDATA[$cliPrinter]]></code>
-    </UnusedProperty>
-  </file>
-  <file src="src/Command/Handlers.php">
-    <PossiblyUnusedMethod>
       <code><![CDATA[add]]></code>
-      <code><![CDATA[toArray]]></code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/Command/HelpCommand.php">
-    <UndefinedClass>
-      <code><![CDATA[?ArgumentListInterface]]></code>
-      <code><![CDATA[?OptionListInterface]]></code>
-    </UndefinedClass>
+  <file src="src/Container/Extension/ConfigExtension.php">
+    <ImplementedReturnTypeMismatch>
+      <code><![CDATA[ConfigInterface]]></code>
+    </ImplementedReturnTypeMismatch>
+    <LessSpecificReturnType>
+      <code><![CDATA[string]]></code>
+    </LessSpecificReturnType>
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new RuntimeException('Failed to parse options');]]></code>
+    </MissingThrowsDocblock>
+    <MoreSpecificImplementedParamType>
+      <code><![CDATA[$service]]></code>
+    </MoreSpecificImplementedParamType>
+    <NoValue>
+      <code><![CDATA[$argument]]></code>
+    </NoValue>
+    <PossiblyUndefinedIntArrayOffset>
+      <code><![CDATA[$long]]></code>
+    </PossiblyUndefinedIntArrayOffset>
+    <TypeDoesNotContainType>
+      <code><![CDATA[throw new ShouldNotHappenException(\sprintf(
+                    'Invalid argument type: %s, expected 0, 1 or 2',
+                    $argument,
+                ))]]></code>
+    </TypeDoesNotContainType>
+    <UnusedMethod>
+      <code><![CDATA[highlight]]></code>
+    </UnusedMethod>
   </file>
-  <file src="src/Command/TestifyCommand.php">
+  <file src="src/Container/Factory/SingleCommandApplicationFactory.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[InstalledVersions::getPrettyVersion('ghostwriter/testify')]]></code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="src/Feature/ErrorHandler/ErrorHandler.php">
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new ErrorException($message, 0, $severity, $file, $line);]]></code>
+    </MissingThrowsDocblock>
+  </file>
+  <file src="src/Feature/ErrorHandler/ErrorHandlerMiddleware.php">
+    <LessSpecificReturnType>
+      <code><![CDATA[bool]]></code>
+    </LessSpecificReturnType>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Feature/ExceptionHandler/ExceptionHandler.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Feature/ExceptionHandler/ExceptionHandlerMiddleware.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Feature/NotFound/CommandNotFoundHandler.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Feature/Testify/TestifyCommand.php">
     <MissingOverrideAttribute>
       <code><![CDATA[public function name(): string]]></code>
     </MissingOverrideAttribute>
@@ -124,67 +143,15 @@
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
-    <UndefinedClass>
-      <code><![CDATA[$this->filesystem]]></code>
-      <code><![CDATA[$this->filesystem]]></code>
-      <code><![CDATA[private]]></code>
-    </UndefinedClass>
     <UndefinedInterfaceMethod>
       <code><![CDATA[dryRun]]></code>
       <code><![CDATA[force]]></code>
     </UndefinedInterfaceMethod>
   </file>
-  <file src="src/Container/Extension/ConfigExtension.php">
-    <ImplementedReturnTypeMismatch>
-      <code><![CDATA[ConfigInterface]]></code>
-    </ImplementedReturnTypeMismatch>
-    <MoreSpecificImplementedParamType>
-      <code><![CDATA[$service]]></code>
-    </MoreSpecificImplementedParamType>
-  </file>
-  <file src="src/Container/Factory/MiddlewaresFactory.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$container->get(ErrorHandlerMiddleware::class)]]></code>
-      <code><![CDATA[$container->get(TestifyCommandMiddleware::class)]]></code>
-    </ArgumentTypeCoercion>
-    <MissingDependency>
-      <code><![CDATA[ErrorHandlerMiddleware]]></code>
-      <code><![CDATA[TestifyCommandMiddleware]]></code>
-    </MissingDependency>
-    <MixedArgument>
-      <code><![CDATA[ErrorHandlerMiddleware::class]]></code>
-      <code><![CDATA[TestifyCommandMiddleware::class]]></code>
-    </MixedArgument>
-  </file>
-  <file src="src/Container/Factory/WorkspaceFactory.php">
-    <MixedArgument>
-      <code><![CDATA[$config->get('dryRun', false)]]></code>
-      <code><![CDATA[$config->get('force', false)]]></code>
-      <code><![CDATA[$config->get('source', 'src')]]></code>
-      <code><![CDATA[$config->get('tests', 'tests')]]></code>
-    </MixedArgument>
-  </file>
-  <file src="src/ErrorHandler/ErrorHandler.php">
-    <MissingThrowsDocblock>
-      <code><![CDATA[throw new ErrorException($message, 0, $severity, $file, $line);]]></code>
-    </MissingThrowsDocblock>
-    <UnusedClass>
-      <code><![CDATA[ErrorHandler]]></code>
-    </UnusedClass>
-  </file>
-  <file src="src/ExceptionHandler/ExceptionHandler.php">
-    <MixedArgument>
-      <code><![CDATA[$this->cliPrinter->printThrowable($throwable)]]></code>
-    </MixedArgument>
+  <file src="src/Feature/Testify/TestifyCommandHandler.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
-    <UndefinedClass>
-      <code><![CDATA[#[Inject(CliPrinter::class)]
-        private CliPrinterInterface $cliPrinter]]></code>
-      <code><![CDATA[$this->cliPrinter]]></code>
-      <code><![CDATA[CliPrinter]]></code>
-    </UndefinedClass>
   </file>
   <file src="src/Generator/ClassLike/ClassGenerator.php">
     <LessSpecificReturnType>
@@ -258,9 +225,6 @@
       <code><![CDATA[$uses]]></code>
       <code><![CDATA[array]]></code>
     </MixedReturnTypeCoercion>
-    <ParamNameMismatch>
-      <code><![CDATA[$classLikeMemberGenerator]]></code>
-    </ParamNameMismatch>
     <RedundantCondition>
       <code><![CDATA[$this->returnType !== null]]></code>
     </RedundantCondition>
@@ -272,9 +236,6 @@
     <MixedOperand>
       <code><![CDATA[$this->value]]></code>
     </MixedOperand>
-    <ParamNameMismatch>
-      <code><![CDATA[$classLikeMemberGenerator]]></code>
-    </ParamNameMismatch>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -435,150 +396,36 @@
       <code><![CDATA[alias]]></code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/Handler/ExceptionHandler.php">
-    <UnusedClass>
-      <code><![CDATA[ExceptionHandler]]></code>
-    </UnusedClass>
-  </file>
-  <file src="src/Handler/TestifyCommandHandler.php">
+  <file src="src/Middleware/MiddlewareProvider.php">
+    <InvalidPropertyAssignmentValue>
+      <code><![CDATA[$this->commandMiddlewares]]></code>
+    </InvalidPropertyAssignmentValue>
+    <LessSpecificReturnType>
+      <code><![CDATA[MiddlewareInterface]]></code>
+    </LessSpecificReturnType>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function get(CommandInterface $command): array]]></code>
+    </MissingOverrideAttribute>
+    <MissingThrowsDocblock>
+      <code><![CDATA[throw new RuntimeException(
+                \sprintf('Command %s must implement %s', $command, CommandInterface::class),
+            );]]></code>
+      <code><![CDATA[throw new RuntimeException(
+                \sprintf('Middleware %s must implement %s', $middleware, MiddlewareInterface::class),
+            );]]></code>
+    </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
+      <code><![CDATA[add]]></code>
     </PossiblyUnusedMethod>
+    <TooManyArguments>
+      <code><![CDATA[fn (string $middleware): MiddlewareInterface => $this->container->get($middleware)]]></code>
+    </TooManyArguments>
   </file>
-  <file src="src/Interface/NameGeneratorInterface.php">
-    <UnusedClass>
-      <code><![CDATA[NameGeneratorInterface]]></code>
-    </UnusedClass>
-  </file>
-  <file src="src/Middleware/CommandMiddleware.php">
-    <ParseError>
-      <code><![CDATA[<<]]></code>
-      <code><![CDATA[===]]></code>
-      <code><![CDATA[>>]]></code>
-    </ParseError>
+  <file src="src/Middleware/MiddlewareQueue.php">
     <PossiblyUnusedMethod>
-      <code><![CDATA[process]]></code>
+      <code><![CDATA[add]]></code>
     </PossiblyUnusedMethod>
-    <UndefinedClass>
-      <code><![CDATA[MiddlewareInterface]]></code>
-    </UndefinedClass>
-    <UndefinedConstant>
-      <code><![CDATA[Stashed]]></code>
-      <code><![CDATA[Updated]]></code>
-      <code><![CDATA[changes]]></code>
-      <code><![CDATA[upstream]]></code>
-    </UndefinedConstant>
-    <UnusedParam>
-      <code><![CDATA[$command]]></code>
-      <code><![CDATA[$commandHandler]]></code>
-    </UnusedParam>
-  </file>
-  <file src="src/Middleware/ErrorHandlerMiddleware.php">
-    <ParseError>
-      <code><![CDATA[<<]]></code>
-      <code><![CDATA[===]]></code>
-      <code><![CDATA[>>]]></code>
-    </ParseError>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-      <code><![CDATA[new]]></code>
-      <code><![CDATA[process]]></code>
-    </PossiblyUnusedMethod>
-    <UndefinedClass>
-      <code><![CDATA[MiddlewareInterface]]></code>
-    </UndefinedClass>
-    <UndefinedConstant>
-      <code><![CDATA[Stashed]]></code>
-      <code><![CDATA[Updated]]></code>
-      <code><![CDATA[changes]]></code>
-      <code><![CDATA[upstream]]></code>
-    </UndefinedConstant>
-    <UnusedParam>
-      <code><![CDATA[$command]]></code>
-      <code><![CDATA[$commandHandler]]></code>
-    </UnusedParam>
-    <UnusedProperty>
-      <code><![CDATA[$cliPrinter]]></code>
-      <code><![CDATA[$exceptionHandler]]></code>
-    </UnusedProperty>
-  </file>
-  <file src="src/Middleware/ExceptionHandlerMiddleware.php">
-    <UndefinedClass>
-      <code><![CDATA[MiddlewareInterface]]></code>
-    </UndefinedClass>
-    <UnusedClass>
-      <code><![CDATA[ExceptionHandlerMiddleware]]></code>
-    </UnusedClass>
-    <UnusedParam>
-      <code><![CDATA[$command]]></code>
-      <code><![CDATA[$handler]]></code>
-    </UnusedParam>
-  </file>
-  <file src="src/Middleware/HelpCommandMiddleware.php">
-    <ParseError>
-      <code><![CDATA[<<]]></code>
-      <code><![CDATA[===]]></code>
-      <code><![CDATA[>>]]></code>
-    </ParseError>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[process]]></code>
-    </PossiblyUnusedMethod>
-    <UndefinedClass>
-      <code><![CDATA[MiddlewareInterface]]></code>
-    </UndefinedClass>
-    <UndefinedConstant>
-      <code><![CDATA[Stashed]]></code>
-      <code><![CDATA[Updated]]></code>
-      <code><![CDATA[changes]]></code>
-      <code><![CDATA[upstream]]></code>
-    </UndefinedConstant>
-    <UnusedParam>
-      <code><![CDATA[$command]]></code>
-      <code><![CDATA[$commandHandler]]></code>
-    </UnusedParam>
-  </file>
-  <file src="src/Middleware/MiddlewareInterface.php">
-    <ParseError>
-      <code><![CDATA[}]]></code>
-    </ParseError>
-  </file>
-  <file src="src/Middleware/TestifyCommandMiddleware.php">
-    <ParseError>
-      <code><![CDATA[<<]]></code>
-      <code><![CDATA[===]]></code>
-      <code><![CDATA[>>]]></code>
-    </ParseError>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[process]]></code>
-    </PossiblyUnusedMethod>
-    <UndefinedClass>
-      <code><![CDATA[MiddlewareInterface]]></code>
-    </UndefinedClass>
-    <UndefinedConstant>
-      <code><![CDATA[Stashed]]></code>
-      <code><![CDATA[Updated]]></code>
-      <code><![CDATA[changes]]></code>
-      <code><![CDATA[upstream]]></code>
-    </UndefinedConstant>
-    <UnusedParam>
-      <code><![CDATA[$command]]></code>
-      <code><![CDATA[$commandHandler]]></code>
-    </UnusedParam>
-  </file>
-  <file src="src/MiddlewareQueue.php">
-    <MissingDependency>
-      <code><![CDATA[MiddlewareQueueInterface]]></code>
-    </MissingDependency>
-    <UnusedClass>
-      <code><![CDATA[MiddlewareQueue]]></code>
-    </UnusedClass>
-    <UnusedParam>
-      <code><![CDATA[$command]]></code>
-      <code><![CDATA[$command]]></code>
-      <code><![CDATA[$handler]]></code>
-      <code><![CDATA[$middleware]]></code>
-      <code><![CDATA[$middleware]]></code>
-    </UnusedParam>
   </file>
   <file src="src/Normalizer/ClassConstantNameNormalizer.php">
     <PossiblyUnusedMethod>
@@ -603,11 +450,6 @@
   <file src="src/Normalizer/TestMethodNameNormalizer.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
-    </PossiblyUnusedMethod>
-  </file>
-  <file src="src/Printer/CliPrinterInterface.php">
-    <PossiblyUnusedMethod>
-      <code><![CDATA[printThrowable]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Resolver/FileResolver.php">
@@ -640,9 +482,12 @@
     <UnevaluatedCode>
       <code><![CDATA[$assertTrue = new StaticCallGenerator('self', 'assertTrue', ['true']);]]></code>
       <code><![CDATA[$methods = [
-            'setUp' => new MethodGenerator('setUp', 'void', [], [], [
-                $staticCallGenerator,
-            ], [], false, false, false, true, false, false),
+            'setUp' => new MethodGenerator(
+                name: 'setUp',
+                returnType: 'void',
+                body: [$staticCallGenerator],
+                isProtected: true,
+            ),
         ];]]></code>
       <code><![CDATA[$reflectionClass = new ReflectionClass($class);]]></code>
       <code><![CDATA[$staticCallGenerator = new StaticCallGenerator('self', 'markTestSkipped', ['Not implemented yet.']);]]></code>
@@ -751,108 +596,6 @@
     <UndefinedInterfaceMethod>
       <code><![CDATA[source]]></code>
       <code><![CDATA[tests]]></code>
-    </UndefinedInterfaceMethod>
-  </file>
-  <file src="src/Service/Factory/HandlersFactory.php">
-    <MixedInferredReturnType>
-      <code><![CDATA[Handlers]]></code>
-    </MixedInferredReturnType>
-    <ParseError>
-      <code><![CDATA[<<]]></code>
-      <code><![CDATA[===]]></code>
-      <code><![CDATA[>>]]></code>
-      <code><![CDATA[namespace]]></code>
-      <code><![CDATA[use]]></code>
-    </ParseError>
-    <UndefinedClass>
-      <code><![CDATA[Handlers]]></code>
-      <code><![CDATA[Handlers]]></code>
-    </UndefinedClass>
-    <UndefinedConstant>
-      <code><![CDATA[Container]]></code>
-      <code><![CDATA[Factory]]></code>
-      <code><![CDATA[Factory]]></code>
-      <code><![CDATA[HandlersFactory]]></code>
-      <code><![CDATA[HandlersFactory]]></code>
-      <code><![CDATA[Service]]></code>
-      <code><![CDATA[Stashed]]></code>
-      <code><![CDATA[Updated]]></code>
-      <code><![CDATA[php]]></code>
-      <code><![CDATA[php]]></code>
-      <code><![CDATA[src]]></code>
-      <code><![CDATA[src]]></code>
-    </UndefinedConstant>
-    <UndefinedDocblockClass>
-      <code><![CDATA[HandlersFactory]]></code>
-    </UndefinedDocblockClass>
-    <UnusedClass>
-      <code><![CDATA[HandlersFactory]]></code>
-    </UnusedClass>
-  </file>
-  <file src="src/Service/Factory/MiddlewaresFactory.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$container->get(ErrorHandlerMiddleware::class)]]></code>
-      <code><![CDATA[$container->get(TestifyCommandMiddleware::class)]]></code>
-    </ArgumentTypeCoercion>
-    <MissingDependency>
-      <code><![CDATA[ErrorHandlerMiddleware]]></code>
-      <code><![CDATA[TestifyCommandMiddleware]]></code>
-    </MissingDependency>
-    <MixedArgument>
-      <code><![CDATA[ErrorHandlerMiddleware::class]]></code>
-      <code><![CDATA[TestifyCommandMiddleware::class]]></code>
-    </MixedArgument>
-    <ParseError>
-      <code><![CDATA[<<]]></code>
-      <code><![CDATA[===]]></code>
-      <code><![CDATA[>>]]></code>
-      <code><![CDATA[namespace]]></code>
-      <code><![CDATA[use]]></code>
-    </ParseError>
-    <UndefinedConstant>
-      <code><![CDATA[Container]]></code>
-      <code><![CDATA[Factory]]></code>
-      <code><![CDATA[Factory]]></code>
-      <code><![CDATA[MiddlewaresFactory]]></code>
-      <code><![CDATA[MiddlewaresFactory]]></code>
-      <code><![CDATA[Service]]></code>
-      <code><![CDATA[Stashed]]></code>
-      <code><![CDATA[Updated]]></code>
-      <code><![CDATA[php]]></code>
-      <code><![CDATA[php]]></code>
-      <code><![CDATA[src]]></code>
-      <code><![CDATA[src]]></code>
-    </UndefinedConstant>
-    <UnusedClass>
-      <code><![CDATA[MiddlewaresFactory]]></code>
-    </UnusedClass>
-  </file>
-  <file src="src/Testify.php">
-    <ForbiddenCode>
-      <code><![CDATA[\var_dump($arguments)]]></code>
-    </ForbiddenCode>
-    <InvalidFunctionCall>
-      <code><![CDATA[($this->commandHandler)($command)]]></code>
-    </InvalidFunctionCall>
-    <MixedAssignment>
-      <code><![CDATA[$exitCode]]></code>
-    </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[int]]></code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement>
-      <code><![CDATA[$exitCode]]></code>
-    </MixedReturnStatement>
-    <PossiblyUnusedMethod>
-      <code><![CDATA[__construct]]></code>
-      <code><![CDATA[new]]></code>
-      <code><![CDATA[run]]></code>
-    </PossiblyUnusedMethod>
-    <TooManyArguments>
-      <code><![CDATA[$this->exceptionHandler]]></code>
-    </TooManyArguments>
-    <UndefinedInterfaceMethod>
-      <code><![CDATA[add]]></code>
     </UndefinedInterfaceMethod>
   </file>
   <file src="src/Trait/ClassLikeGeneratorTrait.php">
@@ -998,6 +741,15 @@
       <code><![CDATA[toString]]></code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="src/Value/Argv.php">
+    <MixedArgument>
+      <code><![CDATA[$arguments]]></code>
+    </MixedArgument>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[has]]></code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Value/Workspace.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[dryRun]]></code>
@@ -1005,40 +757,5 @@
       <code><![CDATA[source]]></code>
       <code><![CDATA[tests]]></code>
     </PossiblyUnusedMethod>
-  </file>
-  <file src="tests/unit/Application/ApplicationTest.php">
-    <MissingDependency>
-      <code><![CDATA[Application]]></code>
-    </MissingDependency>
-  </file>
-  <file src="tests/unit/Handler/NotFoundHandlerTest.php">
-    <UndefinedClass>
-      <code><![CDATA[NotFoundHandler]]></code>
-    </UndefinedClass>
-  </file>
-  <file src="tests/unit/Handler/TestifyCommandHandlerTest.php">
-    <MissingDependency>
-      <code><![CDATA[TestifyCommandHandler]]></code>
-    </MissingDependency>
-  </file>
-  <file src="tests/unit/Middleware/CommandMiddlewareTest.php">
-    <MissingDependency>
-      <code><![CDATA[CommandMiddleware]]></code>
-    </MissingDependency>
-  </file>
-  <file src="tests/unit/Middleware/ErrorHandlerMiddlewareTest.php">
-    <MissingDependency>
-      <code><![CDATA[ErrorHandlerMiddleware]]></code>
-    </MissingDependency>
-  </file>
-  <file src="tests/unit/Middleware/HelpCommandMiddlewareTest.php">
-    <MissingDependency>
-      <code><![CDATA[HelpCommandMiddleware]]></code>
-    </MissingDependency>
-  </file>
-  <file src="tests/unit/Middleware/TestifyCommandMiddlewareTest.php">
-    <MissingDependency>
-      <code><![CDATA[TestifyCommandMiddleware]]></code>
-    </MissingDependency>
   </file>
 </files>
