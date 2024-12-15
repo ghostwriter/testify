@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Handler;
+namespace Tests\Unit\Feature\Testify;
 
-use Ghostwriter\Testify\Handler\TestifyCommandHandler;
+use Ghostwriter\Testify\Feature\Testify\TestifyCommandHandler;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
