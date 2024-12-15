@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Interface;
+namespace Ghostwriter\Testify\Runner;
 
 use Generator;
+use Ghostwriter\Testify\Value\WorkspaceInterface;
 
 interface RunnerInterface
 {
