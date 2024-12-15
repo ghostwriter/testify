@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Middleware;
 
-use Ghostwriter\Testify\Middleware\CommandMiddleware;
+use Ghostwriter\Testify\Middleware\MiddlewareQueue;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(CommandMiddleware::class)]
-final class CommandMiddlewareTest extends TestCase
+#[CoversClass(MiddlewareQueue::class)]
+final class MiddlewareQueueTest extends TestCase
 {
     public function testExample(): void
     {
