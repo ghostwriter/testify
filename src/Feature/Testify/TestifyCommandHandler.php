@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Handler;
+namespace Ghostwriter\Testify\Feature\Testify;
 
 use Ghostwriter\Container\Attribute\Inject;
 use Ghostwriter\Testify\Command\CommandInterface;
+use Ghostwriter\Testify\CommandHandler\CommandHandlerInterface;
 use Ghostwriter\Testify\Printer\CliPrinter;
 use Ghostwriter\Testify\Printer\CliPrinterInterface;
 use Override;
 
-final readonly class TestifyCommandHandler implements HandlerInterface
+final readonly class TestifyCommandHandler implements CommandHandlerInterface
 {
     public function __construct(
         #[Inject(CliPrinter::class)]
