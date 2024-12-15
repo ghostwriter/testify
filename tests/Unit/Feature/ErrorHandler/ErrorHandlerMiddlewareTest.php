@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Middleware;
+namespace Tests\Unit\Feature\ErrorHandler;
 
-use Ghostwriter\Testify\Middleware\ErrorHandlerMiddleware;
+use Ghostwriter\Testify\Feature\ErrorHandler\ErrorHandlerMiddleware;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
