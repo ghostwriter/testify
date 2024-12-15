@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Command;
+namespace Tests\Unit\Middleware;
 
-use Ghostwriter\Testify\Command\Handlers;
+use Ghostwriter\Testify\Middleware\MiddlewareProvider;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(Handlers::class)]
-final class HandlersTest extends TestCase
+#[CoversClass(MiddlewareProvider::class)]
+final class MiddlewareProviderTest extends TestCase
 {
     public function testExample(): void
     {
