@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Formatter;
+namespace Tests\Unit\Feature\Formatter;
 
-use Ghostwriter\Testify\Formatter\TestDataProviderMethodNameFormatter;
+use Ghostwriter\Testify\Feature\Formatter\TestDataProviderMethodNameFormatter;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
