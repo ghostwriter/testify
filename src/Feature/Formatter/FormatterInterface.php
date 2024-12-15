@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Formatter;
+namespace Ghostwriter\Testify\Feature\Formatter;
 
 interface FormatterInterface
 {
