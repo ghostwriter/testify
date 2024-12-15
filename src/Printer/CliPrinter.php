@@ -9,12 +9,20 @@ use Override;
 use Throwable;
 
 use const PHP_EOL;
+use const STDOUT;
 
 final readonly class CliPrinter implements CliPrinterInterface
 {
     #[Override]
     public function print(CommandInterface $command): string
     {
+        \fwrite(STDOUT, \sprintf(
+            '%s by %s and contributors. %s' . PHP_EOL . PHP_EOL,
+            'Testify',
+            'Nathanael Esayeas',
+            '#BlackLivesMatter'
+        ));
+
         return \sprintf('Command: %s' . PHP_EOL, $command::class);
     }
 
