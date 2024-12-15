@@ -2,35 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Middleware;
+namespace Ghostwriter\Testify\Feature\ErrorHandler;
 
 use ErrorException;
 use Ghostwriter\Testify\Command\CommandInterface;
-use Ghostwriter\Testify\Handler\ExceptionHandler;
-use Ghostwriter\Testify\Handler\HandlerInterface;
-use Ghostwriter\Testify\Printer\CliPrinter;
-use Ghostwriter\Testify\Printer\CliPrinterInterface;
+use Ghostwriter\Testify\CommandHandler\CommandHandlerInterface;
+use Ghostwriter\Testify\Feature\ExceptionHandler\ExceptionHandlerInterface;
+use Ghostwriter\Testify\Middleware\MiddlewareInterface;
 use Override;
 use Throwable;
 
 final readonly class ErrorHandlerMiddleware implements MiddlewareInterface
 {
     public function __construct(
-        private ExceptionHandler $exceptionHandler,
-        private CliPrinterInterface $cliPrinter
+        private ExceptionHandlerInterface $exceptionHandler,
     ) {
-    }
-
-    public static function new(): self
-    {
-        return new self(new ExceptionHandler(new CliPrinter()), new CliPrinter());
     }
 
     /**
      * @throws Throwable
      */
     #[Override]
-    public function process(CommandInterface $command, HandlerInterface $handler): int
+    public function process(CommandInterface $command, CommandHandlerInterface $commandHandler): int
     {
         //1: Catchall for general errors
         //2: Misuse of shell builtins (according to Bash documentation)
@@ -51,11 +44,9 @@ final readonly class ErrorHandlerMiddleware implements MiddlewareInterface
         });
 
         try {
-            $exitCode = $handler->handle($command);
+            $exitCode = $commandHandler->handle($command);
         } catch (Throwable $throwable) {
-            $exitCode = $this->exceptionHandler->handle($command);
-
-            echo $this->cliPrinter->printThrowable($throwable);
+            $exitCode = $this->exceptionHandler->handle($command, $throwable);
         } finally {
             \restore_error_handler();
         }
