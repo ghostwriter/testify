@@ -28,6 +28,7 @@ final readonly class TestMethodsResolver
 
     public function resolve(string $class): array
     {
+        // $staticCallGenerator = new StaticCallGenerator('self', 'markTestIncomplete', ['Not implemented yet.']);
         return [
             'testExample' => new MethodGenerator(
                 name: 'testExample',
@@ -35,6 +36,14 @@ final readonly class TestMethodsResolver
                 body: [new StaticCallGenerator('self', 'assertTrue', ['true'])],
                 isPublic: true
             ),
+            //            'setUp' => new MethodGenerator(
+            //                name: 'setUp',
+            //                returnType: 'void',
+            //                body: [
+            //                    $staticCallGenerator,
+            //                ],
+            //                isProtected: true,
+            //            ),
         ];
 
         $reflectionClass = new ReflectionClass($class);
@@ -44,9 +53,12 @@ final readonly class TestMethodsResolver
         $assertTrue = new StaticCallGenerator('self', 'assertTrue', ['true']);
 
         $methods = [
-            'setUp' => new MethodGenerator('setUp', 'void', [], [], [
-                $staticCallGenerator,
-            ], [], false, false, false, true, false, false),
+            'setUp' => new MethodGenerator(
+                name: 'setUp',
+                returnType: 'void',
+                body: [$staticCallGenerator],
+                isProtected: true,
+            ),
         ];
 
         foreach ($reflectionClass->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
