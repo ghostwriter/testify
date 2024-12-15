@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Exception;
 
-use RuntimeException;
+use Throwable;
 
-final class PathIsEmptyException extends RuntimeException
+interface ExceptionInterface extends Throwable
 {
 }
