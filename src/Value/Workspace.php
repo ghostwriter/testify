@@ -6,7 +6,6 @@ namespace Ghostwriter\Testify\Value;
 
 use Ghostwriter\Container\Attribute\Factory;
 use Ghostwriter\Testify\Container\Factory\WorkspaceFactory;
-use Ghostwriter\Testify\Interface\WorkspaceInterface;
 
 #[Factory(WorkspaceFactory::class)]
 final readonly class Workspace implements WorkspaceInterface
@@ -14,9 +13,14 @@ final readonly class Workspace implements WorkspaceInterface
     public function __construct(
         private string $source,
         private string $tests,
-        private bool $dryRun = false,
-        private bool $force = false,
+        private bool $dryRun,
+        private bool $force
     ) {
+    }
+
+    public static function new(string $source, string $tests, bool $dryRun = false, bool $force = false): self
+    {
+        return new self($source, $tests, $dryRun, $force);
     }
 
     public function dryRun(): bool
