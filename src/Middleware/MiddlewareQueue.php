@@ -2,18 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Command;
+namespace Ghostwriter\Testify\Middleware;
 
-use Ghostwriter\Container\Attribute\Factory;
-use Ghostwriter\Testify\Container\Factory\MiddlewaresFactory;
-use Ghostwriter\Testify\Handler\HandlerInterface;
-use Ghostwriter\Testify\Middleware\MiddlewareInterface;
+use Ghostwriter\Testify\Command\CommandInterface;
+use Ghostwriter\Testify\CommandHandler\CommandHandlerInterface;
 use Override;
 use RuntimeException;
 use Throwable;
 
-#[Factory(MiddlewaresFactory::class)]
-final class Middlewares implements MiddlewareInterface
+final class MiddlewareQueue implements MiddlewareQueueInterface
 {
     /**
      * @param array<MiddlewareInterface> $middlewares
@@ -47,10 +44,19 @@ final class Middlewares implements MiddlewareInterface
      * @throws Throwable
      */
     #[Override]
-    public function process(CommandInterface $command, HandlerInterface $handler): int
+    public function handle(CommandInterface $command): int
+    {
+        return $this->process($command, $this);
+    }
+
+    /**
+     * @throws Throwable
+     */
+    #[Override]
+    public function process(CommandInterface $command, CommandHandlerInterface $commandHandler): int
     {
         if ($this->middlewares === []) {
-            return $handler->handle($command);
+            return $commandHandler->handle($command);
         }
 
         $middleware = \array_shift($this->middlewares);
@@ -59,6 +65,6 @@ final class Middlewares implements MiddlewareInterface
             throw new RuntimeException('Middleware must implement Middleware interface');
         }
 
-        return $middleware->process($command, $handler);
+        return $middleware->process($command, $commandHandler);
     }
 }
