@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Middleware;
+namespace Tests\Unit\Feature\Testify;
 
-use Ghostwriter\Testify\Middleware\TestifyCommandMiddleware;
+use Ghostwriter\Testify\Feature\Testify\TestifyCommandMiddleware;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
