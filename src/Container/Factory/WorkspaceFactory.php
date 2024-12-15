@@ -18,19 +18,17 @@ final readonly class WorkspaceFactory implements FactoryInterface
 {
     /**
      * @throws Throwable
-     *
-     * @return Workspace
      */
     #[Override]
     public function __invoke(ContainerInterface $container): object
     {
         $config = $container->get(ConfigInterface::class);
 
-        return new Workspace(
-            source: $config->get('source', 'src'),
-            tests: $config->get('tests', 'tests'),
-            dryRun: $config->get('dryRun', false),
-            force: $config->get('force', false),
+        return Workspace::new(
+            source: (string) $config->get('source', 'src'),
+            tests: (string) $config->get('tests', 'tests'),
+            dryRun: (bool) $config->get('dryRun', false),
+            force: (bool) $config->get('force', false),
         );
     }
 }
