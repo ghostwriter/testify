@@ -6,8 +6,7 @@ namespace Ghostwriter\Testify\Runner;
 
 use Generator;
 use Ghostwriter\Testify\Application\PhpFileFinder;
-use Ghostwriter\Testify\Interface\RunnerInterface;
-use Ghostwriter\Testify\Interface\WorkspaceInterface;
+use Ghostwriter\Testify\Value\WorkspaceInterface;
 use Override;
 
 use const DIRECTORY_SEPARATOR;
@@ -24,7 +23,7 @@ final readonly class Runner implements RunnerInterface
     {
         $sourceDirectory = $workspace->source();
 
-        $unitTestsDirectory = $workspace->tests() . DIRECTORY_SEPARATOR . 'Unit';
+        $unitTestsDirectory = $workspace->tests() . DIRECTORY_SEPARATOR . 'unit';
 
         foreach ($this->phpFileFinder->find($sourceDirectory) as $file) {
             yield $file => \str_replace([$sourceDirectory, '.php'], [$unitTestsDirectory, 'Test.php'], $file);
