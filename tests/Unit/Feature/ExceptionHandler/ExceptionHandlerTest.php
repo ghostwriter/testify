@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Handler;
+namespace Tests\Unit\Feature\ExceptionHandler;
 
-use Ghostwriter\Testify\Handler\ExceptionHandler;
+use Ghostwriter\Testify\Feature\ExceptionHandler\ExceptionHandler;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
