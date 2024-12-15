@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Command;
+namespace Tests\Unit\Feature\Help;
 
-use Ghostwriter\Testify\Command\HelpCommand;
+use Ghostwriter\Testify\Feature\Help\HelpCommand;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
