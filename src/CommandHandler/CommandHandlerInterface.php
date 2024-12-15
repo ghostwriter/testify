@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Handler;
+namespace Ghostwriter\Testify\CommandHandler;
 
 use Ghostwriter\Testify\Command\CommandInterface;
 use Throwable;
 
-interface HandlerInterface
+interface CommandHandlerInterface
 {
     /**
      * @throws Throwable
