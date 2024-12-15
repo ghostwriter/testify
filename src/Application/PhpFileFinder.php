@@ -4,16 +4,34 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Application;
 
+use Closure;
 use Generator;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
-use Ghostwriter\Testify\Exception\ShouldNotHappenException;
-use SplFileInfo;
+use Ghostwriter\Filesystem\Interface\PathInterface;
 
 final readonly class PhpFileFinder
 {
+    private Closure $isNotSupported;
+
+    private Closure $isPhpFile;
+
     public function __construct(
         private FilesystemInterface $filesystem,
     ) {
+        $this->isPhpFile = static fn (PathInterface $path): bool => \str_ends_with($path->toString(), '.php');
+
+        $this->isNotSupported = static function (PathInterface $path) use ($filesystem): bool {
+            $filename = $filesystem->basename($path->toString());
+            return match (true) {
+                // if the first letter is lowercase, it's not a class
+                \mb_strtolower($filename[0]) === $filename[0],
+                \str_starts_with($filename, 'Abstract'),
+                \str_ends_with($filename, 'Trait.php'),
+                \str_ends_with($filename, 'Interface.php'),
+                \str_ends_with($filename, 'Test.php') => true,
+                default => false,
+            };
+        };
     }
 
     /**
@@ -21,30 +39,23 @@ final readonly class PhpFileFinder
      */
     public function find(string $directory): Generator
     {
-        $directory = $this->filesystem->realpath($directory);
+        $match = $this->isPhpFile;
+        $skip = $this->isNotSupported;
 
-        foreach (
-            $this->filesystem->regexIterator($directory, '#.+\.php$#iu') as $file
-        ) {
-            if (! $file instanceof SplFileInfo) {
-                throw new ShouldNotHappenException('Invalid file');
-            }
-
-            $filename = $file->getBasename('.php');
-
-            if (match (true) {
-                // if the first letter is lowercase, it's not a class
-                \mb_strtolower($filename[0]) === $filename[0],
-                \str_starts_with($filename, 'Abstract'),
-                \str_ends_with($filename, 'Trait'),
-                \str_ends_with($filename, 'Interface'),
-                \str_ends_with($filename, 'Test') => true,
-                default => false,
-            }) {
+        foreach ($this->filesystem->recursiveIterator($directory) as $file) {
+            if (! $file instanceof PathInterface) {
                 continue;
             }
 
-            yield $file->getPathname();
+            if ($match($file) === false) {
+                continue;
+            }
+
+            if ($skip($file) === true) {
+                continue;
+            }
+
+            yield $file->toString();
         }
     }
 }
