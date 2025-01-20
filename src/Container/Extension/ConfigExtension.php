@@ -4,12 +4,18 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Container\Extension;
 
-use Ghostwriter\Config\Contract\ConfigInterface;
+use Ghostwriter\Config\ConfigInterface;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\ExtensionInterface;
 use Ghostwriter\Testify\Exception\ShouldNotHappenException;
 use Override;
 use RuntimeException;
+
+use function array_key_exists;
+use function array_slice;
+use function explode;
+use function getopt;
+use function sprintf;
 
 /**
  * @implements ExtensionInterface<ConfigInterface>
@@ -40,13 +46,13 @@ final readonly class ConfigExtension implements ExtensionInterface
         ];
 
         foreach ($defaults as $option => $argument) {
-            [$short, $long] = \explode('|', $option);
+            [$short, $long] = explode('|', $option);
 
             $type = match ($argument) {
                 0 => '',
                 1 => ':',
                 2 => '::',
-                default => throw new ShouldNotHappenException(\sprintf(
+                default => throw new ShouldNotHappenException(sprintf(
                     'Invalid argument type: %s, expected 0, 1 or 2',
                     $argument,
                 )),
@@ -57,17 +63,17 @@ final readonly class ConfigExtension implements ExtensionInterface
             $long_options[] = $long . $type;
         }
 
-        $options = \getopt($short_options, $long_options, $rest_index);
+        $options = getopt($short_options, $long_options, $rest_index);
 
-        if ($options === false) {
+        if (false === $options) {
             throw new RuntimeException('Failed to parse options');
         }
 
-        $service->set('dryRun', \array_key_exists('d', $options) || \array_key_exists('dry-run', $options));
+        $service->set('dryRun', array_key_exists('d', $options) || array_key_exists('dry-run', $options));
 
-        $service->set('force', \array_key_exists('f', $options) || \array_key_exists('force', $options));
+        $service->set('force', array_key_exists('f', $options) || array_key_exists('force', $options));
 
-        $argv = \array_slice($_SERVER['argv'] ?? [], $rest_index);
+        $argv = array_slice($_SERVER['argv'] ?? [], $rest_index);
 
         $service->set('source', $argv[0] ?? 'src');
 
@@ -78,6 +84,6 @@ final readonly class ConfigExtension implements ExtensionInterface
 
     private function highlight(string $thing): string
     {
-        return \sprintf("\x1B[1;32m%s\x1B[0m", $thing);
+        return sprintf("\x1B[1;32m%s\x1B[0m", $thing);
     }
 }
