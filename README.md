@@ -3,8 +3,6 @@
 [![Automation](https://github.com/ghostwriter/testify/actions/workflows/automation.yml/badge.svg)](https://github.com/ghostwriter/testify/actions/workflows/automation.yml)
 [![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/testify?color=8892bf)](https://www.php.net/supported-versions)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/ghostwriter?label=Sponsor+@ghostwriter/testify&logo=GitHub+Sponsors)](https://github.com/sponsors/ghostwriter)
-[![Code Coverage](https://codecov.io/gh/ghostwriter/testify/branch/main/graph/badge.svg)](https://codecov.io/gh/ghostwriter/testify)
-[![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/testify)](https://packagist.org/packages/ghostwriter/testify)
 [![Downloads](https://badgen.net/packagist/dt/ghostwriter/testify?color=blue)](https://packagist.org/packages/ghostwriter/testify)
 
 Automated test Generation for PHP code.
