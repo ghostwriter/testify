@@ -6,6 +6,6 @@ namespace Ghostwriter\Testify\Exception;
 
 use RuntimeException;
 
-final class UseStatementNotFoundException extends RuntimeException
+final class UseStatementNotFoundException extends RuntimeException implements ExceptionInterface
 {
 }

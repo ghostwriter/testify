@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Builder;
 
+use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Ghostwriter\Testify\Generator\AttributeGenerator;
 use Ghostwriter\Testify\Generator\ClassLike\ClassGenerator;
 use Ghostwriter\Testify\Generator\FileGenerator;
@@ -16,42 +17,34 @@ use Override;
 use PhpToken;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 
-use function basename;
-use function file_get_contents;
-use function ltrim;
-
-final readonly class TestBuilder implements BuilderInterface
+final readonly class TestBuilder implements TestBuilderInterface
 {
     public function __construct(
         private TestMethodsResolver $testMethodsResolver,
         private FileResolver $fileResolver,
         private ClassNameNormalizer $classNameNormalizer,
+        private FilesystemInterface $filesystem,
     ) {
     }
 
     #[Override]
     public function build(string $file, string $testFile): GeneratorInterface
     {
-        $code = file_get_contents($file);
-
-        if ($code === false) {
-            throw new RuntimeException('Could not read file: ' . $file);
-        }
+        $code = $this->filesystem->read($file);
 
         $tokens = PhpToken::tokenize($code);
 
         $namespaces = $this->fileResolver->resolve($tokens);
 
-        $class = $this->classNameNormalizer->normalize(basename($file, '.php'));
+        $class = $this->classNameNormalizer->normalize($this->filesystem->basename($file, '.php'));
 
-        $testClass = $this->classNameNormalizer->normalize(basename($testFile, '.php'));
+        $testClass = $this->classNameNormalizer->normalize($this->filesystem->basename($testFile, '.php'));
 
         foreach ($namespaces as $namespace => [$testNamespace, $namespaceGenerator]) {
-            $namespaceClass = ltrim($namespace . '\\' . $class, '\\');
+            $namespaceClass = \ltrim($namespace . '\\' . $class, '\\');
 
-            $testNamespaceClass = ltrim($testNamespace . '\\' . $testClass, '\\');
+            $testNamespaceClass = \ltrim($testNamespace . '\\' . $testClass, '\\');
 
             $namespaces[$namespace] = $namespaceGenerator->classLikes([
                 $testNamespaceClass => new ClassGenerator(

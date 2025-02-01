@@ -6,11 +6,8 @@ namespace Ghostwriter\Testify\Application;
 
 use Closure;
 use Generator;
-use SplFileInfo;
-
-use function mb_strtolower;
-use function str_ends_with;
-use function str_starts_with;
+use Ghostwriter\Filesystem\Interface\FilesystemInterface;
+use Ghostwriter\Filesystem\Interface\PathInterface;
 
 final readonly class PhpFileFinder
 {
@@ -19,19 +16,19 @@ final readonly class PhpFileFinder
     private Closure $isPhpFile;
 
     public function __construct(
-        private Filesystem $filesystem,
+        private FilesystemInterface $filesystem,
     ) {
-        $this->isPhpFile = static fn (SplFileInfo $file): bool => $file->getExtension() === 'php';
+        $this->isPhpFile = static fn (PathInterface $path): bool => \str_ends_with($path->toString(), '.php');
 
-        $this->isNotSupported = static function (SplFileInfo $file): bool {
-            $filename = $file->getFilename();
+        $this->isNotSupported = static function (PathInterface $path) use ($filesystem): bool {
+            $filename = $filesystem->basename($path->toString());
             return match (true) {
                 // if the first letter is lowercase, it's not a class
-                mb_strtolower($filename[0]) === $filename[0],
-                str_starts_with($filename, 'Abstract'),
-                str_ends_with($filename, 'Trait.php'),
-                str_ends_with($filename, 'Interface.php'),
-                str_ends_with($filename, 'Test.php') => true,
+                \mb_strtolower($filename[0]) === $filename[0],
+                \str_starts_with($filename, 'Abstract'),
+                \str_ends_with($filename, 'Trait.php'),
+                \str_ends_with($filename, 'Interface.php'),
+                \str_ends_with($filename, 'Test.php') => true,
                 default => false,
             };
         };
@@ -45,8 +42,8 @@ final readonly class PhpFileFinder
         $match = $this->isPhpFile;
         $skip = $this->isNotSupported;
 
-        foreach ($this->filesystem->recursiveDirectoryIterator($directory) as $file) {
-            if (! $file instanceof SplFileInfo) {
+        foreach ($this->filesystem->recursiveIterator($directory) as $file) {
+            if (! $file instanceof PathInterface) {
                 continue;
             }
 
@@ -58,7 +55,7 @@ final readonly class PhpFileFinder
                 continue;
             }
 
-            yield $file->getPathname();
+            yield $file->toString();
         }
     }
 }

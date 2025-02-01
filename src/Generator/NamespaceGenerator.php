@@ -13,9 +13,6 @@ use Ghostwriter\Testify\Generator\Use\UseGeneratorInterface;
 use InvalidArgumentException;
 use Override;
 
-use function array_reduce;
-use function usort;
-
 final class NamespaceGenerator implements NamespaceGeneratorInterface
 {
     /**
@@ -67,7 +64,7 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
 
         $uses = $this->uses();
 
-        usort(
+        \usort(
             $uses,
             static fn (
                 UseGeneratorInterface $left,
@@ -92,7 +89,7 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
 
         $classLikes = $this->classLikes;
 
-        usort(
+        \usort(
             $classLikes,
             static fn (
                 ClassLikeGeneratorInterface $left,
@@ -106,7 +103,7 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
 
         //        return $code;
 
-        return array_reduce(
+        return \array_reduce(
             $classLikes,
             static fn (string $code, ClassLikeGeneratorInterface $classLikeGenerator): string => $code . $classLikeGenerator->generate() . self::NEWLINES,
             $code

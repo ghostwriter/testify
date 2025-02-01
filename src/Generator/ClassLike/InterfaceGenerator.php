@@ -10,8 +10,6 @@ use Ghostwriter\Testify\Generator\GeneratorInterface;
 use Ghostwriter\Testify\Trait\ClassLikeGeneratorTrait;
 use Override;
 
-use function array_reduce;
-
 final class InterfaceGenerator implements InterfaceGeneratorInterface
 {
     use ClassLikeGeneratorTrait;
@@ -46,11 +44,15 @@ final class InterfaceGenerator implements InterfaceGeneratorInterface
             $code .= $constant->generate() . self::NEWLINES;
         }
 
-        $methods = array_reduce($this->methods, static function (array $methods, GeneratorInterface $generator): array {
-            $methods[] = $generator;
+        $methods = \array_reduce(
+            $this->methods,
+            static function (array $methods, GeneratorInterface $generator): array {
+                $methods[] = $generator;
 
-            return $methods;
-        }, []);
+                return $methods;
+            },
+            []
+        );
 
         foreach ($methods as $method) {
             if (! $method instanceof MethodGeneratorInterface) {

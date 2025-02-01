@@ -9,9 +9,6 @@ use Ghostwriter\Testify\Generator\ClassLikeMemberGeneratorInterface;
 use Ghostwriter\Testify\Trait\ClassLikeMemberGeneratorTrait;
 use Override;
 
-use function array_merge;
-use function rtrim;
-
 final readonly class MethodGenerator implements MethodGeneratorInterface
 {
     use ClassLikeMemberGeneratorTrait;
@@ -92,7 +89,7 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
             $method .= $parameter->generate() . ', ';
         }
 
-        $method = rtrim($method, ', ');
+        $method = \rtrim($method, ', ');
 
         $method .= ')';
 
@@ -106,7 +103,7 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
             $method .= self::INDENT . self::INDENT . $line->generate() . self::NEWLINES;
         }
 
-        return rtrim($method) . self::NEWLINE . self::INDENT . '}';
+        return \rtrim($method) . self::NEWLINE . self::INDENT . '}';
     }
 
     #[Override]
@@ -121,7 +118,7 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
         $uses = $this->uses;
 
         foreach ($this->parameters as $parameter) {
-            $uses = array_merge($uses, $parameter->uses());
+            $uses = \array_merge($uses, $parameter->uses());
         }
 
         return $uses;
