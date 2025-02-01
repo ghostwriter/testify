@@ -6,6 +6,6 @@ namespace Ghostwriter\Testify\Exception;
 
 use RuntimeException;
 
-final class NoNamespaceFoundException extends RuntimeException
+final class NoNamespaceFoundException extends RuntimeException implements ExceptionInterface
 {
 }

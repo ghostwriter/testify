@@ -6,13 +6,10 @@ namespace Ghostwriter\Testify\Runner;
 
 use Generator;
 use Ghostwriter\Testify\Application\PhpFileFinder;
-use Ghostwriter\Testify\Interface\RunnerInterface;
-use Ghostwriter\Testify\Interface\WorkspaceInterface;
+use Ghostwriter\Testify\Value\WorkspaceInterface;
 use Override;
 
 use const DIRECTORY_SEPARATOR;
-
-use function str_replace;
 
 final readonly class Runner implements RunnerInterface
 {
@@ -22,14 +19,14 @@ final readonly class Runner implements RunnerInterface
     }
 
     #[Override]
-    public function run(WorkspaceInterface $project): Generator
+    public function run(WorkspaceInterface $workspace): Generator
     {
-        $sourceDirectory = $project->source();
+        $sourceDirectory = $workspace->source();
 
-        $unitTestsDirectory = $project->tests() . DIRECTORY_SEPARATOR . 'Unit';
+        $unitTestsDirectory = $workspace->tests() . DIRECTORY_SEPARATOR . 'unit';
 
         foreach ($this->phpFileFinder->find($sourceDirectory) as $file) {
-            yield $file => str_replace([$sourceDirectory, '.php'], [$unitTestsDirectory, 'Test.php'], $file);
+            yield $file => \str_replace([$sourceDirectory, '.php'], [$unitTestsDirectory, 'Test.php'], $file);
         }
     }
 }

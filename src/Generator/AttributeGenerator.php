@@ -6,8 +6,6 @@ namespace Ghostwriter\Testify\Generator;
 
 use Override;
 
-use function rtrim;
-
 final readonly class AttributeGenerator implements GeneratorInterface
 {
     /**
@@ -30,6 +28,6 @@ final readonly class AttributeGenerator implements GeneratorInterface
             $code .= $param . ', ';
         }
 
-        return rtrim($code, ', ') . ')]';
+        return \rtrim($code, ', ') . ')]';
     }
 }
