@@ -12,10 +12,6 @@ use Ghostwriter\Testify\Generator\ClassLikeMember\TraitUseGeneratorInterface;
 use Ghostwriter\Testify\Trait\ClassLikeGeneratorTrait;
 use Override;
 
-use function array_reduce;
-use function rtrim;
-use function usort;
-
 final class ClassGenerator implements ClassLikeGeneratorInterface
 {
     use ClassLikeGeneratorTrait;
@@ -54,7 +50,7 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
                 $code .= $extend->generate() . ', ';
             }
 
-            $code = rtrim($code, ', ');
+            $code = \rtrim($code, ', ');
         }
 
         if ($this->implements !== []) {
@@ -64,12 +60,12 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
                 $code .= $implement->generate() . ', ';
             }
 
-            $code = rtrim($code, ', ');
+            $code = \rtrim($code, ', ');
         }
 
         $code .= self::NEWLINE . '{' . self::NEWLINE;
 
-        usort(
+        \usort(
             $this->traitUses,
             static fn (
                 TraitUseGeneratorInterface $left,
@@ -81,7 +77,7 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
             $code .= self::INDENT . $traitUse->generate() . self::NEWLINE;
         }
 
-        usort(
+        \usort(
             $this->constants,
             static fn (
                 ConstantGeneratorInterface $left,
@@ -93,7 +89,7 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
             $code .= self::INDENT . $constant->generate() . self::NEWLINE;
         }
 
-        usort(
+        \usort(
             $this->properties,
             static fn (
                 PropertyGeneratorInterface $left,
@@ -105,7 +101,7 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
             $code .= self::INDENT . $property->generate() . self::NEWLINE;
         }
 
-        usort(
+        \usort(
             $this->methods,
             static fn (
                 MethodGeneratorInterface $left,
@@ -117,30 +113,30 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
             $code .= self::INDENT . $method->generate() . self::NEWLINES;
         }
 
-        return rtrim($code) . self::NEWLINE . '}' . self::NEWLINE;
+        return \rtrim($code) . self::NEWLINE . '}' . self::NEWLINE;
     }
 
     public function generater(): string
     {
-        return array_reduce(
+        return \array_reduce(
             $this->methods(),
             static fn (
                 string $code,
                 MethodGeneratorInterface $methodGenerator
             ): string => $code . $methodGenerator->generate() . self::NEWLINE,
-            array_reduce(
+            \array_reduce(
                 $this->properties(),
                 static fn (
                     string $code,
                     PropertyGeneratorInterface $propertyGenerator
                 ): string => $code . $propertyGenerator->generate() . self::NEWLINE,
-                array_reduce(
+                \array_reduce(
                     $this->constants(),
                     static fn (
                         string $code,
                         ConstantGeneratorInterface $constantGenerator
                     ): string => $code . $constantGenerator->generate() . self::NEWLINE,
-                    array_reduce(
+                    \array_reduce(
                         $this->traitUses(),
                         static fn (
                             string $code,
