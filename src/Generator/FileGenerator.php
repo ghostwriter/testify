@@ -6,10 +6,6 @@ namespace Ghostwriter\Testify\Generator;
 
 use Override;
 
-use function array_reduce;
-use function rtrim;
-use function usort;
-
 final readonly class FileGenerator implements FileGeneratorInterface
 {
     /**
@@ -21,6 +17,14 @@ final readonly class FileGenerator implements FileGeneratorInterface
     ) {
     }
 
+    /**
+     * @param NamespaceGeneratorInterface $namespaces
+     */
+    public static function new(array $namespaces = [], bool $declareStrictTypes = true): self
+    {
+        return new self($namespaces, $declareStrictTypes);
+    }
+
     #[Override]
     public function generate(): string
     {
@@ -30,7 +34,7 @@ final readonly class FileGenerator implements FileGeneratorInterface
             $namespaces[] = new DeclareStrictTypesGenerator();
         }
 
-        usort(
+        \usort(
             $namespaces,
             static fn (GeneratorInterface $left, GeneratorInterface $right): int => match (true) {
                 $left instanceof NamespaceGeneratorInterface => match (true) {
@@ -46,7 +50,7 @@ final readonly class FileGenerator implements FileGeneratorInterface
             }
         );
 
-        return rtrim(array_reduce(
+        return \rtrim(\array_reduce(
             $namespaces,
             static fn (
                 string $buffer,
@@ -54,13 +58,5 @@ final readonly class FileGenerator implements FileGeneratorInterface
             ): string => $buffer . $generator->generate() . self::NEWLINES,
             '<?php' . self::NEWLINES
         )) . self::NEWLINE;
-    }
-
-    /**
-     * @param NamespaceGeneratorInterface $namespaces
-     */
-    public static function new(array $namespaces = [], bool $declareStrictTypes = true): self
-    {
-        return new self($namespaces, $declareStrictTypes);
     }
 }

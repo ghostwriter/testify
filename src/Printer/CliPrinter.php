@@ -9,21 +9,27 @@ use Override;
 use Throwable;
 
 use const PHP_EOL;
-
-use function sprintf;
+use const STDOUT;
 
 final readonly class CliPrinter implements CliPrinterInterface
 {
     #[Override]
     public function print(CommandInterface $command): string
     {
-        return sprintf('Command: %s' . PHP_EOL, $command::class);
+        \fwrite(STDOUT, \sprintf(
+            '%s by %s and contributors. %s' . PHP_EOL . PHP_EOL,
+            'Testify',
+            'Nathanael Esayeas',
+            '#BlackLivesMatter'
+        ));
+
+        return \sprintf('Command: %s' . PHP_EOL, $command::class);
     }
 
     #[Override]
     public function printThrowable(Throwable $throwable): string
     {
-        return sprintf(
+        return \sprintf(
             PHP_EOL . '[%s] %s: ' . PHP_EOL . '%s' . PHP_EOL,
             $throwable::class,
             $throwable->getMessage(),

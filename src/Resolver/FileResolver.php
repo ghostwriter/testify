@@ -26,7 +26,6 @@ final readonly class FileResolver
         $inNamespace = false;
         $namespaces = [];
         $namespace = '';
-        $testNamespaceResolver = $this->testNamespaceResolver;
         foreach ($tokens as $token) {
             $tokenId = $token->id;
 
@@ -56,7 +55,7 @@ final readonly class FileResolver
             if ($text === ';') {
                 $inNamespace = false;
 
-                $testNamespace = $testNamespaceResolver->resolve($namespace);
+                $testNamespace = $this->testNamespaceResolver->resolve($namespace);
 
                 $namespaces[$namespace] = [$testNamespace, new NamespaceGenerator($testNamespace)];
             }
