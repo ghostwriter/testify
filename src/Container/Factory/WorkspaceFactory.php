@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Container\Factory;
 
-use Ghostwriter\Config\Contract\ConfigInterface;
+use Ghostwriter\Config\ConfigInterface;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\FactoryInterface;
 use Ghostwriter\Testify\Value\Workspace;
