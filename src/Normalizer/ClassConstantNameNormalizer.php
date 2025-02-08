@@ -16,6 +16,6 @@ final readonly class ClassConstantNameNormalizer implements NormalizerInterface
     #[Override]
     public function normalize(string $name): string
     {
-        return $this->caseConverter->macroCase($name);
+        return $this->caseConverter->toMacroCase($name);
     }
 }
