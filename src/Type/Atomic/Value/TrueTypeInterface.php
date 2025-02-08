@@ -6,6 +6,4 @@ namespace Ghostwriter\Testify\Type\Atomic\Value;
 
 use Ghostwriter\Testify\Type\Atomic\ValueTypeInterface;
 
-interface TrueTypeInterface extends ValueTypeInterface
-{
-}
+interface TrueTypeInterface extends ValueTypeInterface {}
