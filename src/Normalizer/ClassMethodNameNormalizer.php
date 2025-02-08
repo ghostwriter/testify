@@ -16,6 +16,6 @@ final readonly class ClassMethodNameNormalizer implements NormalizerInterface
     #[Override]
     public function normalize(string $name): string
     {
-        return $this->caseConverter->camelCase($name);
+        return $this->caseConverter->toCamelCase($name);
     }
 }
