@@ -7,12 +7,14 @@ namespace Ghostwriter\Testify\Feature\ErrorHandler;
 use ErrorException;
 use Override;
 
+use function error_reporting;
+
 final readonly class ErrorHandler implements ErrorHandlerInterface
 {
     #[Override]
     public function __invoke(int $severity, string $message, string $file, int $line): void
     {
-        if ((\error_reporting() & $severity) === 0) {
+        if (0 === (error_reporting() & $severity)) {
             // error_reporting does not include this error
             return;
         }
