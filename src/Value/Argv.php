@@ -6,6 +6,9 @@ namespace Ghostwriter\Testify\Value;
 
 use InvalidArgumentException;
 
+use function in_array;
+use function sprintf;
+
 final readonly class Argv
 {
     public array $argv;
@@ -26,11 +29,11 @@ final readonly class Argv
         /** @var string */
         return $this->argv[$argument]
             ?? $default
-            ?? throw new InvalidArgumentException(\sprintf('Argument "%s" not found', $argument));
+            ?? throw new InvalidArgumentException(sprintf('Argument "%s" not found', $argument));
     }
 
     public function has(string $argument): bool
     {
-        return \in_array($argument, $this->argv, true);
+        return in_array($argument, $this->argv, true);
     }
 }
