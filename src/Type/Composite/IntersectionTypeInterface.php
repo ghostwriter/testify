@@ -11,6 +11,4 @@ use Ghostwriter\Testify\Type\CompositeTypeInterface;
  * — Must not contain duplicate types.
  * — Only composed of interfaces and classes.
  */
-interface IntersectionTypeInterface extends CompositeTypeInterface
-{
-}
+interface IntersectionTypeInterface extends CompositeTypeInterface {}
