@@ -51,7 +51,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Ghostwriter\\Testify\\": "src"
+            "Ghostwriter\\Testify\\": "src/"
         }
     },
     "autoload-dev": {
