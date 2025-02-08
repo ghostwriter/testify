@@ -6,6 +6,4 @@ namespace Ghostwriter\Testify\Exception;
 
 use LogicException;
 
-final class ShouldNotHappenException extends LogicException implements ExceptionInterface
-{
-}
+final class ShouldNotHappenException extends LogicException implements ExceptionInterface {}
