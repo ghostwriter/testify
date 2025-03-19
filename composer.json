@@ -60,7 +60,8 @@
         },
         "exclude-from-classmap": [
             "tests/Fixture/"
-        ]
+        ],
+        "files": ["tests/bootstrap.php"]
     },
     "bin": [
         "bin/testify"
