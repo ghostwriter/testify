@@ -27,7 +27,7 @@ final readonly class Runner implements RunnerInterface
     {
         $sourceDirectory = $workspace->source();
 
-        $unitTestsDirectory = $workspace->tests() . DIRECTORY_SEPARATOR . 'unit';
+        $unitTestsDirectory = $workspace->tests() . DIRECTORY_SEPARATOR . 'Unit';
 
         if (! $this->filesystem->isDirectory($unitTestsDirectory)) {
 
