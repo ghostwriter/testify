@@ -18,6 +18,8 @@ use PhpToken;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
+use function mb_ltrim;
+
 final readonly class TestBuilder implements TestBuilderInterface
 {
     public function __construct(
@@ -25,8 +27,7 @@ final readonly class TestBuilder implements TestBuilderInterface
         private FileResolver $fileResolver,
         private ClassNameNormalizer $classNameNormalizer,
         private FilesystemInterface $filesystem,
-    ) {
-    }
+    ) {}
 
     #[Override]
     public function build(string $file, string $testFile): GeneratorInterface
@@ -42,16 +43,16 @@ final readonly class TestBuilder implements TestBuilderInterface
         $testClass = $this->classNameNormalizer->normalize($this->filesystem->basename($testFile, '.php'));
 
         foreach ($namespaces as $namespace => [$testNamespace, $namespaceGenerator]) {
-            $namespaceClass = \ltrim($namespace . '\\' . $class, '\\');
+            $namespaceClass = mb_ltrim($namespace . '\\' . $class, '\\');
 
-            $testNamespaceClass = \ltrim($testNamespace . '\\' . $testClass, '\\');
+            $testNamespaceClass = mb_ltrim($testNamespace . '\\' . $testClass, '\\');
 
             $namespaces[$namespace] = $namespaceGenerator->classLikes([
                 $testNamespaceClass => new ClassGenerator(
                     name: $testClass,
                     extends: [new ClassNameGenerator('TestCase')],
-                    methods: $this->testMethodsResolver->resolve($namespaceClass),
                     attributes: [new AttributeGenerator('CoversClass', [$class . '::class'])],
+                    methods: $this->testMethodsResolver->resolve($namespaceClass),
                     isFinal: true
                 ),
             ])

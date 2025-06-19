@@ -6,6 +6,4 @@ namespace Ghostwriter\Testify\Middleware;
 
 use Ghostwriter\Testify\CommandHandler\CommandHandlerInterface;
 
-interface MiddlewareQueueInterface extends CommandHandlerInterface, MiddlewareInterface
-{
-}
+interface MiddlewareQueueInterface extends CommandHandlerInterface, MiddlewareInterface {}

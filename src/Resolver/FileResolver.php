@@ -15,8 +15,7 @@ final readonly class FileResolver
 {
     public function __construct(
         private TestNamespaceResolver $testNamespaceResolver,
-    ) {
-    }
+    ) {}
 
     /**
      * @param PhpToken $tokens
@@ -29,11 +28,11 @@ final readonly class FileResolver
         foreach ($tokens as $token) {
             $tokenId = $token->id;
 
-            if ($tokenId === T_WHITESPACE) {
+            if (T_WHITESPACE === $tokenId) {
                 continue;
             }
 
-            if ($tokenId === T_NAMESPACE) {
+            if (T_NAMESPACE === $tokenId) {
                 $namespace = '';
                 $inNamespace = true;
 
@@ -46,13 +45,13 @@ final readonly class FileResolver
 
             $text = $token->text;
 
-            if ($tokenId === T_NAME_QUALIFIED) {
+            if (T_NAME_QUALIFIED === $tokenId) {
                 $namespace .= $text;
 
                 continue;
             }
 
-            if ($text === ';') {
+            if (';' === $text) {
                 $inNamespace = false;
 
                 $testNamespace = $this->testNamespaceResolver->resolve($namespace);

@@ -11,8 +11,11 @@ use Ghostwriter\Testify\Exception\ShouldNotHappenException;
 use Override;
 use RuntimeException;
 
+use const PHP_SAPI;
+
 use function array_key_exists;
 use function array_slice;
+use function defined;
 use function explode;
 use function getopt;
 use function sprintf;
@@ -30,6 +33,10 @@ final readonly class ConfigExtension implements ExtensionInterface
     #[Override]
     public function __invoke(ContainerInterface $container, object $service): ConfigInterface
     {
+        if ($this->isPHPUnit()) {
+            return $service;
+        }
+
         //    0 - No colon - no argument ( boolean flag )
         //    1 - One colon - argument required ( string )
         //    2 - Two colons - argument optional ( string|null )
@@ -82,8 +89,15 @@ final readonly class ConfigExtension implements ExtensionInterface
         return $service;
     }
 
-    private function highlight(string $thing): string
+    private function isPHPUnit(): bool
     {
-        return sprintf("\x1B[1;32m%s\x1B[0m", $thing);
+        return match (true) {
+            PHP_SAPI === 'cli' =>  match (true) {
+                defined('PHPUNIT_COMPOSER_INSTALL'),
+                defined('__PHPUNIT_PHAR__') => true,
+                default => false,
+            },
+            default => false,
+        };
     }
 }

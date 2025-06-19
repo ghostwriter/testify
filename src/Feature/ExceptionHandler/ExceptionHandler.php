@@ -13,8 +13,7 @@ final readonly class ExceptionHandler implements ExceptionHandlerInterface
 {
     public function __construct(
         private CliPrinterInterface $cliPrinter
-    ) {
-    }
+    ) {}
 
     #[Override]
     public function handle(CommandInterface $command, Throwable $throwable): int

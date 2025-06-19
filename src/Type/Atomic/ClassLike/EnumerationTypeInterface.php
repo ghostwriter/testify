@@ -6,6 +6,4 @@ namespace Ghostwriter\Testify\Type\Atomic\ClassLike;
 
 use Ghostwriter\Testify\Type\Atomic\ClassLikeTypeInterface;
 
-interface EnumerationTypeInterface extends ClassLikeTypeInterface
-{
-}
+interface EnumerationTypeInterface extends ClassLikeTypeInterface {}

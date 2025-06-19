@@ -16,13 +16,12 @@ final readonly class TestifyCommandHandler implements CommandHandlerInterface
     public function __construct(
         #[Inject(CliPrinter::class)]
         private CliPrinterInterface $cliPrinter
-    ) {
-    }
+    ) {}
 
     #[Override]
     public function handle(CommandInterface $command): int
     {
-        echo $this->cliPrinter->print($command);
+        //        echo $this->cliPrinter->print($command);
 
         return $command->execute();
     }

@@ -15,8 +15,7 @@ final readonly class CommandNotFoundHandler implements CommandHandlerInterface
 {
     public function __construct(
         private CliPrinterInterface $cliPrinter
-    ) {
-    }
+    ) {}
 
     #[Override]
     public function handle(CommandInterface $command): int

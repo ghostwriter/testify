@@ -9,7 +9,7 @@ use Ghostwriter\Testify\Command\CommandInterface;
 interface MiddlewareProviderInterface
 {
     /**
-     * @return array<MiddlewareInterface>
+     * @return list<MiddlewareInterface>
      */
     public function get(CommandInterface $command): array;
 }

@@ -12,12 +12,15 @@ use Ghostwriter\Testify\Middleware\MiddlewareInterface;
 use Override;
 use Throwable;
 
+use function error_reporting;
+use function restore_error_handler;
+use function set_error_handler;
+
 final readonly class ErrorHandlerMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private ExceptionHandlerInterface $exceptionHandler,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws Throwable
@@ -25,18 +28,18 @@ final readonly class ErrorHandlerMiddleware implements MiddlewareInterface
     #[Override]
     public function process(CommandInterface $command, CommandHandlerInterface $commandHandler): int
     {
-        //1: Catchall for general errors
-        //2: Misuse of shell builtins (according to Bash documentation)
-        //126: Command invoked cannot execute
-        //127: "command not found"
-        //128: Invalid argument to exit
-        //128+n: Fatal error signal "n"
-        //255: Exit status out of range (exit takes only integer args in the range 0 - 255)
-        #define EX_NOPERM       77      /* permission denied */
-        #define EX_CONFIG       78      /* configuration error */
-        #define EX_IOERR        74      /* input/output error */
-        \set_error_handler(static function (int $severity, string $message, string $filename, int $line): bool {
-            if (0 === ($severity & \error_reporting())) {
+        // 1: Catchall for general errors
+        // 2: Misuse of shell builtins (according to Bash documentation)
+        // 126: Command invoked cannot execute
+        // 127: "command not found"
+        // 128: Invalid argument to exit
+        // 128+n: Fatal error signal "n"
+        // 255: Exit status out of range (exit takes only integer args in the range 0 - 255)
+        # define EX_NOPERM       77      /* permission denied */
+        # define EX_CONFIG       78      /* configuration error */
+        # define EX_IOERR        74      /* input/output error */
+        set_error_handler(static function (int $severity, string $message, string $filename, int $line): bool {
+            if (0 === ($severity & error_reporting())) {
                 return false;
             }
 
@@ -48,7 +51,7 @@ final readonly class ErrorHandlerMiddleware implements MiddlewareInterface
         } catch (Throwable $throwable) {
             $exitCode = $this->exceptionHandler->handle($command, $throwable);
         } finally {
-            \restore_error_handler();
+            restore_error_handler();
         }
 
         return $exitCode;

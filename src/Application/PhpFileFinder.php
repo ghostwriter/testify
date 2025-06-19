@@ -4,58 +4,58 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Application;
 
-use Closure;
 use Generator;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Ghostwriter\Filesystem\Interface\PathInterface;
+use TypeError;
+
+use function get_debug_type;
+use function mb_strtolower;
+use function sprintf;
+use function str_ends_with;
+use function str_starts_with;
 
 final readonly class PhpFileFinder
 {
-    private Closure $isNotSupported;
-
-    private Closure $isPhpFile;
-
     public function __construct(
         private FilesystemInterface $filesystem,
-    ) {
-        $this->isPhpFile = static fn (PathInterface $path): bool => \str_ends_with($path->toString(), '.php');
-
-        $this->isNotSupported = static function (PathInterface $path) use ($filesystem): bool {
-            $filename = $filesystem->basename($path->toString());
-            return match (true) {
-                // if the first letter is lowercase, it's not a class
-                \mb_strtolower($filename[0]) === $filename[0],
-                \str_starts_with($filename, 'Abstract'),
-                \str_ends_with($filename, 'Trait.php'),
-                \str_ends_with($filename, 'Interface.php'),
-                \str_ends_with($filename, 'Test.php') => true,
-                default => false,
-            };
-        };
-    }
+    ) {}
 
     /**
      * @return Generator<string>
      */
     public function find(string $directory): Generator
     {
-        $match = $this->isPhpFile;
-        $skip = $this->isNotSupported;
-
         foreach ($this->filesystem->recursiveIterator($directory) as $file) {
             if (! $file instanceof PathInterface) {
+                throw new TypeError(
+                    sprintf('Expected a "%s" instance, but got %s', PathInterface::class, get_debug_type($file))
+                );
+            }
+
+            $path = $file->toString();
+
+            if (! str_ends_with($path, '.php')) {
                 continue;
             }
 
-            if ($match($file) === false) {
+            $filename = $this->filesystem->basename($path);
+
+            $skip = match (true) {
+                str_starts_with($filename, 'Abstract'),
+                str_ends_with($filename, 'Trait.php'),
+                str_ends_with($filename, 'Interface.php'),
+                str_ends_with($filename, 'Test.php'),
+                // if the first letter is lowercase, it's not a class
+                mb_strtolower($filename[0]) === $filename[0] => true,
+                default => false,
+            };
+
+            if ($skip) {
                 continue;
             }
 
-            if ($skip($file) === true) {
-                continue;
-            }
-
-            yield $file->toString();
+            yield $path => $path;
         }
     }
 }
