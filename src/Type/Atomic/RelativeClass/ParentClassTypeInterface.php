@@ -6,6 +6,4 @@ namespace Ghostwriter\Testify\Type\Atomic\RelativeClass;
 
 use Ghostwriter\Testify\Type\Atomic\RelativeClassTypeInterface;
 
-interface ParentClassTypeInterface extends RelativeClassTypeInterface
-{
-}
+interface ParentClassTypeInterface extends RelativeClassTypeInterface {}

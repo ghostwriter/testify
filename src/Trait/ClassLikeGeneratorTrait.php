@@ -18,12 +18,12 @@ use Override;
 trait ClassLikeGeneratorTrait
 {
     /**
-     * @param list<AttributeGeneratorInterface> $attributes
      * @param list<NameGeneratorInterface>      $extends
+     * @param list<AttributeGeneratorInterface> $attributes
      * @param list<ConstantGeneratorInterface>  $constants
      * @param list<DocBlockGeneratorInterface>  $dockBlocks
-     * @param list<MethodGeneratorInterface>    $methods
      * @param list<NameGeneratorInterface>      $implements
+     * @param list<MethodGeneratorInterface>    $methods
      * @param list<PropertyGeneratorInterface>  $properties
      * @param list<TraitUseGeneratorInterface>  $traitUses
      * @param list<UseGeneratorInterface>       $uses
@@ -42,8 +42,7 @@ trait ClassLikeGeneratorTrait
         private readonly bool $isAbstract = false,
         private readonly bool $isFinal = false,
         private readonly bool $isReadonly = false,
-    ) {
-    }
+    ) {}
 
     #[Override]
     final public function addAttribute(AttributeGeneratorInterface $attributeGenerator): void

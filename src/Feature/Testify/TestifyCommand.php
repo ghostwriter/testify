@@ -15,6 +15,9 @@ use Throwable;
 use const PHP_EOL;
 use const STDOUT;
 
+use function fwrite;
+use function sprintf;
+
 final readonly class TestifyCommand implements CommandInterface
 {
     /**
@@ -25,8 +28,7 @@ final readonly class TestifyCommand implements CommandInterface
         private RunnerInterface $runner,
         private TestBuilderInterface $testBuilder,
         private WorkspaceInterface $workspace,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws Throwable
@@ -40,7 +42,7 @@ final readonly class TestifyCommand implements CommandInterface
         $project = $this->workspace;
         //            new Workspace($options[0] ?? 'src', $options[1] ?? 'tests', $dryRun, $force);
 
-        \fwrite(STDOUT, \sprintf(
+        fwrite(STDOUT, sprintf(
             '%s by %s and contributors. %s' . PHP_EOL,
             'Testify',
             'Nathanael Esayeas',
@@ -87,6 +89,7 @@ final readonly class TestifyCommand implements CommandInterface
 
             if ($dryRun) {
                 $this->writeln('Dry run, not writing file.');
+
                 continue;
             }
 
@@ -94,14 +97,15 @@ final readonly class TestifyCommand implements CommandInterface
                 ++$count;
                 $this->filesystem->write($testFile, $testFileContent);
 
-                $this->writeln(\sprintf('File "%s" written.' . PHP_EOL, $testFile));
+                $this->writeln(sprintf('File "%s" written.' . PHP_EOL, $testFile));
+
                 continue;
             }
 
             $this->writeln('File already exists;(use "--force|-f" to overwrite)' . PHP_EOL);
         }
 
-        $this->writeln([PHP_EOL, \sprintf('Generated %d missing tests.', $count)]);
+        $this->writeln([PHP_EOL, sprintf('Generated %d missing tests.', $count)]);
 
         return 0;
     }
@@ -117,7 +121,7 @@ final readonly class TestifyCommand implements CommandInterface
     private function writeln(array|string $message): void
     {
         foreach ((array) $message as $line) {
-            \fwrite(STDOUT, \sprintf('%s%s', $line, PHP_EOL));
+            fwrite(STDOUT, sprintf('%s%s', $line, PHP_EOL));
         }
     }
 }

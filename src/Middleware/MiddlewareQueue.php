@@ -10,10 +10,12 @@ use Override;
 use RuntimeException;
 use Throwable;
 
+use function array_shift;
+
 final class MiddlewareQueue implements MiddlewareQueueInterface
 {
     /**
-     * @param array<MiddlewareInterface> $middlewares
+     * @param list<MiddlewareInterface> $middlewares
      *
      * @throws Throwable
      */
@@ -55,11 +57,11 @@ final class MiddlewareQueue implements MiddlewareQueueInterface
     #[Override]
     public function process(CommandInterface $command, CommandHandlerInterface $commandHandler): int
     {
-        if ($this->middlewares === []) {
+        if ([] === $this->middlewares) {
             return $commandHandler->handle($command);
         }
 
-        $middleware = \array_shift($this->middlewares);
+        $middleware = array_shift($this->middlewares);
 
         if (! $middleware instanceof MiddlewareInterface) {
             throw new RuntimeException('Middleware must implement Middleware interface');

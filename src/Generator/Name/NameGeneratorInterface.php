@@ -6,6 +6,4 @@ namespace Ghostwriter\Testify\Generator\Name;
 
 use Ghostwriter\Testify\Generator\GeneratorInterface;
 
-interface NameGeneratorInterface extends GeneratorInterface
-{
-}
+interface NameGeneratorInterface extends GeneratorInterface {}
