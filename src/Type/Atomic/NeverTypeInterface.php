@@ -6,6 +6,4 @@ namespace Ghostwriter\Testify\Type\Atomic;
 
 use Ghostwriter\Testify\Type\AtomicTypeInterface;
 
-interface NeverTypeInterface extends AtomicTypeInterface
-{
-}
+interface NeverTypeInterface extends AtomicTypeInterface {}

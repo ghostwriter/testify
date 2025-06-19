@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Application;
 
+use Ghostwriter\Container\Attribute\Provider;
 use Ghostwriter\Container\Container;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Testify\Command\CommandInterface;
@@ -15,27 +16,21 @@ use Ghostwriter\Testify\Middleware\MiddlewareQueue;
 use Override;
 use Throwable;
 
+#[Provider(ServiceProvider::class)]
 final readonly class Application implements ApplicationInterface
 {
     public function __construct(
         public ContainerInterface $container,
         public CommandHandlerProviderInterface $commandHandlerProvider,
         public MiddlewareProviderInterface $middlewareProvider,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws Throwable
      */
     public static function new(): self
     {
-        $container = Container::getInstance();
-
-        if (! $container->has(ServiceProvider::class)) {
-            $container->provide(ServiceProvider::class);
-        }
-
-        return $container->get(self::class);
+        return Container::getInstance()->get(self::class);
     }
 
     /**
@@ -55,7 +50,7 @@ final readonly class Application implements ApplicationInterface
      * @throws Throwable
      */
     #[Override]
-    public function run(): int
+    public function run(array $arguments = []): int
     {
         return $this->dispatch($this->container->get(TestifyCommand::class));
     }

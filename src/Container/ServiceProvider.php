@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Container;
 
 use Ghostwriter\Config\Config;
-use Ghostwriter\Config\Contract\ConfigInterface;
+// use Ghostwriter\Config\Interface\ConfigInterface;
+use Ghostwriter\Config\ConfigInterface;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\ServiceProviderInterface;
 use Ghostwriter\Filesystem\Filesystem;
@@ -23,6 +24,8 @@ use Ghostwriter\Testify\Feature\ExceptionHandler\ExceptionHandler;
 use Ghostwriter\Testify\Feature\ExceptionHandler\ExceptionHandlerInterface;
 use Ghostwriter\Testify\Middleware\MiddlewareProvider;
 use Ghostwriter\Testify\Middleware\MiddlewareProviderInterface;
+use Ghostwriter\Testify\Printer\CliPrinter;
+use Ghostwriter\Testify\Printer\CliPrinterInterface;
 use Ghostwriter\Testify\Runner\Runner;
 use Ghostwriter\Testify\Runner\RunnerInterface;
 use Ghostwriter\Testify\Value\Argv;
@@ -41,6 +44,7 @@ final readonly class ServiceProvider implements ServiceProviderInterface
         CommandHandlerProvider::class => CommandHandlerProviderInterface::class,
         MiddlewareProvider::class => MiddlewareProviderInterface::class,
         TestBuilder::class => TestBuilderInterface::class,
+        CliPrinter::class => CliPrinterInterface::class,
     ];
 
     public const array EXTENSIONS = [

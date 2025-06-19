@@ -9,11 +9,17 @@ use Ghostwriter\Testify\Application\Application;
 use const DIRECTORY_SEPARATOR;
 use const STDERR;
 
+use function dirname;
+use function fwrite;
+use function implode;
+use function is_file;
+use function sprintf;
+
 (static function (string $composerAutoloadPath): never {
-    if (! \file_exists($composerAutoloadPath)) {
-        \fwrite(
+    if (! is_file($composerAutoloadPath)) {
+        fwrite(
             STDERR,
-            \sprintf('[ERROR]Cannot locate "%s"\n please run "composer install"\n', $composerAutoloadPath)
+            sprintf('[ERROR]Cannot locate "%s"\n please run "composer install"\n', $composerAutoloadPath)
         );
 
         exit(255);
@@ -21,8 +27,6 @@ use const STDERR;
 
     require $composerAutoloadPath;
 
-    /**
-     * #BlackLivesMatter.
-     */
-    exit(Application::new()->run());
-})($_composer_autoload_path ?? \implode(DIRECTORY_SEPARATOR, [\dirname(__DIR__), 'vendor', 'autoload.php']));
+    /** #BlackLivesMatter */
+    exit(Application::new()->run($_SERVER['argv']));
+})($_composer_autoload_path ?? implode(DIRECTORY_SEPARATOR, [dirname(__DIR__), 'vendor', 'autoload.php']));

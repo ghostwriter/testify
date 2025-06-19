@@ -16,7 +16,7 @@ final readonly class UseConstantGenerator implements UseConstantGeneratorInterfa
     {
         $code = 'use const ' . $this->name;
 
-        if ($this->alias !== '') {
+        if ('' !== $this->alias) {
             $code .= ' as ' . $this->alias;
         }
 

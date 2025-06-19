@@ -6,6 +6,4 @@ namespace Ghostwriter\Testify\Type\Atomic\Scalar;
 
 use Ghostwriter\Testify\Type\Atomic\ScalarTypeInterface;
 
-interface StringTypeInterface extends ScalarTypeInterface
-{
-}
+interface StringTypeInterface extends ScalarTypeInterface {}
