@@ -12,8 +12,8 @@ use Override;
 final readonly class PropertyGenerator implements PropertyGeneratorInterface
 {
     /**
-     * @param array<class-string<AttributeGeneratorInterface>> $attributes
-     * @param array<class-string<UseGeneratorInterface>>       $uses
+     * @param list<class-string<AttributeGeneratorInterface>> $attributes
+     * @param list<class-string<UseGeneratorInterface>>       $uses
      */
     public function __construct(
         private string $name,
@@ -25,10 +25,9 @@ final readonly class PropertyGenerator implements PropertyGeneratorInterface
         private bool $isReadonly = false,
         private array $attributes = [],
         private array $uses = [],
-    ) {
-    }
+    ) {}
 
-    /** @return array<class-string<AttributeGeneratorInterface>> */
+    /** @return list<class-string<AttributeGeneratorInterface>> */
     #[Override]
     public function attributes(): array
     {
@@ -68,7 +67,7 @@ final readonly class PropertyGenerator implements PropertyGeneratorInterface
 
         $code .= '$' . $this->name;
 
-        if ($this->value !== null) {
+        if (null !== $this->value) {
             $code .= ' = ' . $this->value;
         }
 
@@ -81,7 +80,7 @@ final readonly class PropertyGenerator implements PropertyGeneratorInterface
         return $this->name;
     }
 
-    /** @return array<class-string<UseGeneratorInterface>> */
+    /** @return list<class-string<UseGeneratorInterface>> */
     #[Override]
     public function uses(): array
     {

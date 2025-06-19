@@ -11,12 +11,11 @@ final readonly class ClassMethodNameNormalizer implements NormalizerInterface
 {
     public function __construct(
         private CaseConverter $caseConverter,
-    ) {
-    }
+    ) {}
 
     #[Override]
     public function normalize(string $name): string
     {
-        return $this->caseConverter->camelCase($name);
+        return $this->caseConverter->toCamelCase($name);
     }
 }

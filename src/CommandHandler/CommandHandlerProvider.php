@@ -13,6 +13,10 @@ use Override;
 use RuntimeException;
 use Throwable;
 
+use function array_key_exists;
+use function is_a;
+use function sprintf;
+
 final class CommandHandlerProvider implements CommandHandlerProviderInterface
 {
     /**
@@ -24,8 +28,7 @@ final class CommandHandlerProvider implements CommandHandlerProviderInterface
 
     public function __construct(
         private readonly ContainerInterface $container,
-    ) {
-    }
+    ) {}
 
     /**
      * @param class-string<CommandInterface>        $command
@@ -35,21 +38,19 @@ final class CommandHandlerProvider implements CommandHandlerProviderInterface
      */
     public function add(string $command, string $commandHandler): void
     {
-        if (\array_key_exists($command, $this->commandHandlers)) {
+        if (array_key_exists($command, $this->commandHandlers)) {
             throw new RuntimeException(
-                \sprintf('Command handler %s already exists for command %s', $commandHandler, $command),
+                sprintf('Command handler %s already exists for command %s', $commandHandler, $command),
             );
         }
 
-        if (! \is_a($command, CommandInterface::class, true)) {
-            throw new RuntimeException(
-                \sprintf('Command %s must implement %s', $command, CommandInterface::class),
-            );
+        if (! is_a($command, CommandInterface::class, true)) {
+            throw new RuntimeException(sprintf('Command %s must implement %s', $command, CommandInterface::class));
         }
 
-        if (! \is_a($commandHandler, CommandHandlerInterface::class, true)) {
+        if (! is_a($commandHandler, CommandHandlerInterface::class, true)) {
             throw new RuntimeException(
-                \sprintf('Command handler %s must implement %s', $commandHandler, CommandHandlerInterface::class),
+                sprintf('Command handler %s must implement %s', $commandHandler, CommandHandlerInterface::class),
             );
         }
 

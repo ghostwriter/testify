@@ -10,12 +10,14 @@ use Ghostwriter\Testify\Middleware\MiddlewareInterface;
 use Override;
 use Throwable;
 
+use function restore_exception_handler;
+use function set_exception_handler;
+
 final readonly class ExceptionHandlerMiddleware implements MiddlewareInterface
 {
     public function __construct(
         private ExceptionHandler $exceptionHandler,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws Throwable
@@ -23,7 +25,7 @@ final readonly class ExceptionHandlerMiddleware implements MiddlewareInterface
     #[Override]
     public function process(CommandInterface $command, CommandHandlerInterface $commandHandler): int
     {
-        \set_exception_handler(static function (Throwable $throwable): void {
+        set_exception_handler(static function (Throwable $throwable): void {
             echo $throwable->getMessage();
         });
 
@@ -32,7 +34,7 @@ final readonly class ExceptionHandlerMiddleware implements MiddlewareInterface
         } catch (Throwable $throwable) {
             $exitCode = $this->exceptionHandler->handle($command, $throwable);
         } finally {
-            \restore_exception_handler();
+            restore_exception_handler();
         }
 
         return $exitCode;

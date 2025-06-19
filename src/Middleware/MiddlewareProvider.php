@@ -14,6 +14,12 @@ use Ghostwriter\Testify\Feature\Testify\TestifyCommandMiddleware;
 use RuntimeException;
 use Throwable;
 
+use function array_key_exists;
+use function array_keys;
+use function array_map;
+use function is_a;
+use function sprintf;
+
 final class MiddlewareProvider implements MiddlewareProviderInterface
 {
     /**
@@ -36,8 +42,7 @@ final class MiddlewareProvider implements MiddlewareProviderInterface
 
     public function __construct(
         private readonly ContainerInterface $container,
-    ) {
-    }
+    ) {}
 
     /**
      * @param class-string<CommandInterface>    $command
@@ -45,15 +50,13 @@ final class MiddlewareProvider implements MiddlewareProviderInterface
      */
     public function add(string $command, string $middleware): void
     {
-        if (! \is_a($command, CommandInterface::class, true)) {
-            throw new RuntimeException(
-                \sprintf('Command %s must implement %s', $command, CommandInterface::class),
-            );
+        if (! is_a($command, CommandInterface::class, true)) {
+            throw new RuntimeException(sprintf('Command %s must implement %s', $command, CommandInterface::class));
         }
 
-        if (! \is_a($middleware, MiddlewareInterface::class, true)) {
+        if (! is_a($middleware, MiddlewareInterface::class, true)) {
             throw new RuntimeException(
-                \sprintf('Middleware %s must implement %s', $middleware, MiddlewareInterface::class),
+                sprintf('Middleware %s must implement %s', $middleware, MiddlewareInterface::class),
             );
         }
 
@@ -67,16 +70,16 @@ final class MiddlewareProvider implements MiddlewareProviderInterface
      */
     public function get(CommandInterface $command): array
     {
-        if (! \array_key_exists($command::class, $this->commandMiddlewares)) {
+        if (! array_key_exists($command::class, $this->commandMiddlewares)) {
             return [];
         }
 
         $middlewares = $this->commandMiddlewares[$command::class];
 
-        return \array_map(
+        return array_map(
             fn (string $middleware): MiddlewareInterface => $this->container->get($middleware),
             self::DEFAULT_MIDDLEWARES,
-            \array_keys($middlewares),
+            array_keys($middlewares),
         );
     }
 }

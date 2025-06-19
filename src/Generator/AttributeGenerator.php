@@ -6,16 +6,17 @@ namespace Ghostwriter\Testify\Generator;
 
 use Override;
 
+use function mb_rtrim;
+
 final readonly class AttributeGenerator implements GeneratorInterface
 {
     /**
-     * @param array<string> $params
+     * @param list<string> $params
      */
     public function __construct(
         public string $name,
         public array $params = [],
-    ) {
-    }
+    ) {}
 
     #[Override]
     public function generate(): string
@@ -28,6 +29,6 @@ final readonly class AttributeGenerator implements GeneratorInterface
             $code .= $param . ', ';
         }
 
-        return \rtrim($code, ', ') . ')]';
+        return mb_rtrim($code, ', ') . ')]';
     }
 }
