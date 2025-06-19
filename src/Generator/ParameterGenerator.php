@@ -18,8 +18,7 @@ final readonly class ParameterGenerator implements GeneratorInterface
         private ?string $defaultValue = null,
         private array $attributes = [],
         private array $uses = [],
-    ) {
-    }
+    ) {}
 
     #[Override]
     public function generate(): string
@@ -34,7 +33,7 @@ final readonly class ParameterGenerator implements GeneratorInterface
             $parameter .= '...';
         }
 
-        if ($this->type !== null) {
+        if (null !== $this->type) {
             $parameter .= $this->type . ' ';
         }
 

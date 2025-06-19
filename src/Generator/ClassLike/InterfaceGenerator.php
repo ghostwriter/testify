@@ -27,9 +27,9 @@ final class InterfaceGenerator implements InterfaceGeneratorInterface
     {
         $code = 'interface ' . $this->name;
 
-        if ($this->extends !== []) {
+        if ([] !== $this->extends) {
             $code .= ' extends ';
-            //. implode(', ', $this->extends);
+            // . implode(', ', $this->extends);
 
             foreach ($this->extends as $extend) {
                 $code .= $extend->generate() . ', ';
@@ -46,11 +46,15 @@ final class InterfaceGenerator implements InterfaceGeneratorInterface
             $code .= $constant->generate() . self::NEWLINES;
         }
 
-        $methods = array_reduce($this->methods, static function (array $methods, GeneratorInterface $generator): array {
-            $methods[] = $generator;
+        $methods = array_reduce(
+            $this->methods,
+            static function (array $methods, GeneratorInterface $generator): array {
+                $methods[] = $generator;
 
-            return $methods;
-        }, []);
+                return $methods;
+            },
+            []
+        );
 
         foreach ($methods as $method) {
             if (! $method instanceof MethodGeneratorInterface) {

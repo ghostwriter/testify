@@ -13,7 +13,7 @@ use Ghostwriter\Testify\Trait\ClassLikeGeneratorTrait;
 use Override;
 
 use function array_reduce;
-use function rtrim;
+use function mb_rtrim;
 use function usort;
 
 final class ClassGenerator implements ClassLikeGeneratorInterface
@@ -47,24 +47,24 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
 
         $code .= 'class ' . $this->name;
 
-        if ($this->extends !== []) {
+        if ([] !== $this->extends) {
             $code .= ' extends ';
 
             foreach ($this->extends as $extend) {
                 $code .= $extend->generate() . ', ';
             }
 
-            $code = rtrim($code, ', ');
+            $code = mb_rtrim($code, ', ');
         }
 
-        if ($this->implements !== []) {
+        if ([] !== $this->implements) {
             $code .= ' implements ';
 
             foreach ($this->implements as $implement) {
                 $code .= $implement->generate() . ', ';
             }
 
-            $code = rtrim($code, ', ');
+            $code = mb_rtrim($code, ', ');
         }
 
         $code .= self::NEWLINE . '{' . self::NEWLINE;
@@ -117,7 +117,7 @@ final class ClassGenerator implements ClassLikeGeneratorInterface
             $code .= self::INDENT . $method->generate() . self::NEWLINES;
         }
 
-        return rtrim($code) . self::NEWLINE . '}' . self::NEWLINE;
+        return mb_rtrim($code) . self::NEWLINE . '}' . self::NEWLINE;
     }
 
     public function generater(): string

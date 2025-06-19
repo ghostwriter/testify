@@ -4,53 +4,54 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Application;
 
+use Ghostwriter\Container\Attribute\Provider;
 use Ghostwriter\Container\Container;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Testify\Command\CommandInterface;
-use Ghostwriter\Testify\Command\Handlers;
-use Ghostwriter\Testify\Command\Middlewares;
-use Ghostwriter\Testify\Handler\HandlerInterface;
+use Ghostwriter\Testify\CommandHandler\CommandHandlerProviderInterface;
+use Ghostwriter\Testify\Container\ServiceProvider;
+use Ghostwriter\Testify\Feature\Testify\TestifyCommand;
+use Ghostwriter\Testify\Middleware\MiddlewareProviderInterface;
+use Ghostwriter\Testify\Middleware\MiddlewareQueue;
 use Override;
 use Throwable;
 
+#[Provider(ServiceProvider::class)]
 final readonly class Application implements ApplicationInterface
 {
     public function __construct(
         public ContainerInterface $container,
-        public Handlers $handlers,
-        public Middlewares $middlewares,
-    ) {
-        $this->handlers->add($this);
-        $this->middlewares->add($this);
+        public CommandHandlerProviderInterface $commandHandlerProvider,
+        public MiddlewareProviderInterface $middlewareProvider,
+    ) {}
+
+    /**
+     * @throws Throwable
+     */
+    public static function new(): self
+    {
+        return Container::getInstance()->get(self::class);
     }
 
+    /**
+     * @throws Throwable
+     */
     #[Override]
     public function dispatch(CommandInterface $command): int
     {
-        return $this->middlewares->process($command, $this);
+        $commandHandler = $this->commandHandlerProvider->get($command);
+
+        $middlewares = $this->middlewareProvider->get($command);
+
+        return MiddlewareQueue::new(...$middlewares)->process($command, $commandHandler);
     }
 
     /**
      * @throws Throwable
      */
     #[Override]
-    public function handle(CommandInterface $command): int
+    public function run(array $arguments = []): int
     {
-        return $this->handlers->handle($command);
-    }
-
-    #[Override]
-    public function process(CommandInterface $command, HandlerInterface $handler): int
-    {
-        return $this->middlewares->process($command, $handler);
-    }
-
-    /**
-     * @throws Throwable
-     */
-    #[Override]
-    public function run(): int
-    {
-        return $this->dispatch(Container::getInstance()->get(CommandInterface::class));
+        return $this->dispatch($this->container->get(TestifyCommand::class));
     }
 }

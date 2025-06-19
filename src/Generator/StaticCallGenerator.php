@@ -6,7 +6,7 @@ namespace Ghostwriter\Testify\Generator;
 
 use Override;
 
-use function rtrim;
+use function mb_rtrim;
 use function sprintf;
 use function str_contains;
 
@@ -16,8 +16,7 @@ final readonly class StaticCallGenerator implements GeneratorInterface
         private string $class,
         private string $method,
         private array $args = [],
-    ) {
-    }
+    ) {}
 
     #[Override]
     public function generate(): string
@@ -32,6 +31,6 @@ final readonly class StaticCallGenerator implements GeneratorInterface
             $code .= $arg . ', ';
         }
 
-        return sprintf('%s);%s', rtrim($code, ', '), self::NEWLINE);
+        return sprintf('%s);%s', mb_rtrim($code, ', '), self::NEWLINE);
     }
 }

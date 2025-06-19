@@ -5,28 +5,35 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Runner;
 
 use Generator;
+use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Ghostwriter\Testify\Application\PhpFileFinder;
-use Ghostwriter\Testify\Interface\RunnerInterface;
-use Ghostwriter\Testify\Interface\WorkspaceInterface;
+use Ghostwriter\Testify\Value\WorkspaceInterface;
 use Override;
 
 use const DIRECTORY_SEPARATOR;
 
+use function dd;
 use function str_replace;
 
 final readonly class Runner implements RunnerInterface
 {
     public function __construct(
+        private FilesystemInterface $filesystem,
         private PhpFileFinder $phpFileFinder,
-    ) {
-    }
+    ) {}
 
     #[Override]
-    public function run(WorkspaceInterface $project): Generator
+    public function run(WorkspaceInterface $workspace): Generator
     {
-        $sourceDirectory = $project->source();
+        $sourceDirectory = $workspace->source();
 
-        $unitTestsDirectory = $project->tests() . DIRECTORY_SEPARATOR . 'Unit';
+        $unitTestsDirectory = $workspace->tests() . DIRECTORY_SEPARATOR . 'Unit';
+
+        if (! $this->filesystem->isDirectory($unitTestsDirectory)) {
+
+            dd($unitTestsDirectory);
+            //            $this->filesystem->cleanDirectory($unitTestsDirectory);
+        }
 
         foreach ($this->phpFileFinder->find($sourceDirectory) as $file) {
             yield $file => str_replace([$sourceDirectory, '.php'], [$unitTestsDirectory, 'Test.php'], $file);

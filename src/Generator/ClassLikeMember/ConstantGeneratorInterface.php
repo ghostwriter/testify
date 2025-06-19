@@ -6,6 +6,4 @@ namespace Ghostwriter\Testify\Generator\ClassLikeMember;
 
 use Ghostwriter\Testify\Generator\ClassLikeMemberGeneratorInterface;
 
-interface ConstantGeneratorInterface extends ClassLikeMemberGeneratorInterface
-{
-}
+interface ConstantGeneratorInterface extends ClassLikeMemberGeneratorInterface {}

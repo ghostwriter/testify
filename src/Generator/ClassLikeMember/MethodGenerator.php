@@ -10,13 +10,13 @@ use Ghostwriter\Testify\Trait\ClassLikeMemberGeneratorTrait;
 use Override;
 
 use function array_merge;
-use function rtrim;
+use function mb_rtrim;
 
 final readonly class MethodGenerator implements MethodGeneratorInterface
 {
     use ClassLikeMemberGeneratorTrait;
 
-    /** @param array<class-string<AttributeGeneratorInterface>> $attributes */
+    /** @param list<class-string<AttributeGeneratorInterface>> $attributes */
     public function __construct(
         private string $name,
         private string $returnType = '',
@@ -31,10 +31,9 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
         private bool $isProtected = false,
         private bool $isPrivate = false,
         private bool $isAnonymous = false,
-    ) {
-    }
+    ) {}
 
-    /** @return array<class-string<AttributeGeneratorInterface>> */
+    /** @return list<class-string<AttributeGeneratorInterface>> */
     #[Override]
     public function attributes(): array
     {
@@ -92,11 +91,11 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
             $method .= $parameter->generate() . ', ';
         }
 
-        $method = rtrim($method, ', ');
+        $method = mb_rtrim($method, ', ');
 
         $method .= ')';
 
-        if ($this->returnType !== null) {
+        if (null !== $this->returnType) {
             $method .= ': ' . $this->returnType . self::NEWLINE;
         }
 
@@ -106,7 +105,7 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
             $method .= self::INDENT . self::INDENT . $line->generate() . self::NEWLINES;
         }
 
-        return rtrim($method) . self::NEWLINE . self::INDENT . '}';
+        return mb_rtrim($method) . self::NEWLINE . self::INDENT . '}';
     }
 
     #[Override]
