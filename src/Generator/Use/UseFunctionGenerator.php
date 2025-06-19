@@ -16,7 +16,7 @@ final readonly class UseFunctionGenerator implements UseFunctionGeneratorInterfa
     {
         $code = 'use function ' . $this->name;
 
-        if ($this->alias !== '') {
+        if ('' !== $this->alias) {
             $code .= ' as ' . $this->alias;
         }
 

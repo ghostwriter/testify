@@ -24,7 +24,7 @@ use function enum_exists;
 use function explode;
 use function implode;
 use function interface_exists;
-use function ltrim;
+use function mb_ltrim;
 use function mb_strrpos;
 use function mb_substr;
 use function sprintf;
@@ -37,11 +37,11 @@ final readonly class TestMethodsResolver
     public function __construct(
         private TestMethodNameNormalizer $testMethodNameNormalizer,
         private TestDataProviderMethodNameNormalizer $testDataProviderMethodNameNormalizer
-    ) {
-    }
+    ) {}
 
     public function resolve(string $class): array
     {
+        // $staticCallGenerator = new StaticCallGenerator('self', 'markTestIncomplete', ['Not implemented yet.']);
         return [
             'testExample' => new MethodGenerator(
                 name: 'testExample',
@@ -49,6 +49,14 @@ final readonly class TestMethodsResolver
                 body: [new StaticCallGenerator('self', 'assertTrue', ['true'])],
                 isPublic: true
             ),
+            //            'setUp' => new MethodGenerator(
+            //                name: 'setUp',
+            //                returnType: 'void',
+            //                body: [
+            //                    $staticCallGenerator,
+            //                ],
+            //                isProtected: true,
+            //            ),
         ];
 
         $reflectionClass = new ReflectionClass($class);
@@ -58,9 +66,12 @@ final readonly class TestMethodsResolver
         $assertTrue = new StaticCallGenerator('self', 'assertTrue', ['true']);
 
         $methods = [
-            'setUp' => new MethodGenerator('setUp', 'void', [], [], [
-                $staticCallGenerator,
-            ], [], false, false, false, true, false, false),
+            'setUp' => new MethodGenerator(
+                name: 'setUp',
+                returnType: 'void',
+                body: [$staticCallGenerator],
+                isProtected: true,
+            ),
         ];
 
         foreach ($reflectionClass->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
@@ -75,7 +86,7 @@ final readonly class TestMethodsResolver
                     $types = [];
                     foreach ($parameterTypes as $parameterType) {
                         if (str_starts_with($parameterType, '?')) {
-                            $parameterType = ltrim($parameterType, '?');
+                            $parameterType = mb_ltrim($parameterType, '?');
                         }
 
                         if (str_contains($parameterType, '\\')) {
@@ -108,13 +119,13 @@ final readonly class TestMethodsResolver
             );
 
             $attributes = [];
-            $hasParameters = $parameters !== [];
+            $hasParameters = [] !== $parameters;
             if ($hasParameters) {
                 $dataProvider = $this->testDataProviderMethodNameNormalizer->normalize($testMethodName);
 
                 $methods[$dataProvider] = new MethodGenerator(
                     $dataProvider,
-                    'Generator',
+                    Generator::class,
                     [new UseClassGenerator(Generator::class), new UseClassGenerator(DataProvider::class)],
                     [],
                     [new TestDataProviderGenerator($testMethodName, $parameters)],

@@ -13,7 +13,7 @@ final readonly class TestNamespaceResolver
     {
         /** @var list<string> $namespaces */
         $namespaces = explode('\\', $namespace, 3);
-        if ($namespaces === []) {
+        if ([] === $namespaces) {
             return 'Tests\\Unit';
         }
 

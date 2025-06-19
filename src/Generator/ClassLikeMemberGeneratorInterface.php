@@ -8,13 +8,13 @@ use Ghostwriter\Testify\Generator\Use\UseGeneratorInterface;
 
 interface ClassLikeMemberGeneratorInterface extends GeneratorInterface
 {
-    /** @return array<class-string<AttributeGeneratorInterface>> */
+    /** @return list<class-string<AttributeGeneratorInterface>> */
     public function attributes(): array;
 
-    public function compare(self $other): int;
+    public function compare(self $classLikeMemberGenerator): int;
 
     public function name(): string;
 
-    /** @return array<class-string<UseGeneratorInterface>> */
+    /** @return list<class-string<UseGeneratorInterface>> */
     public function uses(): array;
 }

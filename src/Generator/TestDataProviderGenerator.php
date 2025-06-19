@@ -12,13 +12,12 @@ use function sprintf;
 final readonly class TestDataProviderGenerator implements GeneratorInterface
 {
     /**
-     * @param array<ParameterGenerator> $parameters
+     * @param list<ParameterGenerator> $parameters
      */
     public function __construct(
         private string $name,
         private array $parameters
-    ) {
-    }
+    ) {}
 
     #[Override]
     public function generate(): string

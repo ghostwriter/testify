@@ -16,7 +16,7 @@ final readonly class UseClassGenerator implements UseClassGeneratorInterface
     {
         $code = 'use ' . $this->name;
 
-        if ($this->alias !== '') {
+        if ('' !== $this->alias) {
             $code .= ' as ' . $this->alias;
         }
 
