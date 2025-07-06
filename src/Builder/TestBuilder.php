@@ -16,7 +16,7 @@ use Ghostwriter\Testify\Resolver\TestMethodsResolver;
 use Override;
 use PhpToken;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\TestCase;
+use Tests\Unit\AbstractTestCase;
 
 use function mb_ltrim;
 
@@ -50,13 +50,13 @@ final readonly class TestBuilder implements TestBuilderInterface
             $namespaces[$namespace] = $namespaceGenerator->classLikes([
                 $testNamespaceClass => new ClassGenerator(
                     name: $testClass,
-                    extends: [new ClassNameGenerator('TestCase')],
+                    extends: [new ClassNameGenerator('AbstractTestCase')],
                     attributes: [new AttributeGenerator('CoversClass', [$class . '::class'])],
                     methods: $this->testMethodsResolver->resolve($namespaceClass),
                     isFinal: true
                 ),
             ])
-                ->usesClass(TestCase::class)
+                ->usesClass(AbstractTestCase::class)
                 ->usesClass(CoversClass::class)
                 ->usesClass($namespaceClass);
         }
