@@ -13,9 +13,8 @@ final readonly class Argv
 {
     public array $argv;
 
-    public function __construct(
-        string ...$arguments,
-    ) {
+    public function __construct(string ...$arguments)
+    {
         $this->argv = $arguments;
     }
 
