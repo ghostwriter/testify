@@ -3,7 +3,6 @@
   "description": "Automated test Generation for PHP code."
   "homepage": "https://github.com/ghostwriter/testify"
   "topics": "dev, ghostwriter, testify, testing"
-  "private": false
   "has_issues": true
   "has_projects": false
   "has_wiki": false
