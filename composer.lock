@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ec0f561d84c865f3361880da55688a33",
+    "content-hash": "4e09d32cc249234861c6f7459c37179a",
     "packages": [
         {
             "name": "ghostwriter/case-converter",
@@ -80,23 +80,27 @@
         },
         {
             "name": "ghostwriter/config",
-            "version": "1.0.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/config.git",
-                "reference": "f2e1aa3cfe936244deb3128e081997f93576b910"
+                "reference": "502d899651159db1178448eb7dec44320fe2aa15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/config/zipball/f2e1aa3cfe936244deb3128e081997f93576b910",
-                "reference": "f2e1aa3cfe936244deb3128e081997f93576b910",
+                "url": "https://api.github.com/repos/ghostwriter/config/zipball/502d899651159db1178448eb7dec44320fe2aa15",
+                "reference": "502d899651159db1178448eb7dec44320fe2aa15",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.4"
+                "php": "~8.4.0 || ~8.5.0"
             },
             "require-dev": {
-                "ghostwriter/coding-standard": "dev-main"
+                "ext-xdebug": "*",
+                "ghostwriter/coding-standard": "dev-main",
+                "mockery/mockery": "^1.6.12",
+                "phpunit/phpunit": "^12.4.2",
+                "symfony/var-dumper": "^7.3.5"
             },
             "type": "library",
             "autoload": {
@@ -106,7 +110,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD-3-Clause"
+                "BSD-4-Clause"
             ],
             "authors": [
                 {
@@ -134,7 +138,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-07T22:42:43+00:00"
+            "time": "2025-11-01T18:10:07+00:00"
         },
         {
             "name": "ghostwriter/container",
