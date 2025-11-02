@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Container;
 
-use Ghostwriter\Config\Config;
-// use Ghostwriter\Config\Interface\ConfigInterface;
-use Ghostwriter\Config\ConfigInterface;
+use Ghostwriter\Config\Configuration;
+use Ghostwriter\Config\Interface\ConfigurationInterface;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\ServiceProviderInterface;
 use Ghostwriter\Filesystem\Filesystem;
@@ -15,8 +14,8 @@ use Ghostwriter\Testify\Builder\TestBuilder;
 use Ghostwriter\Testify\Builder\TestBuilderInterface;
 use Ghostwriter\Testify\CommandHandler\CommandHandlerProvider;
 use Ghostwriter\Testify\CommandHandler\CommandHandlerProviderInterface;
-use Ghostwriter\Testify\Container\Extension\ConfigExtension;
 use Ghostwriter\Testify\Container\Factory\ArgvFactory;
+use Ghostwriter\Testify\Container\Factory\Ghostwriter\Config\ConfigurationFactory;
 use Ghostwriter\Testify\Container\Factory\WorkspaceFactory;
 use Ghostwriter\Testify\Feature\ErrorHandler\ErrorHandler;
 use Ghostwriter\Testify\Feature\ErrorHandler\ErrorHandlerInterface;
@@ -33,10 +32,10 @@ use Ghostwriter\Testify\Value\WorkspaceInterface;
 use Override;
 use Throwable;
 
-final readonly class ServiceProvider implements ServiceProviderInterface
+final readonly class TestifyServiceProvider implements ServiceProviderInterface
 {
     public const array ALIASES = [
-        Config::class => ConfigInterface::class,
+        Configuration::class => ConfigurationInterface::class,
         Filesystem::class => FilesystemInterface::class,
         Runner::class => RunnerInterface::class,
         ErrorHandler::class => ErrorHandlerInterface::class,
@@ -47,11 +46,8 @@ final readonly class ServiceProvider implements ServiceProviderInterface
         CliPrinter::class => CliPrinterInterface::class,
     ];
 
-    public const array EXTENSIONS = [
-        ConfigInterface::class => ConfigExtension::class,
-    ];
-
     public const array FACTORIES = [
+        Configuration::class => ConfigurationFactory::class,
         WorkspaceInterface::class => WorkspaceFactory::class,
         Argv::class => ArgvFactory::class,
     ];
@@ -64,10 +60,6 @@ final readonly class ServiceProvider implements ServiceProviderInterface
     {
         foreach (self::ALIASES as $service => $alias) {
             $container->alias($service, $alias);
-        }
-
-        foreach (self::EXTENSIONS as $service => $extension) {
-            $container->extend($service, $extension);
         }
 
         foreach (self::FACTORIES as $service => $factory) {

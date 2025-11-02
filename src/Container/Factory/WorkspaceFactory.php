@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Container\Factory;
 
-use Ghostwriter\Config\ConfigInterface;
+use Ghostwriter\Config\Interface\ConfigurationInterface;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\FactoryInterface;
 use Ghostwriter\Testify\Value\Workspace;
@@ -22,7 +22,7 @@ final readonly class WorkspaceFactory implements FactoryInterface
     #[Override]
     public function __invoke(ContainerInterface $container): object
     {
-        $config = $container->get(ConfigInterface::class);
+        $config = $container->get(ConfigurationInterface::class);
 
         return Workspace::new(
             source: (string) $config->get('source', 'src'),

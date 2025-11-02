@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Container;
 
-use Ghostwriter\Testify\Container\ServiceProvider;
+use Ghostwriter\Testify\Container\TestifyServiceProvider;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(ServiceProvider::class)]
-final class ServiceProviderTest extends TestCase
+#[CoversClass(TestifyServiceProvider::class)]
+final class TestifyServiceProviderTest extends TestCase
 {
     public function testExample(): void
     {

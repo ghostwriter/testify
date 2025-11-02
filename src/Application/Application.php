@@ -9,14 +9,14 @@ use Ghostwriter\Container\Container;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Testify\Command\CommandInterface;
 use Ghostwriter\Testify\CommandHandler\CommandHandlerProviderInterface;
-use Ghostwriter\Testify\Container\ServiceProvider;
+use Ghostwriter\Testify\Container\TestifyServiceProvider;
 use Ghostwriter\Testify\Feature\Testify\TestifyCommand;
 use Ghostwriter\Testify\Middleware\MiddlewareProviderInterface;
 use Ghostwriter\Testify\Middleware\MiddlewareQueue;
 use Override;
 use Throwable;
 
-#[Provider(ServiceProvider::class)]
+#[Provider(TestifyServiceProvider::class)]
 final readonly class Application implements ApplicationInterface
 {
     public function __construct(

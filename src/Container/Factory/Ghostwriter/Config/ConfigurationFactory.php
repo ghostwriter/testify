@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Container\Extension;
+namespace Ghostwriter\Testify\Container\Factory\Ghostwriter\Config;
 
-use Ghostwriter\Config\ConfigInterface;
+use Ghostwriter\Config\Configuration;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Container\Interface\ExtensionInterface;
+use Ghostwriter\Container\Interface\FactoryInterface;
 use Ghostwriter\Testify\Exception\ShouldNotHappenException;
 use Override;
 use RuntimeException;
+use Throwable;
 
 use const PHP_SAPI;
 
@@ -21,20 +22,20 @@ use function getopt;
 use function sprintf;
 
 /**
- * @implements ExtensionInterface<ConfigInterface>
+ * @see ConfigurationFactoryTest
+ *
+ * @implements FactoryInterface<Configuration>
  */
-final readonly class ConfigExtension implements ExtensionInterface
+final readonly class ConfigurationFactory implements FactoryInterface
 {
-    /**
-     * Extend a service on the given container.
-     *
-     * @param ConfigInterface $service
-     */
+    /** @throws Throwable */
     #[Override]
-    public function __invoke(ContainerInterface $container, object $service): ConfigInterface
+    public function __invoke(ContainerInterface $container): Configuration
     {
+        $configuration = Configuration::new();
+
         if ($this->isPHPUnit()) {
-            return $service;
+            return $configuration;
         }
 
         //    0 - No colon - no argument ( boolean flag )
@@ -76,17 +77,17 @@ final readonly class ConfigExtension implements ExtensionInterface
             throw new RuntimeException('Failed to parse options');
         }
 
-        $service->set('dryRun', array_key_exists('d', $options) || array_key_exists('dry-run', $options));
+        $configuration->set('dryRun', array_key_exists('d', $options) || array_key_exists('dry-run', $options));
 
-        $service->set('force', array_key_exists('f', $options) || array_key_exists('force', $options));
+        $configuration->set('force', array_key_exists('f', $options) || array_key_exists('force', $options));
 
         $argv = array_slice($_SERVER['argv'] ?? [], $rest_index);
 
-        $service->set('source', $argv[0] ?? 'src');
+        $configuration->set('source', $argv[0] ?? 'src');
 
-        $service->set('tests', $argv[1] ?? 'tests');
+        $configuration->set('tests', $argv[1] ?? 'tests');
 
-        return $service;
+        return $configuration;
     }
 
     private function isPHPUnit(): bool

@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Application;
 
-use Generator;
 use Ghostwriter\Testify\Application\Application;
 use Ghostwriter\Testify\Application\ApplicationInterface;
 use Ghostwriter\Testify\Application\PhpFileFinder;
 use Ghostwriter\Testify\Builder\TestBuilder;
 use Ghostwriter\Testify\CommandHandler\CommandHandlerProvider;
-use Ghostwriter\Testify\Container\Extension\ConfigExtension;
+use Ghostwriter\Testify\Container\Factory\Ghostwriter\Config\ConfigurationFactory;
 use Ghostwriter\Testify\Container\Factory\WorkspaceFactory;
-use Ghostwriter\Testify\Container\ServiceProvider;
+use Ghostwriter\Testify\Container\TestifyServiceProvider;
 use Ghostwriter\Testify\Feature\ErrorHandler\ErrorHandlerMiddleware;
 use Ghostwriter\Testify\Feature\ExceptionHandler\ExceptionHandler;
 use Ghostwriter\Testify\Feature\ExceptionHandler\ExceptionHandlerMiddleware;
@@ -64,7 +63,7 @@ use Throwable;
 #[CoversClass(NamespaceGenerator::class)]
 #[CoversClass(PhpFileFinder::class)]
 #[CoversClass(Runner::class)]
-#[CoversClass(ServiceProvider::class)]
+#[CoversClass(TestifyServiceProvider::class)]
 #[CoversClass(StaticCallGenerator::class)]
 #[CoversClass(TestBuilder::class)]
 #[CoversClass(TestDataProviderMethodNameNormalizer::class)]
@@ -75,7 +74,7 @@ use Throwable;
 #[CoversClass(TestifyCommandHandler::class)]
 #[CoversClass(UseClassGenerator::class)]
 #[CoversClass(Workspace::class)]
-#[CoversClass(ConfigExtension::class)]
+#[CoversClass(ConfigurationFactory::class)]
 #[CoversClass(WorkspaceFactory::class)]
 #[CoversTrait(NameGeneratorTrait::class)]
 final class ApplicationTest extends TestCase
@@ -83,7 +82,7 @@ final class ApplicationTest extends TestCase
     /**
      * @throws Throwable
      */
-    #[DataProvider('argvDataProvider')]
+    #[DataProvider('provideApplicationCases')]
     public function testApplication(array $arguments, int $expectedExitCode = 0): void
     {
         $application = Application::new();
@@ -103,7 +102,7 @@ final class ApplicationTest extends TestCase
     /**
      * @throws Throwable
      */
-    public static function argvDataProvider(): Generator
+    public static function provideApplicationCases(): iterable
     {
         yield 'empty' => [[]];
         yield 'with arguments' => [['--help']];
