@@ -6,7 +6,6 @@ namespace Ghostwriter\Testify\Application;
 
 use Generator;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
-use Ghostwriter\Filesystem\Interface\PathInterface;
 use TypeError;
 
 use function get_debug_type;
@@ -15,7 +14,7 @@ use function sprintf;
 use function str_ends_with;
 use function str_starts_with;
 
-final readonly class PhpFileFinder
+final readonly class PhpFileFinder implements FinderInterface
 {
     public function __construct(
         private FilesystemInterface $filesystem,
@@ -27,13 +26,13 @@ final readonly class PhpFileFinder
     public function find(string $directory): Generator
     {
         foreach ($this->filesystem->recursiveIterator($directory) as $file) {
-            if (! $file instanceof PathInterface) {
+            if (! $file instanceof \SplFileInfo) {
                 throw new TypeError(
-                    sprintf('Expected a "%s" instance, but got %s', PathInterface::class, get_debug_type($file))
+                    sprintf('Expected a "%s" instance, but got %s', SplFileInfo::class, get_debug_type($file))
                 );
             }
 
-            $path = $file->toString();
+            $path = $file->getRealPath();
 
             if (! str_ends_with($path, '.php')) {
                 continue;
