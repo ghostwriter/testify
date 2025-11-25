@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "504bcc15a2e001583428a0114c051b11",
+    "content-hash": "0db817261f6e40260e1a8c576a5b7352",
     "packages": [
         {
             "name": "ghostwriter/case-converter",
@@ -161,20 +161,21 @@
         },
         {
             "name": "ghostwriter/console",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/console.git",
-                "reference": "bb444a4389877055f7feaaafb6200b9cc33e41bd"
+                "reference": "bc025cb87e19a8bed2580dae175e6ad2b8f791b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/console/zipball/bb444a4389877055f7feaaafb6200b9cc33e41bd",
-                "reference": "bb444a4389877055f7feaaafb6200b9cc33e41bd",
+                "url": "https://api.github.com/repos/ghostwriter/console/zipball/bc025cb87e19a8bed2580dae175e6ad2b8f791b9",
+                "reference": "bc025cb87e19a8bed2580dae175e6ad2b8f791b9",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
+                "ghostwriter/config": "^2.0.1",
                 "ghostwriter/container": "^6.0.1",
                 "php": "~8.4.0 || ~8.5.0",
                 "symfony/console": "^7.3.6"
@@ -183,7 +184,7 @@
                 "ext-xdebug": "*",
                 "ghostwriter/coding-standard": "dev-main",
                 "mockery/mockery": "^1.6.12",
-                "phpunit/phpunit": "^12.4.3",
+                "phpunit/phpunit": "^12.4.4",
                 "symfony/var-dumper": "^7.3.5"
             },
             "type": "library",
@@ -229,7 +230,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-20T06:01:45+00:00"
+            "time": "2025-11-25T21:15:12+00:00"
         },
         {
             "name": "ghostwriter/container",
