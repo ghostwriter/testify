@@ -95,6 +95,10 @@
             "container": {
                 "definition": "Ghostwriter\\Testify\\Container\\TestifyDefinition"
             }
+        },
+        "thanks": {
+            "url": "https://github.com/ghostwriter/testify",
+            "name": "ghostwriter/testify"
         }
     },
     "scripts": {
