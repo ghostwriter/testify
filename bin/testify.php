@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Bin;
 
+use ErrorException;
 use Ghostwriter\Testify\Console\Application;
 use RuntimeException;
 
 use const DIRECTORY_SEPARATOR;
 use const E_ALL;
 use const PHP_EOL;
-use const STDERR;
 
 use function date_default_timezone_set;
 use function dirname;
-use function fwrite;
 use function implode;
 use function is_file;
 use function restore_error_handler;
@@ -25,7 +24,7 @@ use function sprintf;
     date_default_timezone_set('UTC');
 
     set_error_handler(
-        static fn (int $severity, string $message, string $filename, int $line): mixed => throw new \ErrorException(
+        static fn (int $severity, string $message, string $filename, int $line): mixed => throw new ErrorException(
             $message,
             255,
             $severity,

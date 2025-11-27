@@ -19,6 +19,7 @@ use function dump;
 use function explode;
 use function getopt;
 use function sprintf;
+use function str_repeat;
 
 final readonly class ArgvParser
 {
