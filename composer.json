@@ -97,8 +97,8 @@
             }
         },
         "thanks": {
-            "url": "https://github.com/ghostwriter/testify",
-            "name": "ghostwriter/testify"
+            "name": "ghostwriter/testify",
+            "url": "https://github.com/ghostwriter/testify"
         }
     },
     "scripts": {
