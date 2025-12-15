@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Console\ExceptionHandler;
+namespace Ghostwriter\Testify\Interface\Console\Handler;
 
-use Ghostwriter\Testify\Console\Command\CommandInterface;
-use Ghostwriter\Testify\Console\Handler\HandlerInterface;
+use Ghostwriter\Testify\Interface\Console\CommandInterface;
+use Ghostwriter\Testify\Interface\Console\HandlerInterface;
 use Throwable;
 
 interface ExceptionHandlerInterface

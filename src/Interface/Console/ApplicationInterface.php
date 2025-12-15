@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Console;
+namespace Ghostwriter\Testify\Interface\Console;
 
 use Throwable;
 

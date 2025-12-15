@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Console\Provider;
 
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Testify\Console\Command\CommandInterface;
-use Ghostwriter\Testify\Console\Handler\HandlerInterface;
 use Ghostwriter\Testify\Console\Handler\NotFoundHandler;
+use Ghostwriter\Testify\Interface\Console\CommandInterface;
+use Ghostwriter\Testify\Interface\Console\HandlerInterface;
+use Ghostwriter\Testify\Interface\Console\Provider\HandlerProviderInterface;
 use Override;
 use RuntimeException;
 use Throwable;

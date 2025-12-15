@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Console\Command;
+namespace Ghostwriter\Testify\Interface\Console;
 
 interface CommandInterface
 {

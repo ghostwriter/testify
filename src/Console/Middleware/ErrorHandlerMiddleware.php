@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Console\Middleware;
 
 use ErrorException;
-use Ghostwriter\Testify\Console\Command\CommandInterface;
-use Ghostwriter\Testify\Console\ExceptionHandler\ExceptionHandlerInterface;
-use Ghostwriter\Testify\Console\Handler\HandlerInterface;
+use Ghostwriter\Testify\Interface\Console\CommandInterface;
+use Ghostwriter\Testify\Interface\Console\Handler\ExceptionHandlerInterface;
+use Ghostwriter\Testify\Interface\Console\HandlerInterface;
+use Ghostwriter\Testify\Interface\Console\MiddlewareInterface;
 use Override;
 use Throwable;
 

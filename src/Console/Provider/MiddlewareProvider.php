@@ -5,13 +5,9 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Console\Provider;
 
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Testify\Console\Command\CommandInterface;
-use Ghostwriter\Testify\Console\Command\TestifyCommand;
-use Ghostwriter\Testify\Console\Middleware\ErrorHandlerMiddleware;
-use Ghostwriter\Testify\Console\Middleware\ExceptionHandlerMiddleware;
-use Ghostwriter\Testify\Console\Middleware\HelpCommandMiddleware;
-use Ghostwriter\Testify\Console\Middleware\MiddlewareInterface;
-use Ghostwriter\Testify\Console\Middleware\TestifyCommandMiddleware;
+use Ghostwriter\Testify\Interface\Console\CommandInterface;
+use Ghostwriter\Testify\Interface\Console\MiddlewareInterface;
+use Ghostwriter\Testify\Interface\Console\Provider\MiddlewareProviderInterface;
 use Override;
 use RuntimeException;
 use Throwable;

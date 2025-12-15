@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Console\ErrorHandler;
 
 use ErrorException;
+use Ghostwriter\Testify\Interface\Console\Handler\ErrorHandlerInterface;
 use Override;
 
 use function error_reporting;

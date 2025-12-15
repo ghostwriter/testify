@@ -24,14 +24,7 @@ final readonly class TestifyDefinition implements DefinitionInterface
     {
         $container->extend(ConfigurationInterface::class, ConfigurationExtension::class);
 
-        $configuration = $container->get(ConfigurationInterface::class)->wrap(ConfigurationExtension::class);
-
-        $containerConfiguration = $configuration->wrap('ghostwriter/container', [
-            'alias' => [],
-            'define' => [],
-            'extend' => [],
-            'factory' => [],
-        ]);
+        $containerConfiguration = $container->build(ConfigurationInterface::class)->wrap('ghostwriter/container');
 
         foreach ($containerConfiguration->get('alias', []) as $alias => $service) {
             $container->alias($service, $alias);

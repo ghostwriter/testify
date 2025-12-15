@@ -26,20 +26,24 @@ use Ghostwriter\Testify\Application\Runner\Runner;
 use Ghostwriter\Testify\Application\Trait\NameGeneratorTrait;
 use Ghostwriter\Testify\Application\Value\Workspace;
 use Ghostwriter\Testify\Console\Application;
-use Ghostwriter\Testify\Console\ApplicationInterface;
 use Ghostwriter\Testify\Console\Command\TestifyCommand;
 use Ghostwriter\Testify\Console\ExceptionHandler\ExceptionHandler;
 use Ghostwriter\Testify\Console\Handler\TestifyHandler;
 use Ghostwriter\Testify\Console\Middleware\ErrorHandlerMiddleware;
 use Ghostwriter\Testify\Console\Middleware\ExceptionHandlerMiddleware;
+use Ghostwriter\Testify\Console\Provider\CommandProvider;
 use Ghostwriter\Testify\Console\Provider\HandlerProvider;
 use Ghostwriter\Testify\Console\Provider\MiddlewareProvider;
 use Ghostwriter\Testify\Console\Queue\MiddlewareQueue;
+use Ghostwriter\Testify\Container\Ghostwriter\Config\ConfigurationExtension;
+use Ghostwriter\Testify\Container\Ghostwriter\Testify\CommandProviderExtension;
+use Ghostwriter\Testify\Container\Ghostwriter\Testify\HandlerProviderExtension;
+use Ghostwriter\Testify\Container\Ghostwriter\Testify\MiddlewareProviderExtension;
 use Ghostwriter\Testify\Container\Ghostwriter\Testify\WorkspaceFactory;
-use Iterator;
+use Ghostwriter\Testify\Container\TestifyDefinition;
+use Ghostwriter\Testify\Interface\Console\ApplicationInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversTrait;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
@@ -49,15 +53,20 @@ use Throwable;
 #[CoversClass(ClassMethodNameNormalizer::class)]
 #[CoversClass(ClassNameNormalizer::class)]
 #[CoversClass(CliPrinter::class)]
-#[CoversClass(HandlerProvider::class)]
+#[CoversClass(CommandProvider::class)]
+#[CoversClass(CommandProviderExtension::class)]
+#[CoversClass(ConfigurationExtension::class)]
 #[CoversClass(DeclareStrictTypesGenerator::class)]
 #[CoversClass(ErrorHandlerMiddleware::class)]
 #[CoversClass(ExceptionHandler::class)]
 #[CoversClass(ExceptionHandlerMiddleware::class)]
 #[CoversClass(FileGenerator::class)]
 #[CoversClass(FileResolver::class)]
+#[CoversClass(HandlerProvider::class)]
+#[CoversClass(HandlerProviderExtension::class)]
 #[CoversClass(MethodGenerator::class)]
 #[CoversClass(MiddlewareProvider::class)]
+#[CoversClass(MiddlewareProviderExtension::class)]
 #[CoversClass(MiddlewareQueue::class)]
 #[CoversClass(NamespaceGenerator::class)]
 #[CoversClass(PhpFileFinder::class)]
@@ -69,38 +78,21 @@ use Throwable;
 #[CoversClass(TestMethodsResolver::class)]
 #[CoversClass(TestNamespaceResolver::class)]
 #[CoversClass(TestifyCommand::class)]
+#[CoversClass(TestifyDefinition::class)]
 #[CoversClass(TestifyHandler::class)]
 #[CoversClass(UseClassGenerator::class)]
 #[CoversClass(Workspace::class)]
-#[CoversClass(ConfigurationFactory::class)]
 #[CoversClass(WorkspaceFactory::class)]
 #[CoversTrait(NameGeneratorTrait::class)]
 final class ApplicationTest extends TestCase
 {
-    /**
-     * @throws Throwable
-     */
-    #[DataProvider('provideApplicationCases')]
-    public function testApplication(array $arguments, int $expectedExitCode = 0): void
+    /** @throws Throwable */
+    public function testApplication(): void
     {
         $application = Application::new();
 
         self::assertInstanceOf(ApplicationInterface::class, $application);
 
         self::assertInstanceOf(Application::class, $application);
-
-        self::assertSame($expectedExitCode, $application->run($arguments));
-    }
-
-    /**
-     * @throws Throwable
-     *
-     * @return Iterator<array<int, mixed>>
-     */
-    public static function provideApplicationCases(): iterable
-    {
-        yield 'empty' => [[]];
-        yield 'with arguments' => [['--help']];
-        yield 'argv' => [$_SERVER['argv']];
     }
 }

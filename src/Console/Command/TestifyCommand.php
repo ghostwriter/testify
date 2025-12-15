@@ -8,6 +8,7 @@ use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Ghostwriter\Testify\Application\Builder\TestBuilderInterface;
 use Ghostwriter\Testify\Application\Runner\RunnerInterface;
 use Ghostwriter\Testify\Application\Value\WorkspaceInterface;
+use Ghostwriter\Testify\Interface\Console\CommandInterface;
 use Override;
 use Throwable;
 

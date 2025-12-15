@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Console;
+namespace Ghostwriter\Testify\Interface\Console\Command;
 
-use Ghostwriter\Testify\Console\Command\CommandInterface;
+use Ghostwriter\Testify\Interface\Console\CommandInterface;
 
 interface CommandBusInterface
 {

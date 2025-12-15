@@ -6,14 +6,13 @@ namespace Ghostwriter\Testify\Console;
 
 use Ghostwriter\Container\Container;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Testify\Console\Provider\CommandProviderInterface;
-use Ghostwriter\Testify\Console\Provider\HandlerProviderInterface;
-use Ghostwriter\Testify\Console\Provider\MiddlewareProviderInterface;
 use Ghostwriter\Testify\Console\Queue\MiddlewareQueue;
+use Ghostwriter\Testify\Interface\Console\ApplicationInterface;
+use Ghostwriter\Testify\Interface\Console\Provider\CommandProviderInterface;
+use Ghostwriter\Testify\Interface\Console\Provider\HandlerProviderInterface;
+use Ghostwriter\Testify\Interface\Console\Provider\MiddlewareProviderInterface;
 use Override;
 use Throwable;
-
-use function array_shift;
 
 final readonly class Application implements ApplicationInterface
 {
@@ -24,23 +23,17 @@ final readonly class Application implements ApplicationInterface
         public MiddlewareProviderInterface $middlewareProvider,
     ) {}
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public static function new(): self
     {
         return Container::getInstance()->get(self::class);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function run(array $arguments = []): int
     {
-        array_shift($arguments);
-
-        $command = $this->commandProvider->provide($arguments[0] ?? 'generate');
+        $command = $this->commandProvider->provide('generate');
 
         $handler = $this->handlerProvider->provide($command);
 

@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Console\Provider;
 
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Testify\Console\Command\CommandInterface;
+use Ghostwriter\Testify\Interface\Console\CommandInterface;
+use Ghostwriter\Testify\Interface\Console\Provider\CommandProviderInterface;
 use Override;
 use RuntimeException;
 
@@ -30,9 +31,11 @@ final class CommandProvider implements CommandProviderInterface
         if (array_key_exists($command, $this->commands)) {
             throw new RuntimeException(sprintf('Command %s already exists for command %s', $class, $command));
         }
+
         if (! is_a($class, CommandInterface::class, true)) {
             throw new RuntimeException(sprintf('Command %s must implement %s', $class, CommandInterface::class));
         }
+
         $this->commands[$command] = $class;
     }
 

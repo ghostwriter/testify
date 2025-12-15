@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Console\Handler;
 
 use Ghostwriter\Testify\Application\Printer\CliPrinterInterface;
-use Ghostwriter\Testify\Console\Command\CommandInterface;
+use Ghostwriter\Testify\Interface\Console\CommandInterface;
+use Ghostwriter\Testify\Interface\Console\HandlerInterface;
 use Override;
 
 final readonly class GenerateHandler implements HandlerInterface

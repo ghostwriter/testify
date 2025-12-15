@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Console\Command;
 
+use Ghostwriter\Testify\Interface\Console\CommandInterface;
 use Override;
 
 final readonly class HelpCommand implements CommandInterface

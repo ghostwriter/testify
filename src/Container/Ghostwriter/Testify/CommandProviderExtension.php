@@ -7,8 +7,7 @@ namespace Ghostwriter\Testify\Container\Ghostwriter\Testify;
 use Ghostwriter\Config\Interface\ConfigurationInterface;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\Service\ExtensionInterface;
-use Ghostwriter\Testify\Console\Provider\CommandProviderInterface;
-use Ghostwriter\Testify\Container\Ghostwriter\Config\ConfigurationExtension;
+use Ghostwriter\Testify\Interface\Console\Provider\CommandProviderInterface;
 use Override;
 use Throwable;
 
@@ -30,12 +29,7 @@ final readonly class CommandProviderExtension implements ExtensionInterface
     #[Override]
     public function __invoke(ContainerInterface $container, object $service): void
     {
-        $configuration = $container->get(ConfigurationInterface::class)->wrap(ConfigurationExtension::class);
-
-        $ghostwriterTestifyConfiguration = $configuration->wrap('ghostwriter/testify', [
-            'commands' => [],
-        ]);
-
+        $ghostwriterTestifyConfiguration = $container->get(ConfigurationInterface::class)->wrap('ghostwriter/testify');
         foreach ($ghostwriterTestifyConfiguration->get('commands', []) as $command => $fullyQualifiedClassName) {
             $service->add($command, $fullyQualifiedClassName);
         }

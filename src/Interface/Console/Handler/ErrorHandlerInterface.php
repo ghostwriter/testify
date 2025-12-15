@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Console\ErrorHandler;
+namespace Ghostwriter\Testify\Interface\Console\Handler;
 
 interface ErrorHandlerInterface
 {
