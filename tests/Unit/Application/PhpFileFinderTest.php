@@ -6,10 +6,10 @@ namespace Tests\Unit\Application;
 
 use Ghostwriter\Testify\Application\PhpFileFinder;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\TestCase;
+use Tests\Unit\AbstractTestCase;
 
 #[CoversClass(PhpFileFinder::class)]
-final class PhpFileFinderTest extends TestCase
+final class PhpFileFinderTest extends AbstractTestCase
 {
     public function testExample(): void
     {

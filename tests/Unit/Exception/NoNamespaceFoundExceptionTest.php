@@ -6,10 +6,10 @@ namespace Tests\Unit\Exception;
 
 use Ghostwriter\Testify\Exception\NoNamespaceFoundException;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\TestCase;
+use Tests\Unit\AbstractTestCase;
 
 #[CoversClass(NoNamespaceFoundException::class)]
-final class NoNamespaceFoundExceptionTest extends TestCase
+final class NoNamespaceFoundExceptionTest extends AbstractTestCase
 {
     public function testExample(): void
     {
