@@ -6,10 +6,10 @@ namespace Tests\Unit\Exception;
 
 use Ghostwriter\Testify\Exception\FileNotFoundException;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\TestCase;
+use Tests\Unit\AbstractTestCase;
 
 #[CoversClass(FileNotFoundException::class)]
-final class FileNotFoundExceptionTest extends TestCase
+final class FileNotFoundExceptionTest extends AbstractTestCase
 {
     public function testExample(): void
     {

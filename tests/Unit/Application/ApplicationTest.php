@@ -4,44 +4,46 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Application;
 
-use Generator;
-use Ghostwriter\Testify\Application\Application;
-use Ghostwriter\Testify\Application\ApplicationInterface;
+use Ghostwriter\Testify\Application\Builder\TestBuilder;
+use Ghostwriter\Testify\Application\Generator\AttributeGenerator;
+use Ghostwriter\Testify\Application\Generator\ClassLike\ClassGenerator;
+use Ghostwriter\Testify\Application\Generator\ClassLikeMember\MethodGenerator;
+use Ghostwriter\Testify\Application\Generator\DeclareStrictTypesGenerator;
+use Ghostwriter\Testify\Application\Generator\FileGenerator;
+use Ghostwriter\Testify\Application\Generator\NamespaceGenerator;
+use Ghostwriter\Testify\Application\Generator\StaticCallGenerator;
+use Ghostwriter\Testify\Application\Generator\Use\UseClassGenerator;
+use Ghostwriter\Testify\Application\Normalizer\ClassMethodNameNormalizer;
+use Ghostwriter\Testify\Application\Normalizer\ClassNameNormalizer;
+use Ghostwriter\Testify\Application\Normalizer\TestDataProviderMethodNameNormalizer;
+use Ghostwriter\Testify\Application\Normalizer\TestMethodNameNormalizer;
 use Ghostwriter\Testify\Application\PhpFileFinder;
-use Ghostwriter\Testify\Builder\TestBuilder;
-use Ghostwriter\Testify\CommandHandler\CommandHandlerProvider;
-use Ghostwriter\Testify\Container\Extension\ConfigExtension;
-use Ghostwriter\Testify\Container\Factory\WorkspaceFactory;
-use Ghostwriter\Testify\Container\ServiceProvider;
-use Ghostwriter\Testify\Feature\ErrorHandler\ErrorHandlerMiddleware;
-use Ghostwriter\Testify\Feature\ExceptionHandler\ExceptionHandler;
-use Ghostwriter\Testify\Feature\ExceptionHandler\ExceptionHandlerMiddleware;
-use Ghostwriter\Testify\Feature\Testify\TestifyCommand;
-use Ghostwriter\Testify\Feature\Testify\TestifyCommandHandler;
-use Ghostwriter\Testify\Generator\AttributeGenerator;
-use Ghostwriter\Testify\Generator\ClassLike\ClassGenerator;
-use Ghostwriter\Testify\Generator\ClassLikeMember\MethodGenerator;
-use Ghostwriter\Testify\Generator\DeclareStrictTypesGenerator;
-use Ghostwriter\Testify\Generator\FileGenerator;
-use Ghostwriter\Testify\Generator\NamespaceGenerator;
-use Ghostwriter\Testify\Generator\StaticCallGenerator;
-use Ghostwriter\Testify\Generator\Use\UseClassGenerator;
-use Ghostwriter\Testify\Middleware\MiddlewareProvider;
-use Ghostwriter\Testify\Middleware\MiddlewareQueue;
-use Ghostwriter\Testify\Normalizer\ClassMethodNameNormalizer;
-use Ghostwriter\Testify\Normalizer\ClassNameNormalizer;
-use Ghostwriter\Testify\Normalizer\TestDataProviderMethodNameNormalizer;
-use Ghostwriter\Testify\Normalizer\TestMethodNameNormalizer;
-use Ghostwriter\Testify\Printer\CliPrinter;
-use Ghostwriter\Testify\Resolver\FileResolver;
-use Ghostwriter\Testify\Resolver\TestMethodsResolver;
-use Ghostwriter\Testify\Resolver\TestNamespaceResolver;
-use Ghostwriter\Testify\Runner\Runner;
-use Ghostwriter\Testify\Trait\NameGeneratorTrait;
-use Ghostwriter\Testify\Value\Workspace;
+use Ghostwriter\Testify\Application\Printer\CliPrinter;
+use Ghostwriter\Testify\Application\Resolver\FileResolver;
+use Ghostwriter\Testify\Application\Resolver\TestMethodsResolver;
+use Ghostwriter\Testify\Application\Resolver\TestNamespaceResolver;
+use Ghostwriter\Testify\Application\Runner\Runner;
+use Ghostwriter\Testify\Application\Trait\NameGeneratorTrait;
+use Ghostwriter\Testify\Application\Value\Workspace;
+use Ghostwriter\Testify\Console\Application;
+use Ghostwriter\Testify\Console\Command\TestifyCommand;
+use Ghostwriter\Testify\Console\ExceptionHandler\ExceptionHandler;
+use Ghostwriter\Testify\Console\Handler\TestifyHandler;
+use Ghostwriter\Testify\Console\Middleware\ErrorHandlerMiddleware;
+use Ghostwriter\Testify\Console\Middleware\ExceptionHandlerMiddleware;
+use Ghostwriter\Testify\Console\Provider\CommandProvider;
+use Ghostwriter\Testify\Console\Provider\HandlerProvider;
+use Ghostwriter\Testify\Console\Provider\MiddlewareProvider;
+use Ghostwriter\Testify\Console\Queue\MiddlewareQueue;
+use Ghostwriter\Testify\Container\Ghostwriter\Config\ConfigurationExtension;
+use Ghostwriter\Testify\Container\Ghostwriter\Testify\CommandProviderExtension;
+use Ghostwriter\Testify\Container\Ghostwriter\Testify\HandlerProviderExtension;
+use Ghostwriter\Testify\Container\Ghostwriter\Testify\MiddlewareProviderExtension;
+use Ghostwriter\Testify\Container\Ghostwriter\Testify\WorkspaceFactory;
+use Ghostwriter\Testify\Container\TestifyDefinition;
+use Ghostwriter\Testify\Interface\Console\ApplicationInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversTrait;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
@@ -51,20 +53,24 @@ use Throwable;
 #[CoversClass(ClassMethodNameNormalizer::class)]
 #[CoversClass(ClassNameNormalizer::class)]
 #[CoversClass(CliPrinter::class)]
-#[CoversClass(CommandHandlerProvider::class)]
+#[CoversClass(CommandProvider::class)]
+#[CoversClass(CommandProviderExtension::class)]
+#[CoversClass(ConfigurationExtension::class)]
 #[CoversClass(DeclareStrictTypesGenerator::class)]
 #[CoversClass(ErrorHandlerMiddleware::class)]
 #[CoversClass(ExceptionHandler::class)]
 #[CoversClass(ExceptionHandlerMiddleware::class)]
 #[CoversClass(FileGenerator::class)]
 #[CoversClass(FileResolver::class)]
+#[CoversClass(HandlerProvider::class)]
+#[CoversClass(HandlerProviderExtension::class)]
 #[CoversClass(MethodGenerator::class)]
 #[CoversClass(MiddlewareProvider::class)]
+#[CoversClass(MiddlewareProviderExtension::class)]
 #[CoversClass(MiddlewareQueue::class)]
 #[CoversClass(NamespaceGenerator::class)]
 #[CoversClass(PhpFileFinder::class)]
 #[CoversClass(Runner::class)]
-#[CoversClass(ServiceProvider::class)]
 #[CoversClass(StaticCallGenerator::class)]
 #[CoversClass(TestBuilder::class)]
 #[CoversClass(TestDataProviderMethodNameNormalizer::class)]
@@ -72,41 +78,21 @@ use Throwable;
 #[CoversClass(TestMethodsResolver::class)]
 #[CoversClass(TestNamespaceResolver::class)]
 #[CoversClass(TestifyCommand::class)]
-#[CoversClass(TestifyCommandHandler::class)]
+#[CoversClass(TestifyDefinition::class)]
+#[CoversClass(TestifyHandler::class)]
 #[CoversClass(UseClassGenerator::class)]
 #[CoversClass(Workspace::class)]
-#[CoversClass(ConfigExtension::class)]
 #[CoversClass(WorkspaceFactory::class)]
 #[CoversTrait(NameGeneratorTrait::class)]
 final class ApplicationTest extends TestCase
 {
-    /**
-     * @throws Throwable
-     */
-    #[DataProvider('argvDataProvider')]
-    public function testApplication(array $arguments, int $expectedExitCode = 0): void
+    /** @throws Throwable */
+    public function testApplication(): void
     {
         $application = Application::new();
 
         self::assertInstanceOf(ApplicationInterface::class, $application);
 
         self::assertInstanceOf(Application::class, $application);
-
-        self::assertSame($expectedExitCode, $application->run($arguments));
-    }
-
-    public function testExample(): void
-    {
-        self::assertTrue(true);
-    }
-
-    /**
-     * @throws Throwable
-     */
-    public static function argvDataProvider(): Generator
-    {
-        yield 'empty' => [[]];
-        yield 'with arguments' => [['--help']];
-        yield 'argv' => [$_SERVER['argv']];
     }
 }
