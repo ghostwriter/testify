@@ -6,10 +6,10 @@ namespace Tests\Unit\Exception;
 
 use Ghostwriter\Testify\Exception\ShouldNotHappenException;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\TestCase;
+use Tests\Unit\AbstractTestCase;
 
 #[CoversClass(ShouldNotHappenException::class)]
-final class ShouldNotHappenExceptionTest extends TestCase
+final class ShouldNotHappenExceptionTest extends AbstractTestCase
 {
     public function testExample(): void
     {
