@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c86bb2478a4d540e1b4f675b26c2e092",
+    "content-hash": "49f9688c32ea8b9cb2fb28b85e1a5875",
     "packages": [
         {
             "name": "ghostwriter/case-converter",
@@ -97,16 +97,16 @@
         },
         {
             "name": "ghostwriter/config",
-            "version": "2.0.2",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/config.git",
-                "reference": "27a8517b8b344e9744262357c4cc6246ba9b73f4"
+                "reference": "11076c766c7e7c23a4e2806154f0e641edb686fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/config/zipball/27a8517b8b344e9744262357c4cc6246ba9b73f4",
-                "reference": "27a8517b8b344e9744262357c4cc6246ba9b73f4",
+                "url": "https://api.github.com/repos/ghostwriter/config/zipball/11076c766c7e7c23a4e2806154f0e641edb686fa",
+                "reference": "11076c766c7e7c23a4e2806154f0e641edb686fa",
                 "shasum": ""
             },
             "require": {
@@ -115,10 +115,10 @@
             "require-dev": {
                 "ext-xdebug": "*",
                 "ghostwriter/coding-standard": "dev-main",
-                "ghostwriter/container": "^6.0.1",
+                "ghostwriter/container": "^6.1.1",
                 "mockery/mockery": "^1.6.12",
-                "phpunit/phpunit": "^12.5.3",
-                "symfony/var-dumper": "^8.0.0"
+                "phpunit/phpunit": "^13.1.3",
+                "symfony/var-dumper": "^8.0.8"
             },
             "type": "library",
             "extra": {
@@ -128,7 +128,9 @@
                 },
                 "ghostwriter": {
                     "container": {
-                        "definition": "Ghostwriter\\Config\\Container\\ConfigurationDefinition"
+                        "provider": [
+                            "Ghostwriter\\Config\\Container\\ConfigurationProvider"
+                        ]
                     }
                 }
             },
@@ -139,7 +141,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD-4-Clause"
+                "BSD-3-Clause"
             ],
             "authors": [
                 {
@@ -167,7 +169,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-12-14T23:37:43+00:00"
+            "time": "2026-04-14T22:24:27+00:00"
         },
         {
             "name": "ghostwriter/console",
