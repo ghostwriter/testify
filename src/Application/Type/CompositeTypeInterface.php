@@ -6,8 +6,6 @@ namespace Ghostwriter\Testify\Application\Type;
 
 interface CompositeTypeInterface extends TypeInterface
 {
-    /**
-     * @return non-empty-list<TypeInterface>
-     */
+    /** @return non-empty-list<TypeInterface> */
     public function types(): array;
 }

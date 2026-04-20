@@ -8,8 +8,6 @@ use Throwable;
 
 interface ApplicationInterface
 {
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function run(array $arguments = []): int;
 }

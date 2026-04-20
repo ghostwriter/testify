@@ -11,9 +11,7 @@ use function sprintf;
 
 final readonly class Argv
 {
-    /**
-     * @var array<int|string, string>
-     */
+    /** @var array<int|string, string> */
     public array $argv;
 
     public function __construct(string ...$arguments)

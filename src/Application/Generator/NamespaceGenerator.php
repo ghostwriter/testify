@@ -118,9 +118,7 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
         return $this->name;
     }
 
-    /**
-     * @return array<string,UseGeneratorInterface>
-     */
+    /** @return array<string,UseGeneratorInterface> */
     public function uses(): array
     {
         /** @var array<string,UseGeneratorInterface> $uses */

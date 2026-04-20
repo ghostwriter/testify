@@ -5,33 +5,26 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Container;
 
 use Ghostwriter\Config\Interface\ConfigurationInterface;
+use Ghostwriter\Container\Interface\BuilderInterface;
 use Ghostwriter\Container\Interface\ContainerInterface;
-use Ghostwriter\Container\Interface\Service\DefinitionInterface;
+use Ghostwriter\Container\Service\Provider\AbstractProvider;
 use Ghostwriter\Testify\Container\Ghostwriter\Config\ConfigurationExtension;
 use Override;
 use Throwable;
 
 /**
- * @see TestifyDefinitionTest
+ * @see TestifyProviderTest
  */
-final readonly class TestifyDefinition implements DefinitionInterface
+final class TestifyProvider extends AbstractProvider
 {
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
-    public function __invoke(ContainerInterface $container): void
+    public function boot(ContainerInterface $container): void
     {
-        $container->extend(ConfigurationInterface::class, ConfigurationExtension::class);
-
-        $containerConfiguration = $container->build(ConfigurationInterface::class)->wrap('ghostwriter/container');
+        $containerConfiguration = $container->get(ConfigurationInterface::class)->wrap('ghostwriter.container');
 
         foreach ($containerConfiguration->get('alias', []) as $alias => $service) {
-            $container->alias($service, $alias);
-        }
-
-        foreach ($containerConfiguration->get('define', []) as $definition) {
-            $container->define($definition);
+            $container->alias($alias, $service);
         }
 
         foreach ($containerConfiguration->get('extend', []) as $service => $extensions) {
@@ -43,5 +36,12 @@ final readonly class TestifyDefinition implements DefinitionInterface
         foreach ($containerConfiguration->get('factory', []) as $service => $factory) {
             $container->factory($service, $factory);
         }
+    }
+
+    /** @throws Throwable */
+    #[Override]
+    public function register(BuilderInterface $builder): void
+    {
+        $builder->extend(ConfigurationInterface::class, ConfigurationExtension::class);
     }
 }

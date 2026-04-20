@@ -8,8 +8,6 @@ use Throwable;
 
 interface HandlerInterface
 {
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function handle(CommandInterface $command): int;
 }
