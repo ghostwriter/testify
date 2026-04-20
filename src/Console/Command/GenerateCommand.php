@@ -20,9 +20,7 @@ use function sprintf;
 
 final readonly class GenerateCommand implements CommandInterface
 {
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function __construct(
         private FilesystemInterface $filesystem,
         private RunnerInterface $runner,
@@ -30,9 +28,7 @@ final readonly class GenerateCommand implements CommandInterface
         private WorkspaceInterface $workspace,
     ) {}
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function execute(
         //        ArgumentListInterface $argumentList,
@@ -116,9 +112,7 @@ final readonly class GenerateCommand implements CommandInterface
         return 'testify';
     }
 
-    /**
-     * @param list<string>|string $message
-     */
+    /** @param list<string>|string $message */
     private function writeln(array|string $message): void
     {
         foreach ((array) $message as $line) {

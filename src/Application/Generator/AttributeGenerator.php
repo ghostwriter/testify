@@ -10,9 +10,7 @@ use function mb_rtrim;
 
 final readonly class AttributeGenerator implements GeneratorInterface
 {
-    /**
-     * @param list<string> $params
-     */
+    /** @param list<string> $params */
     public function __construct(
         public string $name,
         public array $params = [],

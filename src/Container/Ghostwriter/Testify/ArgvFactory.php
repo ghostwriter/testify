@@ -15,9 +15,7 @@ use Throwable;
  */
 final readonly class ArgvFactory implements FactoryInterface
 {
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function __invoke(ContainerInterface $container): Argv
     {

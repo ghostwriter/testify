@@ -13,9 +13,7 @@ use Throwable;
 
 final class HelpCommandMiddleware implements MiddlewareInterface
 {
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function process(CommandInterface $command, HandlerInterface $commandHandler): int
     {
