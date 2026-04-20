@@ -22,9 +22,7 @@ final class CommandProvider implements CommandProviderInterface
         private array $commands = [],
     ) {}
 
-    /**
-     * @param class-string<CommandInterface> $class
-     */
+    /** @param class-string<CommandInterface> $class */
     #[Override]
     public function add(string $command, string $class): void
     {

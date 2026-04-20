@@ -32,9 +32,7 @@ final class MiddlewareQueue implements MiddlewareQueueInterface
         }
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public static function new(MiddlewareInterface ...$middleware): self
     {
         return new self($middleware);
@@ -45,9 +43,7 @@ final class MiddlewareQueue implements MiddlewareQueueInterface
         $this->middlewares = [...$this->middlewares, ...$middleware];
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function handle(CommandInterface $command): int
     {
@@ -56,9 +52,7 @@ final class MiddlewareQueue implements MiddlewareQueueInterface
         return $this->process($command, $this);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function process(CommandInterface $command, HandlerInterface $commandHandler): int
     {

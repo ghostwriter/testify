@@ -6,6 +6,7 @@ namespace Ghostwriter\Testify\Application;
 
 use Generator;
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
+use SplFileInfo;
 use TypeError;
 
 use function get_debug_type;
@@ -20,13 +21,11 @@ final readonly class PhpFileFinder implements FinderInterface
         private FilesystemInterface $filesystem,
     ) {}
 
-    /**
-     * @return Generator<string>
-     */
+    /** @return Generator<string> */
     public function find(string $directory): Generator
     {
         foreach ($this->filesystem->recursiveIterator($directory) as $file) {
-            if (! $file instanceof \SplFileInfo) {
+            if (! $file instanceof SplFileInfo) {
                 throw new TypeError(
                     sprintf('Expected a "%s" instance, but got %s', SplFileInfo::class, get_debug_type($file))
                 );

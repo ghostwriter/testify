@@ -29,9 +29,7 @@ final class MiddlewareProvider implements MiddlewareProviderInterface
     //        HelpCommandMiddleware::class,
     //    ];
 
-    /**
-     * @param array<class-string<CommandInterface>,array<class-string<MiddlewareInterface>,bool>> $middlewares
-     */
+    /** @param array<class-string<CommandInterface>,array<class-string<MiddlewareInterface>,bool>> $middlewares */
     public function __construct(
         private readonly ContainerInterface $container,
         private array $middlewares = [

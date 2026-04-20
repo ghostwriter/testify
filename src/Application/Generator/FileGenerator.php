@@ -12,17 +12,13 @@ use function usort;
 
 final readonly class FileGenerator implements FileGeneratorInterface
 {
-    /**
-     * @param NamespaceGeneratorInterface $namespaces
-     */
+    /** @param NamespaceGeneratorInterface $namespaces */
     public function __construct(
         private array $namespaces,
         private bool $declareStrictTypes,
     ) {}
 
-    /**
-     * @param NamespaceGeneratorInterface $namespaces
-     */
+    /** @param NamespaceGeneratorInterface $namespaces */
     public static function new(array $namespaces = [], bool $declareStrictTypes = true): self
     {
         return new self($namespaces, $declareStrictTypes);

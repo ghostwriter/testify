@@ -40,7 +40,7 @@ use Ghostwriter\Testify\Container\Ghostwriter\Testify\CommandProviderExtension;
 use Ghostwriter\Testify\Container\Ghostwriter\Testify\HandlerProviderExtension;
 use Ghostwriter\Testify\Container\Ghostwriter\Testify\MiddlewareProviderExtension;
 use Ghostwriter\Testify\Container\Ghostwriter\Testify\WorkspaceFactory;
-use Ghostwriter\Testify\Container\TestifyDefinition;
+use Ghostwriter\Testify\Container\TestifyProvider;
 use Ghostwriter\Testify\Interface\Console\ApplicationInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversTrait;
@@ -74,12 +74,12 @@ use Throwable;
 #[CoversClass(StaticCallGenerator::class)]
 #[CoversClass(TestBuilder::class)]
 #[CoversClass(TestDataProviderMethodNameNormalizer::class)]
+#[CoversClass(TestifyCommand::class)]
+#[CoversClass(TestifyHandler::class)]
+#[CoversClass(TestifyProvider::class)]
 #[CoversClass(TestMethodNameNormalizer::class)]
 #[CoversClass(TestMethodsResolver::class)]
 #[CoversClass(TestNamespaceResolver::class)]
-#[CoversClass(TestifyCommand::class)]
-#[CoversClass(TestifyDefinition::class)]
-#[CoversClass(TestifyHandler::class)]
 #[CoversClass(UseClassGenerator::class)]
 #[CoversClass(Workspace::class)]
 #[CoversClass(WorkspaceFactory::class)]

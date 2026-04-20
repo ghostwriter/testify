@@ -19,9 +19,7 @@ use function sprintf;
 
 final class HandlerProvider implements HandlerProviderInterface
 {
-    /**
-     * @param array<class-string<CommandInterface>, class-string<HandlerInterface>> $handlers
-     */
+    /** @param array<class-string<CommandInterface>, class-string<HandlerInterface>> $handlers */
     public function __construct(
         private readonly ContainerInterface $container,
         private array $handlers = [],
@@ -55,9 +53,7 @@ final class HandlerProvider implements HandlerProviderInterface
         $this->handlers[$command] = $handler;
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function provide(CommandInterface $command): HandlerInterface
     {

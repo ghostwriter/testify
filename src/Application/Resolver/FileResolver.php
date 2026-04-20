@@ -17,9 +17,7 @@ final readonly class FileResolver
         private TestNamespaceResolver $testNamespaceResolver,
     ) {}
 
-    /**
-     * @param PhpToken $tokens
-     */
+    /** @param PhpToken $tokens */
     public function resolve(array $tokens): array
     {
         $inNamespace = false;

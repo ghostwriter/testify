@@ -22,9 +22,7 @@ final readonly class ErrorHandlerMiddleware implements MiddlewareInterface
         private ExceptionHandlerInterface $exceptionHandler,
     ) {}
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function process(CommandInterface $command, HandlerInterface $commandHandler): int
     {

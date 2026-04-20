@@ -9,8 +9,6 @@ use Ghostwriter\Testify\Application\Value\WorkspaceInterface;
 
 interface RunnerInterface
 {
-    /**
-     * @return Generator<string,string>
-     */
+    /** @return Generator<string,string> */
     public function run(WorkspaceInterface $workspace): Generator;
 }
