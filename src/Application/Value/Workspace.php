@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Application\Value;
 
 use Ghostwriter\Container\Attribute\Factory;
-use Ghostwriter\Testify\Container\Ghostwriter\Testify\WorkspaceFactory;
+use Ghostwriter\Testify\Container\Factory\WorkspaceFactory;
 use Override;
 
 use const DIRECTORY_SEPARATOR;
@@ -26,7 +26,7 @@ final readonly class Workspace implements WorkspaceInterface
 
     public static function new(string $source, string $tests, bool $dryRun = false, bool $force = false): self
     {
-        $fixture = $tests . DIRECTORY_SEPARATOR . 'fixture';
+        $fixture = $tests . DIRECTORY_SEPARATOR . 'Fixture';
 
         $vendor = dirname($source) . DIRECTORY_SEPARATOR . 'vendor';
 

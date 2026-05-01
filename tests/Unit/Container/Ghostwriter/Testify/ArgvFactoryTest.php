@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Container\Ghostwriter\Testify;
 
-use Ghostwriter\Testify\Container\Ghostwriter\Testify\ArgvFactory;
+use Ghostwriter\Testify\Container\Factory\ArgvFactory;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\Unit\AbstractTestCase;
 

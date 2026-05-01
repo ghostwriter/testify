@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Container\Ghostwriter\Testify;
 
-use Ghostwriter\Testify\Container\Ghostwriter\Testify\HandlerProviderExtension;
+use Ghostwriter\Testify\Container\Extension\HandlerProviderExtension;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\Unit\AbstractTestCase;
 
