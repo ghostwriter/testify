@@ -20,8 +20,21 @@ use function restore_error_handler;
 use function set_error_handler;
 use function sprintf;
 
-(static function (array $arguments = []): never {
-    date_default_timezone_set('UTC');
+(static function (array $arguments, string $autoloadFile): never {
+    if (! is_file($autoloadFile)) {
+        throw new RuntimeException(sprintf(
+            implode(
+                PHP_EOL,
+                [
+                    'Failed to locate composer autoload file.',
+                    'Searched for %s',
+                    '',
+                    'Please run "composer install" to generate the autoload file.',
+                ]
+            ),
+            $autoloadFile
+        ));
+    }
 
     set_error_handler(
         static fn (int $severity, string $message, string $filename, int $line): mixed => throw new ErrorException(
@@ -34,38 +47,15 @@ use function sprintf;
         E_ALL
     );
 
-    $level = 0;
-    $parent = $root = __DIR__;
+    require $autoloadFile;
 
-    do {
-        $current = $parent;
+    restore_error_handler();
 
-        $autoloadFile = implode(DIRECTORY_SEPARATOR, [$current, 'vendor', 'autoload.php']);
-        if (! is_file($autoloadFile)) {
-            $parent = dirname($root, ++$level);
+    date_default_timezone_set('UTC');
 
-            continue;
-        }
-
-        require $autoloadFile;
-
-        restore_error_handler();
-
-        /** #BlackLivesMatter. */
-        exit(Application::new()->run($arguments));
-    } while ($current !== $parent);
-
-    throw new RuntimeException(sprintf(
-        implode(
-            PHP_EOL,
-            [
-                'Failed to locate composer autoload file.',
-                'Searched up to %d levels up from %s',
-                '',
-                'Please run "composer install" to generate the autoload file.',
-            ]
-        ),
-        $level,
-        __DIR__
-    ));
-})($_SERVER['argv'] ?? []);
+    /** #BlackLivesMatter. */
+    exit(Application::new()->run($arguments));
+})(
+    $_SERVER['argv'] ??= [],
+    $GLOBALS['_composer_autoload_path'] ??= implode(DIRECTORY_SEPARATOR, [dirname(__DIR__), 'vendor', 'autoload.php'])
+);

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Container\Ghostwriter\Testify;
+namespace Ghostwriter\Testify\Container\Extension;
 
-use Ghostwriter\Config\Interface\ConfigurationInterface;
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\Service\ExtensionInterface;
+use Ghostwriter\Testify\Configuration\TestifyConfiguration;
 use Ghostwriter\Testify\Interface\Console\Provider\MiddlewareProviderInterface;
 use Override;
 use Throwable;
@@ -29,7 +29,7 @@ final readonly class MiddlewareProviderExtension implements ExtensionInterface
     #[Override]
     public function __invoke(ContainerInterface $container, object $service): void
     {
-        $ghostwriterTestifyConfiguration = $container->get(ConfigurationInterface::class)->wrap('ghostwriter/testify');
+        $ghostwriterTestifyConfiguration = $container->get(TestifyConfiguration::class)->wrap('ghostwriter/testify');
         foreach ($ghostwriterTestifyConfiguration->get('middlewares', []) as $middleware) {
             foreach ($ghostwriterTestifyConfiguration->get('commands', []) as $command) {
                 $service->add($command, $middleware);

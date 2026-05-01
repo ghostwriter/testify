@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Testify\Container\Ghostwriter\Testify;
+namespace Ghostwriter\Testify\Container\Factory;
 
 use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\Service\FactoryInterface;

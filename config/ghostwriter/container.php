@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Ghostwriter\Config\Interface\ConfigurationInterface;
 use Ghostwriter\Container\Interface\Service\ExtensionInterface;
 use Ghostwriter\Container\Interface\Service\FactoryInterface;
 use Ghostwriter\Testify\Application\Builder\TestBuilder;
@@ -13,17 +12,18 @@ use Ghostwriter\Testify\Application\Runner\Runner;
 use Ghostwriter\Testify\Application\Runner\RunnerInterface;
 use Ghostwriter\Testify\Application\Value\Argv;
 use Ghostwriter\Testify\Application\Value\WorkspaceInterface;
+use Ghostwriter\Testify\Configuration\TestifyConfiguration;
 use Ghostwriter\Testify\Console\ErrorHandler\ErrorHandler;
 use Ghostwriter\Testify\Console\ExceptionHandler\ExceptionHandler;
 use Ghostwriter\Testify\Console\Provider\CommandProvider;
 use Ghostwriter\Testify\Console\Provider\HandlerProvider;
 use Ghostwriter\Testify\Console\Provider\MiddlewareProvider;
-use Ghostwriter\Testify\Container\Ghostwriter\Config\ConfigurationExtension;
-use Ghostwriter\Testify\Container\Ghostwriter\Testify\ArgvFactory;
-use Ghostwriter\Testify\Container\Ghostwriter\Testify\CommandProviderExtension;
-use Ghostwriter\Testify\Container\Ghostwriter\Testify\HandlerProviderExtension;
-use Ghostwriter\Testify\Container\Ghostwriter\Testify\MiddlewareProviderExtension;
-use Ghostwriter\Testify\Container\Ghostwriter\Testify\WorkspaceFactory;
+use Ghostwriter\Testify\Container\Extension\CommandProviderExtension;
+use Ghostwriter\Testify\Container\Extension\HandlerProviderExtension;
+use Ghostwriter\Testify\Container\Extension\MiddlewareProviderExtension;
+use Ghostwriter\Testify\Container\Factory\ArgvFactory;
+use Ghostwriter\Testify\Container\Factory\TestifyConfigurationFactory;
+use Ghostwriter\Testify\Container\Factory\WorkspaceFactory;
 use Ghostwriter\Testify\Interface\Console\Handler\ErrorHandlerInterface;
 use Ghostwriter\Testify\Interface\Console\Handler\ExceptionHandlerInterface;
 use Ghostwriter\Testify\Interface\Console\Provider\CommandProviderInterface;
@@ -49,12 +49,12 @@ return [
         TestBuilderInterface::class => TestBuilder::class,
     ],
     'extend' => [
-        ConfigurationInterface::class => [ConfigurationExtension::class],
         CommandProviderInterface::class => [CommandProviderExtension::class],
         HandlerProviderInterface::class => [HandlerProviderExtension::class],
         MiddlewareProviderInterface::class => [MiddlewareProviderExtension::class],
     ],
     'factory' => [
+        TestifyConfiguration::class => TestifyConfigurationFactory::class,
         WorkspaceInterface::class => WorkspaceFactory::class,
         Argv::class => ArgvFactory::class,
     ],
