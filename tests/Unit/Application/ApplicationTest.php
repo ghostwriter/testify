@@ -35,11 +35,10 @@ use Ghostwriter\Testify\Console\Provider\CommandProvider;
 use Ghostwriter\Testify\Console\Provider\HandlerProvider;
 use Ghostwriter\Testify\Console\Provider\MiddlewareProvider;
 use Ghostwriter\Testify\Console\Queue\MiddlewareQueue;
-use Ghostwriter\Testify\Container\Ghostwriter\Config\ConfigurationExtension;
-use Ghostwriter\Testify\Container\Ghostwriter\Testify\CommandProviderExtension;
-use Ghostwriter\Testify\Container\Ghostwriter\Testify\HandlerProviderExtension;
-use Ghostwriter\Testify\Container\Ghostwriter\Testify\MiddlewareProviderExtension;
-use Ghostwriter\Testify\Container\Ghostwriter\Testify\WorkspaceFactory;
+use Ghostwriter\Testify\Container\Extension\CommandProviderExtension;
+use Ghostwriter\Testify\Container\Extension\HandlerProviderExtension;
+use Ghostwriter\Testify\Container\Extension\MiddlewareProviderExtension;
+use Ghostwriter\Testify\Container\Factory\WorkspaceFactory;
 use Ghostwriter\Testify\Container\TestifyProvider;
 use Ghostwriter\Testify\Interface\Console\ApplicationInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -55,7 +54,6 @@ use Throwable;
 #[CoversClass(CliPrinter::class)]
 #[CoversClass(CommandProvider::class)]
 #[CoversClass(CommandProviderExtension::class)]
-#[CoversClass(ConfigurationExtension::class)]
 #[CoversClass(DeclareStrictTypesGenerator::class)]
 #[CoversClass(ErrorHandlerMiddleware::class)]
 #[CoversClass(ExceptionHandler::class)]
