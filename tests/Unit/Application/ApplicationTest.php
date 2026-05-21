@@ -38,6 +38,7 @@ use Ghostwriter\Testify\Console\Queue\MiddlewareQueue;
 use Ghostwriter\Testify\Container\Extension\CommandProviderExtension;
 use Ghostwriter\Testify\Container\Extension\HandlerProviderExtension;
 use Ghostwriter\Testify\Container\Extension\MiddlewareProviderExtension;
+use Ghostwriter\Testify\Container\Factory\TestifyConfigurationFactory;
 use Ghostwriter\Testify\Container\Factory\WorkspaceFactory;
 use Ghostwriter\Testify\Container\TestifyProvider;
 use Ghostwriter\Testify\Interface\Console\ApplicationInterface;
@@ -73,6 +74,7 @@ use Throwable;
 #[CoversClass(TestBuilder::class)]
 #[CoversClass(TestDataProviderMethodNameNormalizer::class)]
 #[CoversClass(TestifyCommand::class)]
+#[CoversClass(TestifyConfigurationFactory::class)]
 #[CoversClass(TestifyHandler::class)]
 #[CoversClass(TestifyProvider::class)]
 #[CoversClass(TestMethodNameNormalizer::class)]
