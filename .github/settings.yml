@@ -17,12 +17,6 @@
 "repository":
   "name": "testify"
   "description": "Automated test Generation for PHP code."
-  "topics":
-    - "ghostwriter"
-    - "testify"
-    - "php"
-    - "dev"
-    - "testing"
   "homepage": "https://github.com/ghostwriter/testify"
   "default_branch": "0.1.x"
   "allow_auto_merge": true
