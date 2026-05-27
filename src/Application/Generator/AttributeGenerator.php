@@ -8,7 +8,7 @@ use Override;
 
 use function mb_rtrim;
 
-final readonly class AttributeGenerator implements GeneratorInterface
+final readonly class AttributeGenerator implements AttributeGeneratorInterface
 {
     /** @param list<string> $params */
     public function __construct(
@@ -28,5 +28,11 @@ final readonly class AttributeGenerator implements GeneratorInterface
         }
 
         return mb_rtrim($code, ', ') . ')]';
+    }
+
+    #[Override]
+    public function name(): string
+    {
+        return $this->name;
     }
 }

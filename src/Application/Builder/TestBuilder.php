@@ -10,6 +10,7 @@ use Ghostwriter\Testify\Application\Generator\ClassLike\ClassGenerator;
 use Ghostwriter\Testify\Application\Generator\FileGenerator;
 use Ghostwriter\Testify\Application\Generator\GeneratorInterface;
 use Ghostwriter\Testify\Application\Generator\Name\ClassNameGenerator;
+use Ghostwriter\Testify\Application\Generator\NamespaceGeneratorInterface;
 use Ghostwriter\Testify\Application\Normalizer\ClassNameNormalizer;
 use Ghostwriter\Testify\Application\Resolver\FileResolver;
 use Ghostwriter\Testify\Application\Resolver\TestMethodsResolver;
@@ -17,6 +18,7 @@ use Override;
 use PhpToken;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\Unit\AbstractTestCase;
+use Throwable;
 
 use function mb_ltrim;
 
@@ -42,6 +44,10 @@ final readonly class TestBuilder implements TestBuilderInterface
 
         $testClass = $this->classNameNormalizer->normalize($this->filesystem->basename($testFile, '.php'));
 
+        /**
+         * @var array<string, array{0: string, 1: GeneratorInterface}> $namespaces
+         * @var NamespaceGeneratorInterface                            $namespaceGenerator
+         */
         foreach ($namespaces as $namespace => [$testNamespace, $namespaceGenerator]) {
             $namespaceClass = mb_ltrim($namespace . '\\' . $class, '\\');
 
@@ -56,9 +62,13 @@ final readonly class TestBuilder implements TestBuilderInterface
                     isFinal: true
                 ),
             ])
-                ->usesClass(AbstractTestCase::class)
-                ->usesClass(CoversClass::class)
-                ->usesClass($namespaceClass);
+                ->usesClasses([
+                    AbstractTestCase::class,
+                    CoversClass::class,
+                    $namespaceClass,
+                    Override::class,
+                    Throwable::class,
+                ]);
         }
 
         return FileGenerator::new($namespaces);
