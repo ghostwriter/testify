@@ -14,6 +14,8 @@ use InvalidArgumentException;
 use Override;
 
 use function array_reduce;
+use function array_unique;
+use function sort;
 use function usort;
 
 final class NamespaceGenerator implements NamespaceGeneratorInterface
@@ -145,6 +147,23 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
     public function usesClass(string $class): self
     {
         $this->uses[$class] = new UseClassGenerator($class);
+
+        return $this;
+    }
+
+    public function usesClasses(array $classes = []): self
+    {
+        if ([] === $classes) {
+            return $this;
+        }
+
+        $unique = array_unique($classes);
+
+        sort($unique);
+
+        foreach ($unique as $class) {
+            $this->usesClass($class);
+        }
 
         return $this;
     }
