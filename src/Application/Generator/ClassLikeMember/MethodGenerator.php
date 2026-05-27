@@ -10,6 +10,7 @@ use Override;
 
 use function array_merge;
 use function mb_rtrim;
+use function mb_trim;
 
 final readonly class MethodGenerator implements MethodGeneratorInterface
 {
@@ -28,6 +29,7 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
         private bool $isProtected = false,
         private bool $isPrivate = false,
         private bool $isAnonymous = false,
+        private array $docBlocks = [],
     ) {}
 
     /** @return list<class-string<AttributeGeneratorInterface>> */
@@ -47,6 +49,15 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
     public function generate(): string
     {
         $method = '';
+
+        if ([] !== $this->docBlocks) {
+            $method .= '/**' . self::NEWLINE . self::INDENT;
+            foreach ($this->docBlocks as $docBlock) {
+                $line = mb_trim('* ' . $docBlock) . self::NEWLINE . self::INDENT;
+                $method .= $line;
+            }
+            $method .= '*/' . self::NEWLINE . self::INDENT;
+        }
 
         foreach ($this->attributes as $attribute) {
             $method .= $attribute->generate() . self::NEWLINE . self::INDENT;

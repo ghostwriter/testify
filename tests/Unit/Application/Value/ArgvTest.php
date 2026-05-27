@@ -7,10 +7,12 @@ namespace Tests\Unit\Application\Value;
 use Ghostwriter\Testify\Application\Value\Argv;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\Unit\AbstractTestCase;
+use Throwable;
 
 #[CoversClass(Argv::class)]
 final class ArgvTest extends AbstractTestCase
 {
+    /** @throws Throwable */
     public function testExample(): void
     {
         self::assertTrue(true);

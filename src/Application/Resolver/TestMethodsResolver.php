@@ -79,7 +79,8 @@ final readonly class TestMethodsResolver
                         ]
                     ),
                 ],
-                isPublic: true
+                isPublic: true,
+                docBlocks: ['@throws Throwable']
             );
         }
 
@@ -120,7 +121,8 @@ final readonly class TestMethodsResolver
                         ]
                     ),
                 ],
-                isPublic: true
+                isPublic: true,
+                docBlocks: ['@throws Throwable']
             );
         }
 
@@ -141,14 +143,15 @@ final readonly class TestMethodsResolver
                         'assertTrue',
                         [
                             sprintf(
-                                'is_a(%s::class,%s::class,true)',
+                                'in_array(%s::class,class_uses(%s::class),true)',
+                                '\\' . $traitName,
                                 '\\' . $reflectionClass->getName(),
-                                '\\' . $traitName
                             ),
                         ]
                     ),
                 ],
-                isPublic: true
+                isPublic: true,
+                docBlocks: ['@throws Throwable']
             );
         }
 
@@ -157,7 +160,8 @@ final readonly class TestMethodsResolver
                 name: 'testExample',
                 returnType: 'void',
                 body: [new StaticCallGenerator('self', 'assertTrue', ['true'])],
-                isPublic: true
+                isPublic: true,
+                docBlocks: ['@throws Throwable']
             );
         }
 
@@ -231,18 +235,19 @@ final readonly class TestMethodsResolver
                 $dataProvider = $this->testDataProviderMethodNameNormalizer->normalize($testMethodName);
 
                 $methods[$dataProvider] = new MethodGenerator(
-                    $dataProvider,
-                    Generator::class,
-                    [new UseClassGenerator(Generator::class), new UseClassGenerator(DataProvider::class)],
-                    [],
-                    [new TestDataProviderGenerator($testMethodName, $parameters)],
-                    $attributes,
-                    true,
-                    false,
-                    false,
-                    true,
-                    false,
-                    false,
+                    name: $dataProvider,
+                    returnType: Generator::class,
+                    uses: [new UseClassGenerator(Generator::class), new UseClassGenerator(DataProvider::class)],
+                    parameters: [],
+                    body: [new TestDataProviderGenerator($testMethodName, $parameters)],
+                    attributes: $attributes,
+                    isStatic: true,
+                    isFinal: false,
+                    isAbstract: false,
+                    isPublic: true,
+                    isProtected: false,
+                    isPrivate: false,
+                    docBlocks: ['@throws Throwable']
                 );
 
                 $attributes[] = new AttributeGenerator('DataProvider', [sprintf("'%s'", $dataProvider)]);
@@ -260,7 +265,8 @@ final readonly class TestMethodsResolver
                 $method->isAbstract(),
                 $method->isPublic(),
                 $method->isProtected(),
-                $method->isPrivate()
+                $method->isPrivate(),
+                docBlocks: ['@throws Throwable']
             );
         }
 
