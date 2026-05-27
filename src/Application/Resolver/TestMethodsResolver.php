@@ -29,6 +29,7 @@ use function mb_strrpos;
 use function mb_substr;
 use function sprintf;
 use function str_contains;
+use function str_replace;
 use function str_starts_with;
 use function trait_exists;
 
@@ -41,23 +42,129 @@ final readonly class TestMethodsResolver
 
     public function resolve(string $class): array
     {
-        // $staticCallGenerator = new StaticCallGenerator('self', 'markTestIncomplete', ['Not implemented yet.']);
-        return [
-            'testExample' => new MethodGenerator(
+
+        $methods = [];
+
+        $reflectionClass = new ReflectionClass($class);
+
+        $extends = [];
+
+        $parent = $reflectionClass->getParentClass();
+        while ($parent instanceof ReflectionClass) {
+            $extends[] = $parent;
+            $parent = $parent->getParentClass();
+        }
+
+        foreach ($extends as $extend) {
+            if (! $extend instanceof ReflectionClass) {
+                continue;
+            }
+
+            $extendName = $extend->getName();
+            $short = str_replace('\\', '', $extendName);
+            $testName = 'testExtends' . $short;
+            $methods[$testName] = new MethodGenerator(
+                name: $testName,
+                returnType: 'void',
+                body: [
+                    new StaticCallGenerator(
+                        'self',
+                        'assertTrue',
+                        [
+                            sprintf(
+                                'is_a(%s::class,%s::class,true)',
+                                '\\' . $reflectionClass->getName(),
+                                '\\' . $extendName
+                            ),
+                        ]
+                    ),
+                ],
+                isPublic: true
+            );
+        }
+
+        $implements = $reflectionClass->getInterfaces();
+        foreach ($implements as $implement) {
+            if (! $implement instanceof ReflectionClass) {
+                continue;
+            }
+
+            $implementParent = $implement->getParentClass();
+            while ($implementParent instanceof ReflectionClass) {
+                $implements[] = $implementParent;
+                $implementParent = $implementParent->getParentClass();
+            }
+        }
+
+        foreach ($implements as $implement) {
+            if (! $implement instanceof ReflectionClass) {
+                continue;
+            }
+
+            $implementName = $implement->getName();
+            $short = str_replace('\\', '', $implementName);
+            $testName = 'testImplements' . $short;
+            $methods[$testName] = new MethodGenerator(
+                name: $testName,
+                returnType: 'void',
+                body: [
+                    new StaticCallGenerator(
+                        'self',
+                        'assertTrue',
+                        [
+                            sprintf(
+                                'is_a(%s::class,%s::class,true)',
+                                '\\' . $reflectionClass->getName(),
+                                '\\' . $implementName
+                            ),
+                        ]
+                    ),
+                ],
+                isPublic: true
+            );
+        }
+
+        foreach ($reflectionClass->getTraits() as $trait) {
+            if (! $trait instanceof ReflectionClass) {
+                continue;
+            }
+
+            $traitName = $trait->getName();
+            $short = str_replace('\\', '', $traitName);
+            $testName = 'testUses' . $short;
+            $methods[$testName] = new MethodGenerator(
+                name: $testName,
+                returnType: 'void',
+                body: [
+                    new StaticCallGenerator(
+                        'self',
+                        'assertTrue',
+                        [
+                            sprintf(
+                                'is_a(%s::class,%s::class,true)',
+                                '\\' . $reflectionClass->getName(),
+                                '\\' . $traitName
+                            ),
+                        ]
+                    ),
+                ],
+                isPublic: true
+            );
+        }
+
+        if ([] === $methods) {
+            $methods['testExample'] = new MethodGenerator(
                 name: 'testExample',
                 returnType: 'void',
                 body: [new StaticCallGenerator('self', 'assertTrue', ['true'])],
                 isPublic: true
-            ),
-            //            'setUp' => new MethodGenerator(
-            //                name: 'setUp',
-            //                returnType: 'void',
-            //                body: [
-            //                    $staticCallGenerator,
-            //                ],
-            //                isProtected: true,
-            //            ),
-        ];
+            );
+        }
+
+        return $methods;
+
+        // dd([$class, $methods]);
+        // $staticCallGenerator = new StaticCallGenerator('self', 'markTestIncomplete', ['Not implemented yet.']);
 
         $reflectionClass = new ReflectionClass($class);
 
