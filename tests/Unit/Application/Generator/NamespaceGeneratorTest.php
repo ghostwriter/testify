@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Application\Generator;
 
+use Ghostwriter\PHPUnitAssertions\Trait\AssertionsTrait;
+use Ghostwriter\Testify\Application\Generator\GeneratorInterface;
 use Ghostwriter\Testify\Application\Generator\NamespaceGenerator;
-use Override;
+use Ghostwriter\Testify\Application\Generator\NamespaceGeneratorInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\Unit\AbstractTestCase;
 use Throwable;
@@ -13,19 +15,17 @@ use Throwable;
 #[CoversClass(NamespaceGenerator::class)]
 final class NamespaceGeneratorTest extends AbstractTestCase
 {
-    /**
-    * @throws Throwable
-    */
+    use AssertionsTrait;
+
+    /** @throws Throwable */
     public function testImplementsGhostwriterTestifyApplicationGeneratorGeneratorInterface(): void
     {
-        self::assertTrue(is_a(\Ghostwriter\Testify\Application\Generator\NamespaceGenerator::class,\Ghostwriter\Testify\Application\Generator\GeneratorInterface::class,true));
+        self::assertClassImplementsInterface(NamespaceGenerator::class, GeneratorInterface::class);
     }
 
-    /**
-    * @throws Throwable
-    */
+    /** @throws Throwable */
     public function testImplementsGhostwriterTestifyApplicationGeneratorNamespaceGeneratorInterface(): void
     {
-        self::assertTrue(is_a(\Ghostwriter\Testify\Application\Generator\NamespaceGenerator::class,\Ghostwriter\Testify\Application\Generator\NamespaceGeneratorInterface::class,true));
+        self::assertClassImplementsInterface(NamespaceGenerator::class, NamespaceGeneratorInterface::class);
     }
 }

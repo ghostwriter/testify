@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Application\Generator\Use;
 
+use Ghostwriter\PHPUnitAssertions\Trait\AssertionsTrait;
+use Ghostwriter\Testify\Application\Generator\GeneratorInterface;
 use Ghostwriter\Testify\Application\Generator\Use\UseConstantGenerator;
-use Override;
+use Ghostwriter\Testify\Application\Generator\Use\UseConstantGeneratorInterface;
+use Ghostwriter\Testify\Application\Generator\Use\UseGeneratorInterface;
+use Ghostwriter\Testify\Application\Trait\UseGeneratorTrait;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\Unit\AbstractTestCase;
 use Throwable;
@@ -13,35 +17,29 @@ use Throwable;
 #[CoversClass(UseConstantGenerator::class)]
 final class UseConstantGeneratorTest extends AbstractTestCase
 {
-    /**
-    * @throws Throwable
-    */
+    use AssertionsTrait;
+
+    /** @throws Throwable */
     public function testImplementsGhostwriterTestifyApplicationGeneratorGeneratorInterface(): void
     {
-        self::assertTrue(is_a(\Ghostwriter\Testify\Application\Generator\Use\UseConstantGenerator::class,\Ghostwriter\Testify\Application\Generator\GeneratorInterface::class,true));
+        self::assertClassImplementsInterface(UseConstantGenerator::class, GeneratorInterface::class);
     }
 
-    /**
-    * @throws Throwable
-    */
+    /** @throws Throwable */
     public function testImplementsGhostwriterTestifyApplicationGeneratorUseUseConstantGeneratorInterface(): void
     {
-        self::assertTrue(is_a(\Ghostwriter\Testify\Application\Generator\Use\UseConstantGenerator::class,\Ghostwriter\Testify\Application\Generator\Use\UseConstantGeneratorInterface::class,true));
+        self::assertClassImplementsInterface(UseConstantGenerator::class, UseConstantGeneratorInterface::class);
     }
 
-    /**
-    * @throws Throwable
-    */
+    /** @throws Throwable */
     public function testImplementsGhostwriterTestifyApplicationGeneratorUseUseGeneratorInterface(): void
     {
-        self::assertTrue(is_a(\Ghostwriter\Testify\Application\Generator\Use\UseConstantGenerator::class,\Ghostwriter\Testify\Application\Generator\Use\UseGeneratorInterface::class,true));
+        self::assertClassImplementsInterface(UseConstantGenerator::class, UseGeneratorInterface::class);
     }
 
-    /**
-    * @throws Throwable
-    */
+    /** @throws Throwable */
     public function testUsesGhostwriterTestifyApplicationTraitUseGeneratorTrait(): void
     {
-        self::assertTrue(in_array(\Ghostwriter\Testify\Application\Trait\UseGeneratorTrait::class,class_uses(\Ghostwriter\Testify\Application\Generator\Use\UseConstantGenerator::class),true));
+        self::assertClassUsesTrait(UseConstantGenerator::class, UseGeneratorTrait::class);
     }
 }

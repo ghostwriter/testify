@@ -5,34 +5,34 @@ declare(strict_types=1);
 namespace Tests\Unit\Application\Generator\ClassLikeMember;
 
 use Ghostwriter\PHPUnitAssertions\Trait\AssertionsTrait;
-use Ghostwriter\Testify\Application\Generator\ClassLikeMember\MethodGenerator;
-use Ghostwriter\Testify\Application\Generator\ClassLikeMember\MethodGeneratorInterface;
+use Ghostwriter\Testify\Application\Generator\ClassLikeMember\TraitUseGenerator;
+use Ghostwriter\Testify\Application\Generator\ClassLikeMember\TraitUseGeneratorInterface;
 use Ghostwriter\Testify\Application\Generator\ClassLikeMemberGeneratorInterface;
 use Ghostwriter\Testify\Application\Generator\GeneratorInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\Unit\AbstractTestCase;
 use Throwable;
 
-#[CoversClass(MethodGenerator::class)]
-final class MethodGeneratorTest extends AbstractTestCase
+#[CoversClass(TraitUseGenerator::class)]
+final class TraitUseGeneratorTest extends AbstractTestCase
 {
     use AssertionsTrait;
 
     /** @throws Throwable */
     public function testImplementsGhostwriterTestifyApplicationGeneratorClassLikeMemberGeneratorInterface(): void
     {
-        self::assertClassImplementsInterface(MethodGenerator::class, ClassLikeMemberGeneratorInterface::class);
+        self::assertClassImplementsInterface(TraitUseGenerator::class, ClassLikeMemberGeneratorInterface::class);
     }
 
     /** @throws Throwable */
-    public function testImplementsGhostwriterTestifyApplicationGeneratorClassLikeMemberMethodGeneratorInterface(): void
+    public function testImplementsGhostwriterTestifyApplicationGeneratorClassLikeMemberTraitUseGeneratorInterface(): void
     {
-        self::assertClassImplementsInterface(MethodGenerator::class, MethodGeneratorInterface::class);
+        self::assertClassImplementsInterface(TraitUseGenerator::class, TraitUseGeneratorInterface::class);
     }
 
     /** @throws Throwable */
     public function testImplementsGhostwriterTestifyApplicationGeneratorGeneratorInterface(): void
     {
-        self::assertClassImplementsInterface(MethodGenerator::class, GeneratorInterface::class);
+        self::assertClassImplementsInterface(TraitUseGenerator::class, GeneratorInterface::class);
     }
 }

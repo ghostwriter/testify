@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Exception;
 
 use Exception;
+use Ghostwriter\PHPUnitAssertions\Trait\AssertionsTrait;
 use Ghostwriter\Testify\Exception\NoNamespaceFoundException;
 use Ghostwriter\Testify\Interface\ExceptionInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -13,38 +14,38 @@ use Stringable;
 use Tests\Unit\AbstractTestCase;
 use Throwable;
 
-use function is_a;
-
 #[CoversClass(NoNamespaceFoundException::class)]
 final class NoNamespaceFoundExceptionTest extends AbstractTestCase
 {
+    use AssertionsTrait;
+
     /** @throws Throwable */
     public function testExtendsException(): void
     {
-        self::assertTrue(is_a(NoNamespaceFoundException::class, Exception::class, true));
+        self::assertClassExtendsClass(NoNamespaceFoundException::class, Exception::class);
     }
 
     /** @throws Throwable */
     public function testExtendsRuntimeException(): void
     {
-        self::assertTrue(is_a(NoNamespaceFoundException::class, RuntimeException::class, true));
+        self::assertClassExtendsClass(NoNamespaceFoundException::class, RuntimeException::class);
     }
 
     /** @throws Throwable */
     public function testImplementsGhostwriterTestifyInterfaceExceptionInterface(): void
     {
-        self::assertTrue(is_a(NoNamespaceFoundException::class, ExceptionInterface::class, true));
+        self::assertClassImplementsInterface(NoNamespaceFoundException::class, ExceptionInterface::class);
     }
 
     /** @throws Throwable */
     public function testImplementsStringable(): void
     {
-        self::assertTrue(is_a(NoNamespaceFoundException::class, Stringable::class, true));
+        self::assertClassImplementsInterface(NoNamespaceFoundException::class, Stringable::class);
     }
 
     /** @throws Throwable */
     public function testImplementsThrowable(): void
     {
-        self::assertTrue(is_a(NoNamespaceFoundException::class, Throwable::class, true));
+        self::assertClassImplementsInterface(NoNamespaceFoundException::class, Throwable::class);
     }
 }

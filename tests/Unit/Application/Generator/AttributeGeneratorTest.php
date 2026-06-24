@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Application\Generator;
 
+use Ghostwriter\PHPUnitAssertions\Trait\AssertionsTrait;
 use Ghostwriter\Testify\Application\Generator\AttributeGenerator;
-use Override;
+use Ghostwriter\Testify\Application\Generator\AttributeGeneratorInterface;
+use Ghostwriter\Testify\Application\Generator\GeneratorInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\Unit\AbstractTestCase;
 use Throwable;
@@ -13,19 +15,17 @@ use Throwable;
 #[CoversClass(AttributeGenerator::class)]
 final class AttributeGeneratorTest extends AbstractTestCase
 {
-    /**
-    * @throws Throwable
-    */
+    use AssertionsTrait;
+
+    /** @throws Throwable */
     public function testImplementsGhostwriterTestifyApplicationGeneratorAttributeGeneratorInterface(): void
     {
-        self::assertTrue(is_a(\Ghostwriter\Testify\Application\Generator\AttributeGenerator::class,\Ghostwriter\Testify\Application\Generator\AttributeGeneratorInterface::class,true));
+        self::assertClassImplementsInterface(AttributeGenerator::class, AttributeGeneratorInterface::class);
     }
 
-    /**
-    * @throws Throwable
-    */
+    /** @throws Throwable */
     public function testImplementsGhostwriterTestifyApplicationGeneratorGeneratorInterface(): void
     {
-        self::assertTrue(is_a(\Ghostwriter\Testify\Application\Generator\AttributeGenerator::class,\Ghostwriter\Testify\Application\Generator\GeneratorInterface::class,true));
+        self::assertClassImplementsInterface(AttributeGenerator::class, GeneratorInterface::class);
     }
 }

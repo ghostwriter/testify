@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Application\Generator\Name;
 
+use Ghostwriter\PHPUnitAssertions\Trait\AssertionsTrait;
+use Ghostwriter\Testify\Application\Generator\GeneratorInterface;
 use Ghostwriter\Testify\Application\Generator\Name\ClassNameGenerator;
-use Override;
+use Ghostwriter\Testify\Application\Generator\Name\NameGeneratorInterface;
+use Ghostwriter\Testify\Application\Trait\NameGeneratorTrait;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\Unit\AbstractTestCase;
 use Throwable;
@@ -13,27 +16,23 @@ use Throwable;
 #[CoversClass(ClassNameGenerator::class)]
 final class ClassNameGeneratorTest extends AbstractTestCase
 {
-    /**
-    * @throws Throwable
-    */
+    use AssertionsTrait;
+
+    /** @throws Throwable */
     public function testImplementsGhostwriterTestifyApplicationGeneratorGeneratorInterface(): void
     {
-        self::assertTrue(is_a(\Ghostwriter\Testify\Application\Generator\Name\ClassNameGenerator::class,\Ghostwriter\Testify\Application\Generator\GeneratorInterface::class,true));
+        self::assertClassImplementsInterface(ClassNameGenerator::class, GeneratorInterface::class);
     }
 
-    /**
-    * @throws Throwable
-    */
+    /** @throws Throwable */
     public function testImplementsGhostwriterTestifyApplicationGeneratorNameNameGeneratorInterface(): void
     {
-        self::assertTrue(is_a(\Ghostwriter\Testify\Application\Generator\Name\ClassNameGenerator::class,\Ghostwriter\Testify\Application\Generator\Name\NameGeneratorInterface::class,true));
+        self::assertClassImplementsInterface(ClassNameGenerator::class, NameGeneratorInterface::class);
     }
 
-    /**
-    * @throws Throwable
-    */
+    /** @throws Throwable */
     public function testUsesGhostwriterTestifyApplicationTraitNameGeneratorTrait(): void
     {
-        self::assertTrue(in_array(\Ghostwriter\Testify\Application\Trait\NameGeneratorTrait::class,class_uses(\Ghostwriter\Testify\Application\Generator\Name\ClassNameGenerator::class),true));
+        self::assertClassUsesTrait(ClassNameGenerator::class, NameGeneratorTrait::class);
     }
 }

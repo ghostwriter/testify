@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Application\Generator\ClassLike;
 
+use Ghostwriter\PHPUnitAssertions\Trait\AssertionsTrait;
 use Ghostwriter\Testify\Application\Generator\ClassLike\TraitGenerator;
-use Override;
+use Ghostwriter\Testify\Application\Generator\ClassLike\TraitGeneratorInterface;
+use Ghostwriter\Testify\Application\Generator\ClassLikeGeneratorInterface;
+use Ghostwriter\Testify\Application\Generator\GeneratorInterface;
+use Ghostwriter\Testify\Application\Trait\ClassLikeGeneratorTrait;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\Unit\AbstractTestCase;
 use Throwable;
@@ -13,35 +17,29 @@ use Throwable;
 #[CoversClass(TraitGenerator::class)]
 final class TraitGeneratorTest extends AbstractTestCase
 {
-    /**
-    * @throws Throwable
-    */
+    use AssertionsTrait;
+
+    /** @throws Throwable */
     public function testImplementsGhostwriterTestifyApplicationGeneratorClassLikeGeneratorInterface(): void
     {
-        self::assertTrue(is_a(\Ghostwriter\Testify\Application\Generator\ClassLike\TraitGenerator::class,\Ghostwriter\Testify\Application\Generator\ClassLikeGeneratorInterface::class,true));
+        self::assertClassImplementsInterface(TraitGenerator::class, ClassLikeGeneratorInterface::class);
     }
 
-    /**
-    * @throws Throwable
-    */
+    /** @throws Throwable */
     public function testImplementsGhostwriterTestifyApplicationGeneratorClassLikeTraitGeneratorInterface(): void
     {
-        self::assertTrue(is_a(\Ghostwriter\Testify\Application\Generator\ClassLike\TraitGenerator::class,\Ghostwriter\Testify\Application\Generator\ClassLike\TraitGeneratorInterface::class,true));
+        self::assertClassImplementsInterface(TraitGenerator::class, TraitGeneratorInterface::class);
     }
 
-    /**
-    * @throws Throwable
-    */
+    /** @throws Throwable */
     public function testImplementsGhostwriterTestifyApplicationGeneratorGeneratorInterface(): void
     {
-        self::assertTrue(is_a(\Ghostwriter\Testify\Application\Generator\ClassLike\TraitGenerator::class,\Ghostwriter\Testify\Application\Generator\GeneratorInterface::class,true));
+        self::assertClassImplementsInterface(TraitGenerator::class, GeneratorInterface::class);
     }
 
-    /**
-    * @throws Throwable
-    */
+    /** @throws Throwable */
     public function testUsesGhostwriterTestifyApplicationTraitClassLikeGeneratorTrait(): void
     {
-        self::assertTrue(in_array(\Ghostwriter\Testify\Application\Trait\ClassLikeGeneratorTrait::class,class_uses(\Ghostwriter\Testify\Application\Generator\ClassLike\TraitGenerator::class),true));
+        self::assertClassUsesTrait(TraitGenerator::class, ClassLikeGeneratorTrait::class);
     }
 }

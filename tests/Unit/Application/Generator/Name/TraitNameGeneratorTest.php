@@ -6,33 +6,33 @@ namespace Tests\Unit\Application\Generator\Name;
 
 use Ghostwriter\PHPUnitAssertions\Trait\AssertionsTrait;
 use Ghostwriter\Testify\Application\Generator\GeneratorInterface;
-use Ghostwriter\Testify\Application\Generator\Name\InterfaceNameGenerator;
 use Ghostwriter\Testify\Application\Generator\Name\NameGeneratorInterface;
+use Ghostwriter\Testify\Application\Generator\Name\TraitNameGenerator;
 use Ghostwriter\Testify\Application\Trait\NameGeneratorTrait;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\Unit\AbstractTestCase;
 use Throwable;
 
-#[CoversClass(InterfaceNameGenerator::class)]
-final class InterfaceNameGeneratorTest extends AbstractTestCase
+#[CoversClass(TraitNameGenerator::class)]
+final class TraitNameGeneratorTest extends AbstractTestCase
 {
     use AssertionsTrait;
 
     /** @throws Throwable */
     public function testImplementsGhostwriterTestifyApplicationGeneratorGeneratorInterface(): void
     {
-        self::assertClassImplementsInterface(InterfaceNameGenerator::class, GeneratorInterface::class);
+        self::assertClassImplementsInterface(TraitNameGenerator::class, GeneratorInterface::class);
     }
 
     /** @throws Throwable */
     public function testImplementsGhostwriterTestifyApplicationGeneratorNameNameGeneratorInterface(): void
     {
-        self::assertClassImplementsInterface(InterfaceNameGenerator::class, NameGeneratorInterface::class);
+        self::assertClassImplementsInterface(TraitNameGenerator::class, NameGeneratorInterface::class);
     }
 
     /** @throws Throwable */
     public function testUsesGhostwriterTestifyApplicationTraitNameGeneratorTrait(): void
     {
-        self::assertClassUsesTrait(InterfaceNameGenerator::class, NameGeneratorTrait::class);
+        self::assertClassUsesTrait(TraitNameGenerator::class, NameGeneratorTrait::class);
     }
 }

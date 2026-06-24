@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Application\Resolver;
+namespace Tests\Unit\Application\Trait;
 
 use Ghostwriter\PHPUnitAssertions\Trait\AssertionsTrait;
-use Ghostwriter\Testify\Application\Resolver\FileResolver;
+use Ghostwriter\Testify\Application\Trait\ClassLikeGeneratorTrait;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\Unit\AbstractTestCase;
 use Throwable;
 
-#[CoversClass(FileResolver::class)]
-final class FileResolverTest extends AbstractTestCase
+#[CoversClass(ClassLikeGeneratorTrait::class)]
+final class ClassLikeGeneratorTraitTest extends AbstractTestCase
 {
     use AssertionsTrait;
 

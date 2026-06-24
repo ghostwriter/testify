@@ -4,10 +4,10 @@
     "license": "BSD-3-Clause",
     "type": "library",
     "keywords": [
-        "dev",
         "ghostwriter",
         "testify",
-        "testing"
+        "testing",
+        "dev"
     ],
     "authors": [
         {
