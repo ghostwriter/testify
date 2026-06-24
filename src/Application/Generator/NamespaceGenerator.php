@@ -6,12 +6,15 @@ namespace Ghostwriter\Testify\Application\Generator;
 
 use Ghostwriter\Testify\Application\Generator\ClassLike\ClassGenerator;
 use Ghostwriter\Testify\Application\Generator\ClassLikeMember\MethodGenerator;
+use Ghostwriter\Testify\Application\Generator\ClassLikeMember\MethodGeneratorInterface;
+use Ghostwriter\Testify\Application\Generator\Name\ClassNameGenerator;
 use Ghostwriter\Testify\Application\Generator\Use\UseClassGenerator;
 use Ghostwriter\Testify\Application\Generator\Use\UseConstantGenerator;
 use Ghostwriter\Testify\Application\Generator\Use\UseFunctionGenerator;
 use Ghostwriter\Testify\Application\Generator\Use\UseGeneratorInterface;
 use InvalidArgumentException;
 use Override;
+use Tests\Unit\AbstractTestCase;
 
 use function array_reduce;
 use function array_unique;
@@ -21,8 +24,8 @@ use function usort;
 final class NamespaceGenerator implements NamespaceGeneratorInterface
 {
     /**
-     * @param UseGeneratorInterface       $uses
-     * @param ClassLikeGeneratorInterface $classLikes
+     * @param list<UseGeneratorInterface>       $uses
+     * @param list<ClassLikeGeneratorInterface> $classLikes
      */
     public function __construct(
         private readonly string $name,
@@ -32,17 +35,17 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
 
     public function class(
         string $name,
-        string $extends = 'TestCase',
+        string $extends = AbstractTestCase::class,
         array $methods = [],
         array $attributes = [],
-        bool $isFinal = false
+        bool $isFinal = false,
     ): self {
         $this->classLikes[ClassGenerator::class][$name] = new ClassGenerator(
             name: $name,
-            extends: $extends,
+            extends: [new ClassNameGenerator($extends)],
             attributes: $attributes,
             methods: $methods,
-            isFinal: $isFinal
+            isFinal: $isFinal,
         );
 
         return $this;
@@ -51,7 +54,7 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
     public function classLikes(array $classLikes): self
     {
         foreach ($classLikes as $classLike) {
-            if (! ($classLike instanceof ClassLikeGeneratorInterface)) {
+            if (! $classLike instanceof ClassLikeGeneratorInterface) {
                 throw new InvalidArgumentException('Invalid class like type');
             }
 
@@ -68,13 +71,9 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
 
         $uses = $this->uses();
 
-        usort(
-            $uses,
-            static fn (
-                UseGeneratorInterface $left,
-                UseGeneratorInterface $right
-            ): int => $left->compare($right)
-        );
+        usort($uses, static fn (UseGeneratorInterface $left, UseGeneratorInterface $right): int => $left->compare(
+            $right,
+        ));
 
         //        dump($uses);
 
@@ -93,13 +92,10 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
 
         $classLikes = $this->classLikes;
 
-        usort(
-            $classLikes,
-            static fn (
-                ClassLikeGeneratorInterface $left,
-                ClassLikeGeneratorInterface $right
-            ): int => $left->compare($right)
-        );
+        usort($classLikes, static fn (
+            ClassLikeGeneratorInterface $left,
+            ClassLikeGeneratorInterface $right,
+        ): int => $left->compare($right));
 
         //        foreach ($classLikes as $class) {
         //            $code .= $class->generate() . self::NEWLINES;
@@ -109,8 +105,40 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
 
         return array_reduce(
             $classLikes,
-            static fn (string $code, ClassLikeGeneratorInterface $classLikeGenerator): string => $code . $classLikeGenerator->generate() . self::NEWLINES,
-            $code
+            static fn (string $code, ClassLikeGeneratorInterface $classLikeGenerator): string => (
+                $code . $classLikeGenerator->generate() . self::NEWLINES
+            ),
+            $code,
+        );
+    }
+
+    public function method(
+        string $name,
+        mixed $returnType = null,
+        array $params = [],
+        array $body = [],
+        array $attributes = [],
+        bool $isStatic = false,
+        bool $isFinal = false,
+        bool $isAbstract = false,
+        bool $isPublic = false,
+        bool $isProtected = false,
+        bool $isPrivate = false,
+        bool $isAnonymous = false,
+    ): MethodGeneratorInterface {
+        return new MethodGenerator(
+            name: $name,
+            returnType: $returnType,
+            parameters: $params,
+            body: $body,
+            attributes: $attributes,
+            isStatic: $isStatic,
+            isFinal: $isFinal,
+            isAbstract: $isAbstract,
+            isPublic: $isPublic,
+            isProtected: $isProtected,
+            isPrivate: $isPrivate,
+            isAnonymous: $isAnonymous,
         );
     }
 
@@ -131,7 +159,7 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
         }
 
         foreach ($this->classLikes as $name => $classLike) {
-            if (! ($classLike instanceof ClassLikeGeneratorInterface)) {
+            if (! $classLike instanceof ClassLikeGeneratorInterface) {
                 continue;
             }
 
@@ -180,35 +208,5 @@ final class NamespaceGenerator implements NamespaceGeneratorInterface
         $this->uses[$function] = new UseFunctionGenerator($function);
 
         return $this;
-    }
-
-    private function method(
-        string $name,
-        mixed $returnType = null,
-        array $params = [],
-        array $body = [],
-        array $attributes = [],
-        bool $isStatic = false,
-        bool $isFinal = false,
-        bool $isAbstract = false,
-        bool $isPublic = false,
-        bool $isProtected = false,
-        bool $isPrivate = false,
-        bool $isAnonymous = false
-    ): MethodGenerator {
-        return new MethodGenerator(
-            name: $name,
-            returnType: $returnType,
-            parameters: $params,
-            body: $body,
-            attributes: $attributes,
-            isStatic: $isStatic,
-            isFinal: $isFinal,
-            isAbstract: $isAbstract,
-            isPublic: $isPublic,
-            isProtected: $isProtected,
-            isPrivate: $isPrivate,
-            isAnonymous: $isAnonymous
-        );
     }
 }

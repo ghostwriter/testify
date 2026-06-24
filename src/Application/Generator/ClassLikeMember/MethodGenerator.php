@@ -53,8 +53,7 @@ final readonly class MethodGenerator implements MethodGeneratorInterface
         if ([] !== $this->docBlocks) {
             $method .= '/**' . self::NEWLINE . self::INDENT;
             foreach ($this->docBlocks as $docBlock) {
-                $line = mb_trim('* ' . $docBlock) . self::NEWLINE . self::INDENT;
-                $method .= $line;
+                $method .= mb_trim('* ' . $docBlock) . self::NEWLINE . self::INDENT;
             }
             $method .= '*/' . self::NEWLINE . self::INDENT;
         }

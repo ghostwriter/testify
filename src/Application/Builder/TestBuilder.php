@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace Ghostwriter\Testify\Application\Builder;
 
 use Ghostwriter\Filesystem\Interface\FilesystemInterface;
+use Ghostwriter\PHPUnitAssertions\Trait\AssertionsTrait;
 use Ghostwriter\Testify\Application\Generator\AttributeGenerator;
 use Ghostwriter\Testify\Application\Generator\ClassLike\ClassGenerator;
+use Ghostwriter\Testify\Application\Generator\ClassLikeMember\TraitUseGenerator;
 use Ghostwriter\Testify\Application\Generator\FileGenerator;
 use Ghostwriter\Testify\Application\Generator\GeneratorInterface;
 use Ghostwriter\Testify\Application\Generator\Name\ClassNameGenerator;
+use Ghostwriter\Testify\Application\Generator\Name\TraitNameGenerator;
 use Ghostwriter\Testify\Application\Generator\NamespaceGeneratorInterface;
 use Ghostwriter\Testify\Application\Normalizer\ClassNameNormalizer;
 use Ghostwriter\Testify\Application\Resolver\FileResolver;
@@ -20,6 +23,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use Tests\Unit\AbstractTestCase;
 use Throwable;
 
+use function assert;
 use function mb_ltrim;
 
 final readonly class TestBuilder implements TestBuilderInterface
@@ -49,6 +53,8 @@ final readonly class TestBuilder implements TestBuilderInterface
          * @var NamespaceGeneratorInterface                            $namespaceGenerator
          */
         foreach ($namespaces as $namespace => [$testNamespace, $namespaceGenerator]) {
+            assert($namespaceGenerator instanceof NamespaceGeneratorInterface);
+
             $namespaceClass = mb_ltrim($namespace . '\\' . $class, '\\');
 
             $testNamespaceClass = mb_ltrim($testNamespace . '\\' . $testClass, '\\');
@@ -59,11 +65,13 @@ final readonly class TestBuilder implements TestBuilderInterface
                     extends: [new ClassNameGenerator('AbstractTestCase')],
                     attributes: [new AttributeGenerator('CoversClass', [$class . '::class'])],
                     methods: $this->testMethodsResolver->resolve($namespaceClass),
-                    isFinal: true
+                    traitUses: [new TraitUseGenerator(traits: [new TraitNameGenerator('AssertionsTrait')])],
+                    isFinal: true,
                 ),
             ])
                 ->usesClasses([
                     AbstractTestCase::class,
+                    AssertionsTrait::class,
                     CoversClass::class,
                     $namespaceClass,
                     Override::class,

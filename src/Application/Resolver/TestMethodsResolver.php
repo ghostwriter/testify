@@ -69,14 +69,8 @@ final readonly class TestMethodsResolver
                 body: [
                     new StaticCallGenerator(
                         'self',
-                        'assertTrue',
-                        [
-                            sprintf(
-                                'is_a(%s::class,%s::class,true)',
-                                '\\' . $reflectionClass->getName(),
-                                '\\' . $extendName
-                            ),
-                        ]
+                        'assertClassExtendsClass',
+                        [sprintf('%s::class,%s::class', '\\' . $reflectionClass->getName(), '\\' . $extendName)]
                     ),
                 ],
                 isPublic: true,
@@ -111,10 +105,10 @@ final readonly class TestMethodsResolver
                 body: [
                     new StaticCallGenerator(
                         'self',
-                        'assertTrue',
+                        'assertClassImplementsInterface',
                         [
                             sprintf(
-                                'is_a(%s::class,%s::class,true)',
+                                '%s::class,%s::class',
                                 '\\' . $reflectionClass->getName(),
                                 '\\' . $implementName
                             ),
@@ -140,14 +134,8 @@ final readonly class TestMethodsResolver
                 body: [
                     new StaticCallGenerator(
                         'self',
-                        'assertTrue',
-                        [
-                            sprintf(
-                                'in_array(%s::class,class_uses(%s::class),true)',
-                                '\\' . $traitName,
-                                '\\' . $reflectionClass->getName(),
-                            ),
-                        ]
+                        'assertClassUsesTrait',
+                        [sprintf('%s::class,%s::class', '\\' . $reflectionClass->getName(), '\\' . $traitName)]
                     ),
                 ],
                 isPublic: true,

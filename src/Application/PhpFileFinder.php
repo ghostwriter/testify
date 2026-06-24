@@ -13,7 +13,6 @@ use function get_debug_type;
 use function mb_strtolower;
 use function sprintf;
 use function str_ends_with;
-use function str_starts_with;
 
 final readonly class PhpFileFinder implements FinderInterface
 {
@@ -26,9 +25,11 @@ final readonly class PhpFileFinder implements FinderInterface
     {
         foreach ($this->filesystem->recursiveIterator($directory) as $file) {
             if (! $file instanceof SplFileInfo) {
-                throw new TypeError(
-                    sprintf('Expected a "%s" instance, but got %s', SplFileInfo::class, get_debug_type($file))
-                );
+                throw new TypeError(sprintf(
+                    'Expected a "%s" instance, but got %s',
+                    SplFileInfo::class,
+                    get_debug_type($file)
+                ));
             }
 
             $path = $file->getRealPath();
@@ -40,12 +41,11 @@ final readonly class PhpFileFinder implements FinderInterface
             $filename = $this->filesystem->basename($path);
 
             $skip = match (true) {
-                str_starts_with($filename, 'Abstract'),
-                str_ends_with($filename, 'Trait.php'),
-                str_ends_with($filename, 'Interface.php'),
-                str_ends_with($filename, 'Test.php'),
                 // if the first letter is lowercase, it's not a class
-                mb_strtolower($filename[0]) === $filename[0] => true,
+                mb_strtolower($filename[0]) === $filename[0],
+                // skip test files and interfaces
+                str_ends_with($filename, 'Test.php'),
+                str_ends_with($filename, 'Interface.php') => true,
                 default => false,
             };
 
