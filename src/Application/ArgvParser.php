@@ -15,7 +15,6 @@ use function array_key_exists;
 use function array_slice;
 use function count;
 use function defined;
-use function dump;
 use function explode;
 use function getopt;
 use function sprintf;
@@ -119,7 +118,7 @@ final readonly class ArgvParser
             throw new RuntimeException('Failed to parse options');
         }
 
-        dump([$configuration, $options, array_slice($_SERVER['argv'] ?? [], $rest_index)]);
+        // var_dump([$configuration, $options, array_slice($_SERVER['argv'] ?? [], $rest_index)]);
     }
 
     private function isPHPUnit(): bool

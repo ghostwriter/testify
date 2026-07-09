@@ -9,10 +9,11 @@ use Ghostwriter\Filesystem\Interface\FilesystemInterface;
 use Ghostwriter\Testify\Application\PhpFileFinder;
 use Ghostwriter\Testify\Application\Value\WorkspaceInterface;
 use Override;
+use RuntimeException;
 
 use const DIRECTORY_SEPARATOR;
 
-use function dd;
+use function sprintf;
 use function str_replace;
 
 final readonly class Runner implements RunnerInterface
@@ -30,9 +31,10 @@ final readonly class Runner implements RunnerInterface
         $unitTestsDirectory = $workspace->tests() . DIRECTORY_SEPARATOR . 'Unit';
 
         if (! $this->filesystem->isDirectory($unitTestsDirectory)) {
-
-            dd($unitTestsDirectory);
-            //            $this->filesystem->cleanDirectory($unitTestsDirectory);
+            throw new RuntimeException(sprintf(
+                'Unit tests directory "%s" does not exist',
+                $unitTestsDirectory
+            ));
         }
 
         foreach ($this->phpFileFinder->find($sourceDirectory) as $file) {

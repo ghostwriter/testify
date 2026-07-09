@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Testify\Application\Value;
 
-use Ghostwriter\Container\Attribute\Factory;
-use Ghostwriter\Testify\Container\Factory\WorkspaceFactory;
 use Override;
 
 use const DIRECTORY_SEPARATOR;
 
 use function dirname;
 
-#[Factory(WorkspaceFactory::class)]
 final readonly class Workspace implements WorkspaceInterface
 {
     public function __construct(

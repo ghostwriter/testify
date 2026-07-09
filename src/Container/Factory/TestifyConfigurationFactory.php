@@ -8,12 +8,16 @@ use Ghostwriter\Container\Interface\ContainerInterface;
 use Ghostwriter\Container\Interface\Service\FactoryInterface;
 use Ghostwriter\Testify\Configuration\TestifyConfiguration;
 use Override;
+use RuntimeException;
+
 use Throwable;
 
 use const DIRECTORY_SEPARATOR;
 
 use function dirname;
 use function implode;
+use function is_dir;
+use function sprintf;
 
 /**
  * @see TestifyConfigurationFactoryTest
@@ -28,23 +32,16 @@ final readonly class TestifyConfigurationFactory implements FactoryInterface
     {
         $testifyConfiguration = TestifyConfiguration::new();
 
-        $testifyConfiguration->mergeDirectory(implode(DIRECTORY_SEPARATOR, [dirname(__DIR__, 3), 'config']));
+        $configurationDirectory = implode(DIRECTORY_SEPARATOR, [dirname(__DIR__, 3), 'config']);
 
-        $containerConfiguration = $testifyConfiguration->wrap('ghostwriter.container');
-
-        foreach ($containerConfiguration->get('alias', []) as $alias => $service) {
-            $container->alias($alias, $service);
+        if (! is_dir($configurationDirectory)) {
+            throw new RuntimeException(sprintf(
+                'Configuration directory "%s" does not exist',
+                $configurationDirectory
+            ));
         }
 
-        foreach ($containerConfiguration->get('extend', []) as $service => $extensions) {
-            foreach ($extensions as $extension) {
-                $container->extend($service, $extension);
-            }
-        }
-
-        foreach ($containerConfiguration->get('factory', []) as $service => $factory) {
-            $container->factory($service, $factory);
-        }
+        $testifyConfiguration->mergeDirectory($configurationDirectory);
 
         return $testifyConfiguration;
     }
