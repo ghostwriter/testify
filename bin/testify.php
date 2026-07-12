@@ -14,11 +14,15 @@ use const PHP_EOL;
 
 use function date_default_timezone_set;
 use function dirname;
+use function func_get_args;
+use function getcwd;
 use function implode;
 use function is_file;
 use function restore_error_handler;
 use function set_error_handler;
+use function spl_autoload_register;
 use function sprintf;
+use function var_dump;
 
 (static function (array $arguments, string $autoloadFile): never {
     if (! is_file($autoloadFile)) {
@@ -48,6 +52,40 @@ use function sprintf;
     );
 
     require $autoloadFile;
+
+    $classmapFile = implode(DIRECTORY_SEPARATOR, [
+        getcwd() ?: throw new RuntimeException('Failed to get current working directory.'),
+        'vendor',
+        'composer',
+        'autoload_classmap.php',
+    ]);
+
+    if (! is_file($classmapFile)) {
+        throw new RuntimeException(sprintf(
+            implode(
+                PHP_EOL,
+                [
+                    'Failed to locate composer autoload classmap file.',
+                    'Searched for %s',
+                    '',
+                    'Please run "composer install" to generate the autoload classmap file.',
+                ]
+            ),
+            $classmapFile
+        ));
+    }
+
+    $classmap = require $classmapFile;
+
+    spl_autoload_register(static function (string $class) use ($classmap): void {
+        if (array_key_exists($class, $classmap)) {
+            require $classmap[$class];
+
+            return;
+        }
+
+        throw new RuntimeException(sprintf('Failed to autoload class "%s".', $class));
+    });
 
     restore_error_handler();
 
