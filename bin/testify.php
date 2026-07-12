@@ -12,9 +12,9 @@ use const DIRECTORY_SEPARATOR;
 use const E_ALL;
 use const PHP_EOL;
 
+use function array_key_exists;
 use function date_default_timezone_set;
 use function dirname;
-use function func_get_args;
 use function getcwd;
 use function implode;
 use function is_file;
@@ -22,7 +22,6 @@ use function restore_error_handler;
 use function set_error_handler;
 use function spl_autoload_register;
 use function sprintf;
-use function var_dump;
 
 (static function (array $arguments, string $autoloadFile): never {
     if (! is_file($autoloadFile)) {
